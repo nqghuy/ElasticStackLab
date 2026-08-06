@@ -15,16 +15,3 @@ env/
 
 # VSCode
 .vscode/
-
-# JetBrains
-.idea/
-
-# macOS
-.DS_Store
-
-# Reports
-atomic_report/
-
-# Test outputs
-results*.jsonl
-*.log
