@@ -1,0 +1,13 @@
+elastic:
+  base_url: "https://192.168.122.54:9200"
+  kibana_url: "http://192.168.122.54:5601"
+  verify_ssl: false
+  username: elastic
+victim:
+  hostname: "192.168.122.115"
+  username: "huy"
+rule_wait:
+  poll_interval_sec: 5
+  unchanged_limit: 5
+
+
