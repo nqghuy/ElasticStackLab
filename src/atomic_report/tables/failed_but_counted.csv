@@ -1,0 +1,5 @@
+Technique,Test,Exit code,Error
+T1053.005,3,1,ERROR: No mapping between account names and security IDs was done.
+T1543.003,1,1053,The service did not respond to the start or control request in a timely fashion.
+T1197,1,-2147023651,Unable to add file - 0x800704dd
+T1197,3,1,Use the job identifier instead of the job name.

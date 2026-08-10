@@ -10,11 +10,21 @@ RESULTS_FILE = 'output/results.jsonl'
 PIPELINE_LOG = "logs/pipeline.log"
 ATOMIC_STDOUT_LOG = 'logs/atomic_stdout.log'
 
-def append(result: TestResult) -> None:
-    os.makedirs(os.path.dirname(RESULTS_FILE), exist_ok=True)
+def append(result: TestResult, technique, path: str = RESULTS_FILE) -> None:
+    if path is None:
+        path = RESULTS_FILE
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(RESULTS_FILE, 'a') as f:
         f.write(json.dumps(asdict(result)))
         f.write('\n')
+
+    technique_path = f'output/results_{technique}.jsonl'
+    os.makedirs(os.path.dirname(technique_path), exist_ok=True)
+    with open(technique_path, 'a') as f:
+        f.write(json.dumps(asdict(result)))
+        f.write('\n')
+
+
 
 def _dict_to_result(data: dict) -> TestResult:
     alerts = [Alert(**a) for a in data.get('alerts', [])]
@@ -53,10 +63,13 @@ def _clear_file(path: str) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, "w").close()
 
-def reset() -> None:
+def reset(technique_filter: set[str] = ()) -> None:
     os.makedirs(os.path.dirname(RESULTS_FILE), exist_ok=True)
     open(RESULTS_FILE, "w").close()
     _clear_file(PIPELINE_LOG)
     _clear_file(ATOMIC_STDOUT_LOG)
+    if not technique_filter is None:
+        for t in technique_filter:
+            _clear_file(f'output/results_{t}.jsonl')
 
 

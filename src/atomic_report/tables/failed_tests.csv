@@ -1,12 +1,6 @@
 Technique,Test,Exit code,Error
-T1053.005,3,1,ERROR: No mapping between account names and security IDs was done.
 T1053.005,10,1,"The filename, directory name, or volume label syntax is incorrect."
-T1543.003,1,1053,The service did not respond to the start or control request in a timely fashion.
-T1137.006,1,,
-T1137.006,2,,
-T1137.006,3,,
-T1137.006,4,,
-T1137.006,5,,
+T1112,42,1,ERROR: The system was unable to find the specified registry key or value.
 T1112,43,1,"Type ""REG ADD /?"" for usage."
 T1112,56,1,ERROR: Access is denied.
 T1112,69,,
@@ -15,9 +9,7 @@ T1546.008,3,1,The system cannot find the file specified.
 T1546.008,4,1,The operation completed successfully.
 T1136.002,1,2,The specified domain either does not exist or could not be contacted.
 T1136.002,2,2,The specified domain either does not exist or could not be contacted.
+T1546.003,1,,
 T1547.001,6,,
-T1197,1,-2147023651,Unable to add file - 0x800704dd
-T1197,3,1,Use the job identifier instead of the job name.
 T1197,4,-1,Executing test: T1197-4 Bits download using desktopimgdownldr.exe (cmd)
-T1137.002,1,,
 T1053.002,1,1,The request is not supported.

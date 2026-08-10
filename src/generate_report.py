@@ -31,33 +31,34 @@ atomic test can fail (print "Exit code: <nonzero>") while the overall
 pwsh process still exits 0. That means results.jsonl's "status" field
 alone is NOT reliable for detecting these failures - the log file must
 be scanned for the real per-test exit code. A test is treated as failed
-(and excluded from stats) if EITHER its jsonl status is "failed" OR the
-log shows a non-zero exit code for that (technique, test_number).
-
-For detection-rate purposes, "no_rule" is counted separately as its own
-technique-level category (see below), while "failed" tests are excluded
-entirely since they don't tell us anything about detection - they're an
-environment/execution problem.
+(and excluded from detection-rate stats) if EITHER its jsonl status is
+"failed" OR the log shows a non-zero exit code for that
+(technique, test_number).
 
 Technique-level classification uses 4 distinct categories:
-  Fully detected      - every test for this technique had alerts
-  Partially detected  - some but not all tests had alerts
+  Fully detected      - every (non-failed) test for this technique had alerts
+  Partially detected  - some but not all (non-failed) tests had alerts
   Not detected         - technique has a rule, but no test triggered it
   No rule              - technique has no detection rule at all
+
+The technique x test heatmap shows EVERY test, including failed ones, so
+each test always sits at its own real test-number slot (failed tests are
+not silently dropped, which would otherwise shift/hide slots and make it
+harder to tell which specific test failed).
 
 Output (default ./atomic_report/):
   charts/01_overview_donut.png
   charts/02_technique_status_bar.png
   charts/03_top_rules_bar.png
   charts/04_technique_heatmap.png
-  charts/04b_technique_heatmap_rotated.png
   tables/technique_detail.csv
   tables/rule_frequency.csv
   tables/failed_tests.csv
   report_summary.md
 
 Usage:
-  python3 generate_report.py --results output/results.jsonl --outdir atomic_report
+  python3 generate_report.py --results output/results.jsonl \
+      --atomic-log logs/atomic_stdout.log --outdir atomic_report
 """
 
 import argparse
@@ -77,6 +78,7 @@ COLOR_GREEN = "#1baf7a"
 COLOR_AMBER = "#eda100"
 COLOR_RED = "#e34948"
 COLOR_MUTEDGRAY = "#898781"
+COLOR_PURPLE = "#8a5fbf"   # failed tests in the heatmap
 
 
 # ----------------------------------------------------------------------
@@ -112,8 +114,8 @@ def parse_atomic_log(path):
     run_atomic.ps1 uses -ErrorAction Continue, so the overall pwsh
     process can exit 0 even when one specific atomic test's command
     failed internally - results.jsonl's "status" field won't catch that.
-    This scans for "Exit code: N" lines inside each test's
-    START/END block and records any non-zero ones.
+    This scans for "Exit code: N" lines inside each test's START/END
+    block and records any non-zero ones.
 
     Returns {(technique, test_number): {"exit_code": int, "error_message": str}}
     for every test whose block contained at least one non-zero exit code.
@@ -163,7 +165,9 @@ def parse_atomic_log(path):
 def compute_stats(results, log_failures):
     stats = {}
 
-    failed = []
+    failed = []              # excluded from stats: failed AND no alerts
+    counted_despite_failure = []   # failed but still produced alert(s) - counted, not excluded
+    failed_keys = set()      # only the excluded ones (used to color the heatmap)
     considered = []
     for r in results:
         key = (r["technique"], r["test_number"])
@@ -172,7 +176,14 @@ def compute_stats(results, log_failures):
         # failed (e.g. subprocess-level crash/timeout), OR the atomic log
         # shows a non-zero exit code for it (the case -ErrorAction
         # Continue hides from the pipeline's own status field).
-        if r["status"] == "failed" or log_info is not None:
+        is_failed = r["status"] == "failed" or log_info is not None
+        has_alerts = bool(r.get("alerts"))
+
+        if is_failed and not has_alerts:
+            # Failed AND nothing detected: inconclusive - we can't tell
+            # whether it would have been detected if it had run properly,
+            # so exclude it from detection-rate stats entirely.
+            failed_keys.add(key)
             failed.append({
                 "technique": r["technique"],
                 "test_number": r["test_number"],
@@ -183,15 +194,38 @@ def compute_stats(results, log_failures):
                     or ""
                 ),
             })
-        else:
-            considered.append(r)
+            continue
+
+        if is_failed and has_alerts:
+            # Failed but still triggered an alert: the detection clearly
+            # worked despite the execution error, so it's still
+            # meaningful signal - count it normally instead of excluding.
+            counted_despite_failure.append({
+                "technique": r["technique"],
+                "test_number": r["test_number"],
+                "exit_code": log_info["exit_code"] if log_info else None,
+                "error_message": (
+                    (log_info["error_message"] if log_info else None)
+                    or r.get("error_message")
+                    or ""
+                ),
+            })
+
+        considered.append(r)
 
     stats["total_tests"] = len(results)
     stats["failed_tests"] = failed
+    stats["counted_despite_failure"] = counted_despite_failure
+    stats["failed_keys"] = failed_keys
     stats["considered"] = considered
     stats["considered_count"] = len(considered)
 
-    techniques = sorted({r["technique"] for r in considered})
+    # Build technique stats from ALL results, not just "considered" -
+    # otherwise a technique whose every single test happened to fail
+    # would disappear entirely from technique_detail.csv / the status
+    # chart / total_techniques, instead of showing up with 0 usable
+    # tests and a distinct "All tests failed" status.
+    techniques = sorted({r["technique"] for r in results})
     stats["techniques"] = techniques
     stats["total_techniques"] = len(techniques)
 
@@ -204,22 +238,29 @@ def compute_stats(results, log_failures):
         100 * len(detected) / len(considered) if considered else 0
     )
 
-    # per-technique stats (excluding failed tests)
-    tech_stats = defaultdict(lambda: {"total": 0, "detected": 0, "has_rule": True})
-    for r in considered:
+    tech_stats = defaultdict(lambda: {"total": 0, "detected": 0, "has_rule": True, "failed_count": 0})
+    for r in results:
         t = r["technique"]
+        if not r["has_rule"]:
+            tech_stats[t]["has_rule"] = False
+        key = (t, r["test_number"])
+        if key in failed_keys:
+            tech_stats[t]["failed_count"] += 1
+            continue
         tech_stats[t]["total"] += 1
         if r["status"] == "detected":
             tech_stats[t]["detected"] += 1
-        if not r["has_rule"]:
-            tech_stats[t]["has_rule"] = False
     stats["tech_stats"] = dict(tech_stats)
 
-    # 4 distinct categories, kept separate (no folding "No rule" into
-    # "Not detected" - the report needs to show them apart).
+    # 5 distinct categories - "All tests failed" covers techniques where
+    # every attempt errored out, so there's no usable detection data at
+    # all (different from "Not detected", which means the rule genuinely
+    # never fired on a successfully-run test).
     def classify(s):
         if not s["has_rule"]:
             return "No rule"
+        if s["total"] == 0:
+            return "All tests failed"
         if s["detected"] == 0:
             return "Not detected"
         if s["detected"] == s["total"]:
@@ -268,16 +309,17 @@ def chart_overview_donut(stats, outpath):
 
 
 def chart_technique_status(stats, outpath):
-    order = ["Fully detected", "Partially detected", "Not detected", "No rule"]
+    order = ["Fully detected", "Partially detected", "Not detected", "No rule", "All tests failed"]
     colors = {
         "Fully detected": COLOR_GREEN,
         "Partially detected": COLOR_AMBER,
         "Not detected": COLOR_RED,
         "No rule": COLOR_MUTEDGRAY,
+        "All tests failed": COLOR_PURPLE,
     }
     values = [stats["status_count"].get(k, 0) for k in order]
 
-    fig, ax = plt.subplots(figsize=(7, 4))
+    fig, ax = plt.subplots(figsize=(7, 4.5))
     bars = ax.barh(order, values, color=[colors[k] for k in order])
     ax.invert_yaxis()
     ax.set_xlabel("Number of techniques")
@@ -311,25 +353,33 @@ def chart_top_rules(stats, outpath, top_n=15):
     plt.close(fig)
 
 
-def _build_heatmap_data(considered):
-    """Build the technique x test-position matrix used by both heatmap
-    variants. Expects the already-filtered 'considered' list (failed
-    tests - per jsonl status AND per log exit code - already excluded
-    by compute_stats)."""
+# ----------------------------------------------------------------------
+# Heatmap: technique x test. Includes ALL tests (detected / undetected /
+# no_rule / failed) so every test sits at its own real test-number slot -
+# failed tests are shown with their own color instead of being silently
+# dropped (which would otherwise shift later slots and hide which exact
+# test failed).
+# ----------------------------------------------------------------------
+def _build_heatmap_matrix(results, failed_keys):
     per_tech_tests = defaultdict(dict)  # {technique: {test_number: value}}
 
-    for r in considered:
+    for r in results:
         t, n = r["technique"], r["test_number"]
-        if r["status"] == "no_rule":
-            value = 2       # no rule
+        key = (t, n)
+        if key in failed_keys:
+            value = 3           # failed (execution error)
+        elif r["status"] == "no_rule":
+            value = 2           # no rule
         elif r["status"] == "detected":
-            value = 1        # detected
+            value = 1           # detected
         else:
-            value = 0        # undetected (rule exists but did not fire)
+            value = 0           # undetected (rule exists but did not fire)
         per_tech_tests[t][n] = value
 
     def status_of(t):
-        vals = list(per_tech_tests[t].values())
+        vals = [v for v in per_tech_tests[t].values() if v != 3]  # ignore failed for sorting
+        if not vals:
+            return 2
         if all(v == 2 for v in vals):
             return 0
         if all(v == 0 or v == 2 for v in vals):
@@ -353,24 +403,44 @@ def _build_heatmap_data(considered):
     return techniques, matrix, real_test_no
 
 
+def _sparse_ticks(n, step=5):
+    """Return tick positions (0-indexed) for labels 1, step, 2*step, ...
+    instead of labelling every single position - keeps the axis readable
+    when there are many test slots."""
+    if n <= step:
+        return list(range(n))
+    ticks = sorted(set([0] + list(range(step - 1, n, step))))
+    return ticks
+
+
 def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False):
+    if matrix.size == 0:
+        return
+
     if rotated:
         matrix = matrix.T
         real_test_no = real_test_no.T
 
     cmap = matplotlib.colors.ListedColormap(
-        ["#f1efe8", COLOR_RED, COLOR_GREEN, COLOR_MUTEDGRAY]
+        ["#f1efe8", COLOR_RED, COLOR_GREEN, COLOR_MUTEDGRAY, COLOR_PURPLE]
     )
     display_matrix = matrix + 1
-    bounds = [0, 1, 2, 3, 4]
+    bounds = [0, 1, 2, 3, 4, 5]
     norm = matplotlib.colors.BoundaryNorm(bounds, cmap.N)
 
     n_rows, n_cols = matrix.shape
     cell = 0.32
-    fig_w = max(6, min(20, n_cols * cell + 3))
-    fig_h = max(5, min(20, n_rows * cell + 1.6))
+    fig_w = max(6, min(24, n_cols * cell + 3))
+    fig_h = max(5, min(24, n_rows * cell + 1.8))
     fig, ax = plt.subplots(figsize=(fig_w, fig_h))
-    ax.imshow(display_matrix, aspect="equal", cmap=cmap, norm=norm)
+    # aspect="auto" (not "equal"): with aspect="equal", matplotlib forces
+    # each cell to be a true square in physical inches, so when the data
+    # matrix's row/column ratio doesn't match the figure's width/height
+    # ratio (e.g. one technique with ~90 tests next to many with <10),
+    # it letterboxes - padding the shorter figure dimension with a huge
+    # blank gap to preserve that square-cell constraint. "auto" instead
+    # stretches cells to fill the whole axes box, eliminating that gap.
+    ax.imshow(display_matrix, aspect="auto", cmap=cmap, norm=norm)
 
     ax.set_xticks(np.arange(-0.5, n_cols, 1), minor=True)
     ax.set_yticks(np.arange(-0.5, n_rows, 1), minor=True)
@@ -379,28 +449,30 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False):
 
     if not rotated:
         ax.set_yticks(range(n_rows))
-        ax.set_yticklabels(techniques, fontsize=8)
-        ax.set_xticks(range(n_cols))
-        ax.set_xticklabels([f"#{i+1}" for i in range(n_cols)], fontsize=8)
-        ax.set_xlabel("Test position within technique (not the real test ID)", fontsize=9)
-        ax.set_ylabel("Technique", fontsize=9)
+        ax.set_yticklabels(techniques, fontsize=13)
+        tick_pos = _sparse_ticks(n_cols)
+        ax.set_xticks(tick_pos)
+        ax.set_xticklabels([str(i + 1) for i in tick_pos], fontsize=12)
+        ax.set_xlabel("Atomic Test Number", fontsize=14)
+        ax.set_ylabel("Technique", fontsize=14)
     else:
         ax.set_xticks(range(n_cols))
-        ax.set_xticklabels(techniques, fontsize=8, rotation=90, ha="center")
-        ax.set_yticks(range(n_rows))
-        ax.set_yticklabels([f"#{i+1}" for i in range(n_rows)], fontsize=8)
-        ax.set_ylabel("Test position within technique (not the real test ID)", fontsize=9)
-        ax.set_xlabel("Technique", fontsize=9)
+        ax.set_xticklabels(techniques, fontsize=13, rotation=90, ha="center")
+        tick_pos = _sparse_ticks(n_rows)
+        ax.set_yticks(tick_pos)
+        ax.set_yticklabels([str(i + 1) for i in tick_pos], fontsize=12)
+        ax.set_ylabel("Atomic Test Number", fontsize=14)
+        ax.set_xlabel("Technique", fontsize=14)
 
     ax.set_title("Technique x Test detection matrix"
-                 + (" (rotated)" if rotated else ""), fontsize=12)
+                 + (" (rotated)" if rotated else ""), fontsize=16)
 
     if n_rows * n_cols <= 800:
         for i in range(n_rows):
             for j in range(n_cols):
                 if real_test_no[i, j] >= 0:
                     ax.text(j, i, str(real_test_no[i, j]), ha="center", va="center",
-                            fontsize=6, color="white" if matrix[i, j] != -1 else "black")
+                            fontsize=8, color="white" if matrix[i, j] != -1 else "black")
 
     for spine in ax.spines.values():
         spine.set_visible(False)
@@ -408,26 +480,33 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False):
     legend_items = [
         ("Not detected (rule exists but did not fire)", COLOR_RED),
         ("Detected", COLOR_GREEN),
-        ("Not detected (no rule)", COLOR_MUTEDGRAY),
+        ("No rule", COLOR_MUTEDGRAY),
+        ("Failed (execution error)", COLOR_PURPLE),
     ]
     handles = [plt.Rectangle((0, 0), 1, 1, color=c) for _, c in legend_items]
-    ax.legend(handles, [l for l, _ in legend_items],
-              loc="upper center", bbox_to_anchor=(0.5, -0.05 - 0.008 * max(n_rows, n_cols)),
-              ncol=3, frameon=False, fontsize=9)
+    # fig.legend (figure-fraction coordinates), NOT ax.legend with a
+    # negative bbox_to_anchor in axes-fraction coordinates: axes-fraction
+    # offsets scale with the axes' own height/width, which varies a lot
+    # with matrix shape (e.g. n_rows=90 in the rotated view) - the same
+    # fractional offset can mean a tiny gap for a short axes and a huge
+    # one for a tall axes. Figure-fraction placement stays a small,
+    # consistent gap below the plot regardless of matrix size.
+    # Reserve a fixed slice of the figure's bottom for the legend via
+    # tight_layout(rect=...), instead of just nudging the legend down by
+    # a small offset (which can overlap the xlabel - as it did before
+    # this fix). rect=[left, bottom, right, top] in figure fraction.
+    fig.tight_layout(rect=[0, 0.08, 1, 1])
+    fig.legend(handles, [l for l, _ in legend_items],
+               loc="lower center", ncol=4, frameon=False, fontsize=15,
+               bbox_to_anchor=(0.5, 0.0))
 
-    fig.tight_layout()
     fig.savefig(outpath, dpi=150, bbox_inches="tight")
     plt.close(fig)
 
 
-def chart_technique_heatmap(considered, outpath):
-    techniques, matrix, real_test_no = _build_heatmap_data(considered)
+def chart_technique_heatmap(results, failed_keys, outpath):
+    techniques, matrix, real_test_no = _build_heatmap_matrix(results, failed_keys)
     _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False)
-
-
-def chart_technique_heatmap_rotated(considered, outpath):
-    techniques, matrix, real_test_no = _build_heatmap_data(considered)
-    _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=True)
 
 
 # ----------------------------------------------------------------------
@@ -442,6 +521,8 @@ def export_tables(stats, outdir):
         rate = 100 * s["detected"] / s["total"] if s["total"] else 0
         if not s["has_rule"]:
             status = "No rule"
+        elif s["total"] == 0:
+            status = "All tests failed"
         elif s["detected"] == 0:
             status = "Not detected"
         elif s["detected"] == s["total"]:
@@ -452,6 +533,7 @@ def export_tables(stats, outdir):
             "Technique": t,
             "Tests detected": s["detected"],
             "Tests total": s["total"],
+            "Failed tests": s["failed_count"],
             "Detection rate (%)": round(rate, 1),
             "Status": status,
             "Has rule": "Yes" if s["has_rule"] else "No",
@@ -480,6 +562,19 @@ def export_tables(stats, outdir):
         os.path.join(tables_dir, "failed_tests.csv"), index=False
     )
 
+    counted_rows = [
+        {
+            "Technique": r["technique"],
+            "Test": r["test_number"],
+            "Exit code": r.get("exit_code") if r.get("exit_code") is not None else "",
+            "Error": r.get("error_message") or "",
+        }
+        for r in stats["counted_despite_failure"]
+    ]
+    pd.DataFrame(counted_rows).to_csv(
+        os.path.join(tables_dir, "failed_but_counted.csv"), index=False
+    )
+
     return df_tech
 
 
@@ -489,8 +584,12 @@ def write_summary_md(stats, df_tech, outdir):
     lines.append("## 1. Overview\n")
     lines.append(f"- Total tests recorded: **{stats['total_tests']}**")
     if stats["failed_tests"]:
-        lines.append(f"- Tests excluded due to execution failure: "
+        lines.append(f"- Tests excluded (execution failed, no alert produced): "
                      f"**{len(stats['failed_tests'])}** (see `tables/failed_tests.csv`)")
+    if stats["counted_despite_failure"]:
+        lines.append(f"- Tests that failed to run but still produced an alert - "
+                     f"**counted, not excluded**: **{len(stats['counted_despite_failure'])}** "
+                     f"(see `tables/failed_but_counted.csv`)")
     lines.append(f"- Tests considered for detection stats: **{stats['considered_count']}**")
     lines.append(f"- Techniques tested: **{stats['total_techniques']}**")
     lines.append(f"- Detected: **{stats['detected_count']}** "
@@ -514,8 +613,17 @@ def write_summary_md(stats, df_tech, outdir):
     lines.append("")
 
     if stats["failed_tests"]:
-        lines.append("## 5. Failed tests (excluded from stats above)\n")
+        lines.append("## 5. Failed tests, excluded (no alert produced)\n")
         for r in stats["failed_tests"]:
+            err = r.get("error_message") or "unknown error"
+            code = r.get("exit_code")
+            code_str = f" (exit code {code})" if code is not None else ""
+            lines.append(f"- {r['technique']} test {r['test_number']}{code_str}: {err}")
+        lines.append("")
+
+    if stats["counted_despite_failure"]:
+        lines.append("## 5b. Failed tests, still counted (alert was produced)\n")
+        for r in stats["counted_despite_failure"]:
             err = r.get("error_message") or "unknown error"
             code = r.get("exit_code")
             code_str = f" (exit code {code})" if code is not None else ""
@@ -527,10 +635,11 @@ def write_summary_md(stats, df_tech, outdir):
     lines.append("- `charts/02_technique_status_bar.png`")
     lines.append("- `charts/03_top_rules_bar.png`")
     lines.append("- `charts/04_technique_heatmap.png`")
-    lines.append("- `charts/04b_technique_heatmap_rotated.png`")
     lines.append("- `tables/technique_detail.csv`")
     lines.append("- `tables/rule_frequency.csv`")
     lines.append("- `tables/failed_tests.csv`")
+    if stats["counted_despite_failure"]:
+        lines.append("- `tables/failed_but_counted.csv`")
 
     with open(os.path.join(outdir, "report_summary.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
@@ -561,9 +670,11 @@ def main():
     chart_overview_donut(stats, os.path.join(charts_dir, "01_overview_donut.png"))
     chart_technique_status(stats, os.path.join(charts_dir, "02_technique_status_bar.png"))
     chart_top_rules(stats, os.path.join(charts_dir, "03_top_rules_bar.png"), args.top_rules)
-    chart_technique_heatmap(stats["considered"], os.path.join(charts_dir, "04_technique_heatmap.png"))
-    chart_technique_heatmap_rotated(
-        stats["considered"], os.path.join(charts_dir, "04b_technique_heatmap_rotated.png")
+    # Heatmaps use the FULL result set (results, not just stats["considered"])
+    # plus failed_keys, so every test - including failed ones - shows up at
+    # its own real test-number slot instead of being silently dropped.
+    chart_technique_heatmap(
+        results, stats["failed_keys"], os.path.join(charts_dir, "04_technique_heatmap.png")
     )
 
     df_tech = export_tables(stats, args.outdir)

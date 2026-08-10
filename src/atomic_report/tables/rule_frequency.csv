@@ -1,26 +1,28 @@
 Rule name,Times triggered
-Local Scheduled Task Creation,21
-Startup Persistence by a Suspicious Process,21
-Persistent Scripts in the Startup Directory,12
-Service Control Spawned via Script Interpreter,5
-Uncommon Registry Persistence Change,5
-Potential Application Shimming via Sdbinst,4
+Local Scheduled Task Creation,27
+Startup Persistence by a Suspicious Process,20
+Service Control Spawned via Script Interpreter,14
+Bitsadmin Activity,14
+Persistence via Microsoft Office AddIns,13
+Persistent Scripts in the Startup Directory,11
+Service Path Modification via sc.exe,6
+Uncommon Registry Persistence Change,6
 Potential Persistence via Time Provider Modification,4
-User Account Creation,4
 Component Object Model Hijacking,4
-Startup or Run Key Registry Modification,3
-Local Account TokenFilter Policy Disabled,3
-Image File Execution Options Injection,3
+System Shells via Services,2
 Deprecated - Microsoft Exchange Transport Agent Install Script,2
 Modification of WDigest Security Provider,2
-Registry Persistence via AppCert DLL,2
+Local Account TokenFilter Policy Disabled,2
+Startup or Run Key Registry Modification,2
+RDP Enabled via Registry,2
+Image File Execution Options Injection,2
+Suspicious WMI Event Subscription Created,2
 Suspicious Startup Shell Folder Modification,2
-Potential LSA Authentication Package Abuse,2
-Bitsadmin Activity,2
 Suspicious Image Load (taskschd.dll) from MS Office,1
-Installation of Custom Shim Databases,1
-Installation of Security Support Provider,1
-RDP Enabled via Registry,1
-Suspicious WMI Event Subscription Created,1
+Persistence via Microsoft Outlook VBA,1
+Shortcut File Written or Modified on Startup Folder,1
+Mofcomp Activity,1
 Account Configured with Never-Expiring Password,1
+Outlook Home Page Registry Modification,1
+Registry Persistence via AppInit DLL,1
 Account Discovery Command via SYSTEM Account,1

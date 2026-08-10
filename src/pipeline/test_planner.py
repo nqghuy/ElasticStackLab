@@ -14,15 +14,23 @@ def _validate_entry(technique:str, test_numbers) -> None:
         if not isinstance (n, int) or n < 1: 
             raise ValueError(f'tests_plan.json: technique {technique} has invalid test numbers {n}')
 
-def load_plan(path: str = 'test_plan.json') -> list[AtomicTest]:
+def load_plan(path: str = 'test_plan.json', technique_filter: set[str] | None = None) -> list[AtomicTest]:
     with open(path) as f:
         plan = json.load(f)
 
     if not isinstance(plan, dict):
         raise ValueError('test_plan.json must be flat object')
 
+    if technique_filter:
+        missing = technique_filter - set(plan.keys())
+        if missing:
+            print(f"[test_planner] Warning: requested technique(s) not found in "
+                  f"{path}: {sorted(missing)}")
+
     tests = []
     for technique, test_numbers in plan.items():
+        if technique_filter and technique not in technique_filter:
+            continue
         _validate_entry(technique, test_numbers) 
 
         seen = set()
@@ -34,8 +42,8 @@ def load_plan(path: str = 'test_plan.json') -> list[AtomicTest]:
             tests.append(AtomicTest(technique=technique, test_number=n))
     return tests
 
-def pending_tests(path: str = 'tests_plan.json') -> list[AtomicTest]:
-    all_tests = load_plan(path)
+def pending_tests(path: str = 'tests_plan.json', technique_filter: set[str] | None = None) -> list[AtomicTest]:
+    all_tests = load_plan(path, technique_filter)
     done_keys = result_store.load_done_keys()
 
     remaining = [

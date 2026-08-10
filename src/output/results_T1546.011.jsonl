@@ -1,0 +1,3 @@
+{"technique": "T1546.011", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-08-09T16:45:50.000Z", "end_time": "2026-08-09T16:45:57.000Z", "status": "undetected"}
+{"technique": "T1546.011", "test_number": 2, "alerts": [], "has_rule": true, "start_time": "2026-08-09T16:46:05.000Z", "end_time": "2026-08-09T16:46:12.000Z", "status": "undetected"}
+{"technique": "T1546.011", "test_number": 3, "alerts": [], "has_rule": true, "start_time": "2026-08-09T16:46:20.000Z", "end_time": "2026-08-09T16:46:27.000Z", "status": "undetected"}
