@@ -12,7 +12,7 @@ escalate privileges.
 """
 false_positives = ["Legitimate scheduled tasks may be created during installation of new software."]
 from = "now-9m"
-index = ["winlogbeat-*", "logs-endpoint.events.process-*", "logs-windows.sysmon_operational-*"]
+index = ["winlogbeat-*", "logs-endpoint.events.process-*", "logs-windows.sysmon_operational-*", "*"]
 language = "eql"
 license = "Elastic License v2"
 name = "Local Scheduled Task Creation V2"
@@ -72,39 +72,7 @@ tags = [
 type = "eql"
 
 query = '''
-sequence with maxspan=1m
-  [process where host.os.type == "windows" and event.type == "start" and
-    ((process.name : ("cmd.exe", "wscript.exe", "rundll32.exe", "regsvr32.exe", "wmic.exe", "mshta.exe",
-                      "powershell.exe", "pwsh.exe", "powershell_ise.exe", "WmiPrvSe.exe", "wsmprovhost.exe", "winrshost.exe") or
-    process.pe.original_file_name : ("cmd.exe", "wscript.exe", "rundll32.exe", "regsvr32.exe", "wmic.exe", "mshta.exe",
-                                     "powershell.exe", "pwsh.dll", "powershell_ise.exe", "WmiPrvSe.exe", "wsmprovhost.exe",
-                                     "winrshost.exe")) or
-    ?process.code_signature.trusted == false) and
-    /* exclude legitimate software creating its own scheduled tasks */
-    not (
-      process.name : "cmd.exe" and
-      (
-        (
-          process.parent.executable : "?:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\libs\\node.exe" and
-          process.command_line : "*?:\\Program Files\\Adobe\\Adobe Creative Cloud Experience\\CCXProcess.exe*"
-        ) or
-        (
-          process.parent.executable : "?:\\Program Files (x86)\\LG Software\\LG App Count\\LGAppCountObserver.exe" and
-          process.command_line : "*?:\\Program Files (x86)\\LG Software\\LG App Count\\*"
-        ) or
-        (
-          process.parent.executable : "?:\\Program Files (x86)\\LG Software\\LG Update & Recovery\\URAlarm.exe" and
-          process.command_line : "*?:\\Program Files (x86)\\LG Software\\LG Update & Recovery\\Support\\*"
-        )
-      )
-    )
-  ] by process.entity_id
-  [process where host.os.type == "windows" and event.type == "start" and
-    (process.name : "schtasks.exe" or process.pe.original_file_name == "schtasks.exe") and
-    process.args : ("/create", "-create") and process.args : ("/RU", "/SC", "/TN", "/TR", "/F", "/XML") and
-    /* exclude SYSTEM Integrity Level - look for task creations by non-SYSTEM user */
-    not (?process.Ext.token.integrity_level_name : "System" or ?winlog.event_data.IntegrityLevel : "System")
-  ] by process.parent.entity_id
+file where host.os.type: "windows" and event.code: "11" and file.path: ("C:\\Windows\\System32\\Tasks\\*", "C:\\Windows\\Tasks\\*") and not file.path: ("C:\\Windows\\System32\\Tasks\\Microsoft Office 15 Sync Maintenance for*", "C:\\Windows\\System32\\Tasks\\Mozilla\\Firefox Default Browser Agent*", "C:\\Windows\\System32\\Tasks\\User_Feed_Synchronization*", "C:\\Windows\\System32\\Tasks\\Mozilla\\Firefox Background Update*", "C:\\Windows\\System32\\Tasks\\OneDrive Per-Machine Standalone Update Task*")
 '''
 
 setup = """## Setup
@@ -138,3 +106,7 @@ reference = "https://attack.mitre.org/techniques/T1053/005/"
 id = "TA0003"
 name = "Persistence"
 reference = "https://attack.mitre.org/tactics/TA0003/"
+
+# file where host.os.type: "windows" and event.code: "11" and file.path: ("C:\\Windows\\System32\\Tasks\\*", "C:\\Windows\\Tasks\\*") and not file.path: ("C:\\Windows\\System32\\Tasks\\Microsoft Office 15 Sync Maintenance for*", "C:\\Windows\\System32\\Tasks\\Mozilla\\Firefox Default Browser Agent*", "C:\\Windows\\System32\\Tasks\\User_Feed_Synchronization*", "C:\\Windows\\System32\\Tasks\\Mozilla\\Firefox Background Update*")
+
+# any where host.os.type: "windows" and (event.code: "4698" or event.code: "4699")

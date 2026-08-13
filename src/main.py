@@ -66,9 +66,9 @@ def run_single_test(settings, test, rule_map) -> TestResult:
             has_rule=has_rule,
             status="failed",
         )
-    time.sleep(2) 
+    time.sleep(5) 
     elastic_client.trigger_rules(settings, rule_ids, start, end)
-    time.sleep(5)
+    time.sleep(2)
     remaining = elastic_client.wait_rules_completed(settings, rule_ids, end)
     if remaining:
         logger.warning('Some rules did not finish in time: %s', remaining)
