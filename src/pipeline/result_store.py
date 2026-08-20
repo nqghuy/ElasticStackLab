@@ -72,4 +72,21 @@ def reset(technique_filter: set[str] = ()) -> None:
         for t in technique_filter:
             _clear_file(f'output/results_{t}.jsonl')
 
+def replace_all(results: list[TestResult]) -> None:
+    os.makedirs(os.path.dirname(RESULTS_FILE), exist_ok=True)
 
+    with open(RESULTS_FILE, "w", encoding="utf-8") as file:
+        for result in results:
+            file.write(json.dumps(asdict(result)))
+            file.write("\n")
+
+    techniques = {result.technique for result in results}
+
+    for technique in techniques:
+        technique_path = f"output/results_{technique}.jsonl"
+
+        with open(technique_path, "w", encoding="utf-8") as file:
+            for result in results:
+                if result.technique == technique:
+                    file.write(json.dumps(asdict(result)))
+                    file.write("\n")

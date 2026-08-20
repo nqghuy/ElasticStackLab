@@ -1,5 +1,5 @@
-{"technique": "T1547.004", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-08-09T17:42:51.000Z", "end_time": "2026-08-09T17:43:00.000Z", "status": "undetected"}
-{"technique": "T1547.004", "test_number": 2, "alerts": [], "has_rule": true, "start_time": "2026-08-09T17:43:08.000Z", "end_time": "2026-08-09T17:43:16.000Z", "status": "undetected"}
+{"technique": "T1547.004", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-08-19T23:21:49.000Z", "end_time": "2026-08-19T23:21:57.000Z", "status": "undetected"}
+{"technique": "T1547.004", "test_number": 2, "alerts": [], "has_rule": true, "start_time": "2026-08-19T23:21:59.000Z", "end_time": "2026-08-19T23:22:06.000Z", "status": "undetected"}
 {"technique": "T1547.004", "test_number": 3, "alerts": [], "has_rule": true, "start_time": null, "end_time": null, "status": "failed"}
-{"technique": "T1547.004", "test_number": 4, "alerts": [], "has_rule": true, "start_time": "2026-08-09T17:45:25.000Z", "end_time": "2026-08-09T17:45:33.000Z", "status": "undetected"}
-{"technique": "T1547.004", "test_number": 5, "alerts": [], "has_rule": true, "start_time": "2026-08-09T17:45:41.000Z", "end_time": "2026-08-09T17:45:47.000Z", "status": "undetected"}
+{"technique": "T1547.004", "test_number": 4, "alerts": [], "has_rule": true, "start_time": "2026-08-19T23:24:11.000Z", "end_time": "2026-08-19T23:24:19.000Z", "status": "undetected"}
+{"technique": "T1547.004", "test_number": 5, "alerts": [], "has_rule": true, "start_time": "2026-08-19T23:24:21.000Z", "end_time": "2026-08-19T23:24:29.000Z", "status": "undetected"}

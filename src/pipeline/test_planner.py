@@ -52,8 +52,8 @@ def pending_tests(path: str = 'tests_plan.json', technique_filter: set[str] | No
     ]
 
     skipped = len(all_tests) - len(done_keys)
-    if skipped:
-        print(f"[test_planner] Resume: skipping {skipped} already-done test(s), {len(remaining)} remaining")
+    # if skipped:
+    #     print(f"[test_planner] Resume: skipping {skipped} already-done test(s), {len(remaining)} remaining")
 
     return remaining
 
