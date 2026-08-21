@@ -1,1 +1,1 @@
-{"technique": "T1547.010", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-08-19T23:02:32.000Z", "end_time": "2026-08-19T23:02:38.000Z", "status": "undetected"}
+{"technique": "T1547.010", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-08-20T16:09:36.000Z", "end_time": "2026-08-20T16:09:42.000Z", "status": "undetected"}

@@ -7,8 +7,6 @@ T1112,69,,
 T1547.004,3,,
 T1546.008,3,1,The system cannot find the file specified.
 T1546.008,4,1,The operation completed successfully.
-T1136.002,1,2,The specified domain either does not exist or could not be contacted.
-T1136.002,2,2,The specified domain either does not exist or could not be contacted.
 T1546.003,1,,
 T1547.001,6,,
 T1197,4,-1,Executing test: T1197-4 Bits download using desktopimgdownldr.exe (cmd)

@@ -1,1 +1,1 @@
-{"technique": "T1556.001", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-08-19T23:39:06.000Z", "end_time": "2026-08-19T23:39:14.000Z", "status": "undetected"}
+{"technique": "T1556.001", "test_number": 1, "alerts": [], "has_rule": false, "start_time": null, "end_time": null, "status": "no_rule"}

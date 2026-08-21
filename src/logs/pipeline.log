@@ -1,82 +1,10 @@
-2026-08-20 22:54:24,219 [INFO] pipeline.elastic_client: Find 578 enabled rules (tag=OS: Windows)
-2026-08-20 22:54:24,237 [INFO] pipeline: Runnging 247 tests
-2026-08-20 22:54:24,237 [INFO] pipeline: [1/247] T1053.005 test 1
-2026-08-20 22:54:24,237 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:54:24.000Z
-2026-08-20 22:54:42,882 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:54:42.000Z
-2026-08-20 22:54:44,882 [INFO] pipeline: [2/247] T1053.005 test 2
-2026-08-20 22:54:44,883 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:54:44.000Z
-2026-08-20 22:54:56,033 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:54:56.000Z
-2026-08-20 22:54:58,033 [INFO] pipeline: [3/247] T1053.005 test 3
-2026-08-20 22:54:58,035 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:54:58.000Z
-2026-08-20 22:55:10,123 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:55:10.000Z
-2026-08-20 22:55:12,125 [INFO] pipeline: [4/247] T1053.005 test 4
-2026-08-20 22:55:12,126 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:55:12.000Z
-2026-08-20 22:55:49,041 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:55:49.000Z
-2026-08-20 22:55:51,041 [INFO] pipeline: [5/247] T1053.005 test 5
-2026-08-20 22:55:51,043 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:55:51.000Z
-2026-08-20 22:56:39,413 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:56:39.000Z
-2026-08-20 22:56:41,414 [INFO] pipeline: [6/247] T1053.005 test 6
-2026-08-20 22:56:41,417 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:56:41.000Z
-2026-08-20 22:57:01,375 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:57:01.000Z
-2026-08-20 22:57:03,376 [INFO] pipeline: [7/247] T1053.005 test 7
-2026-08-20 22:57:03,377 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:57:03.000Z
-2026-08-20 22:57:17,834 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:57:17.000Z
-2026-08-20 22:57:19,834 [INFO] pipeline: [8/247] T1053.005 test 8
-2026-08-20 22:57:19,835 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:57:19.000Z
-2026-08-20 22:57:37,683 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:57:37.000Z
-2026-08-20 22:57:39,685 [INFO] pipeline: [9/247] T1053.005 test 9
-2026-08-20 22:57:39,685 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:57:39.000Z
-2026-08-20 22:57:58,956 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:57:58.000Z
-2026-08-20 22:58:00,956 [INFO] pipeline: [10/247] T1053.005 test 10
-2026-08-20 22:58:00,957 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:58:00.000Z
-2026-08-20 22:58:10,936 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:58:10.000Z
-2026-08-20 22:58:12,936 [INFO] pipeline: [11/247] T1053.005 test 11
-2026-08-20 22:58:12,938 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:58:12.000Z
-2026-08-20 22:58:25,432 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:58:25.000Z
-2026-08-20 22:58:27,433 [INFO] pipeline: [12/247] T1053.005 test 12
-2026-08-20 22:58:27,434 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:58:27.000Z
-2026-08-20 22:58:42,998 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:58:42.000Z
-2026-08-20 22:58:44,998 [INFO] pipeline: [13/247] T1546.013 test 1
-2026-08-20 22:58:45,000 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:58:45.000Z
-2026-08-20 22:59:08,956 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:59:08.000Z
-2026-08-20 22:59:10,957 [INFO] pipeline: [14/247] T1133 test 1
-2026-08-20 22:59:10,961 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T15:59:10.000Z
-2026-08-20 22:59:58,221 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T15:59:58.000Z
-2026-08-20 23:00:00,222 [INFO] pipeline: [15/247] T1542.001 test 1
-2026-08-20 23:00:00,223 [INFO] pipeline: Skipping T1542.001 1: no detection rules for this technique
-2026-08-20 23:00:02,224 [INFO] pipeline: [16/247] T1547 test 1
-2026-08-20 23:00:02,225 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T16:00:02.000Z
-2026-08-20 23:00:15,652 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T16:00:15.000Z
-2026-08-20 23:00:17,653 [INFO] pipeline: [17/247] T1547 test 2
-2026-08-20 23:00:17,655 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T16:00:17.000Z
-2026-08-20 23:00:35,961 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T16:00:35.000Z
-2026-08-20 23:00:37,961 [INFO] pipeline: [18/247] T1547 test 3
-2026-08-20 23:00:37,963 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T16:00:37.000Z
-2026-08-20 23:00:52,197 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T16:00:52.000Z
-2026-08-20 23:00:54,198 [INFO] pipeline: [19/247] T1547.014 test 1
-2026-08-20 23:00:54,199 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T16:00:54.000Z
-2026-08-20 23:01:10,394 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T16:01:10.000Z
-2026-08-20 23:01:12,394 [INFO] pipeline: [20/247] T1547.014 test 2
-2026-08-20 23:01:12,398 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T16:01:12.000Z
-2026-08-20 23:01:24,067 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T16:01:24.000Z
-2026-08-20 23:01:26,068 [INFO] pipeline: [21/247] T1547.014 test 3
-2026-08-20 23:01:26,069 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T16:01:26.000Z
-2026-08-20 23:01:43,053 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T16:01:43.000Z
-2026-08-20 23:01:45,054 [INFO] pipeline: [22/247] T1543.003 test 1
-2026-08-20 23:01:45,056 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T16:01:45.000Z
-2026-08-20 23:01:55,533 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T16:01:55.000Z
-2026-08-20 23:01:57,533 [INFO] pipeline: [23/247] T1543.003 test 2
-2026-08-20 23:01:57,534 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T16:01:57.000Z
-2026-08-20 23:02:13,463 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T16:02:13.000Z
-2026-08-20 23:02:15,464 [INFO] pipeline: [24/247] T1543.003 test 3
-2026-08-20 23:02:15,466 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T16:02:15.000Z
-2026-08-20 23:02:35,582 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T16:02:35.000Z
-2026-08-20 23:02:37,582 [INFO] pipeline: [25/247] T1543.003 test 4
-2026-08-20 23:02:37,583 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T16:02:37.000Z
-2026-08-20 23:02:49,311 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T16:02:49.000Z
-2026-08-20 23:02:51,312 [INFO] pipeline: [26/247] T1543.003 test 5
-2026-08-20 23:02:51,314 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T16:02:51.000Z
-2026-08-20 23:03:12,381 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T16:03:12.000Z
-2026-08-20 23:03:14,381 [INFO] pipeline: [27/247] T1543.003 test 6
-2026-08-20 23:03:14,382 [INFO] pipeline.atomic_runner: START TIME: 2026-08-20T16:03:14.000Z
-2026-08-20 23:03:38,888 [INFO] pipeline.atomic_runner: END TIME: 2026-08-20T16:03:38.000Z
+2026-08-21 23:28:01,118 [INFO] pipeline.elastic_client: Find 582 enabled rules (tag=OS: Windows)
+2026-08-21 23:28:01,139 [INFO] pipeline: Runnging 1 tests
+2026-08-21 23:28:01,139 [INFO] pipeline: [1/1] T1112 test 7
+2026-08-21 23:28:01,140 [INFO] pipeline.atomic_runner: START TIME: 2026-08-21T16:28:01.000Z
+2026-08-21 23:28:35,246 [INFO] pipeline.atomic_runner: END TIME: 2026-08-21T16:28:35.000Z
+2026-08-21 23:28:54,657 [INFO] pipeline.elastic_client: Triggered 46 rules
+2026-08-21 23:28:54,761 [INFO] pipeline.elastic_client: 46 rules not complete
+2026-08-21 23:28:59,840 [INFO] pipeline.elastic_client: 36 rules not complete
+2026-08-21 23:29:04,909 [INFO] pipeline.elastic_client: 16 rules not complete
+2026-08-21 23:29:09,966 [INFO] pipeline.elastic_client: 0 rules not complete
