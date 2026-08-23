@@ -376,19 +376,10 @@ def _build_heatmap_matrix(results, failed_keys):
             value = 0           # undetected (rule exists but did not fire)
         per_tech_tests[t][n] = value
 
-    def status_of(t):
-        vals = [v for v in per_tech_tests[t].values() if v != 3]  # ignore failed for sorting
-        if not vals:
-            return 2
-        if all(v == 2 for v in vals):
-            return 0
-        if all(v == 0 or v == 2 for v in vals):
-            return 1
-        if all(v == 1 or v == 2 for v in vals):
-            return 3
-        return 2
-
-    techniques = sorted(per_tech_tests.keys(), key=lambda t: (status_of(t), t))
+    # Keep technique rows in a stable, alphabetical ATT&CK-ID order.  This
+    # makes it easy to find the same technique in the heatmap and CSV; the
+    # cell colours already communicate the detection status.
+    techniques = sorted(per_tech_tests)
     max_slots = max((len(v) for v in per_tech_tests.values()), default=1)
     max_slots = max(max_slots, 1)
 
@@ -538,7 +529,9 @@ def export_tables(stats, outdir):
             "Status": status,
             "Has rule": "Yes" if s["has_rule"] else "No",
         })
-    df_tech = pd.DataFrame(rows).sort_values(["Detection rate (%)", "Technique"])
+    # Present the detail table in the same technique order as the heatmap,
+    # rather than grouping it by detection rate.
+    df_tech = pd.DataFrame(rows).sort_values("Technique")
     df_tech.to_csv(os.path.join(tables_dir, "technique_detail.csv"), index=False)
 
     rule_rows = [

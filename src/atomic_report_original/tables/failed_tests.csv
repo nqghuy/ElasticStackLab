@@ -1,0 +1,14 @@
+Technique,Test,Exit code,Error
+T1053.005,10,1,"The filename, directory name, or volume label syntax is incorrect."
+T1137.006,5,,
+T1176,4,,
+T1112,43,1,"Type ""REG ADD /?"" for usage."
+T1112,56,1,ERROR: Access is denied.
+T1112,69,,
+T1547.004,3,,
+T1546.008,3,1,The system cannot find the file specified.
+T1546.008,4,1,The operation completed successfully.
+T1546.003,1,,
+T1547.001,6,,
+T1197,4,-1,Executing test: T1197-4 Bits download using desktopimgdownldr.exe (cmd)
+T1053.002,1,1,The request is not supported.
