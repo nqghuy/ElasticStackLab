@@ -1,8 +1,8 @@
 [metadata]
-creation_date = "2020/02/18"
+creation_date = "2020/08/14"
 integration = ["endpoint", "windows"]
 maturity = "production"
-updated_date = "2026/08/03"
+updated_date = "2026/08/04"
 
 [rule]
 author = ["Huy"]
@@ -72,7 +72,7 @@ tags = [
 type = "eql"
 
 query = '''
-file where host.os.type: "windows" and event.code: "11" and file.path: ("C:\\Windows\\System32\\Tasks\\*", "C:\\Windows\\Tasks\\*") and not file.path: ("C:\\Windows\\System32\\Tasks\\Microsoft Office 15 Sync Maintenance for*", "C:\\Windows\\System32\\Tasks\\Mozilla\\Firefox Default Browser Agent*", "C:\\Windows\\System32\\Tasks\\User_Feed_Synchronization*", "C:\\Windows\\System32\\Tasks\\Mozilla\\Firefox Background Update*", "C:\\Windows\\System32\\Tasks\\OneDrive Per-Machine Standalone Update Task*")
+file where host.os.type == "windows" and event.code == "11" and file.path : ("C:\\Windows\\System32\\Tasks\\*", "C:\\Windows\\Tasks\\*") and not file.path: ("C:\\Windows\\System32\\Tasks\\Microsoft Office 15 Sync Maintenance for*", "C:\\Windows\\System32\\Tasks\\Mozilla\\Firefox Default Browser Agent*", "C:\\Windows\\System32\\Tasks\\User_Feed_Synchronization*", "C:\\Windows\\System32\\Tasks\\Mozilla\\Firefox Background Update*", "C:\\Windows\\System32\\Tasks\\OneDrive Per-Machine Standalone Update Task*")
 '''
 
 setup = """## Setup
@@ -99,8 +99,6 @@ reference = "https://attack.mitre.org/techniques/T1053/"
 id = "T1053.005"
 name = "Scheduled Task"
 reference = "https://attack.mitre.org/techniques/T1053/005/"
-
-
 
 [rule.threat.tactic]
 id = "TA0003"

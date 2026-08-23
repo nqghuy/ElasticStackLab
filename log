@@ -1,7 +1,7 @@
 2
 3
 4
-7 chưa có alert
+7 chưa có alert -> done
 8
 9 
 10 chưa có alert 
@@ -13,18 +13,25 @@
 
 34 chưa có alert 
 35 chưa có alert 
--> chung 1 rule
+-> chung 1 rule -> done
 
 38 chưa có alert 
-40
+40 -> done
 45 chưa có alert 
-47 chưa có alert 
+47 chưa có alert -> done
 51 chưa có alert 
-63 chưa có alert 
+63 chưa có alert -> done
 68 chưa có alert 
-70
+70 -> done 
 72 chưa có alert
 73 chưa có alert 
 74 chưa có alert -> chung 70 -> chung 47
 75 chưa có alert chung 63 chung 17 -> done
-86  
+86  -> done
+
+38 -> done
+45 -> done 
+51 -> done 
+68 -> done
+72
+73

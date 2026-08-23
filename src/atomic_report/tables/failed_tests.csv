@@ -1,6 +1,7 @@
 Technique,Test,Exit code,Error
 T1053.005,10,1,"The filename, directory name, or volume label syntax is incorrect."
-T1112,42,1,ERROR: The system was unable to find the specified registry key or value.
+T1137.006,5,,
+T1176,4,,
 T1112,43,1,"Type ""REG ADD /?"" for usage."
 T1112,56,1,ERROR: Access is denied.
 T1112,69,,

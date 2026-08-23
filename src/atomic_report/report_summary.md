@@ -3,12 +3,12 @@
 ## 1. Overview
 
 - Total tests recorded: **247**
-- Tests excluded (execution failed, no alert produced): **12** (see `tables/failed_tests.csv`)
-- Tests that failed to run but still produced an alert - **counted, not excluded**: **6** (see `tables/failed_but_counted.csv`)
-- Tests considered for detection stats: **235**
+- Tests excluded (execution failed, no alert produced): **13** (see `tables/failed_tests.csv`)
+- Tests that failed to run but still produced an alert - **counted, not excluded**: **5** (see `tables/failed_but_counted.csv`)
+- Tests considered for detection stats: **234**
 - Techniques tested: **50**
-- Detected: **70** (29.8%)
-- Undetected (including techniques with no rule): **165**
+- Detected: **70** (29.9%)
+- Undetected (including techniques with no rule): **164**
 - Distinct rules triggered: **39**
 
 ## 2. Technique classification
@@ -22,15 +22,15 @@
 ## 3. Top triggered rules
 
 - Local Scheduled Task Creation: 36 time(s)
-- Service Control Spawned via Script Interpreter: 32 time(s)
 - Bitsadmin Activity: 30 time(s)
 - Startup Persistence by a Suspicious Process: 26 time(s)
-- Persistence via Microsoft Office AddIns: 17 time(s)
-- Uncommon Registry Persistence Change: 17 time(s)
+- Service Control Spawned via Script Interpreter: 18 time(s)
 - Persistent Scripts in the Startup Directory: 16 time(s)
-- Service Path Modification via sc.exe: 12 time(s)
-- Potential Application Shimming via Sdbinst: 12 time(s)
+- Persistence via Microsoft Office AddIns: 14 time(s)
+- Uncommon Registry Persistence Change: 13 time(s)
 - User Account Creation: 12 time(s)
+- Startup or Run Key Registry Modification: 8 time(s)
+- Service Path Modification via sc.exe: 6 time(s)
 
 ## 4. Technique detail
 
@@ -42,7 +42,7 @@
 | T1133       |                0 |             1 |              0 |                  0   | Not detected       | Yes        |
 | T1137.001   |                0 |             1 |              0 |                  0   | Not detected       | Yes        |
 | T1137.005   |                0 |             5 |              0 |                  0   | No rule            | No         |
-| T1176       |                0 |             4 |              0 |                  0   | Not detected       | Yes        |
+| T1176       |                0 |             3 |              1 |                  0   | Not detected       | Yes        |
 | T1505.003   |                0 |             1 |              0 |                  0   | Not detected       | Yes        |
 | T1505.004   |                0 |             2 |              0 |                  0   | No rule            | No         |
 | T1505.005   |                0 |             2 |              0 |                  0   | No rule            | No         |
@@ -58,8 +58,8 @@
 | T1547.014   |                0 |             3 |              0 |                  0   | Not detected       | Yes        |
 | T1556.001   |                0 |             1 |              0 |                  0   | No rule            | No         |
 | T1556.002   |                0 |             2 |              0 |                  0   | No rule            | No         |
-| T1112       |                8 |            86 |              4 |                  9.3 | Partially detected | Yes        |
 | T1098       |                1 |            10 |              0 |                 10   | Partially detected | Yes        |
+| T1112       |                9 |            87 |              3 |                 10.3 | Partially detected | Yes        |
 | T1546       |                2 |             9 |              0 |                 22.2 | Partially detected | Yes        |
 | T1078.003   |                1 |             4 |              0 |                 25   | Partially detected | Yes        |
 | T1546.015   |                1 |             4 |              0 |                 25   | Partially detected | Yes        |
@@ -70,8 +70,8 @@
 | T1053.005   |                7 |            11 |              1 |                 63.6 | Partially detected | Yes        |
 | T1136.002   |                2 |             3 |              0 |                 66.7 | Partially detected | Yes        |
 | T1543.003   |                4 |             6 |              0 |                 66.7 | Partially detected | Yes        |
+| T1137.006   |                3 |             4 |              1 |                 75   | Partially detected | Yes        |
 | T1547.001   |               15 |            19 |              1 |                 78.9 | Partially detected | Yes        |
-| T1137.006   |                4 |             5 |              0 |                 80   | Partially detected | Yes        |
 | T1137       |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
 | T1137.002   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
 | T1137.004   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
@@ -90,7 +90,8 @@
 ## 5. Failed tests, excluded (no alert produced)
 
 - T1053.005 test 10 (exit code 1): The filename, directory name, or volume label syntax is incorrect.
-- T1112 test 42 (exit code 1): ERROR: The system was unable to find the specified registry key or value.
+- T1137.006 test 5: unknown error
+- T1176 test 4: unknown error
 - T1112 test 43 (exit code 1): Type "REG ADD /?" for usage.
 - T1112 test 56 (exit code 1): ERROR: Access is denied.
 - T1112 test 69: unknown error
@@ -108,8 +109,7 @@
 - T1543.003 test 1 (exit code 1053): The service did not respond to the start or control request in a timely fashion.
 - T1136.002 test 1 (exit code 2): The specified domain either does not exist or could not be contacted.
 - T1136.002 test 2 (exit code 2): The specified domain either does not exist or could not be contacted.
-- T1197 test 1 (exit code -2147023651): Unable to add file - 0x800704dd
-- T1197 test 3 (exit code 1): Use the job identifier instead of the job name.
+- T1197 test 1 (exit code -2147023651): BITSADMIN version 3.0
 
 ## Attached files
 

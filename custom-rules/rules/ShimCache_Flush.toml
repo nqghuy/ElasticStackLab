@@ -1,0 +1,90 @@
+[metadata]
+creation_date = "2020/08/22"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/08/22"
+
+[rule]
+name = "ShimCache Flush"
+description = "The ShimCache is a component in Windows operating systems that stores information about recently executed applications. It is used by the operating system to speed up the launching process of applications. The ShimCache is also used by IR teams and Forensic teams. Forensic investigators can use the ShimCache to determine which programs have been executed on a system, even if they have been deleted or their logs have been cleared"
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "c927038d-d64f-42a2-a554-1a6d1ea7aeeb"
+
+author = ["Huy"]
+
+tags = [
+    "OS: Windows"
+]
+
+
+false_positives = []
+
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "process.args", type = "keyword", ecs = true },
+    { name = "process.parent.name", type = "keyword", ecs = true },
+]
+
+related_integrations = []
+
+type = "eql"
+language = "eql"
+
+index = [
+    "logs-windows.sysmon_operational*",
+]
+
+query = '''
+process where host.os.type: "windows" and
+event.code : ("4688", "1") and 
+process.name: "rundll32.exe" and 
+(
+    (
+        process.command_line: ("*apphelp.dll*") and
+        (
+            process.command_line: ("*ShimFlushCache*") or 
+            process.command_line: ("*#250*")
+        )
+        
+    ) or
+    (
+        process.command_line: ("*kernel32.dll*") and
+        (
+            process.command_line: ("*BaseFlushAppcompatCache*") or 
+            process.command_line: ("*#46*")
+        )     
+    )
+)
+'''
+
+filters = []
+actions = []
+
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1112"
+name = "Modify Registry"
+reference = "https://attack.mitre.org/techniques/T11112/"
+
+[rule.threat.tactic]
+id = "TA0005"
+name = "Defense Evasion"
+reference = "https://attack.mitre.org/tactics/TA0005/"
+# Old mitre att&ck:
+
