@@ -1,232 +1,89 @@
-START T1546.008 Test 1
+START T1546.015 Test 1
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1546.008-1 Attaches Command Prompt as a Debugger to a List of Target Processes
-Debugger     : C:\windows\system32\cmd.exe
-PSPath       : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options\osk.exe
-PSParentPath : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options
-PSChildName  : osk.exe
-PSDrive      : HKLM
-PSProvider   : Microsoft.PowerShell.Core\Registry
-Debugger     : C:\windows\system32\cmd.exe
-PSPath       : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options\sethc.exe
-PSParentPath : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options
-PSChildName  : sethc.exe
-PSDrive      : HKLM
-PSProvider   : Microsoft.PowerShell.Core\Registry
-Debugger     : C:\windows\system32\cmd.exe
-PSPath       : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options\utilman.exe
-PSParentPath : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options
-PSChildName  : utilman.exe
-PSDrive      : HKLM
-PSProvider   : Microsoft.PowerShell.Core\Registry
-Debugger     : C:\windows\system32\cmd.exe
-PSPath       : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options\magnify.exe
-PSParentPath : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options
-PSChildName  : magnify.exe
-PSDrive      : HKLM
-PSProvider   : Microsoft.PowerShell.Core\Registry
-Debugger     : C:\windows\system32\cmd.exe
-PSPath       : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options\narrator.exe
-PSParentPath : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options
-PSChildName  : narrator.exe
-PSDrive      : HKLM
-PSProvider   : Microsoft.PowerShell.Core\Registry
-Debugger     : C:\windows\system32\cmd.exe
-PSPath       : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options\DisplaySwitch.exe
-PSParentPath : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options
-PSChildName  : DisplaySwitch.exe
-PSDrive      : HKLM
-PSProvider   : Microsoft.PowerShell.Core\Registry
-Debugger     : C:\windows\system32\cmd.exe
-PSPath       : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options\atbroker.exe
-PSParentPath : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows 
-               NT\CurrentVersion\Image File Execution Options
-PSChildName  : atbroker.exe
-PSDrive      : HKLM
-PSProvider   : Microsoft.PowerShell.Core\Registry
+Executing test: T1546.015-1 COM Hijacking - InprocServer32
+Hive: HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID
+Name                           Property                                                                                
+----                           --------                                                                                
+{B5F8350B-0548-48B1-A6EE-88BD0 (default) : MSAA AccPropServices                                                        
+0B4A5E7}                                                                                                               
+    Hive: HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{B5F8350B-0548-48B1-A6EE-88BD00B4A5E7}
+Name                           Property                                                                                
+----                           --------                                                                                
+InprocServer32                 (default) : C:\AtomicRedTeam\atomics\..\ExternalPayloads\AtomicTest.dll                 
+ThreadingModel : Apartment
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{B5F8350B-0548-48B1-A6EE-
+                 88BD00B4A5E7}\InprocServer32
+PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{B5F8350B-0548-48B1-A6EE-
+                 88BD00B4A5E7}
+PSChildName    : InprocServer32
+PSDrive        : HKCU
+PSProvider     : Microsoft.PowerShell.Core\Registry
 Exit code: 0
-Done executing test: T1546.008-1 Attaches Command Prompt as a Debugger to a List of Target Processes
-END T1546.008 Test 1
+Done executing test: T1546.015-1 COM Hijacking - InprocServer32
+END T1546.015 Test 1
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing cleanup for test: T1546.008-1 Attaches Command Prompt as a Debugger to a List of Target Processes
-Done executing cleanup for test: T1546.008-1 Attaches Command Prompt as a Debugger to a List of Target Processes
+Executing cleanup for test: T1546.015-1 COM Hijacking - InprocServer32
+Done executing cleanup for test: T1546.015-1 COM Hijacking - InprocServer32
 
 
-START T1546.008 Test 2
+START T1546.015 Test 2
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1546.008-2 Replace binary of sticky keys
-SUCCESS: The file (or folder): "C:\Windows\System32\sethc.exe" now owned by the administrators group.
-processed file: C:\Windows\System32\sethc.exe
-Successfully processed 1 files; Failed processing 0 files
-        1 file(s) copied.
+Executing test: T1546.015-2 Powershell Execute COM Object
 Exit code: 0
-Done executing test: T1546.008-2 Replace binary of sticky keys
-END T1546.008 Test 2
+Done executing test: T1546.015-2 Powershell Execute COM Object
+END T1546.015 Test 2
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing cleanup for test: T1546.008-2 Replace binary of sticky keys
-1 file(s) copied.
-Done executing cleanup for test: T1546.008-2 Replace binary of sticky keys
+Executing cleanup for test: T1546.015-2 Powershell Execute COM Object
+Done executing cleanup for test: T1546.015-2 Powershell Execute COM Object
 
 
-START T1546.008 Test 3
+START T1546.015 Test 3
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1546.008-3 Create Symbolic Link From osk.exe to cmd.exe
-The system cannot find the file specified.
-Exit code: 1
-Done executing test: T1546.008-3 Create Symbolic Link From osk.exe to cmd.exe
-END T1546.008 Test 3
+Executing test: T1546.015-3 COM Hijacking with RunDLL32 (Local Server Switch)
+Hive: HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID
+Name                           Property                                                                                
+----                           --------                                                                                
+{B5F8350B-0548-48B1-A6EE-88BD0 (default) : MSAA AccPropServices                                                        
+0B4A5E7}                                                                                                               
+    Hive: HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{B5F8350B-0548-48B1-A6EE-88BD00B4A5E7}
+Name                           Property                                                                                
+----                           --------                                                                                
+InprocServer32                 (default) : C:\AtomicRedTeam\atomics\..\ExternalPayloads\T1546.015_calc.dll             
+ThreadingModel : Both
+PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{B5F8350B-0548-48B1-A6EE-
+                 88BD00B4A5E7}\InprocServer32
+PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{B5F8350B-0548-48B1-A6EE-
+                 88BD00B4A5E7}
+PSChildName    : InprocServer32
+PSDrive        : HKCU
+PSProvider     : Microsoft.PowerShell.Core\Registry
+Exit code: 0
+Done executing test: T1546.015-3 COM Hijacking with RunDLL32 (Local Server Switch)
+END T1546.015 Test 3
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing cleanup for test: T1546.008-3 Create Symbolic Link From osk.exe to cmd.exe
-Successfully processed 0 files; Failed processing 0 files
-The system cannot find the file specified.
-Successfully processed 0 files; Failed processing 1 files
-Successfully processed 0 files; Failed processing 1 files
-Successfully processed 0 files; Failed processing 0 files
-Successfully processed 0 files; Failed processing 1 files
-Successfully processed 0 files; Failed processing 1 files
-ERROR: The system cannot find the file specified.
-Could Not Find C:\Windows\System32\osk.exe
-C:\Windows\system32\osk.exe: The system cannot find the file specified.
-C:\Windows\system32\osk.exe: The system cannot find the file specified.
-C:\Windows\system32\osk.exe: The system cannot find the file specified.
-C:\Windows\system32\osk.exe: The system cannot find the file specified.
-Done executing cleanup for test: T1546.008-3 Create Symbolic Link From osk.exe to cmd.exe
+Executing cleanup for test: T1546.015-3 COM Hijacking with RunDLL32 (Local Server Switch)
+Done executing cleanup for test: T1546.015-3 COM Hijacking with RunDLL32 (Local Server Switch)
 
 
-START T1546.008 Test 4
+START T1546.015 Test 4
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1546.008-4 Atbroker.exe (AT) Executes Arbitrary Command via Registry Key
+Executing test: T1546.015-4 COM hijacking via TreatAs
+Exit code: 0
+Done executing test: T1546.015-4 COM hijacking via TreatAs
+END T1546.015 Test 4
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1546.015-4 COM hijacking via TreatAs
 The operation completed successfully.
 The operation completed successfully.
 The operation completed successfully.
-Exit code: 1
-Done executing test: T1546.008-4 Atbroker.exe (AT) Executes Arbitrary Command via Registry Key
-END T1546.008 Test 4
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing cleanup for test: T1546.008-4 Atbroker.exe (AT) Executes Arbitrary Command via Registry Key
-Done executing cleanup for test: T1546.008-4 Atbroker.exe (AT) Executes Arbitrary Command via Registry Key
-
-
-START T1546.008 Test 5
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing test: T1546.008-5 Auto-start application on user logon
-The operation completed successfully.
-The operation completed successfully.
-The operation completed successfully.
-The operation completed successfully.
-Exit code: 0
-Done executing test: T1546.008-5 Auto-start application on user logon
-END T1546.008 Test 5
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing cleanup for test: T1546.008-5 Auto-start application on user logon
-Done executing cleanup for test: T1546.008-5 Auto-start application on user logon
-
-
-START T1546.008 Test 6
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing test: T1546.008-6 Replace utilman.exe (Ease of Access Binary) with cmd.exe
-SUCCESS: The file (or folder): "C:\Windows\System32\utilman.exe" now owned by the administrators group.
-processed file: C:\Windows\System32\utilman.exe
-Successfully processed 1 files; Failed processing 0 files
-        1 file(s) copied.
-Exit code: 0
-Done executing test: T1546.008-6 Replace utilman.exe (Ease of Access Binary) with cmd.exe
-END T1546.008 Test 6
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing cleanup for test: T1546.008-6 Replace utilman.exe (Ease of Access Binary) with cmd.exe
-Done executing cleanup for test: T1546.008-6 Replace utilman.exe (Ease of Access Binary) with cmd.exe
-
-
-START T1546.008 Test 7
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing test: T1546.008-7 Replace Magnify.exe (Magnifier binary) with cmd.exe
-SUCCESS: The file (or folder): "C:\Windows\System32\Magnify.exe" now owned by the administrators group.
-processed file: C:\Windows\System32\Magnify.exe
-Successfully processed 1 files; Failed processing 0 files
-        1 file(s) copied.
-Exit code: 0
-Done executing test: T1546.008-7 Replace Magnify.exe (Magnifier binary) with cmd.exe
-END T1546.008 Test 7
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing cleanup for test: T1546.008-7 Replace Magnify.exe (Magnifier binary) with cmd.exe
-Done executing cleanup for test: T1546.008-7 Replace Magnify.exe (Magnifier binary) with cmd.exe
-
-
-START T1546.008 Test 8
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing test: T1546.008-8 Replace Narrator.exe (Narrator binary) with cmd.exe
-SUCCESS: The file (or folder): "C:\Windows\System32\Narrator.exe" now owned by the administrators group.
-processed file: C:\Windows\System32\Narrator.exe
-Successfully processed 1 files; Failed processing 0 files
-        1 file(s) copied.
-Exit code: 0
-Done executing test: T1546.008-8 Replace Narrator.exe (Narrator binary) with cmd.exe
-END T1546.008 Test 8
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing cleanup for test: T1546.008-8 Replace Narrator.exe (Narrator binary) with cmd.exe
-Done executing cleanup for test: T1546.008-8 Replace Narrator.exe (Narrator binary) with cmd.exe
-
-
-START T1546.008 Test 9
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing test: T1546.008-9 Replace DisplaySwitch.exe (Display Switcher binary) with cmd.exe
-SUCCESS: The file (or folder): "C:\Windows\System32\DisplaySwitch.exe" now owned by the administrators group.
-processed file: C:\Windows\System32\DisplaySwitch.exe
-Successfully processed 1 files; Failed processing 0 files
-        1 file(s) copied.
-Exit code: 0
-Done executing test: T1546.008-9 Replace DisplaySwitch.exe (Display Switcher binary) with cmd.exe
-END T1546.008 Test 9
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing cleanup for test: T1546.008-9 Replace DisplaySwitch.exe (Display Switcher binary) with cmd.exe
-Done executing cleanup for test: T1546.008-9 Replace DisplaySwitch.exe (Display Switcher binary) with cmd.exe
-
-
-START T1546.008 Test 10
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing test: T1546.008-10 Replace AtBroker.exe (App Switcher binary) with cmd.exe
-SUCCESS: The file (or folder): "C:\Windows\System32\AtBroker.exe" now owned by the administrators group.
-processed file: C:\Windows\System32\AtBroker.exe
-Successfully processed 1 files; Failed processing 0 files
-        1 file(s) copied.
-Exit code: 0
-Done executing test: T1546.008-10 Replace AtBroker.exe (App Switcher binary) with cmd.exe
-END T1546.008 Test 10
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing cleanup for test: T1546.008-10 Replace AtBroker.exe (App Switcher binary) with cmd.exe
-Done executing cleanup for test: T1546.008-10 Replace AtBroker.exe (App Switcher binary) with cmd.exe
+Done executing cleanup for test: T1546.015-4 COM hijacking via TreatAs
 
 
