@@ -1,0 +1,99 @@
+[metadata]
+creation_date = "2020/08/23"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/08/23"
+
+[rule]
+name = "Suspicious Copy From or To System Directory"
+description = "Detects a suspicious copy operation that tries to copy a program from system (System32, SysWOW64, WinSxS) directories to another on disk."
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "1b0c0179-8dad-49d8-ab55-78a00a8c6af6"
+
+author = ["Huy"]
+
+tags = [
+    "OS: Windows"
+]
+
+
+false_positives = []
+
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "process.args", type = "keyword", ecs = true },
+    { name = "process.parent.name", type = "keyword", ecs = true },
+]
+
+related_integrations = []
+
+type = "eql"
+language = "eql"
+
+index = [
+    "logs-windows.sysmon_operational*",
+]
+
+query = '''
+process where host.os.type: "windows" and
+event.code: ("4688", "1") and
+(
+    (
+        process.name: "cmd.exe" and
+        process.command_line: "*copy*"
+    ) or
+    (
+        process.name: ("powershell.exe", "pwsh.exe") and
+        process.command_line: ("*copy-item*", "* copy *", "*cpi *", "* cp *")
+    ) or
+    (
+        process.name: ("robocopy.exe", "xcopy.exe")
+    )
+) and
+(
+    process.command_line like~ (
+    "*C:\\Windows\\System32*",
+    "*C:\\Windows\\SysWOW64*",
+    "*C:\\Windows\\WinSxS*",
+    "*C:\\Windows\\Setup\\Scripts\\ErrorHandler.cmd*"
+    )
+)
+
+'''
+
+filters = []
+actions = []
+
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1546"
+name = "Event Triggered Execution"
+reference = "https://attack.mitre.org/techniques/T1546/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1546.008"
+name = "Event Triggered Execution: Accessibility Features"
+reference = "https://attack.mitre.org/techniques/T1546/008/"
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"
+# Old mitre att&ck:
+

@@ -106,6 +106,25 @@ def load_results(path):
 _TEST_START_RE = re.compile(r"^START\s+(?P<technique>\S+)\s+Test\s+(?P<test_number>\d+)\s*$")
 _TEST_END_RE = re.compile(r"^END\s+(?P<technique>\S+)\s+Test\s+(?P<test_number>\d+)\s*$")
 _EXIT_CODE_RE = re.compile(r"^Exit code:\s*(?P<code>-?\d+)\s*$")
+# Invoke-AtomicTest is run with -ErrorAction Continue.  Consequently a
+# non-terminating PowerShell error can be written to stdout while the wrapper
+# still prints "Exit code: 0".  CategoryInfo/FullyQualifiedErrorId are the
+# structured fields PowerShell emits for such an error record; they are much
+# less ambiguous than looking for arbitrary words such as "error".
+_POWERSHELL_ERROR_RECORD_RE = re.compile(
+    r"^\+\s+(?:CategoryInfo|FullyQualifiedErrorId)\s*:", re.IGNORECASE
+)
+_EXPLICIT_ERROR_RE = re.compile(
+    r"^(?:ERROR:|\[SC\].*\bFAILED\b|Exception\s+calling\b|"
+    r"Synchronizing\s+password\s+failed\b)",
+    re.IGNORECASE,
+)
+_POWERSHELL_ERROR_MESSAGE_RE = re.compile(
+    r"(?:\bException\b|\bis not recognized as the name of a cmdlet\b|"
+    r"\bRequested registry access is not allowed\b|\bCannot find path\b|"
+    r"\bUnable to find a default server\b)",
+    re.IGNORECASE,
+)
 
 
 def parse_atomic_log(path):
@@ -115,10 +134,13 @@ def parse_atomic_log(path):
     process can exit 0 even when one specific atomic test's command
     failed internally - results.jsonl's "status" field won't catch that.
     This scans for "Exit code: N" lines inside each test's START/END
-    block and records any non-zero ones.
+    block and records any non-zero ones.  It also records structured
+    PowerShell error records, because -ErrorAction Continue can leave an
+    Atomic test with an exit code of zero even though its command failed.
 
-    Returns {(technique, test_number): {"exit_code": int, "error_message": str}}
-    for every test whose block contained at least one non-zero exit code.
+    Returns {(technique, test_number): {"exit_code": int | None,
+    "error_message": str}} for every test with a non-zero exit code or a
+    PowerShell error record.
     The error_message is the last non-empty line seen before "Exit code:",
     which is normally the actual error text printed by the command.
     """
@@ -129,6 +151,7 @@ def parse_atomic_log(path):
 
     current = None
     last_nonempty = ""
+    last_error_message = ""
 
     with open(path, encoding="utf-8", errors="replace") as f:
         for raw_line in f:
@@ -138,13 +161,35 @@ def parse_atomic_log(path):
             if start_match:
                 current = (start_match.group("technique"), int(start_match.group("test_number")))
                 last_nonempty = ""
+                last_error_message = ""
                 continue
 
             end_match = _TEST_END_RE.match(line)
             if end_match:
                 current = None
                 last_nonempty = ""
+                last_error_message = ""
                 continue
+
+            if current is not None and (
+                _EXPLICIT_ERROR_RE.search(line)
+                or (
+                    not _POWERSHELL_ERROR_RECORD_RE.match(line)
+                    and _POWERSHELL_ERROR_MESSAGE_RE.search(line)
+                )
+            ):
+                last_error_message = line
+
+            if current is not None and (
+                _EXPLICIT_ERROR_RE.search(line)
+                or _POWERSHELL_ERROR_RECORD_RE.match(line)
+            ):
+                # Keep the first error for the test: later PowerShell records
+                # are often follow-on failures caused by the same root issue.
+                failures.setdefault(current, {
+                    "exit_code": None,
+                    "error_message": last_error_message or line,
+                })
 
             exit_match = _EXIT_CODE_RE.match(line)
             if exit_match and current is not None:
@@ -152,7 +197,7 @@ def parse_atomic_log(path):
                 if code != 0:
                     failures[current] = {
                         "exit_code": code,
-                        "error_message": last_nonempty,
+                        "error_message": last_error_message or last_nonempty,
                     }
                 continue
 
@@ -380,14 +425,22 @@ def _build_heatmap_matrix(results, failed_keys):
     # makes it easy to find the same technique in the heatmap and CSV; the
     # cell colours already communicate the detection status.
     techniques = sorted(per_tech_tests)
-    max_slots = max((len(v) for v in per_tech_tests.values()), default=1)
+    # Columns represent real Atomic test numbers, not the ordinal position
+    # within the tests that happened to be selected for a technique.  For
+    # example, tests [1, 2, 9, 10] must occupy columns [1, 2, 9, 10], with
+    # columns 3--8 left empty; packing them into four consecutive columns
+    # incorrectly makes test 9 appear in position 3.
+    max_slots = max(
+        (max(tests) for tests in per_tech_tests.values() if tests), default=1
+    )
     max_slots = max(max_slots, 1)
 
     matrix = np.full((len(techniques), max_slots), -1, dtype=float)
     real_test_no = np.full((len(techniques), max_slots), -1, dtype=int)
 
     for i, t in enumerate(techniques):
-        for pos, (test_no, value) in enumerate(sorted(per_tech_tests[t].items())):
+        for test_no, value in per_tech_tests[t].items():
+            pos = test_no - 1
             real_test_no[i, pos] = test_no
             matrix[i, pos] = value
 

@@ -1,0 +1,109 @@
+[metadata]
+creation_date = "2026/08/24"
+integration = []
+maturity = "development"
+updated_date = "2026/08/24"
+
+[rule]
+actions = []
+author = ["Huy"]
+description = "."
+enabled = true
+exceptions_list = []
+false_positives = []
+filters = []
+from = "now-360s"
+index = ["logs-windows.sysmon_operational*"]
+interval = "5m"
+language = "eql"
+license = ""
+max_signals = 100
+name = "Windows Policy Registry Modification"
+references = []
+related_integrations = []
+risk_score = 21
+risk_score_mapping = []
+rule_id = "65c0772f-9fd6-40ce-824a-5968378c7504"
+setup = ""
+severity = "low"
+severity_mapping = []
+tags = ["OS: Windows", "Tactic: Defense Impairment", "Tactic: Persistence"]
+to = "now"
+type = "eql"
+
+query = '''
+any where host.os.type == "windows" and
+event.code == "13" and
+registry.path: "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\system\\*"
+'''
+
+
+[[rule.required_fields]]
+ecs = true
+name = "event.type"
+type = "keyword"
+
+[[rule.required_fields]]
+ecs = true
+name = "host.os.type"
+type = "keyword"
+
+[[rule.required_fields]]
+ecs = true
+name = "process.executable"
+type = "keyword"
+
+[[rule.required_fields]]
+ecs = true
+name = "process.name"
+type = "keyword"
+
+[[rule.required_fields]]
+ecs = false
+name = "registry.data.strings"
+type = "keyword"
+
+[[rule.required_fields]]
+ecs = true
+name = "registry.hive"
+type = "keyword"
+
+[[rule.required_fields]]
+ecs = true
+name = "registry.path"
+type = "keyword"
+
+[[rule.required_fields]]
+ecs = true
+name = "registry.value"
+type = "keyword"
+
+[[rule.required_fields]]
+ecs = true
+name = "user.id"
+type = "keyword"
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+[[rule.threat.technique]]
+id = "T1112"
+name = "Modify Registry"
+reference = "https://attack.mitre.org/techniques/T1112/"
+
+
+[rule.threat.tactic]
+id = "TA0112"
+name = "Defense Impairment"
+reference = "https://attack.mitre.org/tactics/TA0112/"
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+[[rule.threat.technique]]
+id = "T1112"
+name = "Modify Registry"
+reference = "https://attack.mitre.org/techniques/T1112/"
+
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"

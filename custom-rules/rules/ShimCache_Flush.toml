@@ -80,7 +80,7 @@ framework = "MITRE ATT&CK"
 [[rule.threat.technique]]
 id = "T1112"
 name = "Modify Registry"
-reference = "https://attack.mitre.org/techniques/T11112/"
+reference = "https://attack.mitre.org/techniques/T1112/"
 
 [rule.threat.tactic]
 id = "TA0005"
