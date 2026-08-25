@@ -1,17 +1,9 @@
-2026-08-24 23:22:09,923 [INFO] pipeline.elastic_client: Find 592 enabled rules (tag=OS: Windows)
-2026-08-24 23:22:09,940 [INFO] pipeline: Runnging 4 tests
-2026-08-24 23:22:09,940 [INFO] pipeline: [1/4] T1546.015 test 1
-2026-08-24 23:22:09,940 [INFO] pipeline.atomic_runner: START TIME: 2026-08-24T16:22:09.000Z
-2026-08-24 23:22:20,868 [INFO] pipeline.atomic_runner: END TIME: 2026-08-24T16:22:20.000Z
-2026-08-24 23:22:22,868 [INFO] pipeline: [2/4] T1546.015 test 2
-2026-08-24 23:22:22,869 [INFO] pipeline.atomic_runner: START TIME: 2026-08-24T16:22:22.000Z
-2026-08-24 23:22:36,370 [INFO] pipeline.atomic_runner: END TIME: 2026-08-24T16:22:36.000Z
-2026-08-24 23:22:38,371 [INFO] pipeline: [3/4] T1546.015 test 3
-2026-08-24 23:22:38,371 [INFO] pipeline.atomic_runner: START TIME: 2026-08-24T16:22:38.000Z
-2026-08-24 23:22:51,953 [INFO] pipeline.atomic_runner: END TIME: 2026-08-24T16:22:51.000Z
-2026-08-24 23:22:53,953 [INFO] pipeline: [4/4] T1546.015 test 4
-2026-08-24 23:22:53,954 [INFO] pipeline.atomic_runner: START TIME: 2026-08-24T16:22:53.000Z
-2026-08-24 23:23:09,175 [INFO] pipeline.atomic_runner: END TIME: 2026-08-24T16:23:09.000Z
-2026-08-24 23:23:16,978 [INFO] pipeline.elastic_client: Triggered 3 rules
-2026-08-24 23:23:17,022 [INFO] pipeline.elastic_client: 3 rules not complete
-2026-08-24 23:23:27,066 [INFO] pipeline.elastic_client: 0 rules not complete
+2026-08-25 23:28:19,698 [INFO] pipeline.elastic_client: Find 595 enabled rules (tag=OS: Windows)
+2026-08-25 23:28:19,711 [INFO] pipeline: Runnging 2 tests
+2026-08-25 23:28:19,711 [INFO] pipeline: [1/2] T1546.018 test 1
+2026-08-25 23:28:19,712 [INFO] pipeline.atomic_runner: START TIME: 2026-08-25T16:28:19.000Z
+2026-08-25 23:30:00,773 [INFO] pipeline.atomic_runner: END TIME: 2026-08-25T16:30:00.000Z
+2026-08-25 23:30:02,773 [INFO] pipeline: [2/2] T1546.018 test 2
+2026-08-25 23:30:02,775 [INFO] pipeline.atomic_runner: START TIME: 2026-08-25T16:30:02.000Z
+2026-08-25 23:30:17,157 [INFO] pipeline.atomic_runner: END TIME: 2026-08-25T16:30:17.000Z
+2026-08-25 23:30:24,158 [INFO] pipeline.elastic_client: No rules to trigger

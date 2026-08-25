@@ -1,6 +1,13 @@
 Technique,Test,Exit code,Error
 T1053.005,3,1,ERROR: No mapping between account names and security IDs was done.
-T1543.003,1,1053,The service did not respond to the start or control request in a timely fashion.
+T1543.003,1,1053,[SC] StartService FAILED 1053:
+T1505.002,1,,"Install-TransportAgent : The term 'Install-TransportAgent' is not recognized as the name of a cmdlet, function, script"
+T1112,7,,"+ CategoryInfo          : ObjectNotFound: (Set-ExecutionPolicy:String) [], CommandNotFoundException"
+T1546.008,4,1,The operation completed successfully.
 T1136.002,1,2,The specified domain either does not exist or could not be contacted.
 T1136.002,2,2,The specified domain either does not exist or could not be contacted.
-T1197,1,-2147023651,BITSADMIN version 3.0
+T1547.001,14,,"+ CategoryInfo          : InvalidArgument: (:) [Get-ItemPropertyValue], PSArgumentException"
+T1547.001,15,,"+ CategoryInfo          : InvalidArgument: (:) [Get-ItemPropertyValue], PSArgumentException"
+T1546,8,,"+ CategoryInfo          : NotSpecified: (:) [Copy-Item], DirectoryNotFoundException"
+T1197,1,-2147023651,Unable to add file - 0x800704dd
+T1197,2,,network. The specified service does not exist. (Exception from HRESULT: 0x800704DD)

@@ -45,7 +45,7 @@ def setup_logging() -> None:
 def run_single_test(settings, test, rule_map) -> TestResult:
     rule_ids = rule_map.by_technique.get(test.technique, [])
     has_rule = bool(rule_ids)
-
+    """
     if not has_rule:
         logger.info('Skipping %s %s: no detection rules for this technique', 
                     test.technique, test.test_number)
@@ -55,7 +55,7 @@ def run_single_test(settings, test, rule_map) -> TestResult:
             has_rule=False,
             status="no_rule",
         )
-
+    """
     try: 
         start, end = atomic_runner.run_atomic_tests(settings, [test])
     except Exception as e:

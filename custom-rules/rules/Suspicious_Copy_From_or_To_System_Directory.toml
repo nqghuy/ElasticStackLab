@@ -67,6 +67,8 @@ event.code: ("4688", "1") and
     "*C:\\Windows\\System32*",
     "*C:\\Windows\\SysWOW64*",
     "*C:\\Windows\\WinSxS*",
+    "*C:\\Windows\\apppatch\\Custom*",
+    "*C:\\Windows\\apppatch\\CustomSDB*",
     "*C:\\Windows\\Setup\\Scripts\\ErrorHandler.cmd*"
     )
 )
@@ -90,6 +92,16 @@ reference = "https://attack.mitre.org/techniques/T1546/"
 id = "T1546.008"
 name = "Event Triggered Execution: Accessibility Features"
 reference = "https://attack.mitre.org/techniques/T1546/008/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1546.002"
+name = "Screensaver"
+reference = "https://attack.mitre.org/techniques/T1546/002/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1546.012"
+name = "Application Shimming"
+reference = "https://attack.mitre.org/techniques/T1546/012/"
 
 [rule.threat.tactic]
 id = "TA0003"

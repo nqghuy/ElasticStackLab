@@ -1,89 +1,12 @@
-START T1546.015 Test 1
+START T1546.018 Test 1
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1546.015-1 COM Hijacking - InprocServer32
-Hive: HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID
-Name                           Property                                                                                
-----                           --------                                                                                
-{B5F8350B-0548-48B1-A6EE-88BD0 (default) : MSAA AccPropServices                                                        
-0B4A5E7}                                                                                                               
-    Hive: HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{B5F8350B-0548-48B1-A6EE-88BD00B4A5E7}
-Name                           Property                                                                                
-----                           --------                                                                                
-InprocServer32                 (default) : C:\AtomicRedTeam\atomics\..\ExternalPayloads\AtomicTest.dll                 
-ThreadingModel : Apartment
-PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{B5F8350B-0548-48B1-A6EE-
-                 88BD00B4A5E7}\InprocServer32
-PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{B5F8350B-0548-48B1-A6EE-
-                 88BD00B4A5E7}
-PSChildName    : InprocServer32
-PSDrive        : HKCU
-PSProvider     : Microsoft.PowerShell.Core\Registry
-Exit code: 0
-Done executing test: T1546.015-1 COM Hijacking - InprocServer32
-END T1546.015 Test 1
+Executing test: T1546.018-1 Python Startup Hook - atomic_hook.pth (Windows)
+
+
+START T1546.018 Test 2
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing cleanup for test: T1546.015-1 COM Hijacking - InprocServer32
-Done executing cleanup for test: T1546.015-1 COM Hijacking - InprocServer32
-
-
-START T1546.015 Test 2
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing test: T1546.015-2 Powershell Execute COM Object
-Exit code: 0
-Done executing test: T1546.015-2 Powershell Execute COM Object
-END T1546.015 Test 2
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing cleanup for test: T1546.015-2 Powershell Execute COM Object
-Done executing cleanup for test: T1546.015-2 Powershell Execute COM Object
-
-
-START T1546.015 Test 3
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing test: T1546.015-3 COM Hijacking with RunDLL32 (Local Server Switch)
-Hive: HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID
-Name                           Property                                                                                
-----                           --------                                                                                
-{B5F8350B-0548-48B1-A6EE-88BD0 (default) : MSAA AccPropServices                                                        
-0B4A5E7}                                                                                                               
-    Hive: HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{B5F8350B-0548-48B1-A6EE-88BD00B4A5E7}
-Name                           Property                                                                                
-----                           --------                                                                                
-InprocServer32                 (default) : C:\AtomicRedTeam\atomics\..\ExternalPayloads\T1546.015_calc.dll             
-ThreadingModel : Both
-PSPath         : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{B5F8350B-0548-48B1-A6EE-
-                 88BD00B4A5E7}\InprocServer32
-PSParentPath   : Microsoft.PowerShell.Core\Registry::HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{B5F8350B-0548-48B1-A6EE-
-                 88BD00B4A5E7}
-PSChildName    : InprocServer32
-PSDrive        : HKCU
-PSProvider     : Microsoft.PowerShell.Core\Registry
-Exit code: 0
-Done executing test: T1546.015-3 COM Hijacking with RunDLL32 (Local Server Switch)
-END T1546.015 Test 3
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing cleanup for test: T1546.015-3 COM Hijacking with RunDLL32 (Local Server Switch)
-Done executing cleanup for test: T1546.015-3 COM Hijacking with RunDLL32 (Local Server Switch)
-
-
-START T1546.015 Test 4
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing test: T1546.015-4 COM hijacking via TreatAs
-Exit code: 0
-Done executing test: T1546.015-4 COM hijacking via TreatAs
-END T1546.015 Test 4
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing cleanup for test: T1546.015-4 COM hijacking via TreatAs
-The operation completed successfully.
-The operation completed successfully.
-The operation completed successfully.
-Done executing cleanup for test: T1546.015-4 COM hijacking via TreatAs
+Executing test: T1546.018-2 Python Startup Hook - usercustomize.py (Windows)
 
 
