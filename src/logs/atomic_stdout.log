@@ -1,12 +1,31 @@
-START T1546.018 Test 1
+START T1547.001 Test 16
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1546.018-1 Python Startup Hook - atomic_hook.pth (Windows)
-
-
-START T1546.018 Test 2
+Executing test: T1547.001-16 secedit used to create a Run key in the HKLM Hive
+Completed 1 percent (0/63) 	Process Privilege Rights area        
+Completed 25 percent (15/63) 	Process Privilege Rights area        
+Completed 25 percent (15/63) 	Process Group Membership area        
+Completed 49 percent (30/63) 	Process Group Membership area        
+Completed 49 percent (30/63) 	Process Registry Keys area        
+Completed 49 percent (30/63) 	Process File Security area        
+Completed 49 percent (30/63) 	Process Services area        
+Completed 65 percent (40/63) 	Process Services area        
+Completed 73 percent (45/63) 	Process Services area        
+Completed 73 percent (45/63) 	Process Security Policy area        
+Completed 77 percent (48/63) 	Process Security Policy area        
+Completed 84 percent (52/63) 	Process Security Policy area        
+Completed 88 percent (55/63) 	Process Security Policy area        
+Completed 93 percent (58/63) 	Process Security Policy area        
+Completed 100 percent (63/63) 	Process Security Policy area        
+                                                                           
+The task has completed successfully.
+See log %windir%\security\logs\scesrv.log for detail info.
+Exit code: 0
+Done executing test: T1547.001-16 secedit used to create a Run key in the HKLM Hive
+END T1547.001 Test 16
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1546.018-2 Python Startup Hook - usercustomize.py (Windows)
+Executing cleanup for test: T1547.001-16 secedit used to create a Run key in the HKLM Hive
+Done executing cleanup for test: T1547.001-16 secedit used to create a Run key in the HKLM Hive
 
 
