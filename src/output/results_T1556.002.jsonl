@@ -1,2 +1,2 @@
-{"technique": "T1556.002", "test_number": 1, "alerts": [], "has_rule": false, "start_time": null, "end_time": null, "status": "no_rule"}
-{"technique": "T1556.002", "test_number": 2, "alerts": [], "has_rule": false, "start_time": null, "end_time": null, "status": "no_rule"}
+{"technique": "T1556.002", "test_number": 1, "alerts": [{"name": "Potential LSA Authentication Package Abuse v2", "reason": {"event.type": ["change"], "host.os.type": "windows", "registry.path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Lsa\\Authentication Packages", "user.id": "S-1-5-21-2504368491-1432609220-1588966285-1001"}}], "has_rule": true, "start_time": "2026-08-29T17:06:37.000Z", "end_time": "2026-08-29T17:06:58.000Z", "status": "detected"}
+{"technique": "T1556.002", "test_number": 2, "alerts": [], "has_rule": true, "start_time": null, "end_time": null, "status": "failed"}
