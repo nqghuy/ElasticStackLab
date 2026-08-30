@@ -1,25 +1,35 @@
-START T1556.001 Test 1
+START T1078.001 Test 1
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1556.001-1 Skeleton Key via Mimikatz
-.#####.   mimikatz 2.2.0 (x64) #19041 Sep 19 2022 17:44:08
- .## ^ ##.  "A La Vie, A L'Amour" - (oe.eo)
- ## / \ ##  /*** Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )
- ## \ / ##       > https://blog.gentilkiwi.com/mimikatz
- '## v ##'       Vincent LE TOUX             ( vincent.letoux@gmail.com )
-  '#####'        > https://pingcastle.com / https://mysmartlogon.com ***/
-mimikatz(commandline) # privilege::debug
-Privilege '20' OK
-mimikatz(commandline) # misc::skeleton
-ERROR kuhl_m_misc_skeleton ; kull_m_process_getVeryBasicModuleInformationsForName (0x00000000)
-mimikatz(commandline) # exit
-Bye!
+Executing test: T1078.001-1 Enable Guest account with RDP capability and admin privileges
+The command completed successfully.
+The command completed successfully.
+The command completed successfully.
+The command completed successfully.
+The operation completed successfully.
+The operation completed successfully.
 Exit code: 0
-Done executing test: T1556.001-1 Skeleton Key via Mimikatz
-END T1556.001 Test 1
+Done executing test: T1078.001-1 Enable Guest account with RDP capability and admin privileges
+END T1078.001 Test 1
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing cleanup for test: T1556.001-1 Skeleton Key via Mimikatz
-Done executing cleanup for test: T1556.001-1 Skeleton Key via Mimikatz
+Executing cleanup for test: T1078.001-1 Enable Guest account with RDP capability and admin privileges
+Note: set remove_rdp_access_during_cleanup input argument to disable RDP access during cleanup
+Done executing cleanup for test: T1078.001-1 Enable Guest account with RDP capability and admin privileges
+
+
+START T1078.001 Test 2
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1078.001-2 Activate Guest Account
+The command completed successfully.
+Exit code: 0
+Done executing test: T1078.001-2 Activate Guest Account
+END T1078.001 Test 2
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1078.001-2 Activate Guest Account
+The command completed successfully.
+Done executing cleanup for test: T1078.001-2 Activate Guest Account
 
 

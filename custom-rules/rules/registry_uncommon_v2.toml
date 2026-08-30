@@ -14,7 +14,7 @@ from = "now-9m"
 index = ["logs-endpoint.events.registry-*", "logs-windows.sysmon_operational-*", "winlogbeat-*"]
 language = "eql"
 license = "Elastic License v2"
-name = "Uncommon Registry Persistence Change"
+name = "Uncommon Registry Persistence Change v2"
 note = """## Triage and analysis
 
 > **Disclaimer**:
@@ -171,6 +171,11 @@ framework = "MITRE ATT&CK"
 id = "T1037"
 name = "Boot or Logon Initialization Scripts"
 reference = "https://attack.mitre.org/techniques/T1037/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1037.001"
+name = "Logon Script"
+reference = "https://attack.mitre.org/techniques/T1037/001"
 
 [[rule.threat.technique]]
 id = "T1176"

@@ -1,0 +1,99 @@
+[metadata]
+creation_date = "2020/08/21"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/08/21"
+
+[rule]
+name = "Enable user"
+description = "Persistence via enable user"
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "70381ac4-2c91-4cca-ac07-6b5f908d0122"
+
+author = ["Huy"]
+
+tags = [
+    "OS: Windows"
+]
+
+
+false_positives = []
+
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "process.args", type = "keyword", ecs = true },
+    { name = "process.parent.name", type = "keyword", ecs = true },
+]
+
+related_integrations = []
+
+type = "eql"
+language = "eql"
+
+index = ["logs-endpoint.events.registry-*", "logs-windows.sysmon_operational-*", "winlogbeat-*", "logs-system.security*"]
+
+query = '''
+  any where host.os.type == "windows" and
+  (
+    ( 
+    event.code: ("4688", "1") and 
+    process.name: ("net.exe", "net1.exe") and 
+    process.command_line: "* user *"
+    ) or 
+    (
+      event.code: ("4738", "4722") and not 
+      user.id == "S-1-5-18"
+    )
+  )
+'''
+#![
+#  any where host.os.type == "windows" and
+#  (
+#    event.code: ("4688", "1") and 
+#    process.name: ("net.exe", "net1.exe") and 
+#    process.command_line: "* localgroup *"
+#  ) or 
+#  (
+#    event.code: ("4732", "4728") and 
+#    group.name: ("Administrators", "Remote Desktop Users")
+#  )
+#]
+#
+#'''
+
+filters = []
+actions = []
+
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1078"
+name = "Valid Accounts"
+reference = "https://attack.mitre.org/techniques/T1078/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1078.001"
+name = "Default Accounts"
+reference = "https://attack.mitre.org/techniques/T1078/001"
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"
+
+
