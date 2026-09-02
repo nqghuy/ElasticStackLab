@@ -1,0 +1,81 @@
+[metadata]
+creation_date = "2026/09/02"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/09/02"
+
+[rule]
+name = "UEFI Persistence Via Wpbbin"
+description = "Creates Wpbbin.exe in %systemroot%. This technique can be used for UEFI-based pre-OS boot persistence mechanisms."
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "a0c7e285-b2c8-43b1-92cf-cf64ac590d5a"
+
+author = ["Huy"]
+
+tags = [
+    "OS: Windows"
+]
+
+false_positives = []
+
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "file.path", type = "keyword", ecs = true },
+]
+
+related_integrations = []
+
+type = "eql"
+language = "eql"
+
+index = [
+    "logs-windows.sysmon_operational*",
+    "logs-endpoint.events.process-*",
+    "logs-endpoint.events.registry-*",
+    "winlogbeat-*",
+    "logs-windows.sysmon_operational-*",
+]
+
+query = '''
+any where host.os.type: "windows" and 
+event.code: "11" and 
+file.path: "C:\\Windows\\System32\\wpbbin.exe"
+'''
+
+filters = []
+actions = []
+
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1542"
+name = "Pre-OS Boot"
+reference = "https://attack.mitre.org/techniques/T1542"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1542.001"
+name = "Pre-OS Boot: System Firmware"
+reference = "https://attack.mitre.org/techniques/T1542/001"
+
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"
+
+

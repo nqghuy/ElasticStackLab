@@ -1,35 +1,155 @@
-START T1078.001 Test 1
+START T1543.003 Test 1
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1078.001-1 Enable Guest account with RDP capability and admin privileges
-The command completed successfully.
-The command completed successfully.
-The command completed successfully.
-The command completed successfully.
+Executing test: T1543.003-1 Modify Fax service to run PowerShell
+[SC] ChangeServiceConfig SUCCESS
+[SC] StartService FAILED 1053:
+The service did not respond to the start or control request in a timely fashion.
+Exit code: 1053
+Done executing test: T1543.003-1 Modify Fax service to run PowerShell
+END T1543.003 Test 1
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1543.003-1 Modify Fax service to run PowerShell
+Done executing cleanup for test: T1543.003-1 Modify Fax service to run PowerShell
+
+
+START T1543.003 Test 2
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1543.003-2 Service Installation CMD
+[SC] CreateService SUCCESS
+SERVICE_NAME: AtomicTestService_CMD 
+        TYPE               : 10  WIN32_OWN_PROCESS  
+        STATE              : 2  START_PENDING 
+                                (NOT_STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x7d0
+        PID                : 5732
+        FLAGS              :
+Exit code: 0
+Done executing test: T1543.003-2 Service Installation CMD
+END T1543.003 Test 2
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1543.003-2 Service Installation CMD
+Done executing cleanup for test: T1543.003-2 Service Installation CMD
+
+
+START T1543.003 Test 3
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1543.003-3 Service Installation PowerShell
+Status   Name               DisplayName                           
+------   ----               -----------                           
+Stopped  AtomicTestServi... AtomicTestService_PowerShell
+Exit code: 0
+Done executing test: T1543.003-3 Service Installation PowerShell
+END T1543.003 Test 3
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1543.003-3 Service Installation PowerShell
+__GENUS          : 2
+__CLASS          : __PARAMETERS
+__SUPERCLASS     : 
+__RELPATH        : 
+__PROPERTY_COUNT : 1
+__DYNASTY        : __PARAMETERS
+__DERIVATION     : {}
+__SERVER         : 
+__NAMESPACE      : 
+__PATH           : 
+ReturnValue      : 0
+PSComputerName   :
+Done executing cleanup for test: T1543.003-3 Service Installation PowerShell
+
+
+START T1543.003 Test 4
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1543.003-4 TinyTurla backdoor service w64time
+1 file(s) copied.
+[SC] CreateService SUCCESS
+[SC] ChangeServiceConfig SUCCESS
+[SC] ChangeServiceConfig2 SUCCESS
 The operation completed successfully.
 The operation completed successfully.
+SERVICE_NAME: W64Time 
+        TYPE               : 20  WIN32_SHARE_PROCESS  
+        STATE              : 2  START_PENDING 
+                                (NOT_STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x7d0
+        PID                : 4368
+        FLAGS              :
 Exit code: 0
-Done executing test: T1078.001-1 Enable Guest account with RDP capability and admin privileges
-END T1078.001 Test 1
+Done executing test: T1543.003-4 TinyTurla backdoor service w64time
+END T1543.003 Test 4
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing cleanup for test: T1078.001-1 Enable Guest account with RDP capability and admin privileges
-Note: set remove_rdp_access_during_cleanup input argument to disable RDP access during cleanup
-Done executing cleanup for test: T1078.001-1 Enable Guest account with RDP capability and admin privileges
+Executing cleanup for test: T1543.003-4 TinyTurla backdoor service w64time
+[SC] ControlService FAILED 1062:
+The service has not been started.
+[SC] DeleteService SUCCESS
+The operation completed successfully.
+ERROR: The system was unable to find the specified registry key or value.
+Done executing cleanup for test: T1543.003-4 TinyTurla backdoor service w64time
 
 
-START T1078.001 Test 2
+START T1543.003 Test 5
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1078.001-2 Activate Guest Account
-The command completed successfully.
+Executing test: T1543.003-5 Remote Service Installation CMD
+[SC] CreateService SUCCESS
+SERVICE_NAME: AtomicTestService_CMD 
+        TYPE               : 10  WIN32_OWN_PROCESS  
+        STATE              : 2  START_PENDING 
+                                (NOT_STOPPABLE, NOT_PAUSABLE, IGNORES_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x7d0
+        PID                : 6972
+        FLAGS              :
 Exit code: 0
-Done executing test: T1078.001-2 Activate Guest Account
-END T1078.001 Test 2
+Done executing test: T1543.003-5 Remote Service Installation CMD
+END T1543.003 Test 5
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing cleanup for test: T1078.001-2 Activate Guest Account
-The command completed successfully.
-Done executing cleanup for test: T1078.001-2 Activate Guest Account
+Executing cleanup for test: T1543.003-5 Remote Service Installation CMD
+Done executing cleanup for test: T1543.003-5 Remote Service Installation CMD
+
+
+START T1543.003 Test 6
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1543.003-6 Modify Service to Run Arbitrary Binary (Powershell)
+set-servicebinarypath : The term 'set-servicebinarypath' is not recognized as the name of a cmdlet, function, script 
+file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct 
+and try again.
+At line:2 char:1
++ set-servicebinarypath -name "fax" -path "$env:windir\system32\notepad ...
++ ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (set-servicebinarypath:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+Exit code: 0
+Done executing test: T1543.003-6 Modify Service to Run Arbitrary Binary (Powershell)
+END T1543.003 Test 6
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1543.003-6 Modify Service to Run Arbitrary Binary (Powershell)
+set-servicebinarypath : The term 'set-servicebinarypath' is not recognized as the name of a cmdlet, function, script 
+file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct 
+and try again.
+At line:2 char:1
++ set-servicebinarypath -name "fax" -path "$env:windir\system32\fxssvc. ...
++ ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (set-servicebinarypath:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+Done executing cleanup for test: T1543.003-6 Modify Service to Run Arbitrary Binary (Powershell)
 
 

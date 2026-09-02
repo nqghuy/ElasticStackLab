@@ -1,2 +1,2 @@
-{"technique": "T1505.005", "test_number": 1, "alerts": [], "has_rule": false, "start_time": null, "end_time": null, "status": "no_rule"}
-{"technique": "T1505.005", "test_number": 2, "alerts": [], "has_rule": false, "start_time": null, "end_time": null, "status": "no_rule"}
+{"technique": "T1505.005", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-09-02T16:31:35.000Z", "end_time": "2026-09-02T16:31:46.000Z", "status": "undetected"}
+{"technique": "T1505.005", "test_number": 2, "alerts": [], "has_rule": true, "start_time": "2026-09-02T16:31:48.000Z", "end_time": "2026-09-02T16:31:59.000Z", "status": "undetected"}
