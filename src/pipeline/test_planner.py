@@ -1,9 +1,40 @@
 from __future__ import annotations
 
 import json
+import os
 
 from pipeline import result_store
 from pipeline.models import AtomicTest
+
+
+def load_failed_test_keys(path: str) -> set[tuple[str, int]]:
+    """Load the failed-test manifest written by generate_report.py.
+
+    A missing or malformed manifest is an error when the caller explicitly
+    requested exclusion; silently running known-bad tests would be surprising.
+    """
+    if not os.path.exists(path):
+        raise FileNotFoundError(
+            f"Failed-test manifest not found: {path}. Run generate_report.py first "
+            "or pass --failed-tests-file PATH."
+        )
+
+    with open(path, encoding="utf-8") as f:
+        data = json.load(f)
+    entries = data.get("failed_tests") if isinstance(data, dict) else None
+    if not isinstance(entries, list):
+        raise ValueError(f"{path}: expected an object with a failed_tests list")
+
+    keys = set()
+    for index, entry in enumerate(entries, start=1):
+        if not isinstance(entry, dict):
+            raise ValueError(f"{path}: failed_tests entry {index} is not an object")
+        technique = entry.get("technique")
+        test_number = entry.get("test_number")
+        if not isinstance(technique, str) or not isinstance(test_number, int) or test_number < 1:
+            raise ValueError(f"{path}: invalid failed_tests entry {index}")
+        keys.add((technique, test_number))
+    return keys
 
 def _validate_entry(technique:str, test_numbers) -> None:
     if not isinstance(technique, str) or not technique.startswith('T'):
@@ -56,6 +87,5 @@ def pending_tests(path: str = 'tests_plan.json', technique_filter: set[str] | No
     #     print(f"[test_planner] Resume: skipping {skipped} already-done test(s), {len(remaining)} remaining")
 
     return remaining
-
 
 

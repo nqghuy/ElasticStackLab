@@ -8,6 +8,6 @@ victim:
   username: "huy"
 rule_wait:
   poll_interval_sec: 10
-  unchanged_limit: 5
+  unchanged_limit: 10
 
 

@@ -45,17 +45,7 @@ def setup_logging() -> None:
 def run_single_test(settings, test, rule_map) -> TestResult:
     rule_ids = rule_map.by_technique.get(test.technique, [])
     has_rule = bool(rule_ids)
-    """
-    if not has_rule:
-        logger.info('Skipping %s %s: no detection rules for this technique', 
-                    test.technique, test.test_number)
-        return TestResult(
-            technique=test.technique,
-            test_number=test.test_number,
-            has_rule=False,
-            status="no_rule",
-        )
-    """
+    
     try: 
         start, end = atomic_runner.run_atomic_tests(settings, [test])
     except Exception as e:
@@ -75,7 +65,15 @@ def run_single_test(settings, test, rule_map) -> TestResult:
     #     logger.warning('Some rules did not finish in time: %s', remaining)
 
     # alerts = elastic_client.fetch_matching_alerts(settings, test.technique, end, start, end)
-
+    if not has_rule:
+        logger.info('No detection rules for this technique %s %s', test.technique, test.test_number)
+        return TestResult(
+            technique=test.technique,
+            test_number=test.test_number,
+            has_rule=False,
+            status="no_rule",
+        )
+   
     return TestResult(
         technique=test.technique,
         test_number=test.test_number,
@@ -170,5 +168,3 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
-
-

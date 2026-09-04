@@ -1,0 +1,256 @@
+{
+  "failed_tests": [
+    {
+      "technique": "T1053.005",
+      "test_number": 10,
+      "exit_code": 1,
+      "error_message": "The filename, directory name, or volume label syntax is incorrect."
+    },
+    {
+      "technique": "T1543.003",
+      "test_number": 6,
+      "exit_code": null,
+      "error_message": "set-servicebinarypath : The term 'set-servicebinarypath' is not recognized as the name of a cmdlet, function, script"
+    },
+    {
+      "technique": "T1556.002",
+      "test_number": 2,
+      "exit_code": null,
+      "error_message": ""
+    },
+    {
+      "technique": "T1505.005",
+      "test_number": 1,
+      "exit_code": null,
+      "error_message": "+ CategoryInfo          : ObjectNotFound: (Get-Acl:String) [], CommandNotFoundException"
+    },
+    {
+      "technique": "T1505.005",
+      "test_number": 2,
+      "exit_code": null,
+      "error_message": "+ CategoryInfo          : ObjectNotFound: (Get-Acl:String) [], CommandNotFoundException"
+    },
+    {
+      "technique": "T1176",
+      "test_number": 1,
+      "exit_code": null,
+      "error_message": "Found 0 atomic tests applicable to windows platform for Technique T1176"
+    },
+    {
+      "technique": "T1176",
+      "test_number": 2,
+      "exit_code": null,
+      "error_message": "Found 0 atomic tests applicable to windows platform for Technique T1176"
+    },
+    {
+      "technique": "T1176",
+      "test_number": 3,
+      "exit_code": null,
+      "error_message": "Found 0 atomic tests applicable to windows platform for Technique T1176"
+    },
+    {
+      "technique": "T1176",
+      "test_number": 4,
+      "exit_code": null,
+      "error_message": ""
+    },
+    {
+      "technique": "T1137.005",
+      "test_number": 1,
+      "exit_code": 1,
+      "error_message": "Outlook COM fails with 0x80080005 when run as Administrator."
+    },
+    {
+      "technique": "T1137.005",
+      "test_number": 2,
+      "exit_code": 1,
+      "error_message": "Outlook COM fails with 0x80080005 when run as Administrator."
+    },
+    {
+      "technique": "T1137.005",
+      "test_number": 3,
+      "exit_code": 1,
+      "error_message": "Outlook COM fails with 0x80080005 when run as Administrator."
+    },
+    {
+      "technique": "T1137.005",
+      "test_number": 4,
+      "exit_code": 1,
+      "error_message": "Outlook COM fails with 0x80080005 when run as Administrator."
+    },
+    {
+      "technique": "T1137.005",
+      "test_number": 5,
+      "exit_code": 1,
+      "error_message": "Outlook COM fails with 0x80080005 when run as Administrator."
+    },
+    {
+      "technique": "T1547.005",
+      "test_number": 2,
+      "exit_code": null,
+      "error_message": "+ CategoryInfo          : InvalidArgument: (Security Packages:String) [Get-ItemProperty], PSArgumentException"
+    },
+    {
+      "technique": "T1112",
+      "test_number": 11,
+      "exit_code": null,
+      "error_message": "New-ItemProperty : Cannot find path 'HKCU:\\Software\\Policies\\Microsoft\\Windows\\System' because it does not exist."
+    },
+    {
+      "technique": "T1112",
+      "test_number": 43,
+      "exit_code": 1,
+      "error_message": "ERROR: Invalid syntax."
+    },
+    {
+      "technique": "T1112",
+      "test_number": 56,
+      "exit_code": 1,
+      "error_message": "ERROR: Access is denied."
+    },
+    {
+      "technique": "T1112",
+      "test_number": 69,
+      "exit_code": null,
+      "error_message": ""
+    },
+    {
+      "technique": "T1547.004",
+      "test_number": 3,
+      "exit_code": null,
+      "error_message": ""
+    },
+    {
+      "technique": "T1546.008",
+      "test_number": 3,
+      "exit_code": 1,
+      "error_message": "The system cannot find the file specified."
+    },
+    {
+      "technique": "T1136.002",
+      "test_number": 3,
+      "exit_code": null,
+      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+    },
+    {
+      "technique": "T1137.001",
+      "test_number": 1,
+      "exit_code": null,
+      "error_message": "+ CategoryInfo          : InvalidOperation: (:) [], RuntimeException"
+    },
+    {
+      "technique": "T1546.003",
+      "test_number": 1,
+      "exit_code": null,
+      "error_message": ""
+    },
+    {
+      "technique": "T1547.001",
+      "test_number": 6,
+      "exit_code": null,
+      "error_message": ""
+    },
+    {
+      "technique": "T1098",
+      "test_number": 2,
+      "exit_code": null,
+      "error_message": "New-ADUser : Unable to find a default server with Active Directory Web Services running."
+    },
+    {
+      "technique": "T1098",
+      "test_number": 9,
+      "exit_code": null,
+      "error_message": "Synchronizing password failed. Verify that"
+    },
+    {
+      "technique": "T1098",
+      "test_number": 10,
+      "exit_code": null,
+      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+    },
+    {
+      "technique": "T1098",
+      "test_number": 11,
+      "exit_code": null,
+      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+    },
+    {
+      "technique": "T1098",
+      "test_number": 12,
+      "exit_code": null,
+      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+    },
+    {
+      "technique": "T1098",
+      "test_number": 13,
+      "exit_code": null,
+      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+    },
+    {
+      "technique": "T1098",
+      "test_number": 14,
+      "exit_code": null,
+      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+    },
+    {
+      "technique": "T1098",
+      "test_number": 15,
+      "exit_code": null,
+      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+    },
+    {
+      "technique": "T1098",
+      "test_number": 16,
+      "exit_code": null,
+      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+    },
+    {
+      "technique": "T1505.004",
+      "test_number": 1,
+      "exit_code": 1,
+      "error_message": "operable program or batch file."
+    },
+    {
+      "technique": "T1505.004",
+      "test_number": 2,
+      "exit_code": null,
+      "error_message": "New-WebGlobalModule : The term 'New-WebGlobalModule' is not recognized as the name of a cmdlet, function, script file,"
+    },
+    {
+      "technique": "T1546",
+      "test_number": 4,
+      "exit_code": null,
+      "error_message": "+ FullyQualifiedErrorId : CouldNotAutoloadMatchingModule"
+    },
+    {
+      "technique": "T1197",
+      "test_number": 4,
+      "exit_code": -1,
+      "error_message": "Executing test: T1197-4 Bits download using desktopimgdownldr.exe (cmd)"
+    },
+    {
+      "technique": "T1053.002",
+      "test_number": 1,
+      "exit_code": 1,
+      "error_message": "The request is not supported."
+    },
+    {
+      "technique": "T1078.003",
+      "test_number": 6,
+      "exit_code": null,
+      "error_message": "Exception calling \"DownloadString\" with \"1\" argument(s): \"Could not find a part of the path"
+    },
+    {
+      "technique": "T1078.003",
+      "test_number": 7,
+      "exit_code": null,
+      "error_message": "Exception calling \"DownloadString\" with \"1\" argument(s): \"Could not find a part of the path"
+    },
+    {
+      "technique": "T1556.001",
+      "test_number": 1,
+      "exit_code": null,
+      "error_message": "& : The term 'C:\\ExternalPayloads\\Mimikatz\\x64\\mimikatz.exe' is not recognized as the name of a cmdlet, function,"
+    }
+  ]
+}

@@ -54,6 +54,7 @@ Output (default ./atomic_report/):
   tables/technique_detail.csv
   tables/rule_frequency.csv
   tables/failed_tests.csv
+  tables/all_failed_tests.json
   report_summary.md
 
 Usage:
@@ -62,9 +63,11 @@ Usage:
 """
 
 import argparse
+import copy
 import json
 import os
 import re
+import tomllib
 from collections import defaultdict, Counter
 
 import matplotlib
@@ -79,6 +82,7 @@ COLOR_AMBER = "#eda100"
 COLOR_RED = "#e34948"
 COLOR_MUTEDGRAY = "#898781"
 COLOR_PURPLE = "#8a5fbf"   # failed tests in the heatmap
+COLOR_BLUE = "#378ADD"      # detection gained from a custom rule
 
 
 # ----------------------------------------------------------------------
@@ -116,7 +120,8 @@ _POWERSHELL_ERROR_RECORD_RE = re.compile(
 )
 _EXPLICIT_ERROR_RE = re.compile(
     r"^(?:ERROR:|\[SC\].*\bFAILED\b|Exception\s+calling\b|"
-    r"Synchronizing\s+password\s+failed\b)",
+    r"Synchronizing\s+password\s+failed\b|"
+    r"Found\s+0\s+atomic\s+tests\s+applicable\s+to\s+.+\s+platform\b)",
     re.IGNORECASE,
 )
 _POWERSHELL_ERROR_MESSAGE_RE = re.compile(
@@ -336,24 +341,31 @@ def chart_overview_donut(stats, outpath):
     labels = [f"Detected ({sizes[0]})", f"Undetected ({sizes[1]})"]
     colors = [COLOR_GREEN, "#e1e0d9"]
 
-    wedges, _ = ax.pie(
-        sizes, colors=colors, startangle=90,
-        wedgeprops=dict(width=0.4, edgecolor="white")
-    )
-    ax.legend(wedges, labels, loc="center", frameon=False, fontsize=11)
-    ax.set_title(
-        f"Detection coverage (test-level)\n{stats['detection_rate']:.1f}% detected "
-        f"out of {stats['considered_count']} tests"
-        + (f"\n({len(stats['failed_tests'])} failed tests excluded)"
-           if stats["failed_tests"] else ""),
-        fontsize=12
-    )
+    if sum(sizes) == 0:
+        # matplotlib cannot render a pie whose every wedge is zero.  This is
+        # normal after a fresh run that has not recorded results yet.
+        ax.text(0.5, 0.5, "No test results recorded", ha="center", va="center", fontsize=14)
+        ax.set_title("Detection coverage (test-level)\nNo data available", fontsize=12)
+        ax.set_axis_off()
+    else:
+        wedges, _ = ax.pie(
+            sizes, colors=colors, startangle=90,
+            wedgeprops=dict(width=0.4, edgecolor="white")
+        )
+        ax.legend(wedges, labels, loc="center", frameon=False, fontsize=11)
+        ax.set_title(
+            f"Detection coverage (test-level)\n{stats['detection_rate']:.1f}% detected "
+            f"out of {stats['considered_count']} tests"
+            + (f"\n({len(stats['failed_tests'])} failed tests excluded)"
+               if stats["failed_tests"] else ""),
+            fontsize=12
+        )
     fig.tight_layout()
     fig.savefig(outpath, dpi=150)
     plt.close(fig)
 
 
-def chart_technique_status(stats, outpath):
+def chart_technique_status(stats, outpath, title="Technique classification by detection level"):
     order = ["Fully detected", "Partially detected", "Not detected", "No rule", "All tests failed"]
     colors = {
         "Fully detected": COLOR_GREEN,
@@ -365,10 +377,19 @@ def chart_technique_status(stats, outpath):
     values = [stats["status_count"].get(k, 0) for k in order]
 
     fig, ax = plt.subplots(figsize=(7, 4.5))
+    if stats["total_techniques"] == 0:
+        ax.text(0.5, 0.5, "No test results recorded", ha="center", va="center", fontsize=14)
+        ax.set_title(title)
+        ax.set_axis_off()
+        fig.tight_layout()
+        fig.savefig(outpath, dpi=150)
+        plt.close(fig)
+        return
+
     bars = ax.barh(order, values, color=[colors[k] for k in order])
     ax.invert_yaxis()
     ax.set_xlabel("Number of techniques")
-    ax.set_title("Technique classification by detection level")
+    ax.set_title(title)
     for bar, v in zip(bars, values):
         ax.text(bar.get_width() + 0.2, bar.get_y() + bar.get_height() / 2,
                 str(v), va="center", fontsize=10)
@@ -405,14 +426,19 @@ def chart_top_rules(stats, outpath, top_n=15):
 # dropped (which would otherwise shift later slots and hide which exact
 # test failed).
 # ----------------------------------------------------------------------
-def _build_heatmap_matrix(results, failed_keys):
+def _build_heatmap_matrix(results, failed_keys, custom_only_keys=None, default_only=False):
     per_tech_tests = defaultdict(dict)  # {technique: {test_number: value}}
+    custom_only_keys = custom_only_keys or set()
 
     for r in results:
         t, n = r["technique"], r["test_number"]
         key = (t, n)
         if key in failed_keys:
             value = 3           # failed (execution error)
+        elif key in custom_only_keys:
+            # A custom-only detection is absent in the default-only view,
+            # but receives its own colour in the combined view.
+            value = 0 if default_only else 4
         elif r["status"] == "no_rule":
             value = 2           # no rule
         elif r["status"] == "detected":
@@ -466,10 +492,10 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False):
         real_test_no = real_test_no.T
 
     cmap = matplotlib.colors.ListedColormap(
-        ["#f1efe8", COLOR_RED, COLOR_GREEN, COLOR_MUTEDGRAY, COLOR_PURPLE]
+        ["#f1efe8", COLOR_RED, COLOR_GREEN, COLOR_MUTEDGRAY, COLOR_PURPLE, COLOR_BLUE]
     )
     display_matrix = matrix + 1
-    bounds = [0, 1, 2, 3, 4, 5]
+    bounds = [0, 1, 2, 3, 4, 5, 6]
     norm = matplotlib.colors.BoundaryNorm(bounds, cmap.N)
 
     n_rows, n_cols = matrix.shape
@@ -526,6 +552,7 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False):
         ("Detected", COLOR_GREEN),
         ("No rule", COLOR_MUTEDGRAY),
         ("Failed (execution error)", COLOR_PURPLE),
+        ("Detected with custom rules", COLOR_BLUE),
     ]
     handles = [plt.Rectangle((0, 0), 1, 1, color=c) for _, c in legend_items]
     # fig.legend (figure-fraction coordinates), NOT ax.legend with a
@@ -541,15 +568,18 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False):
     # this fix). rect=[left, bottom, right, top] in figure fraction.
     fig.tight_layout(rect=[0, 0.08, 1, 1])
     fig.legend(handles, [l for l, _ in legend_items],
-               loc="lower center", ncol=4, frameon=False, fontsize=15,
+               loc="lower center", ncol=5, frameon=False, fontsize=12,
                bbox_to_anchor=(0.5, 0.0))
 
     fig.savefig(outpath, dpi=150, bbox_inches="tight")
     plt.close(fig)
 
 
-def chart_technique_heatmap(results, failed_keys, outpath):
-    techniques, matrix, real_test_no = _build_heatmap_matrix(results, failed_keys)
+def chart_technique_heatmap(results, failed_keys, outpath, custom_only_keys=None,
+                            default_only=False):
+    techniques, matrix, real_test_no = _build_heatmap_matrix(
+        results, failed_keys, custom_only_keys, default_only
+    )
     _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False)
 
 
@@ -584,14 +614,20 @@ def export_tables(stats, outdir):
         })
     # Present the detail table in the same technique order as the heatmap,
     # rather than grouping it by detection rate.
-    df_tech = pd.DataFrame(rows).sort_values("Technique")
+    tech_columns = [
+        "Technique", "Tests detected", "Tests total", "Failed tests",
+        "Detection rate (%)", "Status", "Has rule",
+    ]
+    df_tech = pd.DataFrame(rows, columns=tech_columns)
+    if not df_tech.empty:
+        df_tech = df_tech.sort_values("Technique")
     df_tech.to_csv(os.path.join(tables_dir, "technique_detail.csv"), index=False)
 
     rule_rows = [
         {"Rule name": name, "Times triggered": count}
         for name, count in stats["rule_freq"].most_common()
     ]
-    pd.DataFrame(rule_rows).to_csv(
+    pd.DataFrame(rule_rows, columns=["Rule name", "Times triggered"]).to_csv(
         os.path.join(tables_dir, "rule_frequency.csv"), index=False
     )
 
@@ -620,6 +656,23 @@ def export_tables(stats, outdir):
     pd.DataFrame(counted_rows).to_csv(
         os.path.join(tables_dir, "failed_but_counted.csv"), index=False
     )
+
+    # This is the machine-readable input for main.py --exclude-failed-tests.
+    # Keep it aligned with failed_tests.csv: only failures with no alert are
+    # excluded from a future run.  A test that produced an alert remains in
+    # failed_but_counted.csv and is not automatically skipped.
+    all_failed = [
+        {
+            "technique": r["technique"],
+            "test_number": r["test_number"],
+            "exit_code": r.get("exit_code"),
+            "error_message": r.get("error_message") or "",
+        }
+        for r in stats["failed_tests"]
+    ]
+    with open(os.path.join(tables_dir, "all_failed_tests.json"), "w", encoding="utf-8") as f:
+        json.dump({"failed_tests": all_failed}, f, indent=2)
+        f.write("\n")
 
     return df_tech
 
@@ -684,6 +737,7 @@ def write_summary_md(stats, df_tech, outdir):
     lines.append("- `tables/technique_detail.csv`")
     lines.append("- `tables/rule_frequency.csv`")
     lines.append("- `tables/failed_tests.csv`")
+    lines.append("- `tables/all_failed_tests.json` (input for `main.py --exclude-failed-tests`)")
     if stats["counted_despite_failure"]:
         lines.append("- `tables/failed_but_counted.csv`")
 
@@ -692,7 +746,253 @@ def write_summary_md(stats, df_tech, outdir):
 
 
 # ----------------------------------------------------------------------
-# 4. Main
+# 4. Default-rule vs custom-rule comparison
+# ----------------------------------------------------------------------
+def load_custom_rule_names(rules_dir):
+    """Return top-level Elastic rule names from TOML files in rules_dir."""
+    names = set()
+    for root, _, files in os.walk(rules_dir):
+        for filename in files:
+            if not filename.endswith(".toml"):
+                continue
+            path = os.path.join(root, filename)
+            try:
+                with open(path, "rb") as f:
+                    rule = tomllib.load(f)
+            except (OSError, tomllib.TOMLDecodeError) as exc:
+                print(f"[generate_report] Skipping unreadable custom rule {path}: {exc}")
+                continue
+            # Elastic rule TOMLs store the display name in [rule].  Keep the
+            # top-level fallback for simple TOMLs used outside Elastic.
+            name = rule.get("name")
+            if not isinstance(name, str):
+                name = rule.get("rule", {}).get("name")
+            if isinstance(name, str) and name:
+                names.add(name)
+    return names
+
+
+def build_custom_comparison(baseline_results, custom_results, custom_rule_names,
+                            custom_failed_keys):
+    """Classify custom-run tests without crediting detections baseline had."""
+    baseline_by_key = {
+        (r["technique"], r["test_number"]): r for r in baseline_results
+    }
+    rows = []
+    for custom in custom_results:
+        key = (custom["technique"], custom["test_number"])
+        baseline = baseline_by_key.get(key)
+        baseline_detected = bool(baseline and baseline.get("alerts"))
+        alert_names = sorted({a.get("name", "") for a in custom.get("alerts", [])})
+        matching_custom_rules = sorted(set(alert_names) & custom_rule_names)
+        custom_detected = bool(custom.get("alerts"))
+
+        if baseline_detected:
+            classification = "Detected (already detected by default rules)"
+        elif matching_custom_rules:
+            classification = "Detected with custom rules"
+        elif custom_detected:
+            classification = "Detected (not attributed to custom rules)"
+        elif key in custom_failed_keys or custom.get("status") == "failed":
+            classification = "Failed"
+        else:
+            classification = "Not detected"
+
+        rows.append({
+            "Technique": key[0],
+            "Test": key[1],
+            "Baseline status": baseline.get("status") if baseline else "Not present",
+            "Custom-run status": custom.get("status"),
+            "Classification": classification,
+            "Custom rules that alerted": "; ".join(matching_custom_rules),
+        })
+    return rows
+
+
+def write_custom_comparison(rows, outdir):
+    """Add an auditable custom-rule attribution table and report section."""
+    columns = [
+        "Technique", "Test", "Baseline status", "Custom-run status",
+        "Classification", "Custom rules that alerted",
+    ]
+    df = pd.DataFrame(rows, columns=columns).sort_values(["Technique", "Test"])
+    tables_dir = os.path.join(outdir, "tables")
+    df.to_csv(os.path.join(tables_dir, "test_detection_comparison.csv"), index=False)
+
+    counts = Counter(row["Classification"] for row in rows)
+    summary_path = os.path.join(outdir, "report_summary.md")
+    with open(summary_path, "a", encoding="utf-8") as f:
+        f.write("\n## 6. Custom-rule impact\n\n")
+        f.write("A test is credited to custom rules only when the baseline did not "
+                "detect it and a matching custom rule alerted in the custom run.\n\n")
+        for label in (
+            "Detected with custom rules",
+            "Detected (already detected by default rules)",
+            "Detected (not attributed to custom rules)",
+            "Not detected",
+            "Failed",
+        ):
+            f.write(f"- {label}: **{counts[label]}**\n")
+        f.write("\nSee `tables/test_detection_comparison.csv` for every test.\n")
+
+
+def build_detection_source_rows(results, custom_rule_names, failed_keys):
+    """Classify each current-run result by the rule type that detected it.
+
+    This uses only output/results.jsonl.  If both a default and custom rule
+    alert for the same test, the test is labelled as default-detected because
+    the custom rule did not add coverage for that test.
+    """
+    rows = []
+    for result in results:
+        key = (result["technique"], result["test_number"])
+        alert_names = sorted({a.get("name", "") for a in result.get("alerts", [])})
+        custom_alerts = sorted(set(alert_names) & custom_rule_names)
+        default_alerts = sorted(set(alert_names) - custom_rule_names)
+
+        if default_alerts:
+            classification = "Detected by default rules"
+        elif custom_alerts:
+            classification = "Detected with custom rules"
+        elif key in failed_keys or result.get("status") == "failed":
+            classification = "Failed"
+        else:
+            classification = "Not detected"
+
+        rows.append({
+            "Technique": key[0],
+            "Test": key[1],
+            "Classification": classification,
+            "Default rules that alerted": "; ".join(default_alerts),
+            "Custom rules that alerted": "; ".join(custom_alerts),
+        })
+    return rows
+
+
+def write_detection_source_report(rows, outdir):
+    """Write the current-run default-vs-custom attribution table/summary."""
+    columns = [
+        "Technique", "Test", "Classification", "Default rules that alerted",
+        "Custom rules that alerted",
+    ]
+    df = pd.DataFrame(rows, columns=columns).sort_values(["Technique", "Test"])
+    tables_dir = os.path.join(outdir, "tables")
+    df.to_csv(os.path.join(tables_dir, "test_detection_source.csv"), index=False)
+
+    counts = Counter(row["Classification"] for row in rows)
+    with open(os.path.join(outdir, "report_summary.md"), "a", encoding="utf-8") as f:
+        f.write("\n## 6. Detection source\n\n")
+        f.write("Classified from alerts in this run. When both default and custom "
+                "rules alert, the test is counted as default-detected.\n\n")
+        for label in ("Detected by default rules", "Detected with custom rules",
+                      "Not detected", "Failed"):
+            f.write(f"- {label}: **{counts[label]}**\n")
+        f.write("\nSee `tables/test_detection_source.csv` for every test.\n")
+        f.write("\nComparison charts: `charts/05_default_rules_coverage.png`, "
+                "`charts/06_default_plus_custom_coverage.png`, "
+                "`charts/07_default_rules_heatmap.png`, "
+                "`charts/08_default_plus_custom_heatmap.png`, "
+                "`charts/09_default_rules_technique_status.png`, and "
+                "`charts/10_default_plus_custom_technique_status.png`.\n")
+
+
+def chart_detection_coverage(detected, undetected, title, outpath):
+    """Render a coverage donut that also works when no usable tests exist."""
+    fig, ax = plt.subplots(figsize=(5, 5))
+    sizes = [detected, undetected]
+    if sum(sizes) == 0:
+        ax.text(0.5, 0.5, "No test results recorded", ha="center", va="center", fontsize=14)
+        ax.set_title(title + "\nNo data available", fontsize=12)
+        ax.set_axis_off()
+    else:
+        wedges, _ = ax.pie(
+            sizes, colors=[COLOR_GREEN, "#e1e0d9"], startangle=90,
+            wedgeprops=dict(width=0.4, edgecolor="white"),
+        )
+        rate = 100 * detected / sum(sizes)
+        ax.legend(wedges, [f"Detected ({detected})", f"Undetected ({undetected})"],
+                  loc="center", frameon=False, fontsize=11)
+        ax.set_title(f"{title}\n{rate:.1f}% detected out of {sum(sizes)} tests", fontsize=12)
+    fig.tight_layout()
+    fig.savefig(outpath, dpi=150)
+    plt.close(fig)
+
+
+def write_detection_source_charts(rows, results, stats, outdir):
+    """Create directly comparable default-only and default+custom charts."""
+    counts = Counter(row["Classification"] for row in rows)
+    default_detected = counts["Detected by default rules"]
+    custom_detected = counts["Detected with custom rules"]
+    # `considered_count` excludes only failed/no-alert executions, matching
+    # every other detection-rate chart in this report.
+    default_undetected = max(0, stats["considered_count"] - default_detected)
+    combined_detected = default_detected + custom_detected
+    combined_undetected = max(0, stats["considered_count"] - combined_detected)
+    charts_dir = os.path.join(outdir, "charts")
+    chart_detection_coverage(
+        default_detected, default_undetected, "Detection coverage — default rules only",
+        os.path.join(charts_dir, "05_default_rules_coverage.png"),
+    )
+    chart_detection_coverage(
+        combined_detected, combined_undetected,
+        "Detection coverage — default rules + custom rules",
+        os.path.join(charts_dir, "06_default_plus_custom_coverage.png"),
+    )
+    custom_only_keys = {
+        (row["Technique"], row["Test"])
+        for row in rows
+        if row["Classification"] == "Detected with custom rules"
+    }
+    chart_technique_heatmap(
+        results, stats["failed_keys"],
+        os.path.join(charts_dir, "07_default_rules_heatmap.png"),
+        custom_only_keys=custom_only_keys, default_only=True,
+    )
+    chart_technique_heatmap(
+        results, stats["failed_keys"],
+        os.path.join(charts_dir, "08_default_plus_custom_heatmap.png"),
+        custom_only_keys=custom_only_keys,
+    )
+    # Reuse the normal technique classifier after removing custom-only
+    # detections from a copy of the current results.  The known failed keys
+    # are restored to status=failed so the default-only chart keeps the same
+    # exclusion policy as the combined chart.
+    default_results = copy.deepcopy(results)
+    for result in default_results:
+        key = (result["technique"], result["test_number"])
+        if key in stats["failed_keys"]:
+            result["status"] = "failed"
+            result["alerts"] = []
+        elif key in custom_only_keys:
+            result["status"] = "undetected"
+            result["alerts"] = []
+    default_stats = compute_stats(default_results, {})
+    chart_technique_status(
+        default_stats, os.path.join(charts_dir, "09_default_rules_technique_status.png"),
+        "Technique classification — default rules only",
+    )
+    chart_technique_status(
+        stats, os.path.join(charts_dir, "10_default_plus_custom_technique_status.png"),
+        "Technique classification — default rules + custom rules",
+    )
+
+
+def generate_one_report(results_path, atomic_log_path, outdir, top_rules=15):
+    charts_dir = os.path.join(outdir, "charts")
+    os.makedirs(charts_dir, exist_ok=True)
+    results = load_results(results_path)
+    stats = compute_stats(results, parse_atomic_log(atomic_log_path))
+    chart_overview_donut(stats, os.path.join(charts_dir, "01_overview_donut.png"))
+    chart_technique_status(stats, os.path.join(charts_dir, "02_technique_status_bar.png"))
+    chart_top_rules(stats, os.path.join(charts_dir, "03_top_rules_bar.png"), top_rules)
+    chart_technique_heatmap(results, stats["failed_keys"], os.path.join(charts_dir, "04_technique_heatmap.png"))
+    df_tech = export_tables(stats, outdir)
+    write_summary_md(stats, df_tech, outdir)
+    return results, stats
+
+
+# ----------------------------------------------------------------------
+# 5. Main
 # ----------------------------------------------------------------------
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -703,28 +1003,40 @@ def main():
     parser.add_argument("--outdir", default="atomic_report",
                          help="Output directory for the report")
     parser.add_argument("--top-rules", type=int, default=15,
-                         help="Number of rules to show in the top-rules chart")
+                        help="Number of rules to show in the top-rules chart")
+    parser.add_argument("--compare-custom", action="store_true",
+                        help="Generate baseline and custom-rule reports plus a per-test impact table")
+    parser.add_argument("--baseline-results", default="output_original/results.jsonl")
+    parser.add_argument("--baseline-atomic-log", default="log_original/atomic_stdout.log")
+    parser.add_argument("--baseline-outdir", default="atomic_report_original")
+    parser.add_argument("--custom-results", default="output_backup/results.jsonl")
+    parser.add_argument("--custom-atomic-log", default="logs_backup/atomic_stdout.log")
+    parser.add_argument("--custom-outdir", default="atomic_report_custom")
+    parser.add_argument("--custom-rules-dir",
+                        default="/home/nqghuy/KLTN/detection-rules/custom-rules/rules")
     args = parser.parse_args()
 
-    charts_dir = os.path.join(args.outdir, "charts")
-    os.makedirs(charts_dir, exist_ok=True)
+    if args.compare_custom:
+        baseline_results, _ = generate_one_report(
+            args.baseline_results, args.baseline_atomic_log, args.baseline_outdir, args.top_rules
+        )
+        custom_results, custom_stats = generate_one_report(
+            args.custom_results, args.custom_atomic_log, args.custom_outdir, args.top_rules
+        )
+        custom_rule_names = load_custom_rule_names(args.custom_rules_dir)
+        comparison = build_custom_comparison(
+            baseline_results, custom_results, custom_rule_names, custom_stats["failed_keys"]
+        )
+        write_custom_comparison(comparison, args.custom_outdir)
+        print(f"Baseline report generated at: {os.path.abspath(args.baseline_outdir)}")
+        print(f"Custom-rule report generated at: {os.path.abspath(args.custom_outdir)}")
+        return
 
-    results = load_results(args.results)
-    log_failures = parse_atomic_log(args.atomic_log)
-    stats = compute_stats(results, log_failures)
-
-    chart_overview_donut(stats, os.path.join(charts_dir, "01_overview_donut.png"))
-    chart_technique_status(stats, os.path.join(charts_dir, "02_technique_status_bar.png"))
-    chart_top_rules(stats, os.path.join(charts_dir, "03_top_rules_bar.png"), args.top_rules)
-    # Heatmaps use the FULL result set (results, not just stats["considered"])
-    # plus failed_keys, so every test - including failed ones - shows up at
-    # its own real test-number slot instead of being silently dropped.
-    chart_technique_heatmap(
-        results, stats["failed_keys"], os.path.join(charts_dir, "04_technique_heatmap.png")
-    )
-
-    df_tech = export_tables(stats, args.outdir)
-    write_summary_md(stats, df_tech, args.outdir)
+    results, stats = generate_one_report(args.results, args.atomic_log, args.outdir, args.top_rules)
+    custom_rule_names = load_custom_rule_names(args.custom_rules_dir)
+    source_rows = build_detection_source_rows(results, custom_rule_names, stats["failed_keys"])
+    write_detection_source_report(source_rows, args.outdir)
+    write_detection_source_charts(source_rows, results, stats, args.outdir)
 
     print(f"Report generated at: {os.path.abspath(args.outdir)}")
     print(f"  {stats['considered_count']} tests considered "

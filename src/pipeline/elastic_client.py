@@ -95,7 +95,7 @@ def trigger_rules(settings: Settings, rule_ids: list[str], start: str, end: str)
         logger.info('No rules to trigger')
         return 
     
-    batch_size = 100
+    batch_size = 50
     url = f'{settings.elastic.kibana_url}/api/detection_engine/rules/_bulk_action'
     for i in range(0, len(rule_ids), batch_size):
         batch = rule_ids[i: i + 100]
@@ -256,56 +256,15 @@ def _validate_ancestors(ancestors, ancestor_timestamp, start, end):
             return False
     return True
 
-# def fetch_matching_alerts(settings: Settings, technique: str, since:str, all_results) -> list[Alert]:
-#     hits = _fetch_all_alerts_since(settings, since)
-
-#     matched : list[Alert] = []
-
-#     ancestors = []
-#     for hit in hits:
-#         source = hit["_source"]
-#         ancestors.extend(source.get('kibana.alert.ancestors', []))
-
-#     ancestor_timestamp = _fetch_ancestor_timestamps(settings, ancestors)
-
-#     for hit in hits:
-#         source = hit["_source"]
-#         """
-#         if source.get('kibana.alert.rule.execution.type', '') != 'manual':
-#             continue
-#         """
-        
-#         ancestors = source.get('kibana.alert.ancestors', [])
-#         if not _validate_ancestors(ancestors, ancestor_timestamp, start, end):
-#             continue
-
-#         threats = source.get("kibana.alert.rule.threat", [])
-#         alert_name = source["kibana.alert.rule.name"]
-#         reason = _extract_reason(source)
-
-#         already_matched = any(
-#             a.name == alert_name and a.reason == reason for a in matched
-#         )
-#         if already_matched:
-#             continue
-
-#         for threat in threats:
-#             for tech in threat.get("technique", []):
-#                 ids_to_check = {tech["id"]}
-#                 ids_to_check |= {sub["id"] for sub in tech.get("subtechnique", [])}
-
-#                 if technique in ids_to_check:
-#                     matched.append(Alert(name=alert_name, reason=reason))
-#                     break
-
-#     return matched
-
 def extract_matching_alert(settings: Settings, all_alerts: list, all_tests: list) -> list:
     all_tests_results = all_tests.copy()
 
     for hit in all_alerts:
         source = hit["_source"]
         ancestors = (source.get('kibana.alert.ancestors', []))
+        alert_name = source["kibana.alert.rule.name"]
+        if 'High Number of Process and' in alert_name:
+            continue
         ancestor_timestamp = _fetch_ancestor_timestamps(settings, ancestors)
         for test in all_tests:
             if test.start_time is None or test.end_time is None:
