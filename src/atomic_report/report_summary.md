@@ -15,9 +15,9 @@
 
 - Fully detected: **33** technique(s)
 - Partially detected: **7** technique(s)
-- No rule: **4** technique(s)
-- All tests failed: **4** technique(s)
+- All tests failed: **7** technique(s)
 - Not detected: **2** technique(s)
+- No rule: **1** technique(s)
 
 ## 3. Top triggered rules
 
@@ -50,14 +50,14 @@
 | T1137.001   |                0 |             0 |              1 |                  0   | All tests failed   | Yes        |
 | T1137.002   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
 | T1137.004   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
-| T1137.005   |                0 |             0 |              5 |                  0   | No rule            | No         |
+| T1137.005   |                0 |             0 |              5 |                  0   | All tests failed   | No         |
 | T1137.006   |                5 |             5 |              0 |                100   | Fully detected     | Yes        |
 | T1176       |                0 |             0 |              4 |                  0   | All tests failed   | Yes        |
 | T1197       |                3 |             3 |              1 |                100   | Fully detected     | Yes        |
 | T1505.002   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
 | T1505.003   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
-| T1505.004   |                0 |             0 |              2 |                  0   | No rule            | No         |
-| T1505.005   |                0 |             0 |              2 |                  0   | No rule            | No         |
+| T1505.004   |                0 |             0 |              2 |                  0   | All tests failed   | No         |
+| T1505.005   |                0 |             0 |              2 |                  0   | All tests failed   | No         |
 | T1542.001   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
 | T1543.003   |                4 |             5 |              1 |                 80   | Partially detected | Yes        |
 | T1546       |                3 |             8 |              1 |                 37.5 | Partially detected | Yes        |

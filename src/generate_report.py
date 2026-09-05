@@ -307,10 +307,10 @@ def compute_stats(results, log_failures):
     # all (different from "Not detected", which means the rule genuinely
     # never fired on a successfully-run test).
     def classify(s):
-        if not s["has_rule"]:
-            return "No rule"
         if s["total"] == 0:
             return "All tests failed"
+        if not s["has_rule"]:
+            return "No rule"
         if s["detected"] == 0:
             return "Not detected"
         if s["detected"] == s["total"]:
@@ -593,10 +593,10 @@ def export_tables(stats, outdir):
     rows = []
     for t, s in sorted(stats["tech_stats"].items()):
         rate = 100 * s["detected"] / s["total"] if s["total"] else 0
-        if not s["has_rule"]:
-            status = "No rule"
-        elif s["total"] == 0:
+        if s["total"] == 0:
             status = "All tests failed"
+        elif not s["has_rule"]:
+            status = "No rule"
         elif s["detected"] == 0:
             status = "Not detected"
         elif s["detected"] == s["total"]:
