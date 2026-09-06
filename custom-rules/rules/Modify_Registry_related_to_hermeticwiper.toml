@@ -1,12 +1,12 @@
 [metadata]
-creation_date = "2026/09/05"
+creation_date = "2026/09/06"
 integration = ["endpoint", "windows"]
 maturity = "production"
-updated_date = "2026/09/05"
+updated_date = "2026/09/06"
 
 [rule]
-name = "Abusing MyComputer Disk for Persistence"
-description = "Abusing MyComputer Disk for Persistence"
+name = "Modify Registry related to hermeticwiper"
+description = "Modify Registry related to hermeticwiper"
 risk_score = 21
 severity = "low"
 license = ""
@@ -15,7 +15,7 @@ from = "now-360s"
 to = "now"
 max_signals = 100
 
-rule_id = "89e84dc7-c167-4cdb-9c31-9aba42ea6e54"
+rule_id = "5de74dbb-db3d-486f-92a2-8366d15742a6"
 
 author = ["Huy"]
 
@@ -54,24 +54,19 @@ index = [
 ]
 
 query = '''
-any where host.os.type == "windows" and 
-process.name: "reg.exe" and 
-process.command_line: "*SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MyComputer*" and 
-(
-  process.parent.name : (
-    "powershell.exe",
-    "pwsh.exe",
-    "cmd.exe",
-    "wscript.exe",
-    "cscript.exe",
-    "mshta.exe",
-    "rundll32.exe",
-    "regsvr32.exe",
-    "wmic.exe"
-  ) or
-  ?process.parent.code_signature.status != null and
-  ?process.parent.code_signature.status != "trusted"
-)
+sequence with maxspan=30s
+[
+  process where host.os.type == "windows" and
+  process.name: "reg.exe" and 
+  process.command_line: "*Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced*" and 
+  process.command_line: "*ShowInfoTip*"
+]
+[
+  process where host.os.type == "windows" and
+  process.name: "reg.exe" and 
+  process.command_line: "*Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced*" and 
+  process.command_line: "*ShowCompColor*"
+]
 '''
 
 filters = []

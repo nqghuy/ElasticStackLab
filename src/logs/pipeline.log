@@ -1,16 +1,8 @@
-2026-09-05 23:21:53,417 [INFO] pipeline.elastic_client: Find 611 enabled rules (tag=OS: Windows)
-2026-09-05 23:21:53,430 [INFO] pipeline: Runnging 2 tests
-2026-09-05 23:21:53,430 [INFO] pipeline: [1/2] T1112 test 87
-2026-09-05 23:21:53,430 [INFO] pipeline.atomic_runner: START TIME: 2026-09-05T16:21:53.000Z
-2026-09-05 23:22:11,727 [INFO] pipeline.atomic_runner: END TIME: 2026-09-05T16:22:11.000Z
-2026-09-05 23:22:13,728 [INFO] pipeline: [2/2] T1112 test 88
-2026-09-05 23:22:13,729 [INFO] pipeline.atomic_runner: START TIME: 2026-09-05T16:22:13.000Z
-2026-09-05 23:22:32,292 [INFO] pipeline.atomic_runner: END TIME: 2026-09-05T16:22:32.000Z
-2026-09-05 23:26:44,109 [INFO] pipeline.elastic_client: Triggered 611 rules
-2026-09-05 23:26:44,283 [INFO] pipeline.elastic_client: 96 rules not complete
-2026-09-05 23:26:54,350 [INFO] pipeline.elastic_client: 89 rules not complete
-2026-09-05 23:27:04,442 [INFO] pipeline.elastic_client: 61 rules not complete
-2026-09-05 23:27:14,527 [INFO] pipeline.elastic_client: 49 rules not complete
-2026-09-05 23:27:24,577 [INFO] pipeline.elastic_client: 29 rules not complete
-2026-09-05 23:27:34,661 [INFO] pipeline.elastic_client: 6 rules not complete
-2026-09-05 23:27:44,713 [INFO] pipeline.elastic_client: 0 rules not complete
+2026-09-06 23:29:34,031 [INFO] pipeline.elastic_client: Find 620 enabled rules (tag=OS: Windows)
+2026-09-06 23:29:34,045 [INFO] pipeline: Runnging 1 tests
+2026-09-06 23:29:34,045 [INFO] pipeline: [1/1] T1112 test 41
+2026-09-06 23:29:34,046 [INFO] pipeline.atomic_runner: START TIME: 2026-09-06T16:29:34.000Z
+2026-09-06 23:29:44,612 [INFO] pipeline.atomic_runner: END TIME: 2026-09-06T16:29:44.000Z
+2026-09-06 23:30:13,571 [INFO] pipeline.elastic_client: Triggered 72 rules
+2026-09-06 23:30:13,649 [INFO] pipeline.elastic_client: 58 rules not complete
+2026-09-06 23:30:23,727 [INFO] pipeline.elastic_client: 0 rules not complete

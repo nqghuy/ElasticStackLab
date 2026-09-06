@@ -1,12 +1,12 @@
 [metadata]
-creation_date = "2026/09/05"
+creation_date = "2026/09/06"
 integration = ["endpoint", "windows"]
 maturity = "production"
-updated_date = "2026/09/05"
+updated_date = "2026/09/06"
 
 [rule]
-name = "Abusing MyComputer Disk for Persistence"
-description = "Abusing MyComputer Disk for Persistence"
+name = "Darkgate Registry Modification"
+description = "Darkgate Registry Modification"
 risk_score = 21
 severity = "low"
 license = ""
@@ -15,7 +15,7 @@ from = "now-360s"
 to = "now"
 max_signals = 100
 
-rule_id = "89e84dc7-c167-4cdb-9c31-9aba42ea6e54"
+rule_id = "f650f32a-0c41-4d5d-abc6-781abc4754fd"
 
 author = ["Huy"]
 
@@ -54,11 +54,9 @@ index = [
 ]
 
 query = '''
-any where host.os.type == "windows" and 
-process.name: "reg.exe" and 
-process.command_line: "*SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MyComputer*" and 
+any where host.os.type == "windows" and  
 (
-  process.parent.name : (
+  process.name: "reg.exe" and  process.parent.name : (
     "powershell.exe",
     "pwsh.exe",
     "cmd.exe",
@@ -68,9 +66,19 @@ process.command_line: "*SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\
     "rundll32.exe",
     "regsvr32.exe",
     "wmic.exe"
-  ) or
-  ?process.parent.code_signature.status != null and
-  ?process.parent.code_signature.status != "trusted"
+  ) or 
+  process.command_line: ("*New-ItemProperty*", "*New-Item*", "*Set-ItemProperty*")
+) and 
+(
+  ( 
+    process.command_line: "*Software\\Policies\\Microsoft\\Windows NT\\Terminal Services*" and
+    process.command_line: ("*-Value*1*", "*/d*1*") and 
+    process.command_line: ( "*DisableRemoteDesktopAntiAlias*", "*DisableSecuritySettings*") 
+  ) or 
+  (
+    process.command_line: "*Software\\Microsoft\\Windows\\Windows Error Reporting*" and
+    process.command_line: "*DontShowUI*"
+  ) 
 )
 '''
 
@@ -88,6 +96,6 @@ name = "Modify Registry"
 reference = "https://attack.mitre.org/techniques/T1112/"
 
 [rule.threat.tactic]
-id = "TA0003"
-name = "Persistence"
-reference = "https://attack.mitre.org/tactics/TA0003/"
+id = "TA0112"
+name = "Defense Impairment"
+reference = "https://attack.mitre.org/tactics/TA0112/"
