@@ -29,77 +29,77 @@ T1098,13,Failed,,
 T1098,14,Failed,,
 T1098,15,Failed,,
 T1098,16,Failed,,
-T1112,1,Not detected,,
+T1112,1,Detected with custom rules,,Suspicious Modify Registry of Current User Profile
 T1112,2,Detected by default rules,Startup or Run Key Registry Modification,
 T1112,3,Detected by default rules,Modification of WDigest Security Provider,
 T1112,4,Detected by default rules,Modification of WDigest Security Provider,
-T1112,5,Not detected,,
-T1112,6,Not detected,,
+T1112,5,Detected with custom rules,,Suspicious Internet Settings Registry Modification
+T1112,6,Detected with custom rules,,Suspicious Internet Settings Registry Modification
 T1112,7,Detected with custom rules,,Change PowerShell Policies to an Insecure Level
 T1112,8,Detected by default rules,Local Account TokenFilter Policy Disabled,Windows Policy Registry Modification
 T1112,9,Detected by default rules,Local Account TokenFilter Policy Disabled,Windows Policy Registry Modification
 T1112,10,Detected with custom rules,,Windows Policy Registry Modification
-T1112,11,Failed,,
+T1112,11,Detected with custom rules,,Windows Registry Modification to Impair Security Controls or Visibility
 T1112,12,Detected with custom rules,,Windows Policy Registry Modification
-T1112,13,Not detected,,
+T1112,13,Detected with custom rules,,Windows Registry Modification to Impair Security Controls or Visibility
 T1112,14,Detected with custom rules,,Windows Policy Registry Modification
-T1112,15,Not detected,,
+T1112,15,Detected with custom rules,,Windows Explorer Functionality Restriction
 T1112,16,Detected with custom rules,,Windows Policy Registry Modification
 T1112,17,Detected with custom rules,,Windows Policy Registry Modification
-T1112,18,Not detected,,
-T1112,19,Not detected,,
-T1112,20,Not detected,,
-T1112,21,Not detected,,
-T1112,22,Not detected,,
-T1112,23,Not detected,,
-T1112,24,Not detected,,
-T1112,25,Not detected,,
-T1112,26,Not detected,,
-T1112,27,Not detected,,
-T1112,28,Not detected,,
-T1112,29,Not detected,,
-T1112,30,Not detected,,
-T1112,31,Not detected,,
-T1112,32,Not detected,,
-T1112,33,Not detected,,
+T1112,18,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,19,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,20,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,21,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,22,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,23,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,24,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,25,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,26,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,27,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,28,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,29,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,30,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,31,Detected with custom rules,,Windows Explorer Functionality Restriction
+T1112,32,Detected with custom rules,,Modify Registry related to hermeticwiper
+T1112,33,Detected with custom rules,,Windows Registry Modification to Impair Security Controls or Visibility
 T1112,34,Detected with custom rules,,Add SafeBoot Keys Via Reg Utility
 T1112,35,Detected with custom rules,,Add SafeBoot Keys Via Reg Utility
-T1112,36,Not detected,,
-T1112,37,Not detected,,
+T1112,36,Detected with custom rules,,Windows Registry Modification to Impair Security Controls or Visibility
+T1112,37,Detected with custom rules,,Windows Registry Modification to Impair Security Controls or Visibility
 T1112,38,Detected with custom rules,,Microsoft Windows Defender Tampering V2
-T1112,39,Not detected,,
+T1112,39,Detected with custom rules,,Enable RDP via Remote Registry
 T1112,40,Detected by default rules,Startup or Run Key Registry Modification,
-T1112,41,Not detected,,
+T1112,41,Detected with custom rules,,Ursnif Malware Registry Key Creation
 T1112,42,Not detected,,
-T1112,43,Failed,,
-T1112,44,Not detected,,
+T1112,43,Detected with custom rules,,Windows Registry Modification to Impair Security Controls or Visibility
+T1112,44,Detected with custom rules,,Windows Explorer Functionality Restriction
 T1112,45,Detected with custom rules,,RestrictedAdminMode Registry Value Tampering
-T1112,46,Not detected,,
+T1112,46,Detected with custom rules,,Mimic Ransomware-Enable Multiple User Sessions
 T1112,47,Detected with custom rules,,RDP Registry Modification
-T1112,48,Not detected,,
-T1112,49,Not detected,,
-T1112,50,Not detected,,
+T1112,48,Detected with custom rules,,Event Viewer Registry Modification
+T1112,49,Detected with custom rules,,Event Viewer Registry Modification
+T1112,50,Detected with custom rules,,Enable RDP via Remote Registry
 T1112,51,Detected with custom rules,,Microsoft Windows Defender Tampering V2
-T1112,52,Not detected,,
-T1112,53,Not detected,,
-T1112,54,Not detected,,
-T1112,55,Not detected,,
-T1112,56,Failed,,
+T1112,52,Detected with custom rules,,RedLine Registry Modification
+T1112,53,Detected with custom rules,,RedLine Registry Modification
+T1112,54,Detected with custom rules,,RedLine Registry Modification
+T1112,55,Detected with custom rules,,RedLine Registry Modification
+T1112,56,Detected with custom rules,,RedLine Registry Modification
 T1112,57,Not detected,,
-T1112,58,Not detected,,
-T1112,59,Not detected,,
-T1112,60,Not detected,,
-T1112,61,Not detected,,
-T1112,62,Not detected,,
+T1112,58,Detected with custom rules,,Suspicious Internet Settings Registry Modification
+T1112,59,Detected with custom rules,,Suspicious Internet Settings Registry Modification
+T1112,60,Detected with custom rules,,Suspicious Internet Settings Registry Modification
+T1112,61,Detected with custom rules,,Disable Secondary Authentication
+T1112,62,Detected with custom rules,,Disable Secondary Authentication
 T1112,63,Detected with custom rules,,Windows Policy Registry Modification
-T1112,64,Not detected,,
-T1112,65,Not detected,,
-T1112,66,Not detected,,
-T1112,67,Not detected,,
+T1112,64,Detected with custom rules,,Darkgate Registry Modification
+T1112,65,Detected with custom rules,,Darkgate Registry Modification
+T1112,66,Detected with custom rules,,Darkgate Registry Modification
+T1112,67,Detected with custom rules,,Suspicious Internet Settings Registry Modification
 T1112,68,Detected with custom rules,,Modification of IE Registry Settings
 T1112,69,Failed,,
 T1112,70,Detected by default rules,RDP Enabled via Registry,RDP Registry Modification
-T1112,71,Not detected,,
+T1112,71,Detected with custom rules,,Windows Registry Modification to Impair Security Controls or Visibility
 T1112,72,Detected by default rules,Potential Remote Desktop Shadowing Activity,Potential Remote Desktop Shadowing Activity v2
 T1112,73,Detected with custom rules,,ShimCache Flush
 T1112,74,Detected with custom rules,,RDP Registry Modification
@@ -115,10 +115,10 @@ T1112,83,Not detected,,
 T1112,84,Not detected,,
 T1112,85,Not detected,,
 T1112,86,Detected by default rules,Uncommon Registry Persistence Change,RDP Registry Modification; Uncommon Registry Persistence Change v2
-T1112,87,Not detected,,
-T1112,88,Not detected,,
-T1112,89,Not detected,,
-T1112,90,Not detected,,
+T1112,87,Detected with custom rules,,Abusing MyComputer Disk for Persistence
+T1112,88,Detected with custom rules,,Abusing MyComputer Disk for Persistence
+T1112,89,Detected with custom rules,,Abusing MyComputer Disk for Persistence
+T1112,90,Detected with custom rules,,App Paths hijacking
 T1133,1,Not detected,,
 T1136.001,4,Detected by default rules,User Account Creation,Modify user account
 T1136.001,5,Detected with custom rules,,Modify user account
@@ -144,7 +144,7 @@ T1137.006,5,Detected by default rules,Persistence via Microsoft Office AddIns,
 T1176,1,Failed,,
 T1176,2,Failed,,
 T1176,3,Failed,,
-T1176,4,Failed,,
+T1176,4,Not detected,,
 T1197,1,Detected by default rules,Bitsadmin Activity,
 T1197,2,Detected by default rules,Bitsadmin Activity,
 T1197,3,Detected by default rules,Bitsadmin Activity,
@@ -159,7 +159,7 @@ T1542.001,1,Detected with custom rules,,UEFI Persistence Via Wpbbin
 T1543.003,1,Detected by default rules,Service Control Spawned via Script Interpreter; Service Path Modification via sc.exe; System Shells via Services,
 T1543.003,2,Detected by default rules,Service Control Spawned via Script Interpreter,
 T1543.003,3,Not detected,,
-T1543.003,4,Detected by default rules,Service Control Spawned via Script Interpreter; Unusual Persistence via Services Registry,
+T1543.003,4,Detected by default rules,Service Control Spawned via Script Interpreter; Unsigned DLL Loaded by Svchost; Unusual Persistence via Services Registry,
 T1543.003,5,Detected by default rules,Service Control Spawned via Script Interpreter,
 T1543.003,6,Failed,,
 T1546,1,Not detected,,

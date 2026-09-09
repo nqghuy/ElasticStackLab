@@ -7,16 +7,12 @@ T1505.005,2,,"+ CategoryInfo          : ObjectNotFound: (Get-Acl:String) [], Com
 T1176,1,,Found 0 atomic tests applicable to windows platform for Technique T1176
 T1176,2,,Found 0 atomic tests applicable to windows platform for Technique T1176
 T1176,3,,Found 0 atomic tests applicable to windows platform for Technique T1176
-T1176,4,,
 T1137.005,1,1,Outlook COM fails with 0x80080005 when run as Administrator.
 T1137.005,2,1,Outlook COM fails with 0x80080005 when run as Administrator.
 T1137.005,3,1,Outlook COM fails with 0x80080005 when run as Administrator.
 T1137.005,4,1,Outlook COM fails with 0x80080005 when run as Administrator.
 T1137.005,5,1,Outlook COM fails with 0x80080005 when run as Administrator.
 T1547.005,2,,"+ CategoryInfo          : InvalidArgument: (Security Packages:String) [Get-ItemProperty], PSArgumentException"
-T1112,11,,New-ItemProperty : Cannot find path 'HKCU:\Software\Policies\Microsoft\Windows\System' because it does not exist.
-T1112,43,1,ERROR: Invalid syntax.
-T1112,56,1,ERROR: Access is denied.
 T1112,69,,
 T1547.004,3,,
 T1546.008,3,1,The system cannot find the file specified.
@@ -35,7 +31,7 @@ T1098,15,,"+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:Str
 T1098,16,,"+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
 T1505.004,1,1,operable program or batch file.
 T1505.004,2,,"New-WebGlobalModule : The term 'New-WebGlobalModule' is not recognized as the name of a cmdlet, function, script file,"
-T1546,4,,+ FullyQualifiedErrorId : CouldNotAutoloadMatchingModule
+T1546,4,,"+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
 T1197,4,-1,Executing test: T1197-4 Bits download using desktopimgdownldr.exe (cmd)
 T1053.002,1,1,The request is not supported.
 T1078.003,6,,"Exception calling ""DownloadString"" with ""1"" argument(s): ""Could not find a part of the path"

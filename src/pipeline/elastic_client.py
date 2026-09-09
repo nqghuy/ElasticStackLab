@@ -274,9 +274,7 @@ def extract_matching_alert(settings: Settings, all_alerts: list, all_tests: list
                 alert_name = source["kibana.alert.rule.name"]
                 reason = _extract_reason(source)
 
-                for alert in test.alerts:
-                    if reason == alert.reason:
-                        continue
+                if any(reason == alert.reason for alert in test.alerts): continue
 
                 for threat in threats:
                     for tech in threat.get("technique", []):

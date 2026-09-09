@@ -1,14 +1,15 @@
-START T1112 Test 41
+START T1547.001 Test 20
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1112-41 Ursnif Malware Registry Key Creation
+Executing test: T1547.001-20 Add persistence via Windows Context Menu
 The operation completed successfully.
 Exit code: 0
-Done executing test: T1112-41 Ursnif Malware Registry Key Creation
-END T1112 Test 41
+Done executing test: T1547.001-20 Add persistence via Windows Context Menu
+END T1547.001 Test 20
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing cleanup for test: T1112-41 Ursnif Malware Registry Key Creation
-Done executing cleanup for test: T1112-41 Ursnif Malware Registry Key Creation
+Executing cleanup for test: T1547.001-20 Add persistence via Windows Context Menu
+The operation completed successfully.
+Done executing cleanup for test: T1547.001-20 Add persistence via Windows Context Menu
 
 

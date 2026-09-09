@@ -49,12 +49,6 @@
       "error_message": "Found 0 atomic tests applicable to windows platform for Technique T1176"
     },
     {
-      "technique": "T1176",
-      "test_number": 4,
-      "exit_code": null,
-      "error_message": ""
-    },
-    {
       "technique": "T1137.005",
       "test_number": 1,
       "exit_code": 1,
@@ -89,24 +83,6 @@
       "test_number": 2,
       "exit_code": null,
       "error_message": "+ CategoryInfo          : InvalidArgument: (Security Packages:String) [Get-ItemProperty], PSArgumentException"
-    },
-    {
-      "technique": "T1112",
-      "test_number": 11,
-      "exit_code": null,
-      "error_message": "New-ItemProperty : Cannot find path 'HKCU:\\Software\\Policies\\Microsoft\\Windows\\System' because it does not exist."
-    },
-    {
-      "technique": "T1112",
-      "test_number": 43,
-      "exit_code": 1,
-      "error_message": "ERROR: Invalid syntax."
-    },
-    {
-      "technique": "T1112",
-      "test_number": 56,
-      "exit_code": 1,
-      "error_message": "ERROR: Access is denied."
     },
     {
       "technique": "T1112",
@@ -220,7 +196,7 @@
       "technique": "T1546",
       "test_number": 4,
       "exit_code": null,
-      "error_message": "+ FullyQualifiedErrorId : CouldNotAutoloadMatchingModule"
+      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
     },
     {
       "technique": "T1197",

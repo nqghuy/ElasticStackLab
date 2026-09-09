@@ -3,34 +3,34 @@
 ## 1. Overview
 
 - Total tests recorded: **247**
-- Tests excluded (execution failed, no alert produced): **42** (see `tables/failed_tests.csv`)
-- Tests that failed to run but still produced an alert - **counted, not excluded**: **13** (see `tables/failed_but_counted.csv`)
-- Tests considered for detection stats: **205**
+- Tests excluded (execution failed, no alert produced): **38** (see `tables/failed_tests.csv`)
+- Tests that failed to run but still produced an alert - **counted, not excluded**: **16** (see `tables/failed_but_counted.csv`)
+- Tests considered for detection stats: **209**
 - Techniques tested: **50**
-- Detected: **128** (62.4%)
-- Undetected (including techniques with no rule): **77**
-- Distinct rules triggered: **70**
+- Detected: **179** (85.6%)
+- Undetected (including techniques with no rule): **30**
+- Distinct rules triggered: **85**
 
 ## 2. Technique classification
 
 - Fully detected: **33** technique(s)
 - Partially detected: **7** technique(s)
-- All tests failed: **7** technique(s)
-- Not detected: **2** technique(s)
+- All tests failed: **6** technique(s)
+- Not detected: **3** technique(s)
 - No rule: **1** technique(s)
 
 ## 3. Top triggered rules
 
-- Modify user account: 66 time(s)
+- Modify user account: 64 time(s)
 - Local Scheduled Task Creation: 36 time(s)
-- Service Control Spawned via Script Interpreter: 32 time(s)
+- Windows Registry Modification to Impair Security Controls or Visibility: 34 time(s)
+- Windows Explorer Functionality Restriction: 34 time(s)
 - Bitsadmin Activity: 30 time(s)
+- Suspicious Internet Settings Registry Modification: 28 time(s)
 - Startup Persistence by a Suspicious Process: 26 time(s)
-- Uncommon Registry Persistence Change v2: 23 time(s)
 - Windows Policy Registry Modification: 22 time(s)
-- Image File Execution Options Injection V2: 20 time(s)
-- Persistence via Microsoft Office AddIns: 17 time(s)
-- Uncommon Registry Persistence Change: 16 time(s)
+- Uncommon Registry Persistence Change v2: 21 time(s)
+- Service Control Spawned via Script Interpreter: 20 time(s)
 
 ## 4. Technique detail
 
@@ -42,7 +42,7 @@
 | T1078.001   |                2 |             2 |              0 |                100   | Fully detected     | Yes        |
 | T1078.003   |                2 |             2 |              2 |                100   | Fully detected     | Yes        |
 | T1098       |                1 |             1 |              9 |                100   | Fully detected     | Yes        |
-| T1112       |               26 |            86 |              4 |                 30.2 | Partially detected | Yes        |
+| T1112       |               77 |            89 |              1 |                 86.5 | Partially detected | Yes        |
 | T1133       |                0 |             1 |              0 |                  0   | Not detected       | Yes        |
 | T1136.001   |                4 |             4 |              0 |                100   | Fully detected     | Yes        |
 | T1136.002   |                2 |             2 |              1 |                100   | Fully detected     | Yes        |
@@ -52,7 +52,7 @@
 | T1137.004   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
 | T1137.005   |                0 |             0 |              5 |                  0   | All tests failed   | No         |
 | T1137.006   |                5 |             5 |              0 |                100   | Fully detected     | Yes        |
-| T1176       |                0 |             0 |              4 |                  0   | All tests failed   | Yes        |
+| T1176       |                0 |             1 |              3 |                  0   | Not detected       | Yes        |
 | T1197       |                3 |             3 |              1 |                100   | Fully detected     | Yes        |
 | T1505.002   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
 | T1505.003   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
@@ -97,16 +97,12 @@
 - T1176 test 1: Found 0 atomic tests applicable to windows platform for Technique T1176
 - T1176 test 2: Found 0 atomic tests applicable to windows platform for Technique T1176
 - T1176 test 3: Found 0 atomic tests applicable to windows platform for Technique T1176
-- T1176 test 4: unknown error
 - T1137.005 test 1 (exit code 1): Outlook COM fails with 0x80080005 when run as Administrator.
 - T1137.005 test 2 (exit code 1): Outlook COM fails with 0x80080005 when run as Administrator.
 - T1137.005 test 3 (exit code 1): Outlook COM fails with 0x80080005 when run as Administrator.
 - T1137.005 test 4 (exit code 1): Outlook COM fails with 0x80080005 when run as Administrator.
 - T1137.005 test 5 (exit code 1): Outlook COM fails with 0x80080005 when run as Administrator.
 - T1547.005 test 2: + CategoryInfo          : InvalidArgument: (Security Packages:String) [Get-ItemProperty], PSArgumentException
-- T1112 test 11: New-ItemProperty : Cannot find path 'HKCU:\Software\Policies\Microsoft\Windows\System' because it does not exist.
-- T1112 test 43 (exit code 1): ERROR: Invalid syntax.
-- T1112 test 56 (exit code 1): ERROR: Access is denied.
 - T1112 test 69: unknown error
 - T1547.004 test 3: unknown error
 - T1546.008 test 3 (exit code 1): The system cannot find the file specified.
@@ -125,7 +121,7 @@
 - T1098 test 16: + CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException
 - T1505.004 test 1 (exit code 1): operable program or batch file.
 - T1505.004 test 2: New-WebGlobalModule : The term 'New-WebGlobalModule' is not recognized as the name of a cmdlet, function, script file,
-- T1546 test 4: + FullyQualifiedErrorId : CouldNotAutoloadMatchingModule
+- T1546 test 4: + CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException
 - T1197 test 4 (exit code -1): Executing test: T1197-4 Bits download using desktopimgdownldr.exe (cmd)
 - T1053.002 test 1 (exit code 1): The request is not supported.
 - T1078.003 test 6: Exception calling "DownloadString" with "1" argument(s): "Could not find a part of the path
@@ -138,11 +134,14 @@
 - T1543.003 test 1 (exit code 1053): [SC] StartService FAILED 1053:
 - T1505.002 test 1: Install-TransportAgent : The term 'Install-TransportAgent' is not recognized as the name of a cmdlet, function, script
 - T1112 test 7: + CategoryInfo          : ObjectNotFound: (Set-ExecutionPolicy:String) [], CommandNotFoundException
+- T1112 test 11: New-ItemProperty : Cannot find path 'HKCU:\Software\Policies\Microsoft\Windows\System' because it does not exist.
+- T1112 test 43 (exit code 1): ERROR: Invalid syntax.
+- T1112 test 56 (exit code 1): ERROR: Access is denied.
 - T1546.008 test 4 (exit code 1): The operation completed successfully.
 - T1136.002 test 1 (exit code 2): The specified domain either does not exist or could not be contacted.
 - T1136.002 test 2 (exit code 2): The specified domain either does not exist or could not be contacted.
 - T1547.001 test 14: + CategoryInfo          : InvalidArgument: (:) [Get-ItemPropertyValue], PSArgumentException
-- T1547.001 test 15: + FullyQualifiedErrorId : Argument,Microsoft.PowerShell.Commands.GetItemPropertyValueCommand
+- T1547.001 test 15: + CategoryInfo          : InvalidArgument: (:) [Get-ItemPropertyValue], PSArgumentException
 - T1546.015 test 2: Exception calling "CreateInstance" with "1" argument(s): "Retrieving the COM class factory for component with CLSID
 - T1197 test 1 (exit code -2147023651): Unable to add file - 0x800704dd
 - T1197 test 2: network. The specified service does not exist. (Exception from HRESULT: 0x800704DD)
@@ -164,9 +163,9 @@
 Classified from alerts in this run. When both default and custom rules alert, the test is counted as default-detected.
 
 - Detected by default rules: **71**
-- Detected with custom rules: **57**
-- Not detected: **77**
-- Failed: **42**
+- Detected with custom rules: **108**
+- Not detected: **30**
+- Failed: **38**
 
 See `tables/test_detection_source.csv` for every test.
 

@@ -3,11 +3,14 @@ T1053.005,3,1,ERROR: No mapping between account names and security IDs was done.
 T1543.003,1,1053,[SC] StartService FAILED 1053:
 T1505.002,1,,"Install-TransportAgent : The term 'Install-TransportAgent' is not recognized as the name of a cmdlet, function, script"
 T1112,7,,"+ CategoryInfo          : ObjectNotFound: (Set-ExecutionPolicy:String) [], CommandNotFoundException"
+T1112,11,,New-ItemProperty : Cannot find path 'HKCU:\Software\Policies\Microsoft\Windows\System' because it does not exist.
+T1112,43,1,ERROR: Invalid syntax.
+T1112,56,1,ERROR: Access is denied.
 T1546.008,4,1,The operation completed successfully.
 T1136.002,1,2,The specified domain either does not exist or could not be contacted.
 T1136.002,2,2,The specified domain either does not exist or could not be contacted.
 T1547.001,14,,"+ CategoryInfo          : InvalidArgument: (:) [Get-ItemPropertyValue], PSArgumentException"
-T1547.001,15,,"+ FullyQualifiedErrorId : Argument,Microsoft.PowerShell.Commands.GetItemPropertyValueCommand"
+T1547.001,15,,"+ CategoryInfo          : InvalidArgument: (:) [Get-ItemPropertyValue], PSArgumentException"
 T1546.015,2,,"Exception calling ""CreateInstance"" with ""1"" argument(s): ""Retrieving the COM class factory for component with CLSID"
 T1197,1,-2147023651,Unable to add file - 0x800704dd
 T1197,2,,network. The specified service does not exist. (Exception from HRESULT: 0x800704DD)
