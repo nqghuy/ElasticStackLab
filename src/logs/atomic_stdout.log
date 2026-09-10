@@ -1,15 +1,52 @@
-START T1547.001 Test 20
+START T1547.004 Test 2
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing test: T1547.001-20 Add persistence via Windows Context Menu
-The operation completed successfully.
+Executing test: T1547.004-2 Winlogon Userinit Key Persistence - PowerShell
 Exit code: 0
-Done executing test: T1547.001-20 Add persistence via Windows Context Menu
-END T1547.001 Test 20
+Done executing test: T1547.004-2 Winlogon Userinit Key Persistence - PowerShell
+END T1547.004 Test 2
 PathToAtomicsFolder = C:\AtomicRedTeam\atomics
 
-Executing cleanup for test: T1547.001-20 Add persistence via Windows Context Menu
-The operation completed successfully.
-Done executing cleanup for test: T1547.001-20 Add persistence via Windows Context Menu
+Executing cleanup for test: T1547.004-2 Winlogon Userinit Key Persistence - PowerShell
+Done executing cleanup for test: T1547.004-2 Winlogon Userinit Key Persistence - PowerShell
+
+
+START T1547.014 Test 1
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1547.014-1 HKLM - Add atomic_test key to launch executable as part of user setup
+Exit code: 0
+Done executing test: T1547.014-1 HKLM - Add atomic_test key to launch executable as part of user setup
+END T1547.014 Test 1
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1547.014-1 HKLM - Add atomic_test key to launch executable as part of user setup
+Done executing cleanup for test: T1547.014-1 HKLM - Add atomic_test key to launch executable as part of user setup
+
+
+START T1547.014 Test 2
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1547.014-2 HKLM - Add malicious StubPath value to existing Active Setup Entry
+Exit code: 0
+Done executing test: T1547.014-2 HKLM - Add malicious StubPath value to existing Active Setup Entry
+END T1547.014 Test 2
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1547.014-2 HKLM - Add malicious StubPath value to existing Active Setup Entry
+Done executing cleanup for test: T1547.014-2 HKLM - Add malicious StubPath value to existing Active Setup Entry
+
+
+START T1547.014 Test 3
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing test: T1547.014-3 HKLM - re-execute 'Internet Explorer Core Fonts' StubPath payload by decreasing version number
+Exit code: 0
+Done executing test: T1547.014-3 HKLM - re-execute 'Internet Explorer Core Fonts' StubPath payload by decreasing version number
+END T1547.014 Test 3
+PathToAtomicsFolder = C:\AtomicRedTeam\atomics
+
+Executing cleanup for test: T1547.014-3 HKLM - re-execute 'Internet Explorer Core Fonts' StubPath payload by decreasing version number
+Done executing cleanup for test: T1547.014-3 HKLM - re-execute 'Internet Explorer Core Fonts' StubPath payload by decreasing version number
 
 

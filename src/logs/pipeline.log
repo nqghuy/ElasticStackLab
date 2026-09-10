@@ -1,12 +1,26 @@
-2026-09-09 22:14:35,071 [INFO] pipeline.elastic_client: Find 631 enabled rules (tag=OS: Windows)
-2026-09-09 22:14:35,081 [INFO] pipeline: Runnging 1 tests
-2026-09-09 22:14:35,081 [INFO] pipeline: [1/1] T1547.001 test 20
-2026-09-09 22:14:35,081 [INFO] pipeline.atomic_runner: START TIME: 2026-09-09T15:14:35.000Z
-2026-09-09 22:14:42,109 [INFO] pipeline.atomic_runner: END TIME: 2026-09-09T15:14:42.000Z
-2026-09-09 22:14:56,202 [INFO] pipeline.elastic_client: Triggered 20 rules
-2026-09-09 22:14:56,293 [INFO] pipeline.elastic_client: 17 rules not complete
-2026-09-09 22:15:06,340 [INFO] pipeline.elastic_client: 14 rules not complete
-2026-09-09 22:15:16,419 [INFO] pipeline.elastic_client: 10 rules not complete
-2026-09-09 22:15:26,541 [INFO] pipeline.elastic_client: 7 rules not complete
-2026-09-09 22:15:36,658 [INFO] pipeline.elastic_client: 3 rules not complete
-2026-09-09 22:15:46,724 [INFO] pipeline.elastic_client: 0 rules not complete
+2026-09-10 21:47:54,255 [INFO] pipeline.elastic_client: Find 633 enabled rules (tag=OS: Windows)
+2026-09-10 21:47:54,266 [INFO] pipeline: Runnging 4 tests
+2026-09-10 21:47:54,267 [INFO] pipeline: [1/4] T1547.004 test 2
+2026-09-10 21:47:54,267 [INFO] pipeline.atomic_runner: START TIME: 2026-09-10T14:47:54.000Z
+2026-09-10 21:48:19,127 [INFO] pipeline.atomic_runner: END TIME: 2026-09-10T14:48:19.000Z
+2026-09-10 21:48:21,127 [INFO] pipeline: [2/4] T1547.014 test 1
+2026-09-10 21:48:21,128 [INFO] pipeline.atomic_runner: START TIME: 2026-09-10T14:48:21.000Z
+2026-09-10 21:48:33,460 [INFO] pipeline.atomic_runner: END TIME: 2026-09-10T14:48:33.000Z
+2026-09-10 21:48:35,461 [INFO] pipeline: [3/4] T1547.014 test 2
+2026-09-10 21:48:35,461 [INFO] pipeline.atomic_runner: START TIME: 2026-09-10T14:48:35.000Z
+2026-09-10 21:48:44,891 [INFO] pipeline.atomic_runner: END TIME: 2026-09-10T14:48:44.000Z
+2026-09-10 21:48:46,891 [INFO] pipeline: [4/4] T1547.014 test 3
+2026-09-10 21:48:46,892 [INFO] pipeline.atomic_runner: START TIME: 2026-09-10T14:48:46.000Z
+2026-09-10 21:48:54,998 [INFO] pipeline.atomic_runner: END TIME: 2026-09-10T14:48:54.000Z
+2026-09-10 21:52:05,193 [INFO] pipeline.elastic_client: Triggered 633 rules
+2026-09-10 21:52:05,284 [INFO] pipeline.elastic_client: 183 rules not complete
+2026-09-10 21:52:15,336 [INFO] pipeline.elastic_client: 145 rules not complete
+2026-09-10 21:52:25,375 [INFO] pipeline.elastic_client: 133 rules not complete
+2026-09-10 21:52:35,453 [INFO] pipeline.elastic_client: 83 rules not complete
+2026-09-10 21:52:45,539 [INFO] pipeline.elastic_client: 83 rules not complete
+2026-09-10 21:52:55,589 [INFO] pipeline.elastic_client: 83 rules not complete
+2026-09-10 21:53:05,639 [INFO] pipeline.elastic_client: 46 rules not complete
+2026-09-10 21:53:15,690 [INFO] pipeline.elastic_client: 33 rules not complete
+2026-09-10 21:53:25,746 [INFO] pipeline.elastic_client: 33 rules not complete
+2026-09-10 21:53:35,791 [INFO] pipeline.elastic_client: 21 rules not complete
+2026-09-10 21:53:45,852 [INFO] pipeline.elastic_client: 0 rules not complete
