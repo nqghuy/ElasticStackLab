@@ -1,0 +1,76 @@
+[metadata]
+creation_date = "2026/10/11"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/10/11"
+
+[rule]
+name = "Csc.EXE Execution Form Potentially Suspicious Parent"
+description = "Csc.EXE Execution Form Potentially Suspicious Parent"
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "b0dde7b4-9116-4474-ae7b-c0197bc1e1b5"
+
+author = ["Huy"]
+tags = ["OS: Windows"]
+
+false_positives = []
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "process.args", type = "keyword", ecs = true },
+    { name = "process.parent.name", type = "keyword", ecs = true },
+]
+
+related_integrations = []
+type = "eql"
+language = "eql"
+
+index = [
+    "logs-endpoint.events.process-*",
+    "logs-endpoint.events.registry-*",
+    "winlogbeat-*",
+    "logs-windows.sysmon_operational-*",
+    "logs-system.security*"
+]
+
+query = '''
+process where 
+(
+    (
+        process.name : "csc.exe" or process.pe.original_file_name : "csc.exe") and process.command_line : ("*-out:*","*out:*"
+    )
+)
+'''
+
+filters = []
+actions = []
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1027"
+name = "Obfuscated Files or Information"
+reference = "https://attack.mitre.org/techniques/T1027/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1027.004"
+name = "Compile After Delivery"
+reference = "https://attack.mitre.org/techniques/T1027/004/"
+
+[rule.threat.tactic]
+id = "TA0005"
+name = "Stealth"
+reference = "https://attack.mitre.org/tactics/TA0005/"

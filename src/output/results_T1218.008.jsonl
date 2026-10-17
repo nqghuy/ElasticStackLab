@@ -1,0 +1,2 @@
+{"technique": "T1218.008", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-10-10T11:10:24.000Z", "end_time": "2026-10-10T11:10:36.000Z", "status": "undetected"}
+{"technique": "T1218.008", "test_number": 2, "alerts": [], "has_rule": true, "start_time": null, "end_time": null, "status": "failed"}

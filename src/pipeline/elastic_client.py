@@ -89,27 +89,30 @@ def get_all_rules(settings: Settings) -> list[str]:
         all_rules_ids.append(rule["id"])
     return all_rules_ids
 
-# Run rules manually from [start, end]
 def trigger_rules(settings: Settings, rule_ids: list[str], start: str, end: str) -> None:
     if not rule_ids:
-        logger.info('No rules to trigger')
-        return 
-    
-    batch_size = 50
-    url = f'{settings.elastic.kibana_url}/api/detection_engine/rules/_bulk_action'
-    for i in range(0, len(rule_ids), batch_size):
-        batch = rule_ids[i: i + 100]
-        payload = {
-            "action": "run",
-            "ids": batch,
-            "run": {
-                "start_date": start,
-                "end_date": end
-                }
-            }
-        _request(settings, "POST", url, json=payload)
+        logger.info("No rules to trigger")
+        return
 
-    logger.info("Triggered %s rules", len(rule_ids))
+    batch_size, max_retries = 25, 3
+    url = f"{settings.elastic.kibana_url}/api/detection_engine/rules/_bulk_action"
+
+    for i in range(0, len(rule_ids), batch_size):
+        batch = rule_ids[i:i + batch_size]
+        payload = {"action": "run", "ids": batch, "run": {"start_date": start, "end_date": end}}
+
+        for attempt in range(1, max_retries + 1):
+            try:
+                _request(settings, "POST", url, json=payload)
+                logger.info("Triggered batch %d (%d rules)", i // batch_size + 1, len(batch))
+                break
+            except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as e:
+                logger.warning("Batch %d attempt %d/%d failed: %s", i // batch_size + 1, attempt, max_retries, e)
+                if attempt == max_retries:
+                    raise
+                time.sleep(2 * attempt)
+
+    logger.info("Triggered %d rules", len(rule_ids))
 
 # Wait all triggered rules complete
 def wait_rules_completed(settings: Settings, rule_ids: list[str], since: str) -> list[str]:
@@ -206,6 +209,25 @@ def _fetch_ancestor_timestamps(settings: Settings, ancestors) -> dict[tuple[str,
 
         if ancestor.get("type") != "event":
             continue
+
+        index = ancestor.get("index")
+        ancestor_id = ancestor.get("id")
+
+        #threshold rule, not neccessary 
+        if not isinstance(index, str) or not index.strip():
+            logger.warning(
+                "Skipping event ancestor with empty index: id=%r",
+                ancestor_id,
+            )
+            continue
+
+        if not isinstance(ancestor_id, str) or not ancestor_id.strip():
+            logger.warning(
+                "Skipping event ancestor with empty id: index=%r",
+                index,
+            )
+            continue
+
 
         groups[ancestor["index"]].add(ancestor["id"])
 

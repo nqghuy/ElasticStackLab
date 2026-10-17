@@ -1,0 +1,1 @@
+{"technique": "T1564.002", "test_number": 3, "alerts": [{"name": "Creation of a Hidden Local User Account", "reason": {"event.type": ["change"], "host.os.type": "windows", "registry.path": "HKLM\\SAM\\SAM\\Domains\\Account\\Users\\Names\\AtomicOperator$\\"}}], "has_rule": true, "start_time": "2026-10-10T11:23:28.000Z", "end_time": "2026-10-10T11:23:39.000Z", "status": "detected"}

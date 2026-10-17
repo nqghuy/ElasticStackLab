@@ -51,11 +51,16 @@ Output (default ./atomic_report/):
   charts/02_technique_status_bar.png
   charts/03_top_rules_bar.png
   charts/04_technique_heatmap.png
+  charts/11_default_rules_heatmap_without_failed_tests.png
+  charts/12_default_plus_custom_heatmap_without_failed_tests.png
   tables/technique_detail.csv
+  tables/technique_detail_without_failed_tests.csv
+  tables/tests_without_failed_tests.csv
   tables/rule_frequency.csv
   tables/failed_tests.csv
   tables/all_failed_tests.json
   report_summary.md
+  report_without_failed_tests.md
 
 Usage:
   python3 generate_report.py --results output/results.jsonl \
@@ -218,6 +223,7 @@ def compute_stats(results, log_failures):
     failed = []              # excluded from stats: failed AND no alerts
     counted_despite_failure = []   # failed but still produced alert(s) - counted, not excluded
     failed_keys = set()      # only the excluded ones (used to color the heatmap)
+    all_failure_keys = set() # every failed execution, including ones with alerts
     considered = []
     for r in results:
         key = (r["technique"], r["test_number"])
@@ -228,6 +234,9 @@ def compute_stats(results, log_failures):
         # Continue hides from the pipeline's own status field).
         is_failed = r["status"] == "failed" or log_info is not None
         has_alerts = bool(r.get("alerts"))
+
+        if is_failed:
+            all_failure_keys.add(key)
 
         if is_failed and not has_alerts:
             # Failed AND nothing detected: inconclusive - we can't tell
@@ -267,6 +276,7 @@ def compute_stats(results, log_failures):
     stats["failed_tests"] = failed
     stats["counted_despite_failure"] = counted_despite_failure
     stats["failed_keys"] = failed_keys
+    stats["all_failure_keys"] = all_failure_keys
     stats["considered"] = considered
     stats["considered_count"] = len(considered)
 
@@ -483,7 +493,9 @@ def _sparse_ticks(n, step=5):
     return ticks
 
 
-def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False):
+def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False,
+                    title=None, include_failed_legend=True,
+                    include_custom_legend=True):
     if matrix.size == 0:
         return
 
@@ -534,8 +546,9 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False):
         ax.set_ylabel("Atomic Test Number", fontsize=14)
         ax.set_xlabel("Technique", fontsize=14)
 
-    ax.set_title("Technique x Test detection matrix"
-                 + (" (rotated)" if rotated else ""), fontsize=16)
+    if title is None:
+        title = "Technique x Test detection matrix"
+    ax.set_title(title + (" (rotated)" if rotated else ""), fontsize=16)
 
     if n_rows * n_cols <= 800:
         for i in range(n_rows):
@@ -551,9 +564,11 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False):
         ("Not detected (rule exists but did not fire)", COLOR_RED),
         ("Detected", COLOR_GREEN),
         ("No rule", COLOR_MUTEDGRAY),
-        ("Failed (execution error)", COLOR_PURPLE),
-        ("Detected with custom rules", COLOR_BLUE),
     ]
+    if include_failed_legend:
+        legend_items.append(("Failed (execution error)", COLOR_PURPLE))
+    if include_custom_legend:
+        legend_items.append(("Detected with custom rules", COLOR_BLUE))
     handles = [plt.Rectangle((0, 0), 1, 1, color=c) for _, c in legend_items]
     # fig.legend (figure-fraction coordinates), NOT ax.legend with a
     # negative bbox_to_anchor in axes-fraction coordinates: axes-fraction
@@ -568,7 +583,7 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False):
     # this fix). rect=[left, bottom, right, top] in figure fraction.
     fig.tight_layout(rect=[0, 0.08, 1, 1])
     fig.legend(handles, [l for l, _ in legend_items],
-               loc="lower center", ncol=5, frameon=False, fontsize=12,
+               loc="lower center", ncol=len(legend_items), frameon=False, fontsize=12,
                bbox_to_anchor=(0.5, 0.0))
 
     fig.savefig(outpath, dpi=150, bbox_inches="tight")
@@ -576,11 +591,17 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False):
 
 
 def chart_technique_heatmap(results, failed_keys, outpath, custom_only_keys=None,
-                            default_only=False):
+                            default_only=False, title=None,
+                            include_failed_legend=True,
+                            include_custom_legend=True):
     techniques, matrix, real_test_no = _build_heatmap_matrix(
         results, failed_keys, custom_only_keys, default_only
     )
-    _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False)
+    _render_heatmap(
+        techniques, matrix, real_test_no, outpath, rotated=False, title=title,
+        include_failed_legend=include_failed_legend,
+        include_custom_legend=include_custom_legend,
+    )
 
 
 # ----------------------------------------------------------------------
@@ -677,6 +698,105 @@ def export_tables(stats, outdir):
     return df_tech
 
 
+def export_without_failed_tests_tables(results, stats, outdir):
+    """Export tables whose input contains no failed execution whatsoever.
+
+    This is intentionally stricter than the main report's detection-rate
+    policy: a failed test that happened to produce an alert is useful signal
+    in the main report, but is omitted here because this companion report is
+    meant to show only cleanly executed Atomic tests.
+    """
+    tables_dir = os.path.join(outdir, "tables")
+    clean_results = [
+        r for r in results
+        if (r["technique"], r["test_number"]) not in stats["all_failure_keys"]
+    ]
+    clean_stats = compute_stats(clean_results, {})
+
+    rows = []
+    for t, s in sorted(clean_stats["tech_stats"].items()):
+        rate = 100 * s["detected"] / s["total"] if s["total"] else 0
+        if not s["has_rule"]:
+            status = "No rule"
+        elif s["detected"] == 0:
+            status = "Not detected"
+        elif s["detected"] == s["total"]:
+            status = "Fully detected"
+        else:
+            status = "Partially detected"
+        rows.append({
+            "Technique": t,
+            "Tests detected": s["detected"],
+            "Tests total": s["total"],
+            "Detection rate (%)": round(rate, 1),
+            "Status": status,
+            "Has rule": "Yes" if s["has_rule"] else "No",
+        })
+    technique_columns = [
+        "Technique", "Tests detected", "Tests total", "Detection rate (%)",
+        "Status", "Has rule",
+    ]
+    df_tech = pd.DataFrame(rows, columns=technique_columns)
+    if not df_tech.empty:
+        df_tech = df_tech.sort_values("Technique")
+    df_tech.to_csv(
+        os.path.join(tables_dir, "technique_detail_without_failed_tests.csv"),
+        index=False,
+    )
+
+    test_rows = []
+    for r in clean_results:
+        alert_names = sorted({a.get("name", "") for a in r.get("alerts", [])})
+        test_rows.append({
+            "Technique": r["technique"],
+            "Test": r["test_number"],
+            "Status": r["status"],
+            "Has rule": "Yes" if r.get("has_rule") else "No",
+            "Alert count": len(r.get("alerts", [])),
+            "Alert names": "; ".join(name for name in alert_names if name),
+        })
+    test_columns = [
+        "Technique", "Test", "Status", "Has rule", "Alert count", "Alert names",
+    ]
+    pd.DataFrame(test_rows, columns=test_columns).sort_values(
+        ["Technique", "Test"]
+    ).to_csv(os.path.join(tables_dir, "tests_without_failed_tests.csv"), index=False)
+
+    return clean_results, clean_stats, df_tech
+
+
+def write_without_failed_tests_summary(stats, clean_stats, df_tech, outdir):
+    """Write a standalone summary that contains no failed test rows."""
+    excluded = len(stats["all_failure_keys"])
+    lines = [
+        "# Detection coverage report — successful executions only\n",
+        "This companion report removes every failed execution before calculating "
+        "statistics, rendering charts, or exporting tables. A test is removed when "
+        "its result status is `failed` or its Atomic log block records an execution "
+        "failure, even if that test also produced an alert.\n",
+        "## Overview\n",
+        f"- Total tests recorded: **{stats['total_tests']}**",
+        f"- Failed executions removed: **{excluded}**",
+        f"- Tests remaining: **{clean_stats['total_tests']}**",
+        f"- Detected: **{clean_stats['detected_count']}** "
+        f"({clean_stats['detection_rate']:.1f}%)",
+        f"- Undetected (including tests with no rule): **{clean_stats['undetected_count']}**",
+        f"- Techniques with at least one non-failed test: **{clean_stats['total_techniques']}**\n",
+        "## Technique classification\n",
+    ]
+    for status in ("Fully detected", "Partially detected", "Not detected", "No rule"):
+        lines.append(f"- {status}: **{clean_stats['status_count'].get(status, 0)}** technique(s)")
+    lines.extend([
+        "\n## Technique detail\n",
+        df_tech.to_markdown(index=False),
+        "\n## Attached files\n",
+        "- `tables/technique_detail_without_failed_tests.csv`",
+        "- `tables/tests_without_failed_tests.csv`",
+    ])
+    with open(os.path.join(outdir, "report_without_failed_tests.md"), "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+
+
 def write_summary_md(stats, df_tech, outdir):
     lines = []
     lines.append("# Detection coverage report — Atomic Red Team vs Elastic Rules\n")
@@ -738,6 +858,9 @@ def write_summary_md(stats, df_tech, outdir):
     lines.append("- `tables/rule_frequency.csv`")
     lines.append("- `tables/failed_tests.csv`")
     lines.append("- `tables/all_failed_tests.json` (input for `main.py --exclude-failed-tests`)")
+    lines.append("- `report_without_failed_tests.md` (companion report with every failed execution removed)")
+    lines.append("- `tables/technique_detail_without_failed_tests.csv`")
+    lines.append("- `tables/tests_without_failed_tests.csv`")
     if stats["counted_despite_failure"]:
         lines.append("- `tables/failed_but_counted.csv`")
 
@@ -894,6 +1017,9 @@ def write_detection_source_report(rows, outdir):
                 "`charts/08_default_plus_custom_heatmap.png`, "
                 "`charts/09_default_rules_technique_status.png`, and "
                 "`charts/10_default_plus_custom_technique_status.png`.\n")
+        f.write("\nHeatmaps with every failed execution removed: "
+                "`charts/11_default_rules_heatmap_without_failed_tests.png` and "
+                "`charts/12_default_plus_custom_heatmap_without_failed_tests.png`.\n")
 
 
 def chart_detection_coverage(detected, undetected, title, outpath):
@@ -929,6 +1055,14 @@ def write_detection_source_charts(rows, results, stats, outdir):
     combined_detected = default_detected + custom_detected
     combined_undetected = max(0, stats["considered_count"] - combined_detected)
     charts_dir = os.path.join(outdir, "charts")
+    # Version 1 of the clean heatmap used this ambiguous filename and mixed
+    # default/custom detections.  Remove it so a regenerated report cannot
+    # leave a stale chart that is mistaken for the new default-only chart 11.
+    legacy_clean_heatmap = os.path.join(
+        charts_dir, "11_technique_heatmap_without_failed_tests.png"
+    )
+    if os.path.exists(legacy_clean_heatmap):
+        os.remove(legacy_clean_heatmap)
     chart_detection_coverage(
         default_detected, default_undetected, "Detection coverage — default rules only",
         os.path.join(charts_dir, "05_default_rules_coverage.png"),
@@ -952,6 +1086,33 @@ def write_detection_source_charts(rows, results, stats, outdir):
         results, stats["failed_keys"],
         os.path.join(charts_dir, "08_default_plus_custom_heatmap.png"),
         custom_only_keys=custom_only_keys,
+    )
+    # These companion heatmaps use only successfully executed tests.  Unlike
+    # the regular heatmaps above, failed test slots are absent entirely (and
+    # therefore have no failed-test legend item).  Keep the default-only and
+    # default+custom views directly comparable, just as charts 07 and 08 are.
+    clean_results = [
+        result for result in results
+        if (result["technique"], result["test_number"])
+        not in stats["all_failure_keys"]
+    ]
+    clean_custom_only_keys = custom_only_keys - stats["all_failure_keys"]
+    chart_technique_heatmap(
+        clean_results, set(),
+        os.path.join(charts_dir, "11_default_rules_heatmap_without_failed_tests.png"),
+        custom_only_keys=clean_custom_only_keys,
+        default_only=True,
+        title="Technique x Test detection matrix — default rules only (no failed tests)",
+        include_failed_legend=False,
+        include_custom_legend=False,
+    )
+    chart_technique_heatmap(
+        clean_results, set(),
+        os.path.join(charts_dir, "12_default_plus_custom_heatmap_without_failed_tests.png"),
+        custom_only_keys=clean_custom_only_keys,
+        title="Technique x Test detection matrix — default rules + custom rules (no failed tests)",
+        include_failed_legend=False,
+        include_custom_legend=True,
     )
     # Reuse the normal technique classifier after removing custom-only
     # detections from a copy of the current results.  The known failed keys
@@ -988,6 +1149,10 @@ def generate_one_report(results_path, atomic_log_path, outdir, top_rules=15):
     chart_technique_heatmap(results, stats["failed_keys"], os.path.join(charts_dir, "04_technique_heatmap.png"))
     df_tech = export_tables(stats, outdir)
     write_summary_md(stats, df_tech, outdir)
+    clean_results, clean_stats, clean_df_tech = export_without_failed_tests_tables(
+        results, stats, outdir
+    )
+    write_without_failed_tests_summary(stats, clean_stats, clean_df_tech, outdir)
     return results, stats
 
 

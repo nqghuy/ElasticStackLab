@@ -1,0 +1,2 @@
+{"technique": "T1036", "test_number": 1, "alerts": [], "has_rule": true, "start_time": null, "end_time": null, "status": "failed"}
+{"technique": "T1036", "test_number": 2, "alerts": [], "has_rule": true, "start_time": null, "end_time": null, "status": "failed"}

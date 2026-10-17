@@ -13,22 +13,10 @@
       "error_message": "set-servicebinarypath : The term 'set-servicebinarypath' is not recognized as the name of a cmdlet, function, script"
     },
     {
-      "technique": "T1556.002",
-      "test_number": 2,
+      "technique": "T1137.006",
+      "test_number": 5,
       "exit_code": null,
-      "error_message": ""
-    },
-    {
-      "technique": "T1505.005",
-      "test_number": 1,
-      "exit_code": null,
-      "error_message": "+ CategoryInfo          : ObjectNotFound: (Get-Acl:String) [], CommandNotFoundException"
-    },
-    {
-      "technique": "T1505.005",
-      "test_number": 2,
-      "exit_code": null,
-      "error_message": "+ CategoryInfo          : ObjectNotFound: (Get-Acl:String) [], CommandNotFoundException"
+      "error_message": "+ CategoryInfo          : NotSpecified: (:) [Copy-Item], IOException"
     },
     {
       "technique": "T1176",
@@ -47,6 +35,12 @@
       "test_number": 3,
       "exit_code": null,
       "error_message": "Found 0 atomic tests applicable to windows platform for Technique T1176"
+    },
+    {
+      "technique": "T1176",
+      "test_number": 4,
+      "exit_code": -1,
+      "error_message": "Process Timed out after 100 seconds, use '-TimeoutSeconds' to specify a different timeout"
     },
     {
       "technique": "T1137.005",
@@ -91,12 +85,6 @@
       "error_message": ""
     },
     {
-      "technique": "T1547.004",
-      "test_number": 3,
-      "exit_code": null,
-      "error_message": ""
-    },
-    {
       "technique": "T1546.008",
       "test_number": 3,
       "exit_code": 1,
@@ -106,7 +94,7 @@
       "technique": "T1136.002",
       "test_number": 3,
       "exit_code": null,
-      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+      "error_message": "New-Object : Exception calling \".ctor\" with \"1\" argument(s): \"The server could not be contacted.\""
     },
     {
       "technique": "T1137.001",
@@ -117,14 +105,8 @@
     {
       "technique": "T1546.003",
       "test_number": 1,
-      "exit_code": null,
-      "error_message": ""
-    },
-    {
-      "technique": "T1547.001",
-      "test_number": 6,
-      "exit_code": null,
-      "error_message": ""
+      "exit_code": -1,
+      "error_message": "Process Timed out after 100 seconds, use '-TimeoutSeconds' to specify a different timeout"
     },
     {
       "technique": "T1098",
@@ -141,44 +123,44 @@
     {
       "technique": "T1098",
       "test_number": 10,
-      "exit_code": null,
-      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+      "exit_code": 1355,
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1098",
       "test_number": 11,
-      "exit_code": null,
-      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+      "exit_code": 1355,
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1098",
       "test_number": 12,
-      "exit_code": null,
-      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+      "exit_code": 1355,
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1098",
       "test_number": 13,
-      "exit_code": null,
-      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+      "exit_code": 1355,
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1098",
       "test_number": 14,
-      "exit_code": null,
-      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+      "exit_code": 1355,
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1098",
       "test_number": 15,
-      "exit_code": null,
-      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+      "exit_code": 1355,
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1098",
       "test_number": 16,
-      "exit_code": null,
-      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+      "exit_code": 1355,
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1505.004",
@@ -196,7 +178,7 @@
       "technique": "T1546",
       "test_number": 4,
       "exit_code": null,
-      "error_message": "+ CategoryInfo          : ObjectNotFound: (ConvertTo-SecureString:String) [], CommandNotFoundException"
+      "error_message": "+ CategoryInfo          : NotSpecified: (:) [New-CimSession], CimException"
     },
     {
       "technique": "T1197",

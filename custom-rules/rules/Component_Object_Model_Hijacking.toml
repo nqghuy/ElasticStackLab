@@ -5,7 +5,7 @@ maturity = "production"
 updated_date = "2026/09/09"
 
 [rule]
-name = "Component Object Model Hijacking"
+name = "Component Object Model Hijacking v2"
 description = "Component Object Model Hijacking"
 risk_score = 21
 severity = "low"

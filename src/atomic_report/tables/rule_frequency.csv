@@ -1,86 +1,95 @@
 Rule name,Times triggered
-Modify user account,64
+Change PowerShell Policies to an Insecure Level,71
+Modify user account,42
 Local Scheduled Task Creation,36
-Windows Registry Modification to Impair Security Controls or Visibility,34
-Windows Explorer Functionality Restriction,34
-Bitsadmin Activity,30
-Suspicious Internet Settings Registry Modification,28
-Startup Persistence by a Suspicious Process,26
-Windows Policy Registry Modification,22
-Uncommon Registry Persistence Change v2,21
-Service Control Spawned via Script Interpreter,20
-Image File Execution Options Injection V2,20
-Persistence via Microsoft Office AddIns,17
-Persistent Scripts in the Startup Directory,16
-Uncommon Registry Persistence Change,14
+Startup Persistence by a Suspicious Process,33
+Service Control Spawned via Script Interpreter,32
+Windows Explorer Functionality Restriction,32
+Windows Policy Registry Modification,24
+Bitsadmin Activity,22
+Persistent Scripts in the Startup Directory,20
+Uncommon Registry Persistence Change v2,17
+Windows Registry Modification to Impair Security Controls or Visibility,14
+RDP Registry Modification,14
+Suspicious Copy From or To System Directory,14
+Persistence via Microsoft Office AddIns,13
+Registry key creation and/or modification events for SDB,13
+Suspicious Internet Settings Registry Modification,13
 Service Path Modification via sc.exe,12
-RedLine Registry Modification,12
+Potential Application Shimming via Sdbinst,12
 User Account Creation,12
 Local Scheduled Task Creation V2,11
-Suspicious Copy From or To System Directory,9
-Registry key creation and/or modification events for SDB,8
+RedLine Registry Modification,10
 Startup or Run Key Registry Modification,8
-RDP Registry Modification,8
-Abusing MyComputer Disk for Persistence,8
+Component Object Model Hijacking v2,8
+Image File Execution Options Injection V2,7
+Persistence with Custom DLL,7
+Persistence via Active Setup,6
 New Custom Shim Database Created,6
-Potential Application Shimming via Sdbinst,6
 Microsoft Windows Defender Tampering V2,6
 Darkgate Registry Modification,6
-Image File Execution Options Injection,6
-Potential LSA Authentication Package Abuse v2,5
+Abusing MyComputer Disk for Persistence,6
+Winlogon Userinit Key Persistence,6
+Leverage Virtual Channels to execute custom DLL,4
+Potential LSA Authentication Package Abuse v2,4
 Modification of WDigest Security Provider,4
-Local Account TokenFilter Policy Disabled,4
+Add SafeBoot Keys Via Reg Utility,4
 Enable RDP via Remote Registry,4
 Event Viewer Registry Modification,4
 Disable Secondary Authentication,4
 RDP Enabled via Registry,4
 Potential Persistence via Time Provider Modification,4
-Potential LSA Authentication Package Abuse,4
+Winlogon Helper DLL or Shell Modification,4
+Change Default File Association Via Assoc,4
 Component Object Model Hijacking,4
-Registry Persistence via AppInit DLL,4
 System Shells via Services,3
 Shortcut Modification,3
 Shortcut File Written or Modified on Startup Folder,3
-Modify Registry related to hermeticwiper,3
+Local Account TokenFilter Policy Disabled,3
 Web Shell,3
-Winlogon Helper DLL or Shell Modification,3
-Suspicious WMI Event Subscription Created,3
+Image File Execution Options Injection,3
 Suspicious Startup Shell Folder Modification,3
 Suspicious Image Load (taskschd.dll) from MS Office,2
 Persistence via PowerShell profile,2
 Suspicious Driver Install by pnputil.exe,2
-Persistence via Microsoft Outlook VBA,2
 Potential Port Monitor or Print Processor Registration Abuse,2
 Deprecated - Microsoft Exchange Transport Agent Install Script,2
 Installation of Custom Shim Databases,2
 Installation of Security Support Provider,2
 Suspicious Modify Registry of Current User Profile,2
-Add SafeBoot Keys Via Reg Utility,2
 Ursnif Malware Registry Key Creation,2
+Terminal Server Client Connection History Cleared,2
 RestrictedAdminMode Registry Value Tampering,2
 Mimic Ransomware-Enable Multiple User Sessions,2
-Potential Remote Desktop Shadowing Activity,2
+Modification of IE Registry Settings,2
 Potential Remote Desktop Shadowing Activity v2,2
 ShimCache Flush,2
 App Paths hijacking,2
 Windows Accessibility Features Registry Modification,2
 Registry Persistence via AppCert DLL,2
+Suspicious WMI Event Subscription Created,2
 Mofcomp Activity,2
-Change Default File Association Via Assoc,2
-Account Configured with Never-Expiring Password,2
+Add_persistance_via_Recycle_bin.toml,2
+Persistence via Windows Context Menu,2
+Custom debugger for WER,2
+Persistence using STARTUP-PATH in MS-WORD,2
 Powershell Execute COM Object,2
 Outlook Home Page Registry Modification,2
+Registry Persistence via AppInit DLL,2
 Office Test Registry Persistence,2
-Netsh Helper DLL,2
+Registry_to_load_Arbitrary_DLL_into_LSASS,2
 Account Discovery Command via SYSTEM Account,2
+Unusual Scheduled Task Update,1
 UEFI Persistence Via Wpbbin,1
-Unusual Persistence via Services Registry,1
+Execution of an Unsigned Service,1
 Unsigned DLL Loaded by Svchost,1
+Unusual Persistence via Services Registry,1
+Persistence via Microsoft Outlook VBA,1
 Code Executed Via Office Add-in XLL File,1
 Add Port Monitor persistence in Registry,1
-Change PowerShell Policies to an Insecure Level,1
-Modification of IE Registry Settings,1
-Add_persistance_via_Recycle_bin.toml,1
+Modify Registry related to hermeticwiper,1
 Potential Suspicious Activity Using SeCEdit,1
 Modification of Boot Verification Program registry,1
-Registry_to_load_Arbitrary_DLL_into_LSASS,1
+Account Configured with Never-Expiring Password,1
+Uncommon Registry Persistence Change,1
+Netsh Helper DLL,1
