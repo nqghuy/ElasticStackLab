@@ -86,57 +86,72 @@ def run_single_test(settings, test, rule_map) -> TestResult:
 
 def run_pipeline(settings, plan_path: str, output_arg, technique_filter: set[str] | None, fresh: bool = False) -> None:
     st = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
-    if fresh: 
-        logger.info('Fresh run requested, clearing previous results')
+    if fresh:
+        logger.info("Fresh run requested, clearing previous results")
         result_store.reset(technique_filter)
-    
-    # all_results = result_store.load_all()
+
     rule_map = elastic_client.get_rule_mapping(settings)
-
     tests = test_planner.pending_tests(plan_path, technique_filter)
-    
     if not tests:
-        logger.info('Nothing to run, all tests already have results')
-        return 
-    
-    logger.info(f'Runnging {len(tests)} tests')
-    
-    all_tests = []
-    for i, test in enumerate(tests, start=1):
-        logger.info("[%d/%d] %s test %d", i, len(tests), test.technique, test.test_number)
-        result = run_single_test(settings, test, rule_map)
-        all_tests.append(result)
-        time.sleep(2)
-    
-    time.sleep(5) 
+        logger.info("Nothing to run, all tests already have results")
+        return
 
-    # Trigger rules
+    logger.info("Running %d tests", len(tests))
+    timings = atomic_runner.run_atomic_tests(settings, tests)
+    all_tests = []
+
+    for test in tests:
+        key = (str(test.technique), int(test.test_number))
+        timing = timings.get(key, {})
+        start = timing.get("start_time")
+        end = timing.get("end_time")
+        status = timing.get("status", "failed")
+
+        logger.info("%s Test %s: start=%s end=%s status=%s",
+                    test.technique, test.test_number, start, end, status)
+
+        has_rule = bool(rule_map.by_technique.get(test.technique, []))
+        result_status = "failed" if status == "failed" or not start or not end else (
+            "no_rule" if not has_rule else "undetected"
+        )
+
+        all_tests.append(TestResult(
+            technique=test.technique,
+            test_number=test.test_number,
+            has_rule=has_rule,
+            start_time=start,
+            end_time=end,
+            alerts=[],
+            status=result_status,
+        ))
+
+    time.sleep(5)
+
     if technique_filter is not None:
         trigger_rule_ids = list({
             rule_id
-            for t in technique_filter
-            for rule_id in rule_map.by_technique.get(t, [])
+            for technique in technique_filter
+            for rule_id in rule_map.by_technique.get(technique, [])
         })
-    else: 
+    else:
         trigger_rule_ids = elastic_client.get_all_rules(settings)
-    
+
     trigger_time = datetime.now(timezone.utc)
     start_time = (trigger_time - timedelta(minutes=1)).strftime("%Y-%m-%dT%H:%M:%S.000Z")
     end_time = trigger_time.strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
     elastic_client.trigger_rules(settings, trigger_rule_ids, start_time, end_time)
-
-    # Waiting all rules run successfully
     remaining = elastic_client.wait_rules_completed(settings, trigger_rule_ids, end_time)
     if remaining:
-        logger.warning('Some rules did not finish in time: %s', remaining)
+        logger.warning("Some rules did not finish in time: %s", remaining)
 
-    # Get results
     all_alerts = elastic_client._fetch_all_alerts_since(settings, st)
     all_tests_results = elastic_client.extract_matching_alert(settings, all_alerts, all_tests)
 
-    # Store result into files
+    logger.info("Tests to match: %d", len(all_tests))
+    logger.info("Results to save: %d", len(all_tests_results))
     result_store.replace_all(all_tests_results)
+    logger.info("Results saved to %s", result_store.RESULTS_FILE)
 
 
 def parse_args() -> argparse.Namespace:

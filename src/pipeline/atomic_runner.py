@@ -16,7 +16,7 @@ SSH_TARGET = "huy@192.168.122.115"
 STDOUT_LOG = "logs/atomic_stdout.log"
 
 # Timeout tối đa cho mỗi lệnh SSH
-TIMEOUT = 130
+TIMEOUT = 9000
 
 # Timeout bên trong Atomic Test, chừa thời gian cho cleanup
 ATOMIC_TIMEOUT = 100
@@ -37,26 +37,58 @@ def _append_log(text: str) -> None:
         f.write("\n")
 
 
-def _build_remote_script(test: AtomicTest) -> str:
-    technique = str(test.technique)
-    test_number = int(test.test_number)
-
-    if test_number < 1:
-        raise ValueError(f"Invalid test number: {test_number}")
-    if not TECHNIQUE_RE.fullmatch(technique):
-        raise ValueError(f"Invalid technique ID: {technique}")
-
+def _build_remote_script(tests: list[AtomicTest]) -> str:
+    test_entries = ",\n".join(
+        f"@{{ Technique = '{test.technique}'; Number = {int(test.test_number)} }}"
+        for test in tests
+    )
     return f'''
+Write-Output "__SCRIPT_STARTED__"
+$ErrorActionPreference = "Stop"
 Set-ExecutionPolicy Bypass -Scope Process -Force
-Import-Module powershell-yaml
-Import-Module "C:\\AtomicRedTeam\\invoke-atomicredteam\\Invoke-AtomicRedTeam.psd1"
+
+try {{
+    Import-Module powershell-yaml -ErrorAction Stop
+    Write-Output "__YAML_IMPORTED__"
+    Import-Module "C:\\AtomicRedTeam\\invoke-atomicredteam\\Invoke-AtomicRedTeam.psd1" -ErrorAction Stop
+    Write-Output "__ATOMIC_MODULE_IMPORTED__"
+}} catch {{
+    [Console]::Error.WriteLine($_.Exception.ToString())
+    exit 1
+}}
+
 $Global:PathToAtomicsFolder = "C:\\AtomicRedTeam\\atomics"
-Write-Host "START {technique} Test {test_number}"
-Invoke-AtomicTest {technique} -TestNumbers {test_number} -TimeoutSeconds {ATOMIC_TIMEOUT}
-$atomicExit = $LASTEXITCODE
-Write-Host "END {technique} Test {test_number}"
-Invoke-AtomicTest {technique} -TestNumbers {test_number} -CleanUp
-exit $atomicExit
+$tests = @(
+{test_entries}
+)
+
+Write-Output "__TEST_COUNT__|$($tests.Count)"
+
+foreach ($test in $tests) {{
+    $technique = $test.Technique
+    $number = $test.Number
+    $start = [DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+    Write-Output "__ATOMIC_START__|$technique|$number|$start"
+    $status = "completed"
+
+    try {{
+        Invoke-AtomicTest $technique -TestNumbers $number -TimeoutSeconds {ATOMIC_TIMEOUT} -ErrorAction Stop
+    }} catch {{
+        $status = "failed"
+        [Console]::Error.WriteLine("__ATOMIC_ERROR__|$technique|$number|$($_.Exception.Message)")
+    }}
+
+    $end = [DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")
+    Write-Output "__ATOMIC_END__|$technique|$number|$end|$status"
+
+    try {{
+        Invoke-AtomicTest $technique -TestNumbers $number -CleanUp -ErrorAction Stop
+    }} catch {{
+        [Console]::Error.WriteLine("__ATOMIC_CLEANUP_ERROR__|$technique|$number|$($_.Exception.Message)")
+    }}
+
+}}
+
 '''
 
 
@@ -83,15 +115,40 @@ def _build_ssh_command() -> list[str]:
     ]
 
 
-def _run_remote_script(script: str, timeout: int) -> subprocess.CompletedProcess[str]:
+
+def _run_remote_script(script: str, timeout: int):
     cmd = _build_ssh_command()
-    return subprocess.run(
+    output = []
+
+    proc = subprocess.Popen(
         cmd,
-        input=script,
-        capture_output=True,
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
         text=True,
-        timeout=timeout,
+        bufsize=1,
     )
+
+    try:
+        proc.stdin.write(script)
+        proc.stdin.close()
+
+        for line in proc.stdout:
+            print(line, end="", flush=True)
+            output.append(line)
+
+        returncode = proc.wait(timeout=timeout)
+        return subprocess.CompletedProcess(
+            cmd, returncode, stdout="".join(output), stderr=""
+        )
+    except subprocess.TimeoutExpired:
+        proc.kill()
+        proc.wait()
+        raise
+    finally:
+        if proc.stdout:
+            proc.stdout.close()
+
 
 
 def _run_cleanup(test: AtomicTest) -> None:
@@ -110,77 +167,44 @@ def _run_cleanup(test: AtomicTest) -> None:
         )
 
 
-def run_atomic_tests(
-    settings: Settings,
-    tests: list[AtomicTest],
-) -> tuple[str, str]:
-
+def run_atomic_tests(settings: Settings, tests: list[AtomicTest]) -> dict[tuple[str, int], dict[str, str]]:
     if not tests:
         raise ValueError("No Atomic Tests provided")
 
-    start = _now_iso()
-    logger.info("START TIME: %s", start)
+    script = _build_remote_script(tests)
+
+    result = _run_remote_script(script, timeout=TIMEOUT)
+
+    _append_log(
+        f"=== ATOMIC BATCH ===\nSTDOUT:\n{result.stdout}\n"
+        f"STDERR:\n{result.stderr}\nEXIT CODE: {result.returncode}"
+    )
+
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"Atomic batch failed or script did not start. See {STDOUT_LOG}"
+        )
+
+    timings: dict[tuple[str, int], dict[str, str]] = {}
+    for line in result.stdout.splitlines():
+        parts = line.strip().split("|")
+        if parts[0] == "__ATOMIC_START__" and len(parts) == 4:
+            key = (parts[1], int(parts[2]))
+            timings.setdefault(key, {})["start_time"] = parts[3]
+        elif parts[0] == "__ATOMIC_END__" and len(parts) == 5:
+            key = (parts[1], int(parts[2]))
+            timings.setdefault(key, {}).update({
+                "end_time": parts[3],
+                "status": parts[4],
+            })
+        elif parts[0] == "__ATOMIC_ERROR__":
+            logger.error("Atomic test error: %s", line)
+        elif parts[0] == "__ATOMIC_CLEANUP_ERROR__":
+            logger.warning("Atomic cleanup error: %s", line)
 
     for test in tests:
-        technique = test.technique
-        test_number = test.test_number
+        key = (str(test.technique), int(test.test_number))
+        if key not in timings or "start_time" not in timings[key] or "end_time" not in timings[key]:
+            logger.error("Missing time markers for %s Test %s", *key)
 
-        script = _build_remote_script(test)
-
-        logger.info(
-            "Running Atomic Test: %s Test %s",
-            technique,
-            test_number,
-        )
-
-        try:
-            result = _run_remote_script(script, timeout=TIMEOUT)
-
-        except subprocess.TimeoutExpired as e:
-            stdout = e.stdout or ""
-            stderr = e.stderr or ""
-
-            if isinstance(stdout, bytes):
-                stdout = stdout.decode(errors="replace")
-            if isinstance(stderr, bytes):
-                stderr = stderr.decode(errors="replace")
-
-            _append_log(
-                f"[TIMEOUT] {technique} Test {test_number}\n"
-                f"STDOUT:\n{stdout}\n"
-                f"STDERR:\n{stderr}\n"
-            )
-
-            logger.error(
-                "Timeout running %s Test %s",
-                technique,
-                test_number,
-            )
-
-            # Thử dọn dẹp dù test đã timeout
-            _run_cleanup(test)
-            raise
-
-        _append_log(
-            f"=== {technique} Test {test_number} ===\n"
-            f"STDOUT:\n{result.stdout}\n"
-            f"STDERR:\n{result.stderr}\n"
-            f"EXIT CODE: {result.returncode}\n"
-        )
-
-        if result.returncode != 0:
-            logger.error(
-                "SSH/PowerShell failed for %s Test %s, exit code %d",
-                technique,
-                test_number,
-                result.returncode,
-            )
-            raise RuntimeError(
-                f"{technique} Test {test_number} failed. "
-                f"See {STDOUT_LOG} for details."
-            )
-
-    end = _now_iso()
-    logger.info("END TIME: %s", end)
-
-    return start, end
+    return timings
