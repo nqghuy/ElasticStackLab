@@ -25,15 +25,12 @@ Status meaning:
   detected   - atomic test ran and at least 1 alert matched
   undetected - atomic test ran but no alert matched
 
-IMPORTANT - failure detection also reads logs/atomic_stdout.log:
-run_atomic.ps1 uses -ErrorAction Continue internally, so an individual
-atomic test can fail (print "Exit code: <nonzero>") while the overall
-pwsh process still exits 0. That means results.jsonl's "status" field
-alone is NOT reliable for detecting these failures - the log file must
-be scanned for the real per-test exit code. A test is treated as failed
-(and excluded from detection-rate stats) if EITHER its jsonl status is
-"failed" OR the log shows a non-zero exit code for that
-(technique, test_number).
+IMPORTANT - failure detection also reads logs/atomic_stdout.log and
+logs/pipeline.log.  An Atomic test can fail while the overall pwsh process
+still exits 0, so results.jsonl's "status" field alone is not sufficient.
+A test is treated as failed (and excluded from detection-rate statistics)
+if its JSONL status is "failed", its Atomic log block reports an error or a
+non-zero exit code, or the pipeline log reports execution status "failed".
 
 Technique-level classification uses 4 distinct categories:
   Fully detected      - every (non-failed) test for this technique had alerts
@@ -64,7 +61,8 @@ Output (default ./atomic_report/):
 
 Usage:
   python3 generate_report.py --results output/results.jsonl \
-      --atomic-log logs/atomic_stdout.log --outdir atomic_report
+      --atomic-log logs/atomic_stdout.log --pipeline-log logs/pipeline.log \
+      --outdir atomic_report
 """
 
 import argparse
@@ -108,13 +106,31 @@ def load_results(path):
     return results
 
 
-# run_atomic.ps1 prints these markers around each test:
-#   START <Technique> Test <TestNumber>
+# Current atomic_runner output wraps every execution in these markers:
+#   __ATOMIC_START__|<Technique>|<TestNumber>|<UTC timestamp>
 #   ... Invoke-AtomicTest output, including lines like "Exit code: 1" ...
-#   END <Technique> Test <TestNumber>
-_TEST_START_RE = re.compile(r"^START\s+(?P<technique>\S+)\s+Test\s+(?P<test_number>\d+)\s*$")
-_TEST_END_RE = re.compile(r"^END\s+(?P<technique>\S+)\s+Test\s+(?P<test_number>\d+)\s*$")
+#   __ATOMIC_END__|<Technique>|<TestNumber>|<UTC timestamp>|<status>
+# Keep the older START/END patterns as a compatibility fallback for existing
+# archived runs.
+_TEST_START_RE = re.compile(
+    r"^(?:__ATOMIC_START__\|(?P<new_technique>[^|\s]+)\|"
+    r"(?P<new_test_number>\d+)\|[^|\s]+|"
+    r"START\s+(?P<old_technique>\S+)\s+Test\s+(?P<old_test_number>\d+))\s*$"
+)
+_TEST_END_RE = re.compile(
+    r"^(?:__ATOMIC_END__\|(?P<new_technique>[^|\s]+)\|"
+    r"(?P<new_test_number>\d+)\|[^|\s]+\|(?P<new_status>[^|\s]+)|"
+    r"END\s+(?P<old_technique>\S+)\s+Test\s+(?P<old_test_number>\d+))\s*$"
+)
+_ATOMIC_ERROR_RE = re.compile(
+    r"^__ATOMIC_ERROR__\|(?P<technique>[^|\s]+)\|(?P<test_number>\d+)\|(?P<message>.*)$"
+)
 _EXIT_CODE_RE = re.compile(r"^Exit code:\s*(?P<code>-?\d+)\s*$")
+_PIPELINE_TEST_STATUS_RE = re.compile(
+    r"\bpipeline:\s+(?P<technique>T\d{4}(?:\.\d{3})?)\s+Test\s+"
+    r"(?P<test_number>\d+):\s+start=(?P<start>\S+)\s+end=(?P<end>\S+)\s+"
+    r"status=(?P<status>\S+)\s*$"
+)
 # Invoke-AtomicTest is run with -ErrorAction Continue.  Consequently a
 # non-terminating PowerShell error can be written to stdout while the wrapper
 # still prints "Exit code: 0".  CategoryInfo/FullyQualifiedErrorId are the
@@ -143,10 +159,11 @@ def parse_atomic_log(path):
     run_atomic.ps1 uses -ErrorAction Continue, so the overall pwsh
     process can exit 0 even when one specific atomic test's command
     failed internally - results.jsonl's "status" field won't catch that.
-    This scans for "Exit code: N" lines inside each test's START/END
-    block and records any non-zero ones.  It also records structured
-    PowerShell error records, because -ErrorAction Continue can leave an
-    Atomic test with an exit code of zero even though its command failed.
+    This scans for "Exit code: N" lines inside each test's marker block and
+    records any non-zero ones.  It also records __ATOMIC_ERROR__ markers and
+    structured PowerShell error records, because -ErrorAction Continue can
+    leave an Atomic test with an exit code of zero even though its command
+    failed.
 
     Returns {(technique, test_number): {"exit_code": int | None,
     "error_message": str}} for every test with a non-zero exit code or a
@@ -169,16 +186,35 @@ def parse_atomic_log(path):
 
             start_match = _TEST_START_RE.match(line)
             if start_match:
-                current = (start_match.group("technique"), int(start_match.group("test_number")))
+                technique = start_match.group("new_technique") or start_match.group("old_technique")
+                test_number = start_match.group("new_test_number") or start_match.group("old_test_number")
+                current = (technique, int(test_number))
                 last_nonempty = ""
                 last_error_message = ""
                 continue
 
             end_match = _TEST_END_RE.match(line)
             if end_match:
+                if current is not None and (end_match.group("new_status") or "").lower() == "failed":
+                    failures.setdefault(current, {
+                        "exit_code": None,
+                        "error_message": last_error_message or "Atomic execution reported failed",
+                    })
                 current = None
                 last_nonempty = ""
                 last_error_message = ""
+                continue
+
+            atomic_error_match = _ATOMIC_ERROR_RE.match(line)
+            if atomic_error_match:
+                key = (
+                    atomic_error_match.group("technique"),
+                    int(atomic_error_match.group("test_number")),
+                )
+                failures.setdefault(key, {
+                    "exit_code": None,
+                    "error_message": atomic_error_match.group("message") or "Atomic execution reported an error",
+                })
                 continue
 
             if current is not None and (
@@ -215,6 +251,35 @@ def parse_atomic_log(path):
                 last_nonempty = line
 
     return failures
+
+
+def parse_pipeline_log(path):
+    """Return tests whose per-test execution status is failed in pipeline.log."""
+    failures = {}
+    if not os.path.exists(path):
+        print(f"[generate_report] Pipeline log not found, skipping status check: {path}")
+        return failures
+
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for raw_line in f:
+            match = _PIPELINE_TEST_STATUS_RE.search(raw_line.strip())
+            if not match or match.group("status").lower() != "failed":
+                continue
+            key = (match.group("technique"), int(match.group("test_number")))
+            failures[key] = {
+                "exit_code": None,
+                "error_message": "Pipeline reported execution status failed",
+            }
+    return failures
+
+
+def merge_failures(*failure_sets):
+    """Merge failure sources, keeping Atomic-log detail when both mention a test."""
+    merged = {}
+    for failures in failure_sets:
+        for key, info in failures.items():
+            merged.setdefault(key, info)
+    return merged
 
 
 def compute_stats(results, log_failures):
@@ -1138,11 +1203,15 @@ def write_detection_source_charts(rows, results, stats, outdir):
     )
 
 
-def generate_one_report(results_path, atomic_log_path, outdir, top_rules=15):
+def generate_one_report(results_path, atomic_log_path, pipeline_log_path, outdir, top_rules=15):
     charts_dir = os.path.join(outdir, "charts")
     os.makedirs(charts_dir, exist_ok=True)
     results = load_results(results_path)
-    stats = compute_stats(results, parse_atomic_log(atomic_log_path))
+    log_failures = merge_failures(
+        parse_atomic_log(atomic_log_path),
+        parse_pipeline_log(pipeline_log_path),
+    )
+    stats = compute_stats(results, log_failures)
     chart_overview_donut(stats, os.path.join(charts_dir, "01_overview_donut.png"))
     chart_technique_status(stats, os.path.join(charts_dir, "02_technique_status_bar.png"))
     chart_top_rules(stats, os.path.join(charts_dir, "03_top_rules_bar.png"), top_rules)
@@ -1164,7 +1233,9 @@ def main():
     parser.add_argument("--results", default="output/results.jsonl",
                          help="Path to results.jsonl produced by the pipeline")
     parser.add_argument("--atomic-log", default="logs/atomic_stdout.log",
-                         help="Path to atomic_stdout.log, scanned for real per-test exit codes")
+                        help="Path to atomic_stdout.log, scanned for per-test execution failures")
+    parser.add_argument("--pipeline-log", default="logs/pipeline.log",
+                        help="Path to pipeline.log, scanned for per-test failed statuses")
     parser.add_argument("--outdir", default="atomic_report",
                          help="Output directory for the report")
     parser.add_argument("--top-rules", type=int, default=15,
@@ -1173,9 +1244,11 @@ def main():
                         help="Generate baseline and custom-rule reports plus a per-test impact table")
     parser.add_argument("--baseline-results", default="output_original/results.jsonl")
     parser.add_argument("--baseline-atomic-log", default="log_original/atomic_stdout.log")
+    parser.add_argument("--baseline-pipeline-log", default="log_original/pipeline.log")
     parser.add_argument("--baseline-outdir", default="atomic_report_original")
     parser.add_argument("--custom-results", default="output_backup/results.jsonl")
     parser.add_argument("--custom-atomic-log", default="logs_backup/atomic_stdout.log")
+    parser.add_argument("--custom-pipeline-log", default="logs_backup/pipeline.log")
     parser.add_argument("--custom-outdir", default="atomic_report_custom")
     parser.add_argument("--custom-rules-dir",
                         default="/home/nqghuy/KLTN/detection-rules/custom-rules/rules")
@@ -1183,10 +1256,12 @@ def main():
 
     if args.compare_custom:
         baseline_results, _ = generate_one_report(
-            args.baseline_results, args.baseline_atomic_log, args.baseline_outdir, args.top_rules
+            args.baseline_results, args.baseline_atomic_log, args.baseline_pipeline_log,
+            args.baseline_outdir, args.top_rules
         )
         custom_results, custom_stats = generate_one_report(
-            args.custom_results, args.custom_atomic_log, args.custom_outdir, args.top_rules
+            args.custom_results, args.custom_atomic_log, args.custom_pipeline_log,
+            args.custom_outdir, args.top_rules
         )
         custom_rule_names = load_custom_rule_names(args.custom_rules_dir)
         comparison = build_custom_comparison(
@@ -1197,7 +1272,9 @@ def main():
         print(f"Custom-rule report generated at: {os.path.abspath(args.custom_outdir)}")
         return
 
-    results, stats = generate_one_report(args.results, args.atomic_log, args.outdir, args.top_rules)
+    results, stats = generate_one_report(
+        args.results, args.atomic_log, args.pipeline_log, args.outdir, args.top_rules
+    )
     custom_rule_names = load_custom_rule_names(args.custom_rules_dir)
     source_rows = build_detection_source_rows(results, custom_rule_names, stats["failed_keys"])
     write_detection_source_report(source_rows, args.outdir)

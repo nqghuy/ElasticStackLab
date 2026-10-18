@@ -1,1 +1,1 @@
-{"technique": "T1053.002", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-10-13T17:53:41.000Z", "end_time": "2026-10-13T17:53:51.000Z", "status": "undetected"}
+{"technique": "T1053.002", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-10-17T17:12:07.380Z", "end_time": "2026-10-17T17:12:09.735Z", "status": "undetected"}
