@@ -1,0 +1,85 @@
+[metadata]
+creation_date = "2026/10/25"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/10/25"
+
+[rule]
+name = "Suspicious Service was Installed in the System v2"
+description = "Suspicious Service was Installed in the System v2"
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "52c645e9-01be-4b44-a775-aa9ac066fc3a"
+
+author = ["Huy"]
+tags = ["OS: Windows"]
+
+false_positives = []
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "process.args", type = "keyword", ecs = true },
+    { name = "process.parent.name", type = "keyword", ecs = true },
+]
+
+index = ["logs-system.security*", "logs-system.system*", "logs-windows.forwarded*", "winlogbeat-*"]
+
+
+related_integrations = []
+type = "eql"
+language = "eql"
+
+query = '''
+any where host.os.type == "windows" and 
+event.code: ("4697", "7045") and
+not winlog.event_data.ImagePath: (
+    "*c:\\Windows\\System32\\svchost.exe -k*",
+    "*C:\\Program Files\\Elastic*",
+    "C:\\Program Files (x86)\\Google\\GoogleUpdater*",
+    "*System32\\Drivers\\*",
+    "C:\\Windows\\system32\\dllhost.exe*"
+
+) and 
+not winlog.event_data.ServiceFileName: (
+    "%SystemRoot%\\PSEXESVC.exe", "%SystemRoot%\\\\RemComSvc.exe",
+    "%SystemRoot%\\pbpsdeploy.exe", "%SystemRoot%\\system32\\RemComSvc.exe",
+    "\"C:\\Program Files\\Common Files\\Zoom\\Support\\CptService.exe*",
+    "\"C:\\Program Files\\Common Files\\ZoomVDIPluginManagement\\Support\\CptService.exe*",
+    "\"C:\\Program Files (x86)\\CheckPoint\\Endpoint Security\\EFR\\host\\cpsechost.exe\" service"
+    ) and 
+not winlog.event_data.ServiceName: (
+    "KsID"
+)
+'''
+
+filters = []
+actions = []
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1543"
+name = "Create or Modify System Process"
+reference = "https://attack.mitre.org/techniques/T1543/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1543.003"
+name = "Windows Service"
+reference = "https://attack.mitre.org/techniques/T1543/003/"
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"

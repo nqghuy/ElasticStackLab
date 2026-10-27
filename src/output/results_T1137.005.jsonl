@@ -1,5 +1,5 @@
-{"technique": "T1137.005", "test_number": 1, "alerts": [], "has_rule": false, "start_time": "2026-10-17T16:30:37.512Z", "end_time": "2026-10-17T16:30:41.482Z", "status": "no_rule"}
-{"technique": "T1137.005", "test_number": 2, "alerts": [], "has_rule": false, "start_time": "2026-10-17T16:30:46.416Z", "end_time": "2026-10-17T16:30:51.029Z", "status": "no_rule"}
-{"technique": "T1137.005", "test_number": 3, "alerts": [], "has_rule": false, "start_time": "2026-10-17T16:30:54.010Z", "end_time": "2026-10-17T16:30:57.602Z", "status": "no_rule"}
-{"technique": "T1137.005", "test_number": 4, "alerts": [], "has_rule": false, "start_time": "2026-10-17T16:31:01.647Z", "end_time": "2026-10-17T16:31:04.983Z", "status": "no_rule"}
-{"technique": "T1137.005", "test_number": 5, "alerts": [], "has_rule": false, "start_time": "2026-10-17T16:31:07.904Z", "end_time": "2026-10-17T16:31:11.925Z", "status": "no_rule"}
+{"technique": "T1137.005", "test_number": 1, "alerts": [], "has_rule": false, "start_time": "2026-10-27T00:30:10.628Z", "end_time": "2026-10-27T00:30:17.718Z", "status": "no_rule"}
+{"technique": "T1137.005", "test_number": 2, "alerts": [], "has_rule": false, "start_time": "2026-10-27T00:30:23.539Z", "end_time": "2026-10-27T00:30:30.768Z", "status": "no_rule"}
+{"technique": "T1137.005", "test_number": 3, "alerts": [], "has_rule": false, "start_time": "2026-10-27T00:30:37.892Z", "end_time": "2026-10-27T00:30:42.464Z", "status": "no_rule"}
+{"technique": "T1137.005", "test_number": 4, "alerts": [], "has_rule": false, "start_time": "2026-10-27T00:30:48.072Z", "end_time": "2026-10-27T00:30:51.634Z", "status": "no_rule"}
+{"technique": "T1137.005", "test_number": 5, "alerts": [], "has_rule": false, "start_time": "2026-10-27T00:30:55.996Z", "end_time": "2026-10-27T00:31:00.207Z", "status": "no_rule"}

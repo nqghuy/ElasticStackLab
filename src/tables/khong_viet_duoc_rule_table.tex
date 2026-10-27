@@ -1,0 +1,31 @@
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.12}
+\setlength{\LTpre}{0pt}
+\setlength{\LTpost}{0pt}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{5.5cm}|>{\raggedright\arraybackslash}p{5.8cm}|}
+\caption{Các Atomic Test chưa thể viết Detection Rule}\label{tab:khong-viet-duoc-rule}\\
+\hline
+\textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+T1112 Modify Registry & 57: Snake Malware Registry Blob & No event registry for its registry -> hard to detect abnormal data \\
+\hline
+T1505.005 Server Software Component: Terminal Services DLL & 1: Simulate Patching termsrv.dll &  \\
+\hline
+T1546.018 Event Triggered Execution: Python Startup Hooks & 1: Python Startup Hook - atomic\_hook.pth (Windows) & có thể viết log tương tự linux -> theo dõi thêm \\*
+\cline{2-2}
+ & 2: Python Startup Hook - usercustomize.py (Windows) &  \\
+\hline
+T1547.014 Active Setup & 3: HKLM - re-execute 'Internet Explorer Core Fonts' StubPath payload by decreasing version number &  \\
+\hline
+\end{longtable}
+\endgroup

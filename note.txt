@@ -1,3 +1,56 @@
 T1027.004 test 2: không có log tạo file cmdline
 T1027.006 test 1: không có log tạo file, không có log kết nối, che giấu hoàn hảo, viết rule sau
 T1027.018 test 1: không có log tạo file do nằm ở thự mục temp 
+
+T1112 test 7: cần viết lại rule do có event id 13
+T1112 test 69, quên viết rule  
+T1112 77,82: viết thêm rule 
+T1112 90: sửa rule
+query = '''
+any where host.os.type == "windows" and  
+(
+  process.name: "reg.exe" and  process.parent.name : (
+    "powershell.exe",
+    "pwsh.exe",
+    "cmd.exe",
+    "wscript.exe",
+    "cscript.exe",
+    "mshta.exe",
+    "rundll32.exe",
+    "regsvr32.exe",
+    "wmic.exe"
+  ) or 
+  process.command_line: ("*New-ItemProperty*", "*New-Item*", "*Set-ItemProperty*")
+) and 
+process.command_line: "*SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths*.exe*"
+
+FROM logs-windows.sysmon_operational-*
+| WHERE host.os.type == "windows"
+    AND event.code == "1"
+    AND process.name == "reg.exe"
+    AND TO_LOWER(process.command_line) LIKE "*app paths*"
+    AND TO_LOWER(process.command_line) LIKE "*/d*"
+| GROK process.command_line """(?i).*App Paths\\+%{DATA:app_name}" /t REG_SZ /d %{NOTSPACE:target_path} /f.*"""
+| EVAL app_name_norm = TO_LOWER(app_name),
+       target_name = TO_LOWER(REPLACE(target_path, """^.*\\""", ""))
+| WHERE app_name_norm != target_name
+| KEEP @timestamp, host.name, user.name,
+       process.parent.name, process.command_line,
+       app_name, target_path, target_name
+
+T1078.001,1,Detected with custom rules,Modify user account, No rule (only Creation of a Hidden Local User Account and User Account Creation)
+T1078.001,2,Detected with custom rules,Modify user account, No rule (only Creation of a Hidden Local User Account and User Account Creation)
+T1078.003,1,Detected with custom rules,Modify user account, No rule (only Creation of a H..)
+và 
+T1136.001 -> viêt lại rule sử dụng event id 4720 và 4722 -> done
+
+T1505.005: test 1, 2 : viết rule thay event id 13 
+
+T1543.003 test 1 đang bắt sai (fail và success)
+-> cấu hính log cài service 4697, 7045 -> done 
+
+T1546.011,3 sửa và thêm lại Custom và InstalledSDB
+
+T1546.015 sửa 
+"query": "host.os.type: \"windows\" and powershell.file.script_block_text : \"*::GetTypeFromCLSID(*\" and powershell.file.script_block_text : \"*.ShellExecute(*\"",
+-> done, rule đa giống splunk

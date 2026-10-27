@@ -14,12 +14,6 @@
     },
     {
       "technique": "T1556.002",
-      "test_number": 1,
-      "exit_code": -1,
-      "error_message": "Process Timed out after 100 seconds, use '-TimeoutSeconds' to specify a different timeout"
-    },
-    {
-      "technique": "T1556.002",
       "test_number": 2,
       "exit_code": -1,
       "error_message": "Process Timed out after 100 seconds, use '-TimeoutSeconds' to specify a different timeout"
@@ -46,7 +40,7 @@
       "technique": "T1176",
       "test_number": 4,
       "exit_code": -1,
-      "error_message": "Exception calling \"ExtractToFile\" with \"3\" argument(s): \"There is not enough space on the disk."
+      "error_message": "Process Timed out after 100 seconds, use '-TimeoutSeconds' to specify a different timeout"
     },
     {
       "technique": "T1137.005",
@@ -103,12 +97,6 @@
       "error_message": "+ CategoryInfo          : InvalidOperation: (:) [], RuntimeException"
     },
     {
-      "technique": "T1546.003",
-      "test_number": 1,
-      "exit_code": null,
-      "error_message": "+ CategoryInfo          : ResourceExists: (__EventFilter:CimInstance) [New-CimInstance], CimException"
-    },
-    {
       "technique": "T1098",
       "test_number": 2,
       "exit_code": null,
@@ -124,43 +112,43 @@
       "technique": "T1098",
       "test_number": 10,
       "exit_code": 1355,
-      "error_message": "Unable to find a default server with Active Directory Web Services running."
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1098",
       "test_number": 11,
       "exit_code": 1355,
-      "error_message": "Unable to find a default server with Active Directory Web Services running."
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1098",
       "test_number": 12,
       "exit_code": 1355,
-      "error_message": "Unable to find a default server with Active Directory Web Services running."
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1098",
       "test_number": 13,
       "exit_code": 1355,
-      "error_message": "Unable to find a default server with Active Directory Web Services running."
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1098",
       "test_number": 14,
       "exit_code": 1355,
-      "error_message": "Unable to find a default server with Active Directory Web Services running."
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1098",
       "test_number": 15,
       "exit_code": 1355,
-      "error_message": "Unable to find a default server with Active Directory Web Services running."
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1098",
       "test_number": 16,
       "exit_code": 1355,
-      "error_message": "Unable to find a default server with Active Directory Web Services running."
+      "error_message": "New-Object : Exception calling \".ctor\" with \"2\" argument(s): \"Cannot process argument because the value of argument"
     },
     {
       "technique": "T1505.004",

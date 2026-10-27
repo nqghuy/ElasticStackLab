@@ -1,12 +1,11 @@
 Technique,Test,Exit code,Error
 T1053.005,10,1,"The filename, directory name, or volume label syntax is incorrect."
 T1543.003,6,,"set-servicebinarypath : The term 'set-servicebinarypath' is not recognized as the name of a cmdlet, function, script"
-T1556.002,1,-1,"Process Timed out after 100 seconds, use '-TimeoutSeconds' to specify a different timeout"
 T1556.002,2,-1,"Process Timed out after 100 seconds, use '-TimeoutSeconds' to specify a different timeout"
 T1176,1,,Found 0 atomic tests applicable to windows platform for Technique T1176
 T1176,2,,Found 0 atomic tests applicable to windows platform for Technique T1176
 T1176,3,,Found 0 atomic tests applicable to windows platform for Technique T1176
-T1176,4,-1,"Exception calling ""ExtractToFile"" with ""3"" argument(s): ""There is not enough space on the disk."
+T1176,4,-1,"Process Timed out after 100 seconds, use '-TimeoutSeconds' to specify a different timeout"
 T1137.005,1,1,Outlook COM fails with 0x80080005 when run as Administrator.
 T1137.005,2,1,Outlook COM fails with 0x80080005 when run as Administrator.
 T1137.005,3,1,Outlook COM fails with 0x80080005 when run as Administrator.
@@ -16,16 +15,15 @@ T1547.005,2,,"+ CategoryInfo          : InvalidArgument: (Security Packages:Stri
 T1546.008,3,1,The system cannot find the file specified.
 T1136.002,3,,"New-Object : Exception calling "".ctor"" with ""1"" argument(s): ""The server could not be contacted."""
 T1137.001,1,,"+ CategoryInfo          : InvalidOperation: (:) [], RuntimeException"
-T1546.003,1,,"+ CategoryInfo          : ResourceExists: (__EventFilter:CimInstance) [New-CimInstance], CimException"
 T1098,2,,New-ADUser : Unable to find a default server with Active Directory Web Services running.
 T1098,9,,Synchronizing password failed. Verify that
-T1098,10,1355,Unable to find a default server with Active Directory Web Services running.
-T1098,11,1355,Unable to find a default server with Active Directory Web Services running.
-T1098,12,1355,Unable to find a default server with Active Directory Web Services running.
-T1098,13,1355,Unable to find a default server with Active Directory Web Services running.
-T1098,14,1355,Unable to find a default server with Active Directory Web Services running.
-T1098,15,1355,Unable to find a default server with Active Directory Web Services running.
-T1098,16,1355,Unable to find a default server with Active Directory Web Services running.
+T1098,10,1355,"New-Object : Exception calling "".ctor"" with ""2"" argument(s): ""Cannot process argument because the value of argument"
+T1098,11,1355,"New-Object : Exception calling "".ctor"" with ""2"" argument(s): ""Cannot process argument because the value of argument"
+T1098,12,1355,"New-Object : Exception calling "".ctor"" with ""2"" argument(s): ""Cannot process argument because the value of argument"
+T1098,13,1355,"New-Object : Exception calling "".ctor"" with ""2"" argument(s): ""Cannot process argument because the value of argument"
+T1098,14,1355,"New-Object : Exception calling "".ctor"" with ""2"" argument(s): ""Cannot process argument because the value of argument"
+T1098,15,1355,"New-Object : Exception calling "".ctor"" with ""2"" argument(s): ""Cannot process argument because the value of argument"
+T1098,16,1355,"New-Object : Exception calling "".ctor"" with ""2"" argument(s): ""Cannot process argument because the value of argument"
 T1505.004,1,1,operable program or batch file.
 T1505.004,2,,"New-WebGlobalModule : The term 'New-WebGlobalModule' is not recognized as the name of a cmdlet, function, script file,"
 T1546,4,,"+ CategoryInfo          : NotSpecified: (:) [New-CimSession], CimException"

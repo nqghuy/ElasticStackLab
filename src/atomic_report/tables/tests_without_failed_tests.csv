@@ -45,7 +45,7 @@ T1112,28,detected,Yes,2,Windows Explorer Functionality Restriction
 T1112,29,detected,Yes,2,Windows Explorer Functionality Restriction
 T1112,30,detected,Yes,2,Windows Explorer Functionality Restriction
 T1112,31,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,32,detected,Yes,2,Modify Registry related to hermeticwiper
+T1112,32,detected,Yes,1,Modify Registry related to hermeticwiper
 T1112,33,detected,Yes,2,Windows Registry Modification to Impair Security Controls or Visibility
 T1112,34,detected,Yes,1,Add SafeBoot Keys Via Reg Utility
 T1112,35,detected,Yes,1,Add SafeBoot Keys Via Reg Utility
@@ -55,6 +55,7 @@ T1112,38,detected,Yes,4,Microsoft Windows Defender Tampering V2
 T1112,39,detected,Yes,2,Enable RDP via Remote Registry
 T1112,40,detected,Yes,1,Startup or Run Key Registry Modification
 T1112,41,detected,Yes,2,Ursnif Malware Registry Key Creation
+T1112,42,detected,Yes,2,Terminal Server Client Connection History Cleared
 T1112,44,detected,Yes,2,Windows Explorer Functionality Restriction
 T1112,45,detected,Yes,2,RestrictedAdminMode Registry Value Tampering
 T1112,46,detected,Yes,2,Mimic Ransomware-Enable Multiple User Sessions
@@ -79,28 +80,28 @@ T1112,65,detected,Yes,2,Darkgate Registry Modification
 T1112,66,detected,Yes,2,Darkgate Registry Modification
 T1112,67,detected,Yes,2,Suspicious Internet Settings Registry Modification
 T1112,68,detected,Yes,1,Modification of IE Registry Settings
-T1112,69,undetected,Yes,0,
+T1112,69,detected,Yes,2,Darkgate Registry Modification
 T1112,70,detected,Yes,6,RDP Enabled via Registry; RDP Registry Modification
 T1112,71,detected,Yes,2,Windows Registry Modification to Impair Security Controls or Visibility
-T1112,72,detected,Yes,2,Potential Remote Desktop Shadowing Activity
+T1112,72,detected,Yes,4,Potential Remote Desktop Shadowing Activity; Potential Remote Desktop Shadowing Activity v2
 T1112,73,detected,Yes,2,ShimCache Flush
 T1112,74,detected,Yes,2,RDP Registry Modification
 T1112,75,detected,Yes,2,Windows Policy Registry Modification
-T1112,76,undetected,Yes,0,
-T1112,77,undetected,Yes,0,
-T1112,78,undetected,Yes,0,
-T1112,79,undetected,Yes,0,
-T1112,80,undetected,Yes,0,
-T1112,81,undetected,Yes,0,
-T1112,82,undetected,Yes,0,
-T1112,83,undetected,Yes,0,
-T1112,84,undetected,Yes,0,
+T1112,76,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
+T1112,77,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
+T1112,78,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
+T1112,79,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
+T1112,80,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
+T1112,81,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
+T1112,82,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
+T1112,83,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
+T1112,84,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
 T1112,85,undetected,Yes,0,
-T1112,86,detected,Yes,4,RDP Registry Modification; Uncommon Registry Persistence Change v2
+T1112,86,detected,Yes,5,RDP Registry Modification; Uncommon Registry Persistence Change; Uncommon Registry Persistence Change v2
 T1112,87,detected,Yes,2,Abusing MyComputer Disk for Persistence
 T1112,88,detected,Yes,2,Abusing MyComputer Disk for Persistence
 T1112,89,detected,Yes,2,Abusing MyComputer Disk for Persistence
-T1112,90,detected,Yes,2,App Paths hijacking
+T1112,90,detected,Yes,1,App Paths hijacking
 T1133,1,undetected,Yes,0,
 T1136.001,4,detected,Yes,8,Modify user account; User Account Creation
 T1136.001,5,detected,Yes,1,Modify user account
@@ -113,21 +114,21 @@ T1137.006,1,detected,Yes,1,Code Executed Via Office Add-in XLL File
 T1137.006,2,detected,Yes,4,Persistence via Microsoft Office AddIns
 T1137.006,3,detected,Yes,4,Persistence via Microsoft Office AddIns
 T1137.006,4,detected,Yes,4,Persistence via Microsoft Office AddIns
+T1137.006,5,detected,Yes,3,Persistence via Microsoft Office AddIns
 T1505.003,1,detected,Yes,3,Web Shell
-T1505.005,1,no_rule,No,0,
-T1505.005,2,no_rule,No,0,
+T1505.005,1,undetected,Yes,0,
+T1505.005,2,detected,Yes,1,Modify Terminal Services DLL Path
 T1542.001,1,detected,Yes,1,UEFI Persistence Via Wpbbin
-T1543.003,2,detected,Yes,4,Service Control Spawned via Script Interpreter
-T1543.003,3,undetected,Yes,0,
+T1543.003,2,detected,Yes,5,Service Control Spawned via Script Interpreter; Suspicious Service was Installed in the System v2
+T1543.003,3,detected,Yes,1,Suspicious Service was Installed in the System v2
 T1543.003,4,detected,Yes,7,Service Control Spawned via Script Interpreter; Unusual Persistence via Services Registry
-T1543.003,5,detected,Yes,4,Service Control Spawned via Script Interpreter
+T1543.003,5,detected,Yes,5,Service Control Spawned via Script Interpreter; Suspicious Service was Installed in the System v2
 T1546,1,detected,Yes,3,Persistence with Custom DLL
-T1546,2,detected,Yes,1,Uncommon Registry Persistence Change v2
-T1546,3,detected,Yes,1,Uncommon Registry Persistence Change v2
+T1546,2,detected,Yes,2,Uncommon Registry Persistence Change; Uncommon Registry Persistence Change v2
+T1546,3,detected,Yes,2,Uncommon Registry Persistence Change; Uncommon Registry Persistence Change v2
 T1546,5,detected,Yes,2,Custom debugger for WER
 T1546,6,detected,Yes,2,Persistence with Custom DLL
 T1546,7,detected,Yes,2,Persistence with Custom DLL
-T1546,8,detected,Yes,1,Suspicious Copy From or To System Directory
 T1546,9,detected,Yes,2,Persistence using STARTUP-PATH in MS-WORD
 T1546.001,1,detected,Yes,2,Change Default File Association Via Assoc
 T1546.002,1,detected,Yes,1,Suspicious Copy From or To System Directory
@@ -138,19 +139,20 @@ T1546.008,1,detected,Yes,7,Image File Execution Options Injection V2
 T1546.008,2,detected,Yes,1,Suspicious Copy From or To System Directory
 T1546.008,5,detected,Yes,1,Windows Accessibility Features Registry Modification
 T1546.008,6,detected,Yes,1,Suspicious Copy From or To System Directory
+T1546.008,7,detected,Yes,1,Suspicious Copy From or To System Directory
 T1546.008,8,detected,Yes,1,Suspicious Copy From or To System Directory
+T1546.008,9,detected,Yes,1,Suspicious Copy From or To System Directory
 T1546.008,10,detected,Yes,1,Suspicious Copy From or To System Directory
 T1546.009,1,detected,Yes,2,Registry Persistence via AppCert DLL
 T1546.010,1,detected,Yes,2,Registry Persistence via AppInit DLL
 T1546.011,1,detected,Yes,16,Installation of Custom Shim Databases; New Custom Shim Database Created; Potential Application Shimming via Sdbinst; Registry key creation and/or modification events for SDB
 T1546.011,2,detected,Yes,4,New Custom Shim Database Created
 T1546.011,3,detected,Yes,2,Registry key creation and/or modification events for SDB
-T1546.012,1,detected,Yes,1,Image File Execution Options Injection
-T1546.012,2,detected,Yes,1,Image File Execution Options Injection
-T1546.012,3,detected,Yes,1,Image File Execution Options Injection
+T1546.012,1,detected,Yes,2,Image File Execution Options Injection; Image File Execution Options Injection V2
+T1546.012,2,detected,Yes,2,Image File Execution Options Injection; Image File Execution Options Injection V2
+T1546.012,3,detected,Yes,2,Image File Execution Options Injection; Image File Execution Options Injection V2
 T1546.013,1,detected,Yes,2,Persistence via PowerShell profile
-T1546.015,1,detected,Yes,4,Component Object Model Hijacking v2
-T1546.015,2,detected,Yes,2,Powershell Execute COM Object
+T1546.015,1,detected,Yes,3,Component Object Model Hijacking v2
 T1546.015,3,detected,Yes,3,Component Object Model Hijacking v2
 T1546.015,4,detected,Yes,6,Component Object Model Hijacking; Component Object Model Hijacking v2
 T1546.018,1,no_rule,No,0,
@@ -168,14 +170,14 @@ T1547.001,8,detected,Yes,1,Add_persistance_via_Recycle_bin.toml
 T1547.001,9,detected,Yes,1,Startup or Run Key Registry Modification
 T1547.001,10,detected,Yes,1,Suspicious Startup Shell Folder Modification
 T1547.001,11,detected,Yes,2,Suspicious Startup Shell Folder Modification
-T1547.001,12,detected,Yes,2,Startup or Run Key Registry Modification; Uncommon Registry Persistence Change v2
-T1547.001,13,detected,Yes,2,Startup or Run Key Registry Modification; Uncommon Registry Persistence Change v2
+T1547.001,12,detected,Yes,3,Startup or Run Key Registry Modification; Uncommon Registry Persistence Change; Uncommon Registry Persistence Change v2
+T1547.001,13,detected,Yes,3,Startup or Run Key Registry Modification; Uncommon Registry Persistence Change; Uncommon Registry Persistence Change v2
 T1547.001,16,detected,Yes,1,Potential Suspicious Activity Using SeCEdit
-T1547.001,17,detected,Yes,1,Uncommon Registry Persistence Change v2
-T1547.001,18,detected,Yes,1,Uncommon Registry Persistence Change v2
+T1547.001,17,detected,Yes,2,Uncommon Registry Persistence Change; Uncommon Registry Persistence Change v2
+T1547.001,18,detected,Yes,2,Uncommon Registry Persistence Change; Uncommon Registry Persistence Change v2
 T1547.001,19,detected,Yes,1,Modification of Boot Verification Program registry
 T1547.001,20,detected,Yes,2,Persistence via Windows Context Menu
-T1547.002,1,detected,Yes,2,Potential LSA Authentication Package Abuse
+T1547.002,1,detected,Yes,4,Potential LSA Authentication Package Abuse; Potential LSA Authentication Package Abuse v2
 T1547.003,1,detected,Yes,2,Potential Persistence via Time Provider Modification
 T1547.003,2,detected,Yes,2,Potential Persistence via Time Provider Modification
 T1547.004,1,detected,Yes,1,Uncommon Registry Persistence Change v2
@@ -189,6 +191,7 @@ T1547.009,1,detected,Yes,1,Shortcut Modification
 T1547.009,2,detected,Yes,4,Shortcut File Written or Modified on Startup Folder; Shortcut Modification
 T1547.010,1,detected,Yes,1,Add Port Monitor persistence in Registry
 T1547.012,1,detected,Yes,2,Potential Port Monitor or Print Processor Registration Abuse
-T1547.014,1,detected,Yes,4,Persistence via Active Setup
+T1547.014,1,detected,Yes,3,Persistence via Active Setup
 T1547.014,2,detected,Yes,3,Persistence via Active Setup
 T1547.014,3,undetected,Yes,0,
+T1556.002,1,undetected,Yes,0,

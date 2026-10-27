@@ -5,7 +5,7 @@ T1053.005,11,11,1,100.0,Fully detected,Yes
 T1078.001,2,2,0,100.0,Fully detected,Yes
 T1078.003,2,2,2,100.0,Fully detected,Yes
 T1098,1,1,9,100.0,Fully detected,Yes
-T1112,78,90,0,86.7,Partially detected,Yes
+T1112,88,90,0,97.8,Partially detected,Yes
 T1133,0,1,0,0.0,Not detected,Yes
 T1136.001,4,4,0,100.0,Fully detected,Yes
 T1136.002,2,2,1,100.0,Fully detected,Yes
@@ -20,13 +20,13 @@ T1197,3,3,1,100.0,Fully detected,Yes
 T1505.002,1,1,0,100.0,Fully detected,Yes
 T1505.003,1,1,0,100.0,Fully detected,Yes
 T1505.004,0,0,2,0.0,All tests failed,No
-T1505.005,0,2,0,0.0,No rule,No
+T1505.005,1,2,0,50.0,Partially detected,Yes
 T1542.001,1,1,0,100.0,Fully detected,Yes
-T1543.003,4,5,1,80.0,Partially detected,Yes
+T1543.003,5,5,1,100.0,Fully detected,Yes
 T1546,8,8,1,100.0,Fully detected,Yes
 T1546.001,1,1,0,100.0,Fully detected,Yes
 T1546.002,1,1,0,100.0,Fully detected,Yes
-T1546.003,2,2,1,100.0,Fully detected,Yes
+T1546.003,3,3,0,100.0,Fully detected,Yes
 T1546.007,1,1,0,100.0,Fully detected,Yes
 T1546.008,9,9,1,100.0,Fully detected,Yes
 T1546.009,1,1,0,100.0,Fully detected,Yes
@@ -48,4 +48,4 @@ T1547.010,1,1,0,100.0,Fully detected,Yes
 T1547.012,1,1,0,100.0,Fully detected,Yes
 T1547.014,2,3,0,66.7,Partially detected,Yes
 T1556.001,0,0,1,0.0,All tests failed,Yes
-T1556.002,0,0,2,0.0,All tests failed,Yes
+T1556.002,0,1,1,0.0,Not detected,Yes

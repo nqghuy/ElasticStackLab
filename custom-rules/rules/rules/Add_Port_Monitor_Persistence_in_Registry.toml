@@ -1,0 +1,84 @@
+[metadata]
+creation_date = "2020/08/29"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/08/29"
+
+[rule]
+name = "Add Port Monitor persistence in Registry"
+description = "Adversaries may use port monitors to run an adversary supplied DLL during system boot for persistence or privilege escalation. A port monitor can be set through the AddMonitor API call to set a DLL to be loaded at startup"
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "dc52256a-4385-489a-a0a1-9e7ea981f264"
+
+author = ["Huy"]
+
+tags = [
+    "OS: Windows"
+]
+
+
+false_positives = []
+
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "registry.data.strings", type = "keyword", ecs = true },
+    { name = "registry.hive", type = "keyword", ecs = true },
+    { name = "registry.path", type = "keyword", ecs = true },
+    { name = "registry.value", type = "keyword", ecs = true },
+    { name = "user.id", type = "keyword", ecs = true },
+]
+
+related_integrations = []
+
+type = "eql"
+language = "eql"
+
+index = [
+    "logs-windows.sysmon_operational*",
+]
+
+query = '''
+registry where host.os.type == "windows" and event.type == "change" and
+registry.path: "*SYSTEM\\CurrentControlSet\\Control\\Print\\Monitors\\*\\Driver*" and 
+registry.data.strings : "*.dll"
+'''
+# should add rules for DLL loads by spoolsv.exe of non-standard or unsigned modules, and abnormal usage of the AddMonitor API by non-installation processes
+filters = []
+actions = []
+
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1112"
+name = "Modify Registry"
+reference = "https://attack.mitre.org/techniques/T1112/"
+
+[[rule.threat.technique]]
+id = "T1547"
+name = "Boot or Logon Autostart Execution"
+reference = "https://attack.mitre.org/techniques/T1547/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1547.010"
+name = "Port Monitors"
+reference = "https://attack.mitre.org/techniques/T1547/010/"
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"

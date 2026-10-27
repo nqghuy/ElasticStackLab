@@ -1,0 +1,83 @@
+[metadata]
+creation_date = "2020/08/26"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/08/26"
+
+[rule]
+name = "Suspicious Driver Install by pnputil.exe"
+description = "Detects when a possible suspicious driver is being installed via pnputil.exe lolbin"
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "9163d28c-b5d7-4d1e-b954-de2c2563fb29"
+
+author = ["Huy"]
+
+tags = [
+    "OS: Windows"
+]
+
+
+false_positives = []
+
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "process.args", type = "keyword", ecs = true },
+    { name = "process.parent.name", type = "keyword", ecs = true },
+]
+
+related_integrations = []
+
+type = "eql"
+language = "eql"
+
+index = [
+    "logs-endpoint.events.process-*",
+    "logs-endpoint.events.registry-*",
+    "winlogbeat-*",
+    "logs-windows.sysmon_operational-*",
+    "logs-system.security*"
+]
+
+query = '''
+process where host.os.type: "windows" and
+event.code: ("4688", "1") and
+(process.name: "pnputil.exe" or process.pe.original_file_name: "pnputil.exe") and 
+process.command_line: ("*-i*", "*install*", "*-a*", "*add-driver*", "*.inf*")
+'''
+
+filters = []
+actions = []
+
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1547"
+name = "Boot or Logon Autostart Execution"
+reference = "https://attack.mitre.org/techniques/T1547/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1547.001"
+name = "Registry Run Keys / Startup Folder"
+reference = "https://attack.mitre.org/techniques/T1547/001/"
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"
+# Old mitre att&ck:
+

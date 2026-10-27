@@ -1,0 +1,25 @@
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.12}
+\setlength{\LTpre}{0pt}
+\setlength{\LTpost}{0pt}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{5.5cm}|>{\raggedright\arraybackslash}p{5.8cm}|}
+\caption{Các Atomic Test không phát hiện được do thiếu dữ liệu log}\label{tab:log-khong-du}\\
+\hline
+\textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+T1112 Modify Registry & 43: Disable Windows Error Reporting Settings & Có rule Microsoft Windows Defender Tampering nhưng sysmon không ghi lại log registry của bài test \\
+\hline
+T1546.002 Event Triggered Execution: Screensaver & 1: Set Arbitrary Binary as Screensaver & Uncommon Registry Persistence Change có ghi lại nhưng sysmon log không ghi lại path Control Panel\textbackslash{}Desktop \\
+\hline
+\end{longtable}
+\endgroup

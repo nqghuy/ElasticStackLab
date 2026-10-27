@@ -1,0 +1,213 @@
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.12}
+\setlength{\LTpre}{0pt}
+\setlength{\LTpost}{0pt}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{5.5cm}|>{\raggedright\arraybackslash}p{5.8cm}|}
+\caption{Các Atomic Test chưa có Detection Rule phù hợp}\label{tab:no-rule}\\
+\hline
+\textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+T1078.001 Valid Accounts: Default Accounts & 1: Enable Guest account with RDP capability and admin privileges & Chỉ có rule tương tự Creation of a Hidden Local User Account và User Account Creation \\*
+\cline{2-2}
+ & 2: Activate Guest Account &  \\
+\hline
+T1078.003 Valid Accounts: Local Accounts & 1: Create local account with admin privileges & Chỉ có rule tương tự Creation of a Hidden Local User Account và User Account Creation \\
+\hline
+T1112 Modify Registry & 1: Modify Registry of Current User Profile - cmd &  \\*
+\cline{2-2}
+ & 5: Add domain to Trusted sites Zone &  \\*
+\cline{2-2}
+ & 6: Javascript in registry &  \\*
+\cline{2-2}
+ & 7: Change Powershell Execution Policy to Bypass &  \\*
+\cline{2-3}
+ & 10: Disable Windows Registry Tool & Chỉ có rule tương tự là Windows Defender Disabled via Registry Modification \\*
+\cline{2-2}
+ & 11: Disable Windows CMD application &  \\*
+\cline{2-2}
+ & 12: Disable Windows Task Manager application &  \\*
+\cline{2-2}
+ & 13: Disable Windows Notification Center &  \\*
+\cline{2-2}
+ & 14: Disable Windows Shutdown Button &  \\*
+\cline{2-2}
+ & 15: Disable Windows LogOff Button &  \\*
+\cline{2-2}
+ & 16: Disable Windows Change Password Feature &  \\*
+\cline{2-2}
+ & 17: Disable Windows Lock Workstation Feature &  \\*
+\cline{2-3}
+ & 18: Activate Windows NoDesktop Group Policy Feature &  \\*
+\cline{2-2}
+ & 19: Activate Windows NoRun Group Policy Feature &  \\*
+\cline{2-2}
+ & 20: Activate Windows NoFind Group Policy Feature &  \\*
+\cline{2-2}
+ & 21: Activate Windows NoControlPanel Group Policy Feature &  \\*
+\cline{2-2}
+ & 22: Activate Windows NoFileMenu Group Policy Feature &  \\*
+\cline{2-2}
+ & 23: Activate Windows NoClose Group Policy Feature &  \\*
+\cline{2-2}
+ & 24: Activate Windows NoSetTaskbar Group Policy Feature &  \\*
+\cline{2-2}
+ & 25: Activate Windows NoTrayContextMenu Group Policy Feature &  \\*
+\cline{2-2}
+ & 26: Activate Windows NoPropertiesMyDocuments Group Policy Feature &  \\*
+\cline{2-2}
+ & 27: Hide Windows Clock Group Policy Feature &  \\*
+\cline{2-2}
+ & 28: Windows HideSCAHealth Group Policy Feature &  \\*
+\cline{2-2}
+ & 29: Windows HideSCANetwork Group Policy Feature &  \\*
+\cline{2-2}
+ & 30: Windows HideSCAPower Group Policy Feature &  \\*
+\cline{2-2}
+ & 31: Windows HideSCAVolume Group Policy Feature &  \\*
+\cline{2-2}
+ & 32: Windows Modify Show Compress Color And Info Tip Registry &  \\*
+\cline{2-2}
+ & 34: Windows Add Registry Value to Load Service in Safe Mode without Network &  \\*
+\cline{2-2}
+ & 35: Windows Add Registry Value to Load Service in Safe Mode with Network &  \\*
+\cline{2-3}
+ & 36: Disable Windows Toast Notifications & Chỉ có rule tương tự là Windows Defender Disabled via Registry Modification \\*
+\cline{2-2}
+ & 37: Disable Windows Security Center Notifications &  \\*
+\cline{2-3}
+ & 39: Allow RDP Remote Assistance Feature &  \\*
+\cline{2-2}
+ & 41: Ursnif Malware Registry Key Creation &  \\*
+\cline{2-2}
+ & 42: Terminal Server Client Connection History Cleared &  \\*
+\cline{2-2}
+ & 44: DisallowRun Execution Of Certain Applications &  \\*
+\cline{2-2}
+ & 45: Enabling Restricted Admin Mode via Command\_Prompt &  \\*
+\cline{2-2}
+ & 46: Mimic Ransomware - Enable Multiple User Sessions &  \\*
+\cline{2-2}
+ & 47: Mimic Ransomware - Allow Multiple RDP Sessions per User &  \\*
+\cline{2-2}
+ & 48: Event Viewer Registry Modification - Redirection URL &  \\*
+\cline{2-2}
+ & 49: Event Viewer Registry Modification - Redirection Program &  \\*
+\cline{2-2}
+ & 50: Enabling Remote Desktop Protocol via Remote Registry &  \\*
+\cline{2-2}
+ & 52: Disable Windows OS Auto Update &  \\*
+\cline{2-2}
+ & 53: Disable Windows Auto Reboot for current logon user &  \\*
+\cline{2-2}
+ & 54: Windows Auto Update Option to Notify before download &  \\*
+\cline{2-2}
+ & 55: Do Not Connect To Win Update &  \\*
+\cline{2-2}
+ & 58: Allow Simultaneous Download Registry &  \\*
+\cline{2-2}
+ & 59: Modify Internet Zone Protocol Defaults in Current User Registry - cmd &  \\*
+\cline{2-2}
+ & 60: Modify Internet Zone Protocol Defaults in Current User Registry - PowerShell &  \\*
+\cline{2-2}
+ & 61: Activities To Disable Secondary Authentication Detected By Modified Registry Value. &  \\*
+\cline{2-2}
+ & 62: Activities To Disable Microsoft [FIDO Aka Fast IDentity Online] Authentication Detected By Modified Registry Value. &  \\*
+\cline{2-2}
+ & 63: Scarab Ransomware Defense Evasion Activities &  \\*
+\cline{2-2}
+ & 64: Disable Remote Desktop Anti-Alias Setting Through Registry &  \\*
+\cline{2-2}
+ & 65: Disable Remote Desktop Security Settings Through Registry &  \\*
+\cline{2-2}
+ & 66: Disabling ShowUI Settings of Windows Error Reporting (WER) &  \\*
+\cline{2-2}
+ & 67: Enable Proxy Settings &  \\*
+\cline{2-2}
+ & 68: Set-Up Proxy Server &  \\*
+\cline{2-2}
+ & 69: RDP Authentication Level Override &  \\*
+\cline{2-2}
+ & 71: Disable Windows Prefetch Through Registry &  \\*
+\cline{2-2}
+ & 73: Flush Shimcache &  \\*
+\cline{2-3}
+ & 74: Disable Windows Remote Desktop Protocol & Chỉ có rule RDP Enabled via Registry \\*
+\cline{2-3}
+ & 75: Enforce Smart Card Authentication Through Registry & Uncommon Registry Persistence có phát hiện key 'shell' \\*
+\cline{2-3}
+ & 76: Requires the BitLocker PIN for Pre-boot authentication &  \\*
+\cline{2-2}
+ & 77: Modify EnableBDEWithNoTPM Registry entry &  \\*
+\cline{2-2}
+ & 78: Modify UseTPM Registry entry &  \\*
+\cline{2-2}
+ & 79: Modify UseTPMPIN Registry entry &  \\*
+\cline{2-2}
+ & 80: Modify UseTPMKey Registry entry &  \\*
+\cline{2-2}
+ & 81: Modify UseTPMKeyPIN Registry entry &  \\*
+\cline{2-2}
+ & 82: Modify EnableNonTPM Registry entry &  \\*
+\cline{2-2}
+ & 83: Modify UsePartialEncryptionKey Registry entry &  \\*
+\cline{2-2}
+ & 84: Modify UsePIN Registry entry &  \\*
+\cline{2-2}
+ & 87: Abusing MyComputer Disk Cleanup Path for Persistence &  \\*
+\cline{2-2}
+ & 88: Abusing MyComputer Disk Fragmentation Path for Persistence &  \\*
+\cline{2-2}
+ & 89: Abusing MyComputer Disk Backup Path for Persistence &  \\*
+\cline{2-2}
+ & 90: Adding custom paths for application execution &  \\
+\hline
+T1505.005 Server Software Component: Terminal Services DLL & 2: Modify Terminal Services DLL Path &  \\
+\hline
+T1542.001 Pre-OS Boot: System Firmware & 1: UEFI Persistence via Wpbbin.exe File Creation &  \\
+\hline
+T1546 Event Triggered Execution & 1: Persistence with Custom AutodialDLL &  \\*
+\cline{2-2}
+ & 6: Load custom DLL on mstsc execution &  \\*
+\cline{2-2}
+ & 7: Persistence using automatic execution of custom DLL during RDP session &  \\*
+\cline{2-2}
+ & 8: Persistence via ErrorHandler.cmd script execution &  \\*
+\cline{2-2}
+ & 9: Persistence using STARTUP-PATH in MS-WORD &  \\
+\hline
+T1546.001 Event Triggered Execution: Change Default File Association & 1: Change Default File Association &  \\
+\hline
+T1546.008 Event Triggered Execution: Accessibility Features & 4: Atbroker.exe (AT) Executes Arbitrary Command via Registry Key &  \\*
+\cline{2-2}
+ & 5: Auto-start application on user logon &  \\
+\hline
+T1546.015 Event Triggered Execution: Component Object Model Hijacking & 2: Powershell Execute COM Object &  \\
+\hline
+T1547 Boot or Logon Autostart Execution & 1: Add a driver &  \\*
+\cline{2-2}
+ & 3: Leverage Virtual Channels to execute custom DLL during successful RDP session &  \\
+\hline
+T1547.001 Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder & 8: Add persistance via Recycle bin &  \\*
+\cline{2-2}
+ & 20: Add persistence via Windows Context Menu &  \\
+\hline
+T1547.008 Boot or Logon Autostart Execution: LSASS Driver & 1: Modify Registry to load Arbitrary DLL into LSASS - LsaDbExtPt &  \\
+\hline
+T1547.009 Boot or Logon Autostart Execution: Shortcut Modification & 1: Shortcut Modification &  \\
+\hline
+T1547.014 Active Setup & 1: HKLM - Add atomic\_test key to launch executable as part of user setup &  \\*
+\cline{2-2}
+ & 2: HKLM - Add malicious StubPath value to existing Active Setup Entry &  \\
+\hline
+\end{longtable}
+\endgroup

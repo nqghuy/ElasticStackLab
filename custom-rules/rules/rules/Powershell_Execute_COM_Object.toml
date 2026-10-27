@@ -1,0 +1,76 @@
+[metadata]
+creation_date = "2020/08/23"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/08/23"
+
+[rule]
+name = "Powershell Execute COM Object"
+description = "Use the PowerShell to execute COM CLSID object."
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "a840ad0f-1668-4c6e-adbe-01202b41a27a"
+
+author = ["Huy"]
+
+tags = [
+    "OS: Windows"
+]
+
+false_positives = []
+
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "powershell.file.script_block_text", type = "text", ecs = true },
+]
+
+related_integrations = []
+
+type = "query"
+language = "kuery"
+
+index = [
+    "logs-windows.sysmon_operational*",
+    "logs-endpoint.events.process-*",
+    "logs-endpoint.events.registry-*",
+    "winlogbeat-*",
+    "logs-windows.powershell_operational*"
+]
+
+query = '''
+host.os.type: "windows" and 
+event.code: "4104" and
+powershell.file.script_block_text: "*CreateInstance([type]::GetTypeFromCLSID*"
+'''
+
+filters = []
+actions = []
+
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1546"
+name = "Event Triggered Execution"
+reference = "https://attack.mitre.org/techniques/T1546/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1546.015"
+name = "Component Object Model Hijacking"
+reference = "https://attack.mitre.org/techniques/T1546/015/"
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"

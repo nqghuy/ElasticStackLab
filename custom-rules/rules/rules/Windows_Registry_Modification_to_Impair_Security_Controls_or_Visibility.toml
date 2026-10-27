@@ -1,0 +1,142 @@
+[metadata]
+creation_date = "2026/09/06"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/09/06"
+
+[rule]
+name = "Windows Registry Modification to Impair Security Controls or Visibility"
+description = "Windows Registry Modification to Impair Security Controls or Visibility"
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "c653ec95-0220-46a9-8420-2d7ce445d081"
+
+author = ["Huy"]
+
+tags = [
+    "OS: Windows"
+]
+
+
+false_positives = []
+
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "registry.data.strings", type = "keyword", ecs = true },
+    { name = "registry.hive", type = "keyword", ecs = true },
+    { name = "registry.path", type = "keyword", ecs = true },
+    { name = "registry.value", type = "keyword", ecs = true },
+    { name = "user.id", type = "keyword", ecs = true },
+]
+
+related_integrations = []
+
+type = "eql"
+language = "eql"
+
+index = [
+    "logs-windows.sysmon_operational*",
+    "logs-endpoint.events.process-*",
+    "logs-endpoint.events.registry-*",
+    "winlogbeat-*",
+    "logs-windows.powershell_operational*"
+]
+
+query = '''
+any where host.os.type == "windows" and 
+(
+  process.name: "reg.exe" and  process.parent.name : (
+    "powershell.exe",
+    "pwsh.exe",
+    "cmd.exe",
+    "wscript.exe",
+    "cscript.exe",
+    "mshta.exe",
+    "rundll32.exe",
+    "regsvr32.exe",
+    "wmic.exe"
+  ) or 
+  process.command_line: ("*New-ItemProperty*", "*New-Item*", "*Set-ItemProperty*")
+) and 
+(
+  (
+    process.command_line: ("*-Value*1*", "*/d*1*") and 
+    (
+      (
+        process.command_line: "*\\Software\\Policies\\Microsoft\\Windows\\System*" and
+        process.command_line: "*DisableCMD*"
+      ) or
+      (
+        process.command_line: "*\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer*" and
+        process.command_line: "*DisableNotificationCenter*"
+      ) or
+      (
+        process.command_line: "*\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting*" and
+        process.command_line: "*DisableEnhancedNotifications*"
+      )
+    )
+  ) or 
+  (
+    process.command_line: ("*-Value*0*", "*/d*0*") and 
+    (
+      (
+        process.command_line: "*\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\ModuleLogging*" and
+        process.command_line: "*EnableModuleLogging*"
+      ) or
+      (
+        process.command_line: "*\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\ScriptBlockLogging*" and
+        process.command_line: "*EnableScriptBlockLogging*"
+      ) or
+      (
+        process.command_line: "*\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\ImmersiveShell*" and
+        process.command_line: "*UseActionCenterExperience*"
+      ) or
+      (
+        process.command_line: "*\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\Transcription*" and
+        process.command_line: "*EnableTranscripting*"
+      ) or
+      (
+        process.command_line: "*\\Software\\Policies\\Microsoft\\Windows\\PowerShell*" and
+        process.command_line: "*EnableScripts*"
+      ) or
+      (
+        process.command_line: "*\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PushNotifications*" and
+        process.command_line: "*ToastEnabled*"
+      ) or
+      (
+        process.command_line: "*\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters*" and
+        process.command_line: "*EnablePrefetcher*"
+      )
+    )
+  )
+)
+'''
+
+filters = []
+actions = []
+
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1112"
+name = "Modify Registry"
+reference = "https://attack.mitre.org/techniques/T1112/"
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"

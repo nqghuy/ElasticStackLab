@@ -1,0 +1,35 @@
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.12}
+\setlength{\LTpre}{0pt}
+\setlength{\LTpost}{0pt}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{5.5cm}|>{\raggedright\arraybackslash}p{5.8cm}|}
+\caption{Các Atomic Test có rule nhưng chưa ánh xạ đúng technique}\label{tab:khong-anh-xa}\\
+\hline
+\textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+T1037.001 Boot or Logon Initialization Scripts: Logon Script (Windows) & 1: Logon Scripts & Rule Uncommon Registry Persistence Change không ánh xạ technique T1037.001 \\
+\hline
+T1112 Modify Registry & 72: Setting Shadow key in Registry for RDP Shadowing & Rule Potential Remote Desktop Shadowing Activity không ánh xạ đủ \\
+\hline
+T1546.008 Event Triggered Execution: Accessibility Features & 1: Attaches Command Prompt as a Debugger to a List of Target Processes & Đã có rule Image File Execution Options Injection nhưng chưa ánh xạ T1546.008 \\
+\hline
+T1547.004 Boot or Logon Autostart Execution: Winlogon Helper DLL & 1: Winlogon Shell Key Persistence - PowerShell & Uncommon Registry Persistence Change và Startup or Run Key Registry Modification chưa ánh xạ đủ \\*
+\cline{2-3}
+ & 2: Winlogon Userinit Key Persistence - PowerShell & Uncommon Registry Persistence Change chưa ánh xạ đủ và chưa có hive HKCU cho path này \\*
+\cline{2-3}
+ & 4: Winlogon HKLM Shell Key Persistence - PowerShell & Uncommon Registry Persistence Change và Startup or Run Key Registry Modification chưa ánh xạ đủ \\*
+\cline{2-3}
+ & 5: Winlogon HKLM Userinit Key Persistence - PowerShell & Uncommon Registry Persistence Change chưa ánh xạ đủ \\
+\hline
+\end{longtable}
+\endgroup

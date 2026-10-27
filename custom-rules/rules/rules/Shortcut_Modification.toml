@@ -1,0 +1,108 @@
+[metadata]
+creation_date = "2026/08/28"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/08/28"
+
+[rule]
+name = "Shortcut Modification"
+description = "Adversaries may create or modify shortcuts that can execute a program during system boot or user login. Shortcuts or symbolic links are used to reference other files or programs that will be opened or executed when the shortcut is clicked or executed by a system startup process."
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "4c528b8f-f4f5-4afc-8938-d35a2601a2b1"
+
+author = ["Huy"]
+
+tags = [
+    "OS: Windows"
+]
+
+
+false_positives = []
+
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "file.path", type = "keyword", ecs = true },
+]
+
+related_integrations = []
+
+type = "eql"
+language = "eql"
+
+index = [
+    "logs-windows.sysmon_operational*",
+    "logs-endpoint.events.process-*",
+    "logs-endpoint.events.registry-*",
+    "winlogbeat-*",
+    "logs-windows.sysmon_operational-*",
+]
+
+query = '''
+file where host.os.type == "windows" and event.type != "deletion" and 
+  (file.extension: ("lnk", "url") or
+    file.path : (
+      "C:\\Users\\*\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\*",
+      "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp\\*"
+    )
+  ) and
+  not (
+    (process.name : "ONENOTE.EXE" and process.code_signature.status: "trusted" and file.name : "*OneNote.lnk") or
+    (process.name : "OktaVerifySetup.exe" and process.code_signature.status: "trusted" and file.name : "Okta Verify.lnk") or
+    (process.name : "OneLaunch.exe" and process.code_signature.status: "trusted" and file.name : "OneLaunch*.lnk") or
+    (process.name : "APPServerClient.exe" and process.code_signature.status: "trusted" and file.name : "Parallels Client.lnk")
+  ) and process.name : ("cmd.exe",
+                  "powershell.exe",
+                  "wmic.exe",
+                  "mshta.exe",
+                  "pwsh.exe",
+                  "cscript.exe",
+                  "wscript.exe",
+                  "regsvr32.exe",
+                  "RegAsm.exe",
+                  "rundll32.exe",
+                  "EQNEDT32.EXE",
+                  "WINWORD.EXE",
+                  "EXCEL.EXE",
+                  "POWERPNT.EXE",
+                  "MSPUB.EXE",
+                  "MSACCESS.EXE",
+                  "iexplore.exe",
+                  "InstallUtil.exe")
+'''
+
+filters = []
+actions = []
+
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+
+[[rule.threat.technique]]
+id = "T1547"
+name = "Boot or Logon Autostart Execution"
+reference = "https://attack.mitre.org/techniques/T1547/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1547.009"
+name = "Shortcut Modification"
+reference = "https://attack.mitre.org/techniques/T1547/009/"
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"
+

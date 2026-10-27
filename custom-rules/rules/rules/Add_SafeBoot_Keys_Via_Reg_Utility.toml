@@ -1,0 +1,74 @@
+[metadata]
+creation_date = "2020/08/22"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/08/22"
+
+[rule]
+name = "Add SafeBoot Keys Via Reg Utility"
+description = "Detects modification on safe boot registry keys. Often used by attacker to allow the ransomware to work in safe mode as some security products do not"
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "526362fe-f4e4-4991-87ad-9be1cfab0f89"
+
+author = ["Huy"]
+
+tags = [
+    "OS: Windows"
+]
+
+
+false_positives = []
+
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "registry.data.strings", type = "keyword", ecs = true },
+    { name = "registry.hive", type = "keyword", ecs = true },
+    { name = "registry.path", type = "keyword", ecs = true },
+    { name = "registry.value", type = "keyword", ecs = true },
+    { name = "user.id", type = "keyword", ecs = true },
+]
+
+related_integrations = []
+
+type = "eql"
+language = "eql"
+
+index = [
+    "logs-windows.sysmon_operational*",
+]
+
+query = '''
+any where host.os.type: "windows" and
+event.code : ("12", "13", "14") and registry.path: "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SafeBoot*" 
+'''
+
+filters = []
+actions = []
+
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1112"
+name = "Modify Registry"
+reference = "https://attack.mitre.org/techniques/T11112/"
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"
+

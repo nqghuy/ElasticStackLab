@@ -93,7 +93,7 @@ T1136.001,5,Detected with custom rules,Modify user account
 T1136.001,9,Detected with custom rules,Modify user account
 T1137.006,1,Detected with custom rules,Code Executed Via Office Add-in XLL File
 T1505.003,1,Detected with custom rules,Web Shell
-T1505.005,1,Not detected,
+T1505.005,1,Not detected,, Không phát hiện được thay đổi nội dung
 T1505.005,2,Not detected,
 T1542.001,1,Detected with custom rules,UEFI Persistence Via Wpbbin
 T1543.003,3,Not detected,

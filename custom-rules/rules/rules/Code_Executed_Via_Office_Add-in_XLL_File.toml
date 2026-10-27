@@ -1,0 +1,93 @@
+[metadata]
+creation_date = "2026/09/02"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/09/02"
+
+[rule]
+name = "Code Executed Via Office Add-in XLL File"
+description = "Adversaries may abuse Microsoft Office add-ins to obtain persistence on a compromised system. Office add-ins can be used to add functionality to Office programs. " 
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "a3c733e1-1b4e-4bfd-8aa7-98c81e878e65"
+
+author = ["Huy"]
+
+tags = [
+    "OS: Windows"
+]
+
+false_positives = []
+
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "process.args", type = "keyword", ecs = true },
+    { name = "process.parent.name", type = "keyword", ecs = true },
+]
+
+related_integrations = []
+
+type = "eql"
+language = "eql"
+
+index = [
+    "logs-windows.sysmon_operational*",
+    "logs-endpoint.events.process-*",
+    "logs-endpoint.events.registry-*",
+    "winlogbeat-*",
+    "logs-windows.powershell_operational*"
+]
+
+query = '''
+process where event.code: "7" and
+(
+  not dll.code_signature.status: "trusted" or 
+  file.path: ("?:\\Users\\*\\Temp\\7z*",
+            "?:\\Users\\*\\Temp\\Rar$*",
+            "?:\\Users\\*\\Temp\\Temp?_*",
+            "?:\\Users\\*\\Temp\\BNZ.*",
+            "?:\\Users\\*\\Downloads\\*",
+            "?:\\Users\\*\\AppData\\Roaming\\*",
+            "?:\\Users\\Public\\*",
+            "?:\\Windows\\Temp\\*",
+            "\\Device\\*",
+            "http*")
+) and 
+process.name : ("WINWORD.EXE", "EXCEL.EXE", "POWERPNT.EXE", "MSACCESS.EXE", "VSTOInstaller.exe")
+'''
+
+filters = []
+actions = []
+
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1137"
+name = "Office Application Startup"
+reference = "https://attack.mitre.org/techniques/T1137/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1137.006"
+name = "Add-ins"
+reference = "https://attack.mitre.org/techniques/T1137/006"
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"
+
+
