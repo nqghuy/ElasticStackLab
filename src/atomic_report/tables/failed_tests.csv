@@ -24,7 +24,7 @@ T1098,13,1355,"New-Object : Exception calling "".ctor"" with ""2"" argument(s): 
 T1098,14,1355,"New-Object : Exception calling "".ctor"" with ""2"" argument(s): ""Cannot process argument because the value of argument"
 T1098,15,1355,"New-Object : Exception calling "".ctor"" with ""2"" argument(s): ""Cannot process argument because the value of argument"
 T1098,16,1355,"New-Object : Exception calling "".ctor"" with ""2"" argument(s): ""Cannot process argument because the value of argument"
-T1505.004,1,1,operable program or batch file.
+T1505.004,1,1,"'C:\Windows\system32\inetsrv\appcmd.exe' is not recognized as an internal or external command,"
 T1505.004,2,,"New-WebGlobalModule : The term 'New-WebGlobalModule' is not recognized as the name of a cmdlet, function, script file,"
 T1546,4,,"+ CategoryInfo          : NotSpecified: (:) [New-CimSession], CimException"
 T1197,4,-1,Executing test: T1197-4 Bits download using desktopimgdownldr.exe (cmd)

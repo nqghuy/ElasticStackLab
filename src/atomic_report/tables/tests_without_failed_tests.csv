@@ -96,7 +96,7 @@ T1112,81,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
 T1112,82,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
 T1112,83,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
 T1112,84,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
-T1112,85,undetected,Yes,0,
+T1112,85,detected,Yes,2,Abusing Windows TelemetryController for Persistence
 T1112,86,detected,Yes,5,RDP Registry Modification; Uncommon Registry Persistence Change; Uncommon Registry Persistence Change v2
 T1112,87,detected,Yes,2,Abusing MyComputer Disk for Persistence
 T1112,88,detected,Yes,2,Abusing MyComputer Disk for Persistence
@@ -113,7 +113,7 @@ T1137.004,1,detected,Yes,2,Outlook Home Page Registry Modification
 T1137.006,1,detected,Yes,1,Code Executed Via Office Add-in XLL File
 T1137.006,2,detected,Yes,4,Persistence via Microsoft Office AddIns
 T1137.006,3,detected,Yes,4,Persistence via Microsoft Office AddIns
-T1137.006,4,detected,Yes,4,Persistence via Microsoft Office AddIns
+T1137.006,4,detected,Yes,5,Persistence via Microsoft Office AddIns
 T1137.006,5,detected,Yes,3,Persistence via Microsoft Office AddIns
 T1505.003,1,detected,Yes,3,Web Shell
 T1505.005,1,undetected,Yes,0,
@@ -155,11 +155,11 @@ T1546.013,1,detected,Yes,2,Persistence via PowerShell profile
 T1546.015,1,detected,Yes,3,Component Object Model Hijacking v2
 T1546.015,3,detected,Yes,3,Component Object Model Hijacking v2
 T1546.015,4,detected,Yes,6,Component Object Model Hijacking; Component Object Model Hijacking v2
-T1546.018,1,no_rule,No,0,
-T1546.018,2,no_rule,No,0,
+T1546.018,1,undetected,Yes,0,
+T1546.018,2,detected,Yes,1,Python Site or User Customize File Creation Win
 T1547,1,detected,Yes,1,Suspicious Driver Install by pnputil.exe
 T1547,2,detected,Yes,1,Suspicious Driver Install by pnputil.exe
-T1547,3,detected,Yes,2,Leverage Virtual Channels to execute custom DLL
+T1547,3,detected,Yes,1,Leverage Virtual Channels to execute custom DLL
 T1547.001,1,detected,Yes,1,Startup or Run Key Registry Modification
 T1547.001,2,detected,Yes,1,Startup or Run Key Registry Modification
 T1547.001,3,detected,Yes,1,Startup or Run Key Registry Modification
@@ -177,12 +177,12 @@ T1547.001,17,detected,Yes,2,Uncommon Registry Persistence Change; Uncommon Regis
 T1547.001,18,detected,Yes,2,Uncommon Registry Persistence Change; Uncommon Registry Persistence Change v2
 T1547.001,19,detected,Yes,1,Modification of Boot Verification Program registry
 T1547.001,20,detected,Yes,2,Persistence via Windows Context Menu
-T1547.002,1,detected,Yes,4,Potential LSA Authentication Package Abuse; Potential LSA Authentication Package Abuse v2
+T1547.002,1,detected,Yes,2,Potential LSA Authentication Package Abuse
 T1547.003,1,detected,Yes,2,Potential Persistence via Time Provider Modification
 T1547.003,2,detected,Yes,2,Potential Persistence via Time Provider Modification
 T1547.004,1,detected,Yes,1,Uncommon Registry Persistence Change v2
 T1547.004,2,detected,Yes,3,Winlogon Userinit Key Persistence
-T1547.004,3,undetected,Yes,0,
+T1547.004,3,detected,Yes,4,Winlogon Userinit Key Persistence
 T1547.004,4,detected,Yes,2,Uncommon Registry Persistence Change v2; Winlogon Helper DLL or Shell Modification
 T1547.004,5,detected,Yes,5,Uncommon Registry Persistence Change v2; Winlogon Helper DLL or Shell Modification; Winlogon Userinit Key Persistence
 T1547.005,1,detected,Yes,2,Installation of Security Support Provider
@@ -194,4 +194,4 @@ T1547.012,1,detected,Yes,2,Potential Port Monitor or Print Processor Registratio
 T1547.014,1,detected,Yes,3,Persistence via Active Setup
 T1547.014,2,detected,Yes,3,Persistence via Active Setup
 T1547.014,3,undetected,Yes,0,
-T1556.002,1,undetected,Yes,0,
+T1556.002,1,detected,Yes,1,Password Filter DLL

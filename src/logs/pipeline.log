@@ -1,299 +1,301 @@
-2026-10-27 07:18:45,476 [INFO] pipeline.elastic_client: Find 635 enabled rules (tag=OS: Windows)
-2026-10-27 07:18:45,497 [INFO] pipeline: Running 247 tests
-2026-10-27 08:15:35,237 [INFO] pipeline: T1053.005 Test 1: start=2026-10-27T00:18:53.852Z end=2026-10-27T00:19:03.838Z status=completed
-2026-10-27 08:15:35,239 [INFO] pipeline: T1053.005 Test 2: start=2026-10-27T00:19:08.322Z end=2026-10-27T00:19:12.358Z status=completed
-2026-10-27 08:15:35,239 [INFO] pipeline: T1053.005 Test 3: start=2026-10-27T00:19:15.970Z end=2026-10-27T00:19:19.662Z status=completed
-2026-10-27 08:15:35,239 [INFO] pipeline: T1053.005 Test 4: start=2026-10-27T00:19:22.733Z end=2026-10-27T00:19:28.828Z status=completed
-2026-10-27 08:15:35,239 [INFO] pipeline: T1053.005 Test 5: start=2026-10-27T00:19:37.102Z end=2026-10-27T00:20:08.556Z status=completed
-2026-10-27 08:15:35,239 [INFO] pipeline: T1053.005 Test 6: start=2026-10-27T00:20:18.272Z end=2026-10-27T00:20:24.541Z status=completed
-2026-10-27 08:15:35,240 [INFO] pipeline: T1053.005 Test 7: start=2026-10-27T00:20:32.759Z end=2026-10-27T00:20:35.732Z status=completed
-2026-10-27 08:15:35,240 [INFO] pipeline: T1053.005 Test 8: start=2026-10-27T00:20:39.923Z end=2026-10-27T00:20:46.009Z status=completed
-2026-10-27 08:15:35,240 [INFO] pipeline: T1053.005 Test 9: start=2026-10-27T00:20:55.708Z end=2026-10-27T00:21:03.860Z status=completed
-2026-10-27 08:15:35,240 [INFO] pipeline: T1053.005 Test 10: start=2026-10-27T00:21:13.109Z end=2026-10-27T00:21:16.988Z status=completed
-2026-10-27 08:15:35,240 [INFO] pipeline: T1053.005 Test 11: start=2026-10-27T00:21:20.017Z end=2026-10-27T00:21:25.623Z status=completed
-2026-10-27 08:15:35,240 [INFO] pipeline: T1053.005 Test 12: start=2026-10-27T00:21:30.180Z end=2026-10-27T00:21:33.597Z status=completed
-2026-10-27 08:15:35,240 [INFO] pipeline: T1546.013 Test 1: start=2026-10-27T00:21:36.715Z end=2026-10-27T00:21:40.909Z status=completed
-2026-10-27 08:15:35,240 [INFO] pipeline: T1133 Test 1: start=2026-10-27T00:21:43.888Z end=2026-10-27T00:22:18.647Z status=completed
-2026-10-27 08:15:35,240 [INFO] pipeline: T1542.001 Test 1: start=2026-10-27T00:22:22.463Z end=2026-10-27T00:22:25.266Z status=completed
-2026-10-27 08:15:35,241 [INFO] pipeline: T1547 Test 1: start=2026-10-27T00:22:27.591Z end=2026-10-27T00:22:29.223Z status=completed
-2026-10-27 08:15:35,241 [INFO] pipeline: T1547 Test 2: start=2026-10-27T00:22:30.208Z end=2026-10-27T00:22:34.651Z status=completed
-2026-10-27 08:15:35,241 [INFO] pipeline: T1547 Test 3: start=2026-10-27T00:22:36.782Z end=2026-10-27T00:22:37.744Z status=completed
-2026-10-27 08:15:35,241 [INFO] pipeline: T1547.014 Test 1: start=2026-10-27T00:22:39.357Z end=2026-10-27T00:22:41.843Z status=completed
-2026-10-27 08:15:35,241 [INFO] pipeline: T1547.014 Test 2: start=2026-10-27T00:22:45.128Z end=2026-10-27T00:22:48.326Z status=completed
-2026-10-27 08:15:35,241 [INFO] pipeline: T1547.014 Test 3: start=2026-10-27T00:22:50.316Z end=2026-10-27T00:22:52.232Z status=completed
-2026-10-27 08:15:35,241 [INFO] pipeline: T1543.003 Test 1: start=2026-10-27T00:22:54.209Z end=2026-10-27T00:22:57.649Z status=completed
-2026-10-27 08:15:35,241 [INFO] pipeline: T1543.003 Test 2: start=2026-10-27T00:22:59.873Z end=2026-10-27T00:23:03.868Z status=completed
-2026-10-27 08:15:35,241 [INFO] pipeline: T1543.003 Test 3: start=2026-10-27T00:23:06.724Z end=2026-10-27T00:23:10.590Z status=completed
-2026-10-27 08:15:35,242 [INFO] pipeline: T1543.003 Test 4: start=2026-10-27T00:23:15.416Z end=2026-10-27T00:23:18.337Z status=completed
-2026-10-27 08:15:35,242 [INFO] pipeline: T1543.003 Test 5: start=2026-10-27T00:23:20.293Z end=2026-10-27T00:23:23.159Z status=completed
-2026-10-27 08:15:35,242 [INFO] pipeline: T1543.003 Test 6: start=2026-10-27T00:23:25.493Z end=2026-10-27T00:23:31.953Z status=completed
-2026-10-27 08:15:35,242 [INFO] pipeline: T1137 Test 1: start=2026-10-27T00:23:35.458Z end=2026-10-27T00:23:36.229Z status=completed
-2026-10-27 08:15:35,242 [INFO] pipeline: T1547.012 Test 1: start=2026-10-27T00:23:37.441Z end=2026-10-27T00:23:44.524Z status=completed
-2026-10-27 08:15:35,242 [INFO] pipeline: T1137.006 Test 1: start=2026-10-27T00:23:49.741Z end=2026-10-27T00:24:07.506Z status=completed
-2026-10-27 08:15:35,242 [INFO] pipeline: T1137.006 Test 2: start=2026-10-27T00:24:11.434Z end=2026-10-27T00:24:40.449Z status=completed
-2026-10-27 08:15:35,243 [INFO] pipeline: T1137.006 Test 3: start=2026-10-27T00:24:53.549Z end=2026-10-27T00:25:09.547Z status=completed
-2026-10-27 08:15:35,243 [INFO] pipeline: T1137.006 Test 4: start=2026-10-27T00:25:15.786Z end=2026-10-27T00:25:20.262Z status=completed
-2026-10-27 08:15:35,243 [INFO] pipeline: T1137.006 Test 5: start=2026-10-27T00:25:30.914Z end=2026-10-27T00:25:40.210Z status=completed
-2026-10-27 08:15:35,243 [INFO] pipeline: T1505.002 Test 1: start=2026-10-27T00:25:54.396Z end=2026-10-27T00:25:57.670Z status=completed
-2026-10-27 08:15:35,243 [INFO] pipeline: T1556.002 Test 1: start=2026-10-27T00:26:00.355Z end=2026-10-27T00:26:03.860Z status=completed
-2026-10-27 08:15:35,243 [INFO] pipeline: T1556.002 Test 2: start=2026-10-27T00:26:06.912Z end=2026-10-27T00:27:49.470Z status=completed
-2026-10-27 08:15:35,243 [INFO] pipeline: T1505.005 Test 1: start=2026-10-27T00:27:52.307Z end=2026-10-27T00:27:54.765Z status=completed
-2026-10-27 08:15:35,244 [INFO] pipeline: T1505.005 Test 2: start=2026-10-27T00:27:57.060Z end=2026-10-27T00:28:00.070Z status=completed
-2026-10-27 08:15:35,244 [INFO] pipeline: T1176 Test 1: start=2026-10-27T00:28:02.407Z end=2026-10-27T00:28:03.376Z status=completed
-2026-10-27 08:15:35,244 [INFO] pipeline: T1176 Test 2: start=2026-10-27T00:28:04.407Z end=2026-10-27T00:28:05.326Z status=completed
-2026-10-27 08:15:35,244 [INFO] pipeline: T1176 Test 3: start=2026-10-27T00:28:06.060Z end=2026-10-27T00:28:07.493Z status=completed
-2026-10-27 08:15:35,244 [INFO] pipeline: T1176 Test 4: start=2026-10-27T00:28:08.379Z end=2026-10-27T00:29:51.121Z status=completed
-2026-10-27 08:15:35,244 [INFO] pipeline: T1137.005 Test 1: start=2026-10-27T00:30:10.628Z end=2026-10-27T00:30:17.718Z status=completed
-2026-10-27 08:15:35,244 [INFO] pipeline: T1137.005 Test 2: start=2026-10-27T00:30:23.539Z end=2026-10-27T00:30:30.768Z status=completed
-2026-10-27 08:15:35,244 [INFO] pipeline: T1137.005 Test 3: start=2026-10-27T00:30:37.892Z end=2026-10-27T00:30:42.464Z status=completed
-2026-10-27 08:15:35,245 [INFO] pipeline: T1137.005 Test 4: start=2026-10-27T00:30:48.072Z end=2026-10-27T00:30:51.634Z status=completed
-2026-10-27 08:15:35,245 [INFO] pipeline: T1137.005 Test 5: start=2026-10-27T00:30:55.996Z end=2026-10-27T00:31:00.207Z status=completed
-2026-10-27 08:15:35,245 [INFO] pipeline: T1546.011 Test 1: start=2026-10-27T00:31:03.662Z end=2026-10-27T00:31:05.338Z status=completed
-2026-10-27 08:15:35,245 [INFO] pipeline: T1546.011 Test 2: start=2026-10-27T00:31:07.324Z end=2026-10-27T00:31:10.563Z status=completed
-2026-10-27 08:15:35,245 [INFO] pipeline: T1546.011 Test 3: start=2026-10-27T00:31:12.732Z end=2026-10-27T00:31:16.165Z status=completed
-2026-10-27 08:15:35,245 [INFO] pipeline: T1547.010 Test 1: start=2026-10-27T00:31:19.969Z end=2026-10-27T00:31:22.176Z status=completed
-2026-10-27 08:15:35,245 [INFO] pipeline: T1547.009 Test 1: start=2026-10-27T00:31:23.950Z end=2026-10-27T00:31:29.139Z status=completed
-2026-10-27 08:15:35,245 [INFO] pipeline: T1547.009 Test 2: start=2026-10-27T00:31:30.309Z end=2026-10-27T00:31:35.105Z status=completed
-2026-10-27 08:15:35,246 [INFO] pipeline: T1547.005 Test 1: start=2026-10-27T00:31:38.067Z end=2026-10-27T00:31:40.026Z status=completed
-2026-10-27 08:15:35,246 [INFO] pipeline: T1547.005 Test 2: start=2026-10-27T00:31:41.982Z end=2026-10-27T00:31:45.109Z status=completed
-2026-10-27 08:15:35,246 [INFO] pipeline: T1112 Test 1: start=2026-10-27T00:31:48.489Z end=2026-10-27T00:31:57.628Z status=completed
-2026-10-27 08:15:35,246 [INFO] pipeline: T1112 Test 2: start=2026-10-27T00:32:07.840Z end=2026-10-27T00:32:15.760Z status=completed
-2026-10-27 08:15:35,246 [INFO] pipeline: T1112 Test 3: start=2026-10-27T00:32:23.330Z end=2026-10-27T00:32:30.943Z status=completed
-2026-10-27 08:15:35,246 [INFO] pipeline: T1112 Test 4: start=2026-10-27T00:32:39.726Z end=2026-10-27T00:32:51.818Z status=completed
-2026-10-27 08:15:35,246 [INFO] pipeline: T1112 Test 5: start=2026-10-27T00:33:05.831Z end=2026-10-27T00:33:17.872Z status=completed
-2026-10-27 08:15:35,247 [INFO] pipeline: T1112 Test 6: start=2026-10-27T00:33:27.499Z end=2026-10-27T00:33:35.140Z status=completed
-2026-10-27 08:15:35,247 [INFO] pipeline: T1112 Test 7: start=2026-10-27T00:33:43.038Z end=2026-10-27T00:33:50.846Z status=completed
-2026-10-27 08:15:35,247 [INFO] pipeline: T1112 Test 8: start=2026-10-27T00:33:59.182Z end=2026-10-27T00:34:06.584Z status=completed
-2026-10-27 08:15:35,247 [INFO] pipeline: T1112 Test 9: start=2026-10-27T00:34:14.096Z end=2026-10-27T00:34:21.718Z status=completed
-2026-10-27 08:15:35,247 [INFO] pipeline: T1112 Test 10: start=2026-10-27T00:34:29.979Z end=2026-10-27T00:34:38.874Z status=completed
-2026-10-27 08:15:35,247 [INFO] pipeline: T1112 Test 11: start=2026-10-27T00:34:46.914Z end=2026-10-27T00:34:56.812Z status=completed
-2026-10-27 08:15:35,247 [INFO] pipeline: T1112 Test 12: start=2026-10-27T00:35:06.441Z end=2026-10-27T00:35:13.824Z status=completed
-2026-10-27 08:15:35,247 [INFO] pipeline: T1112 Test 13: start=2026-10-27T00:35:22.038Z end=2026-10-27T00:35:31.228Z status=completed
-2026-10-27 08:15:35,248 [INFO] pipeline: T1112 Test 14: start=2026-10-27T00:35:38.354Z end=2026-10-27T00:35:45.633Z status=completed
-2026-10-27 08:15:35,248 [INFO] pipeline: T1112 Test 15: start=2026-10-27T00:35:53.675Z end=2026-10-27T00:36:01.696Z status=completed
-2026-10-27 08:15:35,248 [INFO] pipeline: T1112 Test 16: start=2026-10-27T00:36:10.039Z end=2026-10-27T00:36:17.942Z status=completed
-2026-10-27 08:15:35,248 [INFO] pipeline: T1112 Test 17: start=2026-10-27T00:36:24.638Z end=2026-10-27T00:36:32.508Z status=completed
-2026-10-27 08:15:35,248 [INFO] pipeline: T1112 Test 18: start=2026-10-27T00:36:40.803Z end=2026-10-27T00:36:47.622Z status=completed
-2026-10-27 08:15:35,248 [INFO] pipeline: T1112 Test 19: start=2026-10-27T00:36:54.163Z end=2026-10-27T00:37:02.001Z status=completed
-2026-10-27 08:15:35,248 [INFO] pipeline: T1112 Test 20: start=2026-10-27T00:37:09.386Z end=2026-10-27T00:37:19.068Z status=completed
-2026-10-27 08:15:35,248 [INFO] pipeline: T1112 Test 21: start=2026-10-27T00:37:29.009Z end=2026-10-27T00:37:38.929Z status=completed
-2026-10-27 08:15:35,249 [INFO] pipeline: T1112 Test 22: start=2026-10-27T00:37:48.350Z end=2026-10-27T00:37:55.853Z status=completed
-2026-10-27 08:15:35,249 [INFO] pipeline: T1112 Test 23: start=2026-10-27T00:38:04.941Z end=2026-10-27T00:38:11.862Z status=completed
-2026-10-27 08:15:35,249 [INFO] pipeline: T1112 Test 24: start=2026-10-27T00:38:17.918Z end=2026-10-27T00:38:22.958Z status=completed
-2026-10-27 08:15:35,249 [INFO] pipeline: T1112 Test 25: start=2026-10-27T00:38:28.041Z end=2026-10-27T00:38:35.045Z status=completed
-2026-10-27 08:15:35,249 [INFO] pipeline: T1112 Test 26: start=2026-10-27T00:38:43.321Z end=2026-10-27T00:38:51.329Z status=completed
-2026-10-27 08:15:35,249 [INFO] pipeline: T1112 Test 27: start=2026-10-27T00:38:59.067Z end=2026-10-27T00:39:06.900Z status=completed
-2026-10-27 08:15:35,249 [INFO] pipeline: T1112 Test 28: start=2026-10-27T00:39:13.562Z end=2026-10-27T00:39:20.458Z status=completed
-2026-10-27 08:15:35,249 [INFO] pipeline: T1112 Test 29: start=2026-10-27T00:39:27.203Z end=2026-10-27T00:39:34.568Z status=completed
-2026-10-27 08:15:35,249 [INFO] pipeline: T1112 Test 30: start=2026-10-27T00:39:41.799Z end=2026-10-27T00:39:49.274Z status=completed
-2026-10-27 08:15:35,250 [INFO] pipeline: T1112 Test 31: start=2026-10-27T00:39:56.797Z end=2026-10-27T00:40:04.665Z status=completed
-2026-10-27 08:15:35,250 [INFO] pipeline: T1112 Test 32: start=2026-10-27T00:40:12.622Z end=2026-10-27T00:40:19.978Z status=completed
-2026-10-27 08:15:35,250 [INFO] pipeline: T1112 Test 33: start=2026-10-27T00:40:27.063Z end=2026-10-27T00:40:34.581Z status=completed
-2026-10-27 08:15:35,250 [INFO] pipeline: T1112 Test 34: start=2026-10-27T00:40:41.417Z end=2026-10-27T00:40:49.876Z status=completed
-2026-10-27 08:15:35,250 [INFO] pipeline: T1112 Test 35: start=2026-10-27T00:40:57.948Z end=2026-10-27T00:41:05.406Z status=completed
-2026-10-27 08:15:35,250 [INFO] pipeline: T1112 Test 36: start=2026-10-27T00:41:13.168Z end=2026-10-27T00:41:20.292Z status=completed
-2026-10-27 08:15:35,250 [INFO] pipeline: T1112 Test 37: start=2026-10-27T00:41:28.321Z end=2026-10-27T00:41:37.147Z status=completed
-2026-10-27 08:15:35,251 [INFO] pipeline: T1112 Test 38: start=2026-10-27T00:41:44.067Z end=2026-10-27T00:41:51.001Z status=completed
-2026-10-27 08:15:35,251 [INFO] pipeline: T1112 Test 39: start=2026-10-27T00:42:00.538Z end=2026-10-27T00:42:08.532Z status=completed
-2026-10-27 08:15:35,251 [INFO] pipeline: T1112 Test 40: start=2026-10-27T00:42:16.168Z end=2026-10-27T00:42:23.692Z status=completed
-2026-10-27 08:15:35,251 [INFO] pipeline: T1112 Test 41: start=2026-10-27T00:42:31.609Z end=2026-10-27T00:42:38.867Z status=completed
-2026-10-27 08:15:35,251 [INFO] pipeline: T1112 Test 42: start=2026-10-27T00:42:45.343Z end=2026-10-27T00:42:51.628Z status=completed
-2026-10-27 08:15:35,251 [INFO] pipeline: T1112 Test 43: start=2026-10-27T00:42:58.542Z end=2026-10-27T00:43:05.699Z status=completed
-2026-10-27 08:15:35,251 [INFO] pipeline: T1112 Test 44: start=2026-10-27T00:43:12.304Z end=2026-10-27T00:43:18.887Z status=completed
-2026-10-27 08:15:35,251 [INFO] pipeline: T1112 Test 45: start=2026-10-27T00:43:25.466Z end=2026-10-27T00:43:31.773Z status=completed
-2026-10-27 08:15:35,252 [INFO] pipeline: T1112 Test 46: start=2026-10-27T00:43:38.247Z end=2026-10-27T00:43:45.206Z status=completed
-2026-10-27 08:15:35,252 [INFO] pipeline: T1112 Test 47: start=2026-10-27T00:43:51.468Z end=2026-10-27T00:43:58.252Z status=completed
-2026-10-27 08:15:35,252 [INFO] pipeline: T1112 Test 48: start=2026-10-27T00:44:05.535Z end=2026-10-27T00:44:14.107Z status=completed
-2026-10-27 08:15:35,252 [INFO] pipeline: T1112 Test 49: start=2026-10-27T00:44:20.405Z end=2026-10-27T00:44:27.282Z status=completed
-2026-10-27 08:15:35,252 [INFO] pipeline: T1112 Test 50: start=2026-10-27T00:44:34.526Z end=2026-10-27T00:44:41.893Z status=completed
-2026-10-27 08:15:35,252 [INFO] pipeline: T1112 Test 51: start=2026-10-27T00:44:49.775Z end=2026-10-27T00:44:56.845Z status=completed
-2026-10-27 08:15:35,253 [INFO] pipeline: T1112 Test 52: start=2026-10-27T00:45:05.831Z end=2026-10-27T00:45:14.621Z status=completed
-2026-10-27 08:15:35,253 [INFO] pipeline: T1112 Test 53: start=2026-10-27T00:45:21.299Z end=2026-10-27T00:45:27.711Z status=completed
-2026-10-27 08:15:35,253 [INFO] pipeline: T1112 Test 54: start=2026-10-27T00:45:37.677Z end=2026-10-27T00:45:44.928Z status=completed
-2026-10-27 08:15:35,253 [INFO] pipeline: T1112 Test 55: start=2026-10-27T00:45:52.385Z end=2026-10-27T00:45:58.592Z status=completed
-2026-10-27 08:15:35,253 [INFO] pipeline: T1112 Test 56: start=2026-10-27T00:46:07.268Z end=2026-10-27T00:46:16.811Z status=completed
-2026-10-27 08:15:35,253 [INFO] pipeline: T1112 Test 57: start=2026-10-27T00:46:25.385Z end=2026-10-27T00:46:36.738Z status=completed
-2026-10-27 08:15:35,253 [INFO] pipeline: T1112 Test 58: start=2026-10-27T00:46:46.029Z end=2026-10-27T00:46:53.303Z status=completed
-2026-10-27 08:15:35,254 [INFO] pipeline: T1112 Test 59: start=2026-10-27T00:46:59.191Z end=2026-10-27T00:47:07.175Z status=completed
-2026-10-27 08:15:35,254 [INFO] pipeline: T1112 Test 60: start=2026-10-27T00:47:15.362Z end=2026-10-27T00:47:23.370Z status=completed
-2026-10-27 08:15:35,254 [INFO] pipeline: T1112 Test 61: start=2026-10-27T00:47:31.127Z end=2026-10-27T00:47:39.160Z status=completed
-2026-10-27 08:15:35,254 [INFO] pipeline: T1112 Test 62: start=2026-10-27T00:47:47.504Z end=2026-10-27T00:47:53.744Z status=completed
-2026-10-27 08:15:35,254 [INFO] pipeline: T1112 Test 63: start=2026-10-27T00:47:59.925Z end=2026-10-27T00:48:07.163Z status=completed
-2026-10-27 08:15:35,254 [INFO] pipeline: T1112 Test 64: start=2026-10-27T00:48:13.598Z end=2026-10-27T00:48:20.193Z status=completed
-2026-10-27 08:15:35,254 [INFO] pipeline: T1112 Test 65: start=2026-10-27T00:48:28.199Z end=2026-10-27T00:48:35.944Z status=completed
-2026-10-27 08:15:35,254 [INFO] pipeline: T1112 Test 66: start=2026-10-27T00:48:43.709Z end=2026-10-27T00:48:51.210Z status=completed
-2026-10-27 08:15:35,255 [INFO] pipeline: T1112 Test 67: start=2026-10-27T00:48:57.276Z end=2026-10-27T00:49:03.845Z status=completed
-2026-10-27 08:15:35,255 [INFO] pipeline: T1112 Test 68: start=2026-10-27T00:49:10.507Z end=2026-10-27T00:49:17.318Z status=completed
-2026-10-27 08:15:35,255 [INFO] pipeline: T1112 Test 69: start=2026-10-27T00:49:24.231Z end=2026-10-27T00:49:31.314Z status=completed
-2026-10-27 08:15:35,255 [INFO] pipeline: T1112 Test 70: start=2026-10-27T00:51:38.730Z end=2026-10-27T00:51:48.515Z status=completed
-2026-10-27 08:15:35,255 [INFO] pipeline: T1112 Test 71: start=2026-10-27T00:52:01.658Z end=2026-10-27T00:52:11.415Z status=completed
-2026-10-27 08:15:35,255 [INFO] pipeline: T1112 Test 72: start=2026-10-27T00:52:19.045Z end=2026-10-27T00:52:35.920Z status=completed
-2026-10-27 08:15:35,255 [INFO] pipeline: T1112 Test 73: start=2026-10-27T00:52:46.041Z end=2026-10-27T00:52:53.712Z status=completed
-2026-10-27 08:15:35,255 [INFO] pipeline: T1112 Test 74: start=2026-10-27T00:53:01.195Z end=2026-10-27T00:53:07.706Z status=completed
-2026-10-27 08:15:35,256 [INFO] pipeline: T1112 Test 75: start=2026-10-27T00:53:13.674Z end=2026-10-27T00:53:21.016Z status=completed
-2026-10-27 08:15:35,256 [INFO] pipeline: T1112 Test 76: start=2026-10-27T00:53:30.014Z end=2026-10-27T00:53:40.509Z status=completed
-2026-10-27 08:15:35,256 [INFO] pipeline: T1112 Test 77: start=2026-10-27T00:53:51.847Z end=2026-10-27T00:54:02.506Z status=completed
-2026-10-27 08:15:35,256 [INFO] pipeline: T1112 Test 78: start=2026-10-27T00:54:10.656Z end=2026-10-27T00:54:20.572Z status=completed
-2026-10-27 08:15:35,256 [INFO] pipeline: T1112 Test 79: start=2026-10-27T00:54:31.177Z end=2026-10-27T00:54:40.313Z status=completed
-2026-10-27 08:15:35,256 [INFO] pipeline: T1112 Test 80: start=2026-10-27T00:54:46.678Z end=2026-10-27T00:54:54.483Z status=completed
-2026-10-27 08:15:35,256 [INFO] pipeline: T1112 Test 81: start=2026-10-27T00:55:01.618Z end=2026-10-27T00:55:09.484Z status=completed
-2026-10-27 08:15:35,256 [INFO] pipeline: T1112 Test 82: start=2026-10-27T00:55:14.751Z end=2026-10-27T00:55:21.024Z status=completed
-2026-10-27 08:15:35,256 [INFO] pipeline: T1112 Test 83: start=2026-10-27T00:55:27.341Z end=2026-10-27T00:55:33.142Z status=completed
-2026-10-27 08:15:35,257 [INFO] pipeline: T1112 Test 84: start=2026-10-27T00:55:42.849Z end=2026-10-27T00:55:53.827Z status=completed
-2026-10-27 08:15:35,257 [INFO] pipeline: T1112 Test 85: start=2026-10-27T00:56:02.357Z end=2026-10-27T00:56:11.108Z status=completed
-2026-10-27 08:15:35,257 [INFO] pipeline: T1112 Test 86: start=2026-10-27T00:56:19.541Z end=2026-10-27T00:56:29.058Z status=completed
-2026-10-27 08:15:35,257 [INFO] pipeline: T1112 Test 87: start=2026-10-27T00:56:38.563Z end=2026-10-27T00:56:48.517Z status=completed
-2026-10-27 08:15:35,257 [INFO] pipeline: T1112 Test 88: start=2026-10-27T00:56:57.634Z end=2026-10-27T00:57:04.870Z status=completed
-2026-10-27 08:15:35,257 [INFO] pipeline: T1112 Test 89: start=2026-10-27T00:57:12.316Z end=2026-10-27T00:57:20.165Z status=completed
-2026-10-27 08:15:35,257 [INFO] pipeline: T1112 Test 90: start=2026-10-27T00:57:26.514Z end=2026-10-27T00:57:33.418Z status=completed
-2026-10-27 08:15:35,257 [INFO] pipeline: T1505.003 Test 1: start=2026-10-27T00:57:40.437Z end=2026-10-27T00:57:42.154Z status=completed
-2026-10-27 08:15:35,258 [INFO] pipeline: T1078.001 Test 1: start=2026-10-27T00:57:42.947Z end=2026-10-27T00:57:45.256Z status=completed
-2026-10-27 08:15:35,258 [INFO] pipeline: T1078.001 Test 2: start=2026-10-27T00:57:47.705Z end=2026-10-27T00:57:49.129Z status=completed
-2026-10-27 08:15:35,258 [INFO] pipeline: T1547.003 Test 1: start=2026-10-27T00:57:50.664Z end=2026-10-27T00:57:58.570Z status=completed
-2026-10-27 08:15:35,258 [INFO] pipeline: T1547.003 Test 2: start=2026-10-27T00:58:04.146Z end=2026-10-27T00:58:09.634Z status=completed
-2026-10-27 08:15:35,258 [INFO] pipeline: T1136.001 Test 4: start=2026-10-27T00:58:15.073Z end=2026-10-27T00:58:17.564Z status=completed
-2026-10-27 08:15:35,258 [INFO] pipeline: T1136.001 Test 5: start=2026-10-27T00:58:19.153Z end=2026-10-27T00:58:22.516Z status=completed
-2026-10-27 08:15:35,258 [INFO] pipeline: T1136.001 Test 8: start=2026-10-27T00:58:27.081Z end=2026-10-27T00:58:30.250Z status=completed
-2026-10-27 08:15:35,258 [INFO] pipeline: T1136.001 Test 9: start=2026-10-27T00:58:32.567Z end=2026-10-27T00:58:59.950Z status=completed
-2026-10-27 08:15:35,258 [INFO] pipeline: T1547.004 Test 1: start=2026-10-27T00:59:04.283Z end=2026-10-27T00:59:06.870Z status=completed
-2026-10-27 08:15:35,259 [INFO] pipeline: T1547.004 Test 2: start=2026-10-27T00:59:08.872Z end=2026-10-27T00:59:11.226Z status=completed
-2026-10-27 08:15:35,259 [INFO] pipeline: T1547.004 Test 3: start=2026-10-27T00:59:13.099Z end=2026-10-27T00:59:16.036Z status=completed
-2026-10-27 08:15:35,259 [INFO] pipeline: T1547.004 Test 4: start=2026-10-27T00:59:19.178Z end=2026-10-27T00:59:21.277Z status=completed
-2026-10-27 08:15:35,259 [INFO] pipeline: T1547.004 Test 5: start=2026-10-27T00:59:23.154Z end=2026-10-27T00:59:25.168Z status=completed
-2026-10-27 08:15:35,259 [INFO] pipeline: T1546.012 Test 1: start=2026-10-27T00:59:27.286Z end=2026-10-27T00:59:28.350Z status=completed
-2026-10-27 08:15:35,259 [INFO] pipeline: T1546.012 Test 2: start=2026-10-27T00:59:29.365Z end=2026-10-27T00:59:30.575Z status=completed
-2026-10-27 08:15:35,259 [INFO] pipeline: T1546.012 Test 3: start=2026-10-27T00:59:31.460Z end=2026-10-27T00:59:36.212Z status=completed
-2026-10-27 08:15:35,259 [INFO] pipeline: T1546.008 Test 1: start=2026-10-27T00:59:40.351Z end=2026-10-27T00:59:45.645Z status=completed
-2026-10-27 08:15:35,260 [INFO] pipeline: T1546.008 Test 2: start=2026-10-27T00:59:48.995Z end=2026-10-27T00:59:51.796Z status=completed
-2026-10-27 08:15:35,260 [INFO] pipeline: T1546.008 Test 3: start=2026-10-27T00:59:54.138Z end=2026-10-27T00:59:57.657Z status=completed
-2026-10-27 08:15:35,260 [INFO] pipeline: T1546.008 Test 4: start=2026-10-27T01:00:05.241Z end=2026-10-27T01:00:10.528Z status=completed
-2026-10-27 08:15:35,260 [INFO] pipeline: T1546.008 Test 5: start=2026-10-27T01:00:12.699Z end=2026-10-27T01:00:14.875Z status=completed
-2026-10-27 08:15:35,260 [INFO] pipeline: T1546.008 Test 6: start=2026-10-27T01:00:17.490Z end=2026-10-27T01:00:19.811Z status=completed
-2026-10-27 08:15:35,260 [INFO] pipeline: T1546.008 Test 7: start=2026-10-27T01:00:21.605Z end=2026-10-27T01:00:23.580Z status=completed
-2026-10-27 08:15:35,260 [INFO] pipeline: T1546.008 Test 8: start=2026-10-27T01:00:25.262Z end=2026-10-27T01:00:27.668Z status=completed
-2026-10-27 08:15:35,260 [INFO] pipeline: T1546.008 Test 9: start=2026-10-27T01:00:29.741Z end=2026-10-27T01:00:31.831Z status=completed
-2026-10-27 08:15:35,261 [INFO] pipeline: T1546.008 Test 10: start=2026-10-27T01:00:33.601Z end=2026-10-27T01:00:35.602Z status=completed
-2026-10-27 08:15:35,261 [INFO] pipeline: T1136.002 Test 1: start=2026-10-27T01:00:38.628Z end=2026-10-27T01:00:41.858Z status=completed
-2026-10-27 08:15:35,261 [INFO] pipeline: T1136.002 Test 2: start=2026-10-27T01:00:45.721Z end=2026-10-27T01:00:48.679Z status=completed
-2026-10-27 08:15:35,261 [INFO] pipeline: T1136.002 Test 3: start=2026-10-27T01:00:51.906Z end=2026-10-27T01:00:57.977Z status=completed
-2026-10-27 08:15:35,261 [INFO] pipeline: T1137.001 Test 1: start=2026-10-27T01:01:01.870Z end=2026-10-27T01:01:20.126Z status=completed
-2026-10-27 08:15:35,261 [INFO] pipeline: T1546.009 Test 1: start=2026-10-27T01:01:23.688Z end=2026-10-27T01:01:26.241Z status=completed
-2026-10-27 08:15:35,261 [INFO] pipeline: T1546.003 Test 1: start=2026-10-27T01:01:29.494Z end=2026-10-27T01:03:11.014Z status=completed
-2026-10-27 08:15:35,261 [INFO] pipeline: T1546.003 Test 2: start=2026-10-27T01:03:39.753Z end=2026-10-27T01:03:47.880Z status=completed
-2026-10-27 08:15:35,262 [INFO] pipeline: T1546.003 Test 3: start=2026-10-27T01:03:52.292Z end=2026-10-27T01:03:55.462Z status=completed
-2026-10-27 08:15:35,262 [INFO] pipeline: T1546.001 Test 1: start=2026-10-27T01:03:58.566Z end=2026-10-27T01:04:00.113Z status=completed
-2026-10-27 08:15:35,262 [INFO] pipeline: T1547.001 Test 1: start=2026-10-27T01:04:01.589Z end=2026-10-27T01:04:05.769Z status=completed
-2026-10-27 08:15:35,262 [INFO] pipeline: T1547.001 Test 2: start=2026-10-27T01:04:09.527Z end=2026-10-27T01:04:13.635Z status=completed
-2026-10-27 08:15:35,262 [INFO] pipeline: T1547.001 Test 3: start=2026-10-27T01:04:17.341Z end=2026-10-27T01:04:21.543Z status=completed
-2026-10-27 08:15:35,262 [INFO] pipeline: T1547.001 Test 4: start=2026-10-27T01:04:27.160Z end=2026-10-27T01:04:33.647Z status=completed
-2026-10-27 08:15:35,262 [INFO] pipeline: T1547.001 Test 5: start=2026-10-27T01:04:39.349Z end=2026-10-27T01:04:45.209Z status=completed
-2026-10-27 08:15:35,262 [INFO] pipeline: T1547.001 Test 6: start=2026-10-27T01:04:50.612Z end=2026-10-27T01:06:37.499Z status=completed
-2026-10-27 08:15:35,263 [INFO] pipeline: T1547.001 Test 7: start=2026-10-27T01:06:43.573Z end=2026-10-27T01:06:50.084Z status=completed
-2026-10-27 08:15:35,263 [INFO] pipeline: T1547.001 Test 8: start=2026-10-27T01:06:55.369Z end=2026-10-27T01:07:00.160Z status=completed
-2026-10-27 08:15:35,263 [INFO] pipeline: T1547.001 Test 9: start=2026-10-27T01:07:03.543Z end=2026-10-27T01:07:10.439Z status=completed
-2026-10-27 08:15:35,263 [INFO] pipeline: T1547.001 Test 10: start=2026-10-27T01:07:15.859Z end=2026-10-27T01:07:22.783Z status=completed
-2026-10-27 08:15:35,263 [INFO] pipeline: T1547.001 Test 11: start=2026-10-27T01:07:28.851Z end=2026-10-27T01:07:33.638Z status=completed
-2026-10-27 08:15:35,263 [INFO] pipeline: T1547.001 Test 12: start=2026-10-27T01:07:38.280Z end=2026-10-27T01:07:42.843Z status=completed
-2026-10-27 08:15:35,264 [INFO] pipeline: T1547.001 Test 13: start=2026-10-27T01:07:48.959Z end=2026-10-27T01:07:54.460Z status=completed
-2026-10-27 08:15:35,264 [INFO] pipeline: T1547.001 Test 14: start=2026-10-27T01:07:59.095Z end=2026-10-27T01:08:05.280Z status=completed
-2026-10-27 08:15:35,264 [INFO] pipeline: T1547.001 Test 15: start=2026-10-27T01:08:10.976Z end=2026-10-27T01:08:17.163Z status=completed
-2026-10-27 08:15:35,264 [INFO] pipeline: T1547.001 Test 16: start=2026-10-27T01:08:21.312Z end=2026-10-27T01:08:25.408Z status=completed
-2026-10-27 08:15:35,264 [INFO] pipeline: T1547.001 Test 17: start=2026-10-27T01:08:29.328Z end=2026-10-27T01:08:34.266Z status=completed
-2026-10-27 08:15:35,264 [INFO] pipeline: T1547.001 Test 18: start=2026-10-27T01:08:39.621Z end=2026-10-27T01:08:42.703Z status=completed
-2026-10-27 08:15:35,265 [INFO] pipeline: T1547.001 Test 19: start=2026-10-27T01:08:46.231Z end=2026-10-27T01:08:52.230Z status=completed
-2026-10-27 08:15:35,265 [INFO] pipeline: T1547.001 Test 20: start=2026-10-27T01:08:57.778Z end=2026-10-27T01:09:03.142Z status=completed
-2026-10-27 08:15:35,265 [INFO] pipeline: T1098 Test 1: start=2026-10-27T01:09:06.607Z end=2026-10-27T01:09:13.228Z status=completed
-2026-10-27 08:15:35,265 [INFO] pipeline: T1098 Test 2: start=2026-10-27T01:09:18.623Z end=2026-10-27T01:09:25.391Z status=completed
-2026-10-27 08:15:35,265 [INFO] pipeline: T1098 Test 9: start=2026-10-27T01:09:30.645Z end=2026-10-27T01:09:34.708Z status=completed
-2026-10-27 08:15:35,265 [INFO] pipeline: T1098 Test 10: start=2026-10-27T01:09:38.000Z end=2026-10-27T01:09:44.194Z status=completed
-2026-10-27 08:15:35,266 [INFO] pipeline: T1098 Test 11: start=2026-10-27T01:09:48.891Z end=2026-10-27T01:09:56.690Z status=completed
-2026-10-27 08:15:35,266 [INFO] pipeline: T1098 Test 12: start=2026-10-27T01:10:02.369Z end=2026-10-27T01:10:09.944Z status=completed
-2026-10-27 08:15:35,266 [INFO] pipeline: T1098 Test 13: start=2026-10-27T01:10:15.610Z end=2026-10-27T01:10:21.555Z status=completed
-2026-10-27 08:15:35,266 [INFO] pipeline: T1098 Test 14: start=2026-10-27T01:10:25.415Z end=2026-10-27T01:10:32.005Z status=completed
-2026-10-27 08:15:35,266 [INFO] pipeline: T1098 Test 15: start=2026-10-27T01:10:36.497Z end=2026-10-27T01:10:42.664Z status=completed
-2026-10-27 08:15:35,266 [INFO] pipeline: T1098 Test 16: start=2026-10-27T01:10:47.421Z end=2026-10-27T01:10:54.559Z status=completed
-2026-10-27 08:15:35,266 [INFO] pipeline: T1505.004 Test 1: start=2026-10-27T01:10:59.867Z end=2026-10-27T01:11:01.059Z status=completed
-2026-10-27 08:15:35,267 [INFO] pipeline: T1505.004 Test 2: start=2026-10-27T01:11:01.978Z end=2026-10-27T01:11:04.765Z status=completed
-2026-10-27 08:15:35,267 [INFO] pipeline: T1546 Test 1: start=2026-10-27T01:11:07.785Z end=2026-10-27T01:11:11.873Z status=completed
-2026-10-27 08:15:35,267 [INFO] pipeline: T1546 Test 2: start=2026-10-27T01:11:15.990Z end=2026-10-27T01:11:19.855Z status=completed
-2026-10-27 08:15:35,267 [INFO] pipeline: T1546 Test 3: start=2026-10-27T01:11:22.672Z end=2026-10-27T01:11:26.018Z status=completed
-2026-10-27 08:15:35,267 [INFO] pipeline: T1546 Test 4: start=2026-10-27T01:11:29.368Z end=2026-10-27T01:11:34.805Z status=completed
-2026-10-27 08:15:35,268 [INFO] pipeline: T1546 Test 5: start=2026-10-27T01:11:37.654Z end=2026-10-27T01:11:40.064Z status=completed
-2026-10-27 08:15:35,268 [INFO] pipeline: T1546 Test 6: start=2026-10-27T01:11:42.346Z end=2026-10-27T01:11:45.320Z status=completed
-2026-10-27 08:15:35,268 [INFO] pipeline: T1546 Test 7: start=2026-10-27T01:11:48.560Z end=2026-10-27T01:11:51.340Z status=completed
-2026-10-27 08:15:35,268 [INFO] pipeline: T1546 Test 8: start=2026-10-27T01:11:53.335Z end=2026-10-27T01:11:59.524Z status=completed
-2026-10-27 08:15:35,268 [INFO] pipeline: T1546 Test 9: start=2026-10-27T01:12:03.411Z end=2026-10-27T01:12:05.388Z status=completed
-2026-10-27 08:15:35,268 [INFO] pipeline: T1547.002 Test 1: start=2026-10-27T01:12:07.707Z end=2026-10-27T01:12:12.120Z status=completed
-2026-10-27 08:15:35,269 [INFO] pipeline: T1546.015 Test 1: start=2026-10-27T01:12:13.872Z end=2026-10-27T01:12:18.733Z status=completed
-2026-10-27 08:15:35,269 [INFO] pipeline: T1546.015 Test 2: start=2026-10-27T01:12:21.363Z end=2026-10-27T01:12:25.691Z status=completed
-2026-10-27 08:15:35,269 [INFO] pipeline: T1546.015 Test 3: start=2026-10-27T01:12:28.053Z end=2026-10-27T01:12:30.933Z status=completed
-2026-10-27 08:15:35,269 [INFO] pipeline: T1546.015 Test 4: start=2026-10-27T01:12:34.302Z end=2026-10-27T01:12:40.861Z status=completed
-2026-10-27 08:15:35,269 [INFO] pipeline: T1137.004 Test 1: start=2026-10-27T01:12:44.033Z end=2026-10-27T01:12:45.225Z status=completed
-2026-10-27 08:15:35,269 [INFO] pipeline: T1546.018 Test 1: start=2026-10-27T01:12:45.948Z end=2026-10-27T01:13:13.002Z status=completed
-2026-10-27 08:15:35,269 [INFO] pipeline: T1546.018 Test 2: start=2026-10-27T01:13:22.018Z end=2026-10-27T01:13:27.793Z status=completed
-2026-10-27 08:15:35,269 [INFO] pipeline: T1197 Test 1: start=2026-10-27T01:13:32.948Z end=2026-10-27T01:13:37.491Z status=completed
-2026-10-27 08:15:35,270 [INFO] pipeline: T1197 Test 2: start=2026-10-27T01:13:39.170Z end=2026-10-27T01:13:42.960Z status=completed
-2026-10-27 08:15:35,270 [INFO] pipeline: T1197 Test 3: start=2026-10-27T01:13:45.917Z end=2026-10-27T01:13:54.324Z status=completed
-2026-10-27 08:15:35,270 [INFO] pipeline: T1197 Test 4: start=2026-10-27T01:13:55.855Z end=2026-10-27T01:13:58.811Z status=completed
-2026-10-27 08:15:35,270 [INFO] pipeline: T1546.010 Test 1: start=2026-10-27T01:14:01.317Z end=2026-10-27T01:14:02.236Z status=completed
-2026-10-27 08:15:35,270 [INFO] pipeline: T1546.002 Test 1: start=2026-10-27T01:14:03.696Z end=2026-10-27T01:14:05.678Z status=completed
-2026-10-27 08:15:35,270 [INFO] pipeline: T1037.001 Test 1: start=2026-10-27T01:14:07.302Z end=2026-10-27T01:14:08.527Z status=completed
-2026-10-27 08:15:35,270 [INFO] pipeline: T1137.002 Test 1: start=2026-10-27T01:14:09.729Z end=2026-10-27T01:14:25.162Z status=completed
-2026-10-27 08:15:35,271 [INFO] pipeline: T1547.008 Test 1: start=2026-10-27T01:14:32.821Z end=2026-10-27T01:14:35.555Z status=completed
-2026-10-27 08:15:35,271 [INFO] pipeline: T1053.002 Test 1: start=2026-10-27T01:14:38.513Z end=2026-10-27T01:14:40.886Z status=completed
-2026-10-27 08:15:35,271 [INFO] pipeline: T1546.007 Test 1: start=2026-10-27T01:14:42.675Z end=2026-10-27T01:14:46.564Z status=completed
-2026-10-27 08:15:35,271 [INFO] pipeline: T1078.003 Test 1: start=2026-10-27T01:14:49.612Z end=2026-10-27T01:14:53.603Z status=completed
-2026-10-27 08:15:35,271 [INFO] pipeline: T1078.003 Test 6: start=2026-10-27T01:14:56.813Z end=2026-10-27T01:15:05.833Z status=completed
-2026-10-27 08:15:35,271 [INFO] pipeline: T1078.003 Test 7: start=2026-10-27T01:15:10.193Z end=2026-10-27T01:15:17.192Z status=completed
-2026-10-27 08:15:35,271 [INFO] pipeline: T1078.003 Test 13: start=2026-10-27T01:15:20.922Z end=2026-10-27T01:15:26.141Z status=completed
-2026-10-27 08:15:35,271 [INFO] pipeline: T1556.001 Test 1: start=2026-10-27T01:15:28.672Z end=2026-10-27T01:15:31.464Z status=completed
-2026-10-27 08:15:56,016 [INFO] pipeline.elastic_client: Triggered batch 1 (25 rules)
-2026-10-27 08:16:03,074 [INFO] pipeline.elastic_client: Triggered batch 2 (25 rules)
-2026-10-27 08:16:11,907 [INFO] pipeline.elastic_client: Triggered batch 3 (25 rules)
-2026-10-27 08:16:19,287 [INFO] pipeline.elastic_client: Triggered batch 4 (25 rules)
-2026-10-27 08:16:24,792 [INFO] pipeline.elastic_client: Triggered batch 5 (25 rules)
-2026-10-27 08:16:32,845 [INFO] pipeline.elastic_client: Triggered batch 6 (25 rules)
-2026-10-27 08:16:41,926 [INFO] pipeline.elastic_client: Triggered batch 7 (25 rules)
-2026-10-27 08:16:50,575 [INFO] pipeline.elastic_client: Triggered batch 8 (25 rules)
-2026-10-27 08:16:57,691 [INFO] pipeline.elastic_client: Triggered batch 9 (25 rules)
-2026-10-27 08:17:04,524 [INFO] pipeline.elastic_client: Triggered batch 10 (25 rules)
-2026-10-27 08:17:11,058 [INFO] pipeline.elastic_client: Triggered batch 11 (25 rules)
-2026-10-27 08:17:20,011 [INFO] pipeline.elastic_client: Triggered batch 12 (25 rules)
-2026-10-27 08:17:28,178 [INFO] pipeline.elastic_client: Triggered batch 13 (25 rules)
-2026-10-27 08:17:33,608 [INFO] pipeline.elastic_client: Triggered batch 14 (25 rules)
-2026-10-27 08:17:39,945 [INFO] pipeline.elastic_client: Triggered batch 15 (25 rules)
-2026-10-27 08:17:45,744 [INFO] pipeline.elastic_client: Triggered batch 16 (25 rules)
-2026-10-27 08:17:52,241 [INFO] pipeline.elastic_client: Triggered batch 17 (25 rules)
-2026-10-27 08:17:58,377 [INFO] pipeline.elastic_client: Triggered batch 18 (25 rules)
-2026-10-27 08:18:04,811 [INFO] pipeline.elastic_client: Triggered batch 19 (25 rules)
-2026-10-27 08:18:10,507 [INFO] pipeline.elastic_client: Triggered batch 20 (25 rules)
-2026-10-27 08:18:18,089 [INFO] pipeline.elastic_client: Triggered batch 21 (25 rules)
-2026-10-27 08:18:23,644 [INFO] pipeline.elastic_client: Triggered batch 22 (25 rules)
-2026-10-27 08:18:30,343 [INFO] pipeline.elastic_client: Triggered batch 23 (25 rules)
-2026-10-27 08:18:36,529 [INFO] pipeline.elastic_client: Triggered batch 24 (25 rules)
-2026-10-27 08:18:44,487 [INFO] pipeline.elastic_client: Triggered batch 25 (25 rules)
-2026-10-27 08:18:48,234 [INFO] pipeline.elastic_client: Triggered batch 26 (10 rules)
-2026-10-27 08:18:48,234 [INFO] pipeline.elastic_client: Triggered 635 rules
-2026-10-27 08:18:48,411 [INFO] pipeline.elastic_client: 207 rules not complete
-2026-10-27 08:18:58,537 [INFO] pipeline.elastic_client: 207 rules not complete
-2026-10-27 08:19:08,645 [INFO] pipeline.elastic_client: 195 rules not complete
-2026-10-27 08:19:18,742 [INFO] pipeline.elastic_client: 169 rules not complete
-2026-10-27 08:19:28,825 [INFO] pipeline.elastic_client: 153 rules not complete
-2026-10-27 08:19:38,903 [INFO] pipeline.elastic_client: 153 rules not complete
-2026-10-27 08:19:48,992 [INFO] pipeline.elastic_client: 153 rules not complete
-2026-10-27 08:19:59,112 [INFO] pipeline.elastic_client: 128 rules not complete
-2026-10-27 08:20:09,355 [INFO] pipeline.elastic_client: 97 rules not complete
-2026-10-27 08:20:19,483 [INFO] pipeline.elastic_client: 56 rules not complete
-2026-10-27 08:20:29,574 [INFO] pipeline.elastic_client: 29 rules not complete
-2026-10-27 08:20:39,698 [INFO] pipeline.elastic_client: 6 rules not complete
-2026-10-27 08:20:49,781 [INFO] pipeline.elastic_client: 1 rules not complete
-2026-10-27 08:20:59,933 [INFO] pipeline.elastic_client: 1 rules not complete
-2026-10-27 08:21:10,027 [INFO] pipeline.elastic_client: 1 rules not complete
-2026-10-27 08:21:20,168 [INFO] pipeline.elastic_client: 1 rules not complete
-2026-10-27 08:21:30,251 [INFO] pipeline.elastic_client: 1 rules not complete
-2026-10-27 08:21:40,395 [INFO] pipeline.elastic_client: 1 rules not complete
-2026-10-27 08:21:50,505 [INFO] pipeline.elastic_client: 1 rules not complete
-2026-10-27 08:22:00,673 [INFO] pipeline.elastic_client: 0 rules not complete
-2026-10-27 08:25:31,538 [INFO] pipeline: Tests to match: 247
-2026-10-27 08:25:31,539 [INFO] pipeline: Results to save: 247
-2026-10-27 08:25:31,596 [INFO] pipeline: Results saved to output/results.jsonl
+2026-10-28 00:45:22,997 [INFO] pipeline.elastic_client: Find 637 enabled rules (tag=OS: Windows)
+2026-10-28 00:45:23,024 [INFO] pipeline: Running 247 tests
+2026-10-28 01:48:40,761 [INFO] pipeline: T1053.005 Test 1: start=2026-10-27T17:45:38.064Z end=2026-10-27T17:45:57.126Z status=completed
+2026-10-28 01:48:40,763 [INFO] pipeline: T1053.005 Test 2: start=2026-10-27T17:46:06.146Z end=2026-10-27T17:46:13.279Z status=completed
+2026-10-28 01:48:40,763 [INFO] pipeline: T1053.005 Test 3: start=2026-10-27T17:46:21.241Z end=2026-10-27T17:46:29.242Z status=completed
+2026-10-28 01:48:40,763 [INFO] pipeline: T1053.005 Test 4: start=2026-10-27T17:46:36.269Z end=2026-10-27T17:46:44.797Z status=completed
+2026-10-28 01:48:40,763 [INFO] pipeline: T1053.005 Test 5: start=2026-10-27T17:46:53.245Z end=2026-10-27T17:47:22.693Z status=completed
+2026-10-28 01:48:40,763 [INFO] pipeline: T1053.005 Test 6: start=2026-10-27T17:47:32.240Z end=2026-10-27T17:47:38.492Z status=completed
+2026-10-28 01:48:40,764 [INFO] pipeline: T1053.005 Test 7: start=2026-10-27T17:47:47.261Z end=2026-10-27T17:47:50.583Z status=completed
+2026-10-28 01:48:40,764 [INFO] pipeline: T1053.005 Test 8: start=2026-10-27T17:47:54.667Z end=2026-10-27T17:48:01.642Z status=completed
+2026-10-28 01:48:40,764 [INFO] pipeline: T1053.005 Test 9: start=2026-10-27T17:48:10.533Z end=2026-10-27T17:48:17.277Z status=completed
+2026-10-28 01:48:40,764 [INFO] pipeline: T1053.005 Test 10: start=2026-10-27T17:48:25.034Z end=2026-10-27T17:48:28.824Z status=completed
+2026-10-28 01:48:40,764 [INFO] pipeline: T1053.005 Test 11: start=2026-10-27T17:48:32.795Z end=2026-10-27T17:48:38.728Z status=completed
+2026-10-28 01:48:40,764 [INFO] pipeline: T1053.005 Test 12: start=2026-10-27T17:48:43.411Z end=2026-10-27T17:48:47.159Z status=completed
+2026-10-28 01:48:40,764 [INFO] pipeline: T1546.013 Test 1: start=2026-10-27T17:48:50.524Z end=2026-10-27T17:48:56.959Z status=completed
+2026-10-28 01:48:40,764 [INFO] pipeline: T1133 Test 1: start=2026-10-27T17:49:00.703Z end=2026-10-27T17:49:36.802Z status=completed
+2026-10-28 01:48:40,764 [INFO] pipeline: T1542.001 Test 1: start=2026-10-27T17:49:42.372Z end=2026-10-27T17:49:51.876Z status=completed
+2026-10-28 01:48:40,764 [INFO] pipeline: T1547 Test 1: start=2026-10-27T17:49:54.638Z end=2026-10-27T17:49:56.750Z status=completed
+2026-10-28 01:48:40,764 [INFO] pipeline: T1547 Test 2: start=2026-10-27T17:49:57.968Z end=2026-10-27T17:50:16.472Z status=completed
+2026-10-28 01:48:40,764 [INFO] pipeline: T1547 Test 3: start=2026-10-27T17:50:25.804Z end=2026-10-27T17:50:32.691Z status=completed
+2026-10-28 01:48:40,765 [INFO] pipeline: T1547.014 Test 1: start=2026-10-27T17:50:48.275Z end=2026-10-27T17:50:58.962Z status=completed
+2026-10-28 01:48:40,765 [INFO] pipeline: T1547.014 Test 2: start=2026-10-27T17:51:08.248Z end=2026-10-27T17:51:17.495Z status=completed
+2026-10-28 01:48:40,765 [INFO] pipeline: T1547.014 Test 3: start=2026-10-27T17:51:39.082Z end=2026-10-27T17:52:19.638Z status=completed
+2026-10-28 01:48:40,765 [INFO] pipeline: T1543.003 Test 1: start=2026-10-27T17:52:30.799Z end=2026-10-27T17:52:37.052Z status=completed
+2026-10-28 01:48:40,765 [INFO] pipeline: T1543.003 Test 2: start=2026-10-27T17:52:40.503Z end=2026-10-27T17:52:48.024Z status=completed
+2026-10-28 01:48:40,765 [INFO] pipeline: T1543.003 Test 3: start=2026-10-27T17:52:50.294Z end=2026-10-27T17:52:55.332Z status=completed
+2026-10-28 01:48:40,765 [INFO] pipeline: T1543.003 Test 4: start=2026-10-27T17:53:02.319Z end=2026-10-27T17:53:06.520Z status=completed
+2026-10-28 01:48:40,765 [INFO] pipeline: T1543.003 Test 5: start=2026-10-27T17:53:09.346Z end=2026-10-27T17:53:13.170Z status=completed
+2026-10-28 01:48:40,765 [INFO] pipeline: T1543.003 Test 6: start=2026-10-27T17:53:16.731Z end=2026-10-27T17:53:24.797Z status=completed
+2026-10-28 01:48:40,765 [INFO] pipeline: T1137 Test 1: start=2026-10-27T17:53:29.507Z end=2026-10-27T17:53:30.907Z status=completed
+2026-10-28 01:48:40,765 [INFO] pipeline: T1547.012 Test 1: start=2026-10-27T17:53:31.741Z end=2026-10-27T17:53:39.640Z status=completed
+2026-10-28 01:48:40,765 [INFO] pipeline: T1137.006 Test 1: start=2026-10-27T17:53:47.140Z end=2026-10-27T17:54:11.271Z status=completed
+2026-10-28 01:48:40,766 [INFO] pipeline: T1137.006 Test 2: start=2026-10-27T17:54:23.081Z end=2026-10-27T17:55:00.964Z status=completed
+2026-10-28 01:48:40,766 [INFO] pipeline: T1137.006 Test 3: start=2026-10-27T17:55:27.344Z end=2026-10-27T17:55:40.585Z status=completed
+2026-10-28 01:48:40,766 [INFO] pipeline: T1137.006 Test 4: start=2026-10-27T17:55:52.701Z end=2026-10-27T17:56:00.223Z status=completed
+2026-10-28 01:48:40,766 [INFO] pipeline: T1137.006 Test 5: start=2026-10-27T17:56:12.381Z end=2026-10-27T17:56:31.149Z status=completed
+2026-10-28 01:48:40,766 [INFO] pipeline: T1505.002 Test 1: start=2026-10-27T17:56:38.712Z end=2026-10-27T17:56:42.904Z status=completed
+2026-10-28 01:48:40,766 [INFO] pipeline: T1556.002 Test 1: start=2026-10-27T17:56:46.212Z end=2026-10-27T17:56:49.547Z status=completed
+2026-10-28 01:48:40,766 [INFO] pipeline: T1556.002 Test 2: start=2026-10-27T17:56:51.627Z end=2026-10-27T17:58:34.047Z status=completed
+2026-10-28 01:48:40,766 [INFO] pipeline: T1505.005 Test 1: start=2026-10-27T17:58:37.213Z end=2026-10-27T17:58:40.100Z status=completed
+2026-10-28 01:48:40,766 [INFO] pipeline: T1505.005 Test 2: start=2026-10-27T17:58:43.061Z end=2026-10-27T17:58:46.134Z status=completed
+2026-10-28 01:48:40,766 [INFO] pipeline: T1176 Test 1: start=2026-10-27T17:58:48.055Z end=2026-10-27T17:58:48.782Z status=completed
+2026-10-28 01:48:40,766 [INFO] pipeline: T1176 Test 2: start=2026-10-27T17:58:49.816Z end=2026-10-27T17:58:50.825Z status=completed
+2026-10-28 01:48:40,766 [INFO] pipeline: T1176 Test 3: start=2026-10-27T17:58:51.510Z end=2026-10-27T17:58:52.375Z status=completed
+2026-10-28 01:48:40,767 [INFO] pipeline: T1176 Test 4: start=2026-10-27T17:58:53.837Z end=2026-10-27T18:00:37.514Z status=completed
+2026-10-28 01:48:40,767 [INFO] pipeline: T1137.005 Test 1: start=2026-10-27T18:00:52.637Z end=2026-10-27T18:00:56.234Z status=completed
+2026-10-28 01:48:40,767 [INFO] pipeline: T1137.005 Test 2: start=2026-10-27T18:00:58.921Z end=2026-10-27T18:01:02.028Z status=completed
+2026-10-28 01:48:40,767 [INFO] pipeline: T1137.005 Test 3: start=2026-10-27T18:01:06.532Z end=2026-10-27T18:01:10.822Z status=completed
+2026-10-28 01:48:40,767 [INFO] pipeline: T1137.005 Test 4: start=2026-10-27T18:01:14.199Z end=2026-10-27T18:01:17.672Z status=completed
+2026-10-28 01:48:40,767 [INFO] pipeline: T1137.005 Test 5: start=2026-10-27T18:01:20.898Z end=2026-10-27T18:01:24.743Z status=completed
+2026-10-28 01:48:40,767 [INFO] pipeline: T1546.011 Test 1: start=2026-10-27T18:01:27.951Z end=2026-10-27T18:01:29.543Z status=completed
+2026-10-28 01:48:40,767 [INFO] pipeline: T1546.011 Test 2: start=2026-10-27T18:01:30.643Z end=2026-10-27T18:01:33.508Z status=completed
+2026-10-28 01:48:40,767 [INFO] pipeline: T1546.011 Test 3: start=2026-10-27T18:01:36.634Z end=2026-10-27T18:01:39.547Z status=completed
+2026-10-28 01:48:40,768 [INFO] pipeline: T1547.010 Test 1: start=2026-10-27T18:01:42.554Z end=2026-10-27T18:01:44.823Z status=completed
+2026-10-28 01:48:40,768 [INFO] pipeline: T1547.009 Test 1: start=2026-10-27T18:01:45.754Z end=2026-10-27T18:01:48.505Z status=completed
+2026-10-28 01:48:40,768 [INFO] pipeline: T1547.009 Test 2: start=2026-10-27T18:01:49.476Z end=2026-10-27T18:01:53.858Z status=completed
+2026-10-28 01:48:40,768 [INFO] pipeline: T1547.005 Test 1: start=2026-10-27T18:01:55.756Z end=2026-10-27T18:01:57.596Z status=completed
+2026-10-28 01:48:40,768 [INFO] pipeline: T1547.005 Test 2: start=2026-10-27T18:02:00.000Z end=2026-10-27T18:02:04.163Z status=completed
+2026-10-28 01:48:40,768 [INFO] pipeline: T1112 Test 1: start=2026-10-27T18:02:07.524Z end=2026-10-27T18:02:17.619Z status=completed
+2026-10-28 01:48:40,768 [INFO] pipeline: T1112 Test 2: start=2026-10-27T18:02:27.639Z end=2026-10-27T18:02:38.022Z status=completed
+2026-10-28 01:48:40,768 [INFO] pipeline: T1112 Test 3: start=2026-10-27T18:02:48.176Z end=2026-10-27T18:02:58.225Z status=completed
+2026-10-28 01:48:40,768 [INFO] pipeline: T1112 Test 4: start=2026-10-27T18:03:15.075Z end=2026-10-27T18:03:26.004Z status=completed
+2026-10-28 01:48:40,768 [INFO] pipeline: T1112 Test 5: start=2026-10-27T18:03:37.107Z end=2026-10-27T18:03:48.055Z status=completed
+2026-10-28 01:48:40,768 [INFO] pipeline: T1112 Test 6: start=2026-10-27T18:03:57.265Z end=2026-10-27T18:04:07.760Z status=completed
+2026-10-28 01:48:40,769 [INFO] pipeline: T1112 Test 7: start=2026-10-27T18:04:18.840Z end=2026-10-27T18:04:27.708Z status=completed
+2026-10-28 01:48:40,769 [INFO] pipeline: T1112 Test 8: start=2026-10-27T18:04:38.049Z end=2026-10-27T18:04:47.073Z status=completed
+2026-10-28 01:48:40,769 [INFO] pipeline: T1112 Test 9: start=2026-10-27T18:04:53.819Z end=2026-10-27T18:05:02.318Z status=completed
+2026-10-28 01:48:40,769 [INFO] pipeline: T1112 Test 10: start=2026-10-27T18:05:10.730Z end=2026-10-27T18:05:19.840Z status=completed
+2026-10-28 01:48:40,769 [INFO] pipeline: T1112 Test 11: start=2026-10-27T18:05:27.723Z end=2026-10-27T18:05:37.668Z status=completed
+2026-10-28 01:48:40,769 [INFO] pipeline: T1112 Test 12: start=2026-10-27T18:05:45.540Z end=2026-10-27T18:05:51.296Z status=completed
+2026-10-28 01:48:40,769 [INFO] pipeline: T1112 Test 13: start=2026-10-27T18:05:57.238Z end=2026-10-27T18:06:03.121Z status=completed
+2026-10-28 01:48:40,769 [INFO] pipeline: T1112 Test 14: start=2026-10-27T18:06:08.906Z end=2026-10-27T18:06:15.279Z status=completed
+2026-10-28 01:48:40,769 [INFO] pipeline: T1112 Test 15: start=2026-10-27T18:06:20.771Z end=2026-10-27T18:06:27.330Z status=completed
+2026-10-28 01:48:40,769 [INFO] pipeline: T1112 Test 16: start=2026-10-27T18:06:33.563Z end=2026-10-27T18:06:40.027Z status=completed
+2026-10-28 01:48:40,769 [INFO] pipeline: T1112 Test 17: start=2026-10-27T18:06:47.216Z end=2026-10-27T18:06:55.563Z status=completed
+2026-10-28 01:48:40,769 [INFO] pipeline: T1112 Test 18: start=2026-10-27T18:07:01.541Z end=2026-10-27T18:07:07.856Z status=completed
+2026-10-28 01:48:40,770 [INFO] pipeline: T1112 Test 19: start=2026-10-27T18:07:13.954Z end=2026-10-27T18:07:22.518Z status=completed
+2026-10-28 01:48:40,770 [INFO] pipeline: T1112 Test 20: start=2026-10-27T18:07:30.725Z end=2026-10-27T18:07:37.747Z status=completed
+2026-10-28 01:48:40,770 [INFO] pipeline: T1112 Test 21: start=2026-10-27T18:07:43.273Z end=2026-10-27T18:07:51.134Z status=completed
+2026-10-28 01:48:40,770 [INFO] pipeline: T1112 Test 22: start=2026-10-27T18:07:59.104Z end=2026-10-27T18:08:06.647Z status=completed
+2026-10-28 01:48:40,770 [INFO] pipeline: T1112 Test 23: start=2026-10-27T18:08:15.809Z end=2026-10-27T18:08:23.354Z status=completed
+2026-10-28 01:48:40,770 [INFO] pipeline: T1112 Test 24: start=2026-10-27T18:08:32.176Z end=2026-10-27T18:08:40.215Z status=completed
+2026-10-28 01:48:40,770 [INFO] pipeline: T1112 Test 25: start=2026-10-27T18:08:47.803Z end=2026-10-27T18:08:56.259Z status=completed
+2026-10-28 01:48:40,770 [INFO] pipeline: T1112 Test 26: start=2026-10-27T18:09:02.743Z end=2026-10-27T18:09:09.633Z status=completed
+2026-10-28 01:48:40,770 [INFO] pipeline: T1112 Test 27: start=2026-10-27T18:09:17.147Z end=2026-10-27T18:09:24.808Z status=completed
+2026-10-28 01:48:40,770 [INFO] pipeline: T1112 Test 28: start=2026-10-27T18:09:32.483Z end=2026-10-27T18:09:40.998Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 29: start=2026-10-27T18:09:48.551Z end=2026-10-27T18:09:56.952Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 30: start=2026-10-27T18:10:04.119Z end=2026-10-27T18:10:10.532Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 31: start=2026-10-27T18:10:18.647Z end=2026-10-27T18:10:26.887Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 32: start=2026-10-27T18:10:35.257Z end=2026-10-27T18:10:45.458Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 33: start=2026-10-27T18:10:52.921Z end=2026-10-27T18:11:01.798Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 34: start=2026-10-27T18:11:10.090Z end=2026-10-27T18:11:17.201Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 35: start=2026-10-27T18:11:24.599Z end=2026-10-27T18:11:32.061Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 36: start=2026-10-27T18:11:40.071Z end=2026-10-27T18:11:48.172Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 37: start=2026-10-27T18:11:56.455Z end=2026-10-27T18:12:08.147Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 38: start=2026-10-27T18:12:15.590Z end=2026-10-27T18:12:24.725Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 39: start=2026-10-27T18:12:32.986Z end=2026-10-27T18:12:41.947Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 40: start=2026-10-27T18:12:51.361Z end=2026-10-27T18:13:01.899Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 41: start=2026-10-27T18:13:10.116Z end=2026-10-27T18:13:16.875Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 42: start=2026-10-27T18:13:24.584Z end=2026-10-27T18:13:33.082Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 43: start=2026-10-27T18:13:40.410Z end=2026-10-27T18:13:49.619Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 44: start=2026-10-27T18:13:58.554Z end=2026-10-27T18:14:05.683Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 45: start=2026-10-27T18:14:13.732Z end=2026-10-27T18:14:21.650Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 46: start=2026-10-27T18:14:29.970Z end=2026-10-27T18:14:37.241Z status=completed
+2026-10-28 01:48:40,771 [INFO] pipeline: T1112 Test 47: start=2026-10-27T18:14:45.222Z end=2026-10-27T18:14:55.648Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 48: start=2026-10-27T18:15:02.442Z end=2026-10-27T18:15:09.505Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 49: start=2026-10-27T18:15:16.742Z end=2026-10-27T18:15:25.475Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 50: start=2026-10-27T18:15:33.917Z end=2026-10-27T18:15:42.734Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 51: start=2026-10-27T18:15:50.926Z end=2026-10-27T18:15:59.395Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 52: start=2026-10-27T18:16:06.708Z end=2026-10-27T18:16:14.226Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 53: start=2026-10-27T18:16:21.699Z end=2026-10-27T18:16:30.556Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 54: start=2026-10-27T18:16:39.010Z end=2026-10-27T18:16:48.148Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 55: start=2026-10-27T18:16:58.505Z end=2026-10-27T18:17:07.238Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 56: start=2026-10-27T18:17:14.538Z end=2026-10-27T18:17:21.956Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 57: start=2026-10-27T18:17:29.816Z end=2026-10-27T18:17:42.513Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 58: start=2026-10-27T18:17:51.229Z end=2026-10-27T18:18:02.940Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 59: start=2026-10-27T18:18:10.495Z end=2026-10-27T18:18:17.876Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 60: start=2026-10-27T18:18:26.512Z end=2026-10-27T18:18:36.269Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 61: start=2026-10-27T18:18:46.196Z end=2026-10-27T18:18:54.711Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 62: start=2026-10-27T18:19:04.750Z end=2026-10-27T18:19:11.426Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 63: start=2026-10-27T18:19:17.575Z end=2026-10-27T18:19:25.528Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 64: start=2026-10-27T18:19:33.320Z end=2026-10-27T18:19:41.585Z status=completed
+2026-10-28 01:48:40,772 [INFO] pipeline: T1112 Test 65: start=2026-10-27T18:19:50.806Z end=2026-10-27T18:19:58.612Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 66: start=2026-10-27T18:20:07.801Z end=2026-10-27T18:20:14.839Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 67: start=2026-10-27T18:20:22.482Z end=2026-10-27T18:20:29.785Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 68: start=2026-10-27T18:20:37.194Z end=2026-10-27T18:20:46.316Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 69: start=2026-10-27T18:20:54.949Z end=2026-10-27T18:21:03.451Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 70: start=2026-10-27T18:23:29.640Z end=2026-10-27T18:23:39.294Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 71: start=2026-10-27T18:23:51.804Z end=2026-10-27T18:24:01.211Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 72: start=2026-10-27T18:24:09.437Z end=2026-10-27T18:24:27.939Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 73: start=2026-10-27T18:24:39.613Z end=2026-10-27T18:24:48.666Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 74: start=2026-10-27T18:24:55.955Z end=2026-10-27T18:25:05.357Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 75: start=2026-10-27T18:25:13.386Z end=2026-10-27T18:25:21.928Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 76: start=2026-10-27T18:25:29.889Z end=2026-10-27T18:25:40.470Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 77: start=2026-10-27T18:25:48.267Z end=2026-10-27T18:25:55.747Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 78: start=2026-10-27T18:26:04.939Z end=2026-10-27T18:26:14.032Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 79: start=2026-10-27T18:26:22.423Z end=2026-10-27T18:26:29.718Z status=completed
+2026-10-28 01:48:40,773 [INFO] pipeline: T1112 Test 80: start=2026-10-27T18:26:37.501Z end=2026-10-27T18:26:45.664Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1112 Test 81: start=2026-10-27T18:26:54.848Z end=2026-10-27T18:27:04.477Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1112 Test 82: start=2026-10-27T18:27:12.292Z end=2026-10-27T18:27:19.939Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1112 Test 83: start=2026-10-27T18:27:27.926Z end=2026-10-27T18:27:37.645Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1112 Test 84: start=2026-10-27T18:27:45.851Z end=2026-10-27T18:27:54.973Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1112 Test 85: start=2026-10-27T18:28:02.925Z end=2026-10-27T18:28:11.239Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1112 Test 86: start=2026-10-27T18:28:18.887Z end=2026-10-27T18:28:26.826Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1112 Test 87: start=2026-10-27T18:28:34.530Z end=2026-10-27T18:28:42.462Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1112 Test 88: start=2026-10-27T18:28:51.500Z end=2026-10-27T18:29:01.572Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1112 Test 89: start=2026-10-27T18:29:09.228Z end=2026-10-27T18:29:16.654Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1112 Test 90: start=2026-10-27T18:29:24.116Z end=2026-10-27T18:29:32.780Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1505.003 Test 1: start=2026-10-27T18:29:40.727Z end=2026-10-27T18:29:41.858Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1078.001 Test 1: start=2026-10-27T18:29:42.890Z end=2026-10-27T18:29:45.292Z status=completed
+2026-10-28 01:48:40,774 [INFO] pipeline: T1078.001 Test 2: start=2026-10-27T18:29:47.494Z end=2026-10-27T18:29:49.056Z status=completed
+2026-10-28 01:48:40,775 [INFO] pipeline: T1547.003 Test 1: start=2026-10-27T18:29:50.746Z end=2026-10-27T18:29:59.735Z status=completed
+2026-10-28 01:48:40,775 [INFO] pipeline: T1547.003 Test 2: start=2026-10-27T18:30:06.225Z end=2026-10-27T18:30:12.454Z status=completed
+2026-10-28 01:48:40,775 [INFO] pipeline: T1136.001 Test 4: start=2026-10-27T18:30:18.311Z end=2026-10-27T18:30:20.851Z status=completed
+2026-10-28 01:48:40,775 [INFO] pipeline: T1136.001 Test 5: start=2026-10-27T18:30:24.635Z end=2026-10-27T18:30:28.792Z status=completed
+2026-10-28 01:48:40,775 [INFO] pipeline: T1136.001 Test 8: start=2026-10-27T18:30:34.095Z end=2026-10-27T18:30:38.132Z status=completed
+2026-10-28 01:48:40,775 [INFO] pipeline: T1136.001 Test 9: start=2026-10-27T18:30:42.058Z end=2026-10-27T18:31:12.781Z status=completed
+2026-10-28 01:48:40,775 [INFO] pipeline: T1547.004 Test 1: start=2026-10-27T18:31:18.778Z end=2026-10-27T18:31:21.837Z status=completed
+2026-10-28 01:48:40,775 [INFO] pipeline: T1547.004 Test 2: start=2026-10-27T18:31:24.311Z end=2026-10-27T18:31:27.509Z status=completed
+2026-10-28 01:48:40,775 [INFO] pipeline: T1547.004 Test 3: start=2026-10-27T18:31:29.933Z end=2026-10-27T18:31:33.295Z status=completed
+2026-10-28 01:48:40,775 [INFO] pipeline: T1547.004 Test 4: start=2026-10-27T18:31:38.114Z end=2026-10-27T18:31:40.970Z status=completed
+2026-10-28 01:48:40,775 [INFO] pipeline: T1547.004 Test 5: start=2026-10-27T18:31:44.286Z end=2026-10-27T18:31:47.268Z status=completed
+2026-10-28 01:48:40,775 [INFO] pipeline: T1546.012 Test 1: start=2026-10-27T18:31:50.081Z end=2026-10-27T18:31:51.741Z status=completed
+2026-10-28 01:48:40,776 [INFO] pipeline: T1546.012 Test 2: start=2026-10-27T18:31:53.026Z end=2026-10-27T18:31:55.512Z status=completed
+2026-10-28 01:48:40,776 [INFO] pipeline: T1546.012 Test 3: start=2026-10-27T18:31:56.903Z end=2026-10-27T18:32:01.401Z status=completed
+2026-10-28 01:48:40,776 [INFO] pipeline: T1546.008 Test 1: start=2026-10-27T18:32:04.911Z end=2026-10-27T18:32:09.567Z status=completed
+2026-10-28 01:48:40,776 [INFO] pipeline: T1546.008 Test 2: start=2026-10-27T18:32:14.180Z end=2026-10-27T18:32:15.611Z status=completed
+2026-10-28 01:48:40,776 [INFO] pipeline: T1546.008 Test 3: start=2026-10-27T18:32:17.984Z end=2026-10-27T18:32:19.889Z status=completed
+2026-10-28 01:48:40,776 [INFO] pipeline: T1546.008 Test 4: start=2026-10-27T18:32:25.957Z end=2026-10-27T18:32:27.693Z status=completed
+2026-10-28 01:48:40,776 [INFO] pipeline: T1546.008 Test 5: start=2026-10-27T18:32:29.872Z end=2026-10-27T18:32:32.356Z status=completed
+2026-10-28 01:48:40,776 [INFO] pipeline: T1546.008 Test 6: start=2026-10-27T18:32:35.838Z end=2026-10-27T18:32:39.012Z status=completed
+2026-10-28 01:48:40,776 [INFO] pipeline: T1546.008 Test 7: start=2026-10-27T18:32:41.948Z end=2026-10-27T18:32:45.043Z status=completed
+2026-10-28 01:48:40,776 [INFO] pipeline: T1546.008 Test 8: start=2026-10-27T18:32:47.241Z end=2026-10-27T18:32:49.267Z status=completed
+2026-10-28 01:48:40,776 [INFO] pipeline: T1546.008 Test 9: start=2026-10-27T18:32:51.237Z end=2026-10-27T18:32:53.302Z status=completed
+2026-10-28 01:48:40,776 [INFO] pipeline: T1546.008 Test 10: start=2026-10-27T18:32:56.628Z end=2026-10-27T18:32:58.442Z status=completed
+2026-10-28 01:48:40,777 [INFO] pipeline: T1136.002 Test 1: start=2026-10-27T18:33:00.592Z end=2026-10-27T18:33:03.894Z status=completed
+2026-10-28 01:48:40,777 [INFO] pipeline: T1136.002 Test 2: start=2026-10-27T18:33:06.136Z end=2026-10-27T18:33:08.791Z status=completed
+2026-10-28 01:48:40,777 [INFO] pipeline: T1136.002 Test 3: start=2026-10-27T18:33:11.305Z end=2026-10-27T18:33:17.453Z status=completed
+2026-10-28 01:48:40,778 [INFO] pipeline: T1137.001 Test 1: start=2026-10-27T18:33:20.955Z end=2026-10-27T18:33:38.831Z status=completed
+2026-10-28 01:48:40,778 [INFO] pipeline: T1546.009 Test 1: start=2026-10-27T18:33:41.956Z end=2026-10-27T18:33:45.123Z status=completed
+2026-10-28 01:48:40,778 [INFO] pipeline: T1546.003 Test 1: start=2026-10-27T18:33:47.811Z end=2026-10-27T18:35:29.833Z status=completed
+2026-10-28 01:48:40,778 [INFO] pipeline: T1546.003 Test 2: start=2026-10-27T18:35:59.082Z end=2026-10-27T18:36:04.015Z status=completed
+2026-10-28 01:48:40,778 [INFO] pipeline: T1546.003 Test 3: start=2026-10-27T18:36:07.172Z end=2026-10-27T18:36:09.991Z status=completed
+2026-10-28 01:48:40,778 [INFO] pipeline: T1546.001 Test 1: start=2026-10-27T18:36:13.263Z end=2026-10-27T18:36:14.555Z status=completed
+2026-10-28 01:48:40,778 [INFO] pipeline: T1547.001 Test 1: start=2026-10-27T18:36:15.543Z end=2026-10-27T18:36:19.564Z status=completed
+2026-10-28 01:48:40,778 [INFO] pipeline: T1547.001 Test 2: start=2026-10-27T18:36:23.154Z end=2026-10-27T18:36:27.487Z status=completed
+2026-10-28 01:48:40,779 [INFO] pipeline: T1547.001 Test 3: start=2026-10-27T18:36:31.552Z end=2026-10-27T18:36:36.604Z status=completed
+2026-10-28 01:48:40,779 [INFO] pipeline: T1547.001 Test 4: start=2026-10-27T18:36:42.755Z end=2026-10-27T18:36:49.201Z status=completed
+2026-10-28 01:48:40,779 [INFO] pipeline: T1547.001 Test 5: start=2026-10-27T18:36:55.002Z end=2026-10-27T18:37:00.750Z status=completed
+2026-10-28 01:48:40,779 [INFO] pipeline: T1547.001 Test 6: start=2026-10-27T18:37:07.348Z end=2026-10-27T18:38:53.269Z status=completed
+2026-10-28 01:48:40,779 [INFO] pipeline: T1547.001 Test 7: start=2026-10-27T18:39:01.980Z end=2026-10-27T18:39:11.665Z status=completed
+2026-10-28 01:48:40,779 [INFO] pipeline: T1547.001 Test 8: start=2026-10-27T18:39:20.191Z end=2026-10-27T18:39:24.802Z status=completed
+2026-10-28 01:48:40,779 [INFO] pipeline: T1547.001 Test 9: start=2026-10-27T18:39:28.188Z end=2026-10-27T18:39:34.214Z status=completed
+2026-10-28 01:48:40,779 [INFO] pipeline: T1547.001 Test 10: start=2026-10-27T18:39:38.607Z end=2026-10-27T18:39:45.428Z status=completed
+2026-10-28 01:48:40,779 [INFO] pipeline: T1547.001 Test 11: start=2026-10-27T18:39:49.982Z end=2026-10-27T18:39:57.408Z status=completed
+2026-10-28 01:48:40,780 [INFO] pipeline: T1547.001 Test 12: start=2026-10-27T18:40:05.335Z end=2026-10-27T18:40:11.072Z status=completed
+2026-10-28 01:48:40,780 [INFO] pipeline: T1547.001 Test 13: start=2026-10-27T18:40:16.662Z end=2026-10-27T18:40:21.172Z status=completed
+2026-10-28 01:48:40,780 [INFO] pipeline: T1547.001 Test 14: start=2026-10-27T18:40:27.468Z end=2026-10-27T18:40:34.287Z status=completed
+2026-10-28 01:48:40,780 [INFO] pipeline: T1547.001 Test 15: start=2026-10-27T18:40:39.219Z end=2026-10-27T18:40:45.561Z status=completed
+2026-10-28 01:48:40,780 [INFO] pipeline: T1547.001 Test 16: start=2026-10-27T18:40:51.729Z end=2026-10-27T18:40:58.823Z status=completed
+2026-10-28 01:48:40,780 [INFO] pipeline: T1547.001 Test 17: start=2026-10-27T18:41:03.431Z end=2026-10-27T18:41:09.409Z status=completed
+2026-10-28 01:48:40,780 [INFO] pipeline: T1547.001 Test 18: start=2026-10-27T18:41:13.458Z end=2026-10-27T18:41:16.552Z status=completed
+2026-10-28 01:48:40,780 [INFO] pipeline: T1547.001 Test 19: start=2026-10-27T18:41:18.927Z end=2026-10-27T18:41:21.883Z status=completed
+2026-10-28 01:48:40,780 [INFO] pipeline: T1547.001 Test 20: start=2026-10-27T18:41:24.540Z end=2026-10-27T18:41:26.979Z status=completed
+2026-10-28 01:48:40,780 [INFO] pipeline: T1098 Test 1: start=2026-10-27T18:41:29.489Z end=2026-10-27T18:41:34.817Z status=completed
+2026-10-28 01:48:40,781 [INFO] pipeline: T1098 Test 2: start=2026-10-27T18:41:39.356Z end=2026-10-27T18:41:48.191Z status=completed
+2026-10-28 01:48:40,781 [INFO] pipeline: T1098 Test 9: start=2026-10-27T18:41:54.184Z end=2026-10-27T18:41:58.518Z status=completed
+2026-10-28 01:48:40,781 [INFO] pipeline: T1098 Test 10: start=2026-10-27T18:42:03.004Z end=2026-10-27T18:42:12.226Z status=completed
+2026-10-28 01:48:40,781 [INFO] pipeline: T1098 Test 11: start=2026-10-27T18:42:17.401Z end=2026-10-27T18:42:24.522Z status=completed
+2026-10-28 01:48:40,781 [INFO] pipeline: T1098 Test 12: start=2026-10-27T18:42:29.425Z end=2026-10-27T18:42:36.493Z status=completed
+2026-10-28 01:48:40,781 [INFO] pipeline: T1098 Test 13: start=2026-10-27T18:42:41.895Z end=2026-10-27T18:42:49.225Z status=completed
+2026-10-28 01:48:40,781 [INFO] pipeline: T1098 Test 14: start=2026-10-27T18:42:55.165Z end=2026-10-27T18:43:02.264Z status=completed
+2026-10-28 01:48:40,781 [INFO] pipeline: T1098 Test 15: start=2026-10-27T18:43:07.100Z end=2026-10-27T18:43:15.030Z status=completed
+2026-10-28 01:48:40,781 [INFO] pipeline: T1098 Test 16: start=2026-10-27T18:43:20.103Z end=2026-10-27T18:43:27.390Z status=completed
+2026-10-28 01:48:40,781 [INFO] pipeline: T1505.004 Test 1: start=2026-10-27T18:43:31.614Z end=2026-10-27T18:43:32.910Z status=completed
+2026-10-28 01:48:40,782 [INFO] pipeline: T1505.004 Test 2: start=2026-10-27T18:43:35.050Z end=2026-10-27T18:43:38.454Z status=completed
+2026-10-28 01:48:40,782 [INFO] pipeline: T1546 Test 1: start=2026-10-27T18:43:41.757Z end=2026-10-27T18:43:45.117Z status=completed
+2026-10-28 01:48:40,782 [INFO] pipeline: T1546 Test 2: start=2026-10-27T18:43:48.336Z end=2026-10-27T18:43:51.950Z status=completed
+2026-10-28 01:48:40,782 [INFO] pipeline: T1546 Test 3: start=2026-10-27T18:43:55.244Z end=2026-10-27T18:43:58.611Z status=completed
+2026-10-28 01:48:40,782 [INFO] pipeline: T1546 Test 4: start=2026-10-27T18:44:01.930Z end=2026-10-27T18:44:07.122Z status=completed
+2026-10-28 01:48:40,782 [INFO] pipeline: T1546 Test 5: start=2026-10-27T18:44:11.018Z end=2026-10-27T18:44:13.633Z status=completed
+2026-10-28 01:48:40,782 [INFO] pipeline: T1546 Test 6: start=2026-10-27T18:44:16.223Z end=2026-10-27T18:44:18.743Z status=completed
+2026-10-28 01:48:40,782 [INFO] pipeline: T1546 Test 7: start=2026-10-27T18:44:20.972Z end=2026-10-27T18:44:23.389Z status=completed
+2026-10-28 01:48:40,782 [INFO] pipeline: T1546 Test 8: start=2026-10-27T18:44:26.205Z end=2026-10-27T18:44:30.224Z status=completed
+2026-10-28 01:48:40,782 [INFO] pipeline: T1546 Test 9: start=2026-10-27T18:44:34.371Z end=2026-10-27T18:44:36.865Z status=completed
+2026-10-28 01:48:40,782 [INFO] pipeline: T1547.002 Test 1: start=2026-10-27T18:44:38.884Z end=2026-10-27T18:44:41.488Z status=completed
+2026-10-28 01:48:40,783 [INFO] pipeline: T1546.015 Test 1: start=2026-10-27T18:44:44.809Z end=2026-10-27T18:44:48.882Z status=completed
+2026-10-28 01:48:40,783 [INFO] pipeline: T1546.015 Test 2: start=2026-10-27T18:44:52.653Z end=2026-10-27T18:44:57.539Z status=completed
+2026-10-28 01:48:40,783 [INFO] pipeline: T1546.015 Test 3: start=2026-10-27T18:45:00.722Z end=2026-10-27T18:45:04.710Z status=completed
+2026-10-28 01:48:40,783 [INFO] pipeline: T1546.015 Test 4: start=2026-10-27T18:45:08.037Z end=2026-10-27T18:45:12.172Z status=completed
+2026-10-28 01:48:40,783 [INFO] pipeline: T1137.004 Test 1: start=2026-10-27T18:45:17.745Z end=2026-10-27T18:45:19.353Z status=completed
+2026-10-28 01:48:40,783 [INFO] pipeline: T1546.018 Test 1: start=2026-10-27T18:45:20.055Z end=2026-10-27T18:45:48.178Z status=completed
+2026-10-28 01:48:40,783 [INFO] pipeline: T1546.018 Test 2: start=2026-10-27T18:45:56.126Z end=2026-10-27T18:46:02.398Z status=completed
+2026-10-28 01:48:40,783 [INFO] pipeline: T1197 Test 1: start=2026-10-27T18:46:07.002Z end=2026-10-27T18:46:10.471Z status=completed
+2026-10-28 01:48:40,783 [INFO] pipeline: T1197 Test 2: start=2026-10-27T18:46:14.777Z end=2026-10-27T18:46:19.100Z status=completed
+2026-10-28 01:48:40,783 [INFO] pipeline: T1197 Test 3: start=2026-10-27T18:46:22.132Z end=2026-10-27T18:46:30.791Z status=completed
+2026-10-28 01:48:40,784 [INFO] pipeline: T1197 Test 4: start=2026-10-27T18:46:33.343Z end=2026-10-27T18:46:39.059Z status=completed
+2026-10-28 01:48:40,784 [INFO] pipeline: T1546.010 Test 1: start=2026-10-27T18:46:43.069Z end=2026-10-27T18:46:48.424Z status=completed
+2026-10-28 01:48:40,784 [INFO] pipeline: T1546.002 Test 1: start=2026-10-27T18:46:50.461Z end=2026-10-27T18:46:53.341Z status=completed
+2026-10-28 01:48:40,784 [INFO] pipeline: T1037.001 Test 1: start=2026-10-27T18:46:57.422Z end=2026-10-27T18:47:00.344Z status=completed
+2026-10-28 01:48:40,784 [INFO] pipeline: T1137.002 Test 1: start=2026-10-27T18:47:02.441Z end=2026-10-27T18:47:31.939Z status=completed
+2026-10-28 01:48:40,784 [INFO] pipeline: T1547.008 Test 1: start=2026-10-27T18:47:40.207Z end=2026-10-27T18:47:42.634Z status=completed
+2026-10-28 01:48:40,784 [INFO] pipeline: T1053.002 Test 1: start=2026-10-27T18:47:45.409Z end=2026-10-27T18:47:47.391Z status=completed
+2026-10-28 01:48:40,784 [INFO] pipeline: T1546.007 Test 1: start=2026-10-27T18:47:49.185Z end=2026-10-27T18:47:55.157Z status=completed
+2026-10-28 01:48:40,784 [INFO] pipeline: T1078.003 Test 1: start=2026-10-27T18:47:57.028Z end=2026-10-27T18:48:00.959Z status=completed
+2026-10-28 01:48:40,785 [INFO] pipeline: T1078.003 Test 6: start=2026-10-27T18:48:04.496Z end=2026-10-27T18:48:11.384Z status=completed
+2026-10-28 01:48:40,785 [INFO] pipeline: T1078.003 Test 7: start=2026-10-27T18:48:14.882Z end=2026-10-27T18:48:21.774Z status=completed
+2026-10-28 01:48:40,785 [INFO] pipeline: T1078.003 Test 13: start=2026-10-27T18:48:27.427Z end=2026-10-27T18:48:32.762Z status=completed
+2026-10-28 01:48:40,785 [INFO] pipeline: T1556.001 Test 1: start=2026-10-27T18:48:34.909Z end=2026-10-27T18:48:37.427Z status=completed
+2026-10-28 01:49:00,536 [INFO] pipeline.elastic_client: Triggered batch 1 (25 rules)
+2026-10-28 01:49:06,553 [INFO] pipeline.elastic_client: Triggered batch 2 (25 rules)
+2026-10-28 01:49:13,548 [INFO] pipeline.elastic_client: Triggered batch 3 (25 rules)
+2026-10-28 01:49:19,926 [INFO] pipeline.elastic_client: Triggered batch 4 (25 rules)
+2026-10-28 01:49:26,826 [INFO] pipeline.elastic_client: Triggered batch 5 (25 rules)
+2026-10-28 01:49:34,717 [INFO] pipeline.elastic_client: Triggered batch 6 (25 rules)
+2026-10-28 01:49:42,737 [INFO] pipeline.elastic_client: Triggered batch 7 (25 rules)
+2026-10-28 01:49:49,737 [INFO] pipeline.elastic_client: Triggered batch 8 (25 rules)
+2026-10-28 01:49:56,380 [INFO] pipeline.elastic_client: Triggered batch 9 (25 rules)
+2026-10-28 01:50:03,202 [INFO] pipeline.elastic_client: Triggered batch 10 (25 rules)
+2026-10-28 01:50:09,807 [INFO] pipeline.elastic_client: Triggered batch 11 (25 rules)
+2026-10-28 01:50:17,274 [INFO] pipeline.elastic_client: Triggered batch 12 (25 rules)
+2026-10-28 01:50:22,583 [INFO] pipeline.elastic_client: Triggered batch 13 (25 rules)
+2026-10-28 01:50:31,517 [INFO] pipeline.elastic_client: Triggered batch 14 (25 rules)
+2026-10-28 01:50:37,932 [INFO] pipeline.elastic_client: Triggered batch 15 (25 rules)
+2026-10-28 01:50:48,696 [INFO] pipeline.elastic_client: Triggered batch 16 (25 rules)
+2026-10-28 01:50:53,916 [INFO] pipeline.elastic_client: Triggered batch 17 (25 rules)
+2026-10-28 01:51:02,549 [INFO] pipeline.elastic_client: Triggered batch 18 (25 rules)
+2026-10-28 01:51:11,468 [INFO] pipeline.elastic_client: Triggered batch 19 (25 rules)
+2026-10-28 01:51:20,236 [INFO] pipeline.elastic_client: Triggered batch 20 (25 rules)
+2026-10-28 01:51:26,066 [INFO] pipeline.elastic_client: Triggered batch 21 (25 rules)
+2026-10-28 01:51:33,049 [INFO] pipeline.elastic_client: Triggered batch 22 (25 rules)
+2026-10-28 01:51:41,921 [INFO] pipeline.elastic_client: Triggered batch 23 (25 rules)
+2026-10-28 01:51:51,613 [INFO] pipeline.elastic_client: Triggered batch 24 (25 rules)
+2026-10-28 01:51:59,823 [INFO] pipeline.elastic_client: Triggered batch 25 (25 rules)
+2026-10-28 01:52:05,334 [INFO] pipeline.elastic_client: Triggered batch 26 (12 rules)
+2026-10-28 01:52:05,334 [INFO] pipeline.elastic_client: Triggered 637 rules
+2026-10-28 01:52:05,525 [INFO] pipeline.elastic_client: 247 rules not complete
+2026-10-28 01:52:15,635 [INFO] pipeline.elastic_client: 229 rules not complete
+2026-10-28 01:52:25,762 [INFO] pipeline.elastic_client: 203 rules not complete
+2026-10-28 01:52:35,857 [INFO] pipeline.elastic_client: 183 rules not complete
+2026-10-28 01:52:45,984 [INFO] pipeline.elastic_client: 158 rules not complete
+2026-10-28 01:52:56,120 [INFO] pipeline.elastic_client: 133 rules not complete
+2026-10-28 01:53:06,278 [INFO] pipeline.elastic_client: 119 rules not complete
+2026-10-28 01:53:16,395 [INFO] pipeline.elastic_client: 99 rules not complete
+2026-10-28 01:53:26,484 [INFO] pipeline.elastic_client: 66 rules not complete
+2026-10-28 01:53:36,594 [INFO] pipeline.elastic_client: 61 rules not complete
+2026-10-28 01:53:46,749 [INFO] pipeline.elastic_client: 48 rules not complete
+2026-10-28 01:53:56,846 [INFO] pipeline.elastic_client: 41 rules not complete
+2026-10-28 01:54:06,956 [INFO] pipeline.elastic_client: 33 rules not complete
+2026-10-28 01:54:17,034 [INFO] pipeline.elastic_client: 28 rules not complete
+2026-10-28 01:54:27,160 [INFO] pipeline.elastic_client: 22 rules not complete
+2026-10-28 01:54:37,275 [INFO] pipeline.elastic_client: 15 rules not complete
+2026-10-28 01:54:47,380 [INFO] pipeline.elastic_client: 12 rules not complete
+2026-10-28 01:54:57,482 [INFO] pipeline.elastic_client: 9 rules not complete
+2026-10-28 01:55:07,565 [INFO] pipeline.elastic_client: 2 rules not complete
+2026-10-28 01:55:17,748 [INFO] pipeline.elastic_client: 2 rules not complete
+2026-10-28 01:55:27,937 [INFO] pipeline.elastic_client: 2 rules not complete
+2026-10-28 01:55:38,084 [INFO] pipeline.elastic_client: 0 rules not complete
+2026-10-28 01:59:18,343 [INFO] pipeline: Tests to match: 247
+2026-10-28 01:59:18,344 [INFO] pipeline: Results to save: 247
+2026-10-28 01:59:18,401 [INFO] pipeline: Results saved to output/results.jsonl

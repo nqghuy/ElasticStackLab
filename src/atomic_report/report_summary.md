@@ -7,17 +7,16 @@
 - Tests that failed to run but still produced an alert - **counted, not excluded**: **18** (see `tables/failed_but_counted.csv`)
 - Tests considered for detection stats: **214**
 - Techniques tested: **50**
-- Detected: **205** (95.8%)
-- Undetected (including techniques with no rule): **9**
-- Distinct rules triggered: **96**
+- Detected: **209** (97.7%)
+- Undetected (including techniques with no rule): **5**
+- Distinct rules triggered: **98**
 
 ## 2. Technique classification
 
-- Fully detected: **37** technique(s)
+- Fully detected: **39** technique(s)
 - All tests failed: **6** technique(s)
 - Partially detected: **4** technique(s)
-- Not detected: **2** technique(s)
-- No rule: **1** technique(s)
+- Not detected: **1** technique(s)
 
 ## 3. Top triggered rules
 
@@ -30,7 +29,7 @@
 - Bitsadmin Activity: 22 time(s)
 - Persistent Scripts in the Startup Directory: 20 time(s)
 - Service Control Spawned via Script Interpreter: 18 time(s)
-- Persistence via Microsoft Office AddIns: 15 time(s)
+- Persistence via Microsoft Office AddIns: 16 time(s)
 
 ## 4. Technique detail
 
@@ -42,7 +41,7 @@
 | T1078.001   |                2 |             2 |              0 |                100   | Fully detected     | Yes        |
 | T1078.003   |                2 |             2 |              2 |                100   | Fully detected     | Yes        |
 | T1098       |                1 |             1 |              9 |                100   | Fully detected     | Yes        |
-| T1112       |               88 |            90 |              0 |                 97.8 | Partially detected | Yes        |
+| T1112       |               89 |            90 |              0 |                 98.9 | Partially detected | Yes        |
 | T1133       |                0 |             1 |              0 |                  0   | Not detected       | Yes        |
 | T1136.001   |                4 |             4 |              0 |                100   | Fully detected     | Yes        |
 | T1136.002   |                2 |             2 |              1 |                100   | Fully detected     | Yes        |
@@ -72,12 +71,12 @@
 | T1546.012   |                3 |             3 |              0 |                100   | Fully detected     | Yes        |
 | T1546.013   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
 | T1546.015   |                4 |             4 |              0 |                100   | Fully detected     | Yes        |
-| T1546.018   |                0 |             2 |              0 |                  0   | No rule            | No         |
+| T1546.018   |                1 |             2 |              0 |                 50   | Partially detected | Yes        |
 | T1547       |                3 |             3 |              0 |                100   | Fully detected     | Yes        |
 | T1547.001   |               20 |            20 |              0 |                100   | Fully detected     | Yes        |
 | T1547.002   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
 | T1547.003   |                2 |             2 |              0 |                100   | Fully detected     | Yes        |
-| T1547.004   |                4 |             5 |              0 |                 80   | Partially detected | Yes        |
+| T1547.004   |                5 |             5 |              0 |                100   | Fully detected     | Yes        |
 | T1547.005   |                1 |             1 |              1 |                100   | Fully detected     | Yes        |
 | T1547.008   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
 | T1547.009   |                2 |             2 |              0 |                100   | Fully detected     | Yes        |
@@ -85,7 +84,7 @@
 | T1547.012   |                1 |             1 |              0 |                100   | Fully detected     | Yes        |
 | T1547.014   |                2 |             3 |              0 |                 66.7 | Partially detected | Yes        |
 | T1556.001   |                0 |             0 |              1 |                  0   | All tests failed   | Yes        |
-| T1556.002   |                0 |             1 |              1 |                  0   | Not detected       | Yes        |
+| T1556.002   |                1 |             1 |              1 |                100   | Fully detected     | Yes        |
 
 ## 5. Failed tests, excluded (no alert produced)
 
@@ -114,7 +113,7 @@
 - T1098 test 14 (exit code 1355): New-Object : Exception calling ".ctor" with "2" argument(s): "Cannot process argument because the value of argument
 - T1098 test 15 (exit code 1355): New-Object : Exception calling ".ctor" with "2" argument(s): "Cannot process argument because the value of argument
 - T1098 test 16 (exit code 1355): New-Object : Exception calling ".ctor" with "2" argument(s): "Cannot process argument because the value of argument
-- T1505.004 test 1 (exit code 1): operable program or batch file.
+- T1505.004 test 1 (exit code 1): 'C:\Windows\system32\inetsrv\appcmd.exe' is not recognized as an internal or external command,
 - T1505.004 test 2: New-WebGlobalModule : The term 'New-WebGlobalModule' is not recognized as the name of a cmdlet, function, script file,
 - T1546 test 4: + CategoryInfo          : NotSpecified: (:) [New-CimSession], CimException
 - T1197 test 4 (exit code -1): Executing test: T1197-4 Bits download using desktopimgdownldr.exe (cmd)
@@ -163,8 +162,8 @@
 Classified from alerts in this run. When both default and custom rules alert, the test is counted as default-detected.
 
 - Detected by default rules: **73**
-- Detected with custom rules: **132**
-- Not detected: **9**
+- Detected with custom rules: **136**
+- Not detected: **5**
 - Failed: **33**
 
 See `tables/test_detection_source.csv` for every test.

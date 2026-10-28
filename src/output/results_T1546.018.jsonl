@@ -1,2 +1,2 @@
-{"technique": "T1546.018", "test_number": 1, "alerts": [], "has_rule": false, "start_time": "2026-10-27T01:12:45.948Z", "end_time": "2026-10-27T01:13:13.002Z", "status": "no_rule"}
-{"technique": "T1546.018", "test_number": 2, "alerts": [], "has_rule": false, "start_time": "2026-10-27T01:13:22.018Z", "end_time": "2026-10-27T01:13:27.793Z", "status": "no_rule"}
+{"technique": "T1546.018", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-10-27T18:45:20.055Z", "end_time": "2026-10-27T18:45:48.178Z", "status": "undetected"}
+{"technique": "T1546.018", "test_number": 2, "alerts": [{"name": "Python Site or User Customize File Creation Win", "reason": {"event.type": ["creation"], "host.os.type": "windows", "process.executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "process.name": "powershell.exe"}}], "has_rule": true, "start_time": "2026-10-27T18:45:56.126Z", "end_time": "2026-10-27T18:46:02.398Z", "status": "detected"}

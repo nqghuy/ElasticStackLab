@@ -1,1 +1,1 @@
-{"technique": "T1133", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-10-27T00:21:43.888Z", "end_time": "2026-10-27T00:22:18.647Z", "status": "undetected"}
+{"technique": "T1133", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-10-27T17:49:00.703Z", "end_time": "2026-10-27T17:49:36.802Z", "status": "undetected"}

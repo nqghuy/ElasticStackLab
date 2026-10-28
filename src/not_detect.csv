@@ -3,6 +3,7 @@ T1037.001,1,Detected with custom rules,Uncommon Registry Persistence Change v2, 
 T1053.005,4,Detected with custom rules,Local Scheduled Task Creation V2, Local Scheduled Task Creation không phát hiện được do chỉ phát hiện được hành vi từ tiến trình schtasks.exe,Rule chưa hoàn thiện 
 T1053.005,6,Detected with custom rules,Local Scheduled Task Creation V2, Local Scheduled Task Creation không phát hiện được do chỉ phát hiện được hành vi từ tiến trình schtasks.exe,Rule chưa hoàn thiện
 T1053.005,8,Detected with custom rules,Local Scheduled Task Creation V2, Local Scheduled Task Creation không phát hiện được do chỉ phát hiện được hành vi từ tiến trình schtasks.exe,Rule chưa hoàn thiện
+T1053.005,9,Detected with custom rules,Local Scheduled Task Creation V2, Local Scheduled Task Creation không phát hiện được do chỉ phát hiện được hành vi từ tiến trình schtasks.exe,Rule chưa hoàn thiện
 T1078.001,1,Detected with custom rules,Modify user account, No rule (Chỉ có rule tương tự Creation of a Hidden Local User Account và User Account Creation),No rule
 T1078.001,2,Detected with custom rules,Modify user account, No rule (Chỉ có rule tương tự Creation of a Hidden Local User Account và User Account Creation),No rule
 T1078.003,1,Detected with custom rules,Modify user account, No rule (Chỉ có rule tương tự Creation of a Hidden Local User Account và User Account Creation),No rule
@@ -56,7 +57,7 @@ T1112,53,Detected with custom rules,RedLine Registry Modification, No rule ,No r
 T1112,54,Detected with custom rules,RedLine Registry Modification, No rule ,No rule
 T1112,55,Detected with custom rules,RedLine Registry Modification, No rule ,No rule
 T1112,56,Detected with custom rules,RedLine Registry Modification, Có rule Microsoft Windows Defender Tampering nhưng không phát hiện registry \Features (Sysmon cũng không ghi lại log registry này), Rule chưa hoàn thiện
-T1112,57,Not detected,, No event registry for its registry -> hard to detect abnormal data, Không viết được rule
+T1112,57,Not detected,, Không viết được rule do không có log registry nên không phát hiện do log không đủ, Không viết được rule
 T1112,58,Detected with custom rules,Suspicious Internet Settings Registry Modification, No rule,No rule
 T1112,59,Detected with custom rules,Suspicious Internet Settings Registry Modification, No rule,No rule
 T1112,60,Detected with custom rules,Suspicious Internet Settings Registry Modification, No rule,No rule
@@ -70,7 +71,7 @@ T1112,67,Detected with custom rules,Suspicious Internet Settings Registry Modifi
 T1112,68,Detected with custom rules,Modification of IE Registry Settings, No rule,No rule
 T1112,69,Detected with custom rules,Darkgate Registry Modification, No rule, No rule
 T1112,71,Detected with custom rules,Windows Registry Modification to Impair Security Controls or Visibility, No rule,No rule
-T1112,72,Detected with custom rules,Potential Remote Desktop Shadowing Activity v2, Rule Potential Remote Desktop Shadowing Activity không ánh xạ đủ ,Không ánh xạ
+T1112,72,Detected with custom rules,Potential Remote Desktop Shadowing Activity v2, Rule Potential Remote Desktop Shadowing Activity không ánh xạ đủ,Không ánh xạ
 T1112,73,Detected with custom rules,ShimCache Flush, No rule ,No rule
 T1112,74,Detected with custom rules,RDP Registry Modification," ""No rule (Chỉ có rule RDP Enabled via Registry",No rule
 T1112,75,Detected with custom rules,Windows Policy Registry Modification," ""No rule (Uncommon Registry Persistence có phát hiện key 'shell'",No rule
@@ -88,13 +89,13 @@ T1112,87,Detected with custom rules,Abusing MyComputer Disk for Persistence, No 
 T1112,88,Detected with custom rules,Abusing MyComputer Disk for Persistence, No rule,No rule
 T1112,89,Detected with custom rules,Abusing MyComputer Disk for Persistence, No rule ,No rule
 T1112,90,Detected with custom rules,App Paths hijacking,No rule,No rule
-T1133,1,Not detected,, Không mô tả đúng hành vi persistence -> Initial Access,khác
+T1133,1,Not detected,, "Không viết được rule do không đủ log và cần kết hợp với nguồn Threat Intelligence",khác
 T1136.001,5,Detected with custom rules,Modify user account, "Rule User Account Creation chỉ phát hiện được hành vi sử dụng net /add", Rule chưa hoàn thiện 
 T1136.001,9,Detected with custom rules,Modify user account, có rule User Account Creation nhưng bắt chưa đầy đủ (mới bắt net /add), Rule chưa hoàn thiện 
 T1137.006,1,Detected with custom rules,Code Executed Via Office Add-in XLL File, Rule Suspicious Execution via Microsoft Office Add-Ins chỉ phát hiện được file dll với một số đường dẫn cố định, Rule chưa hoàn thiện 
 T1505.003,1,Detected with custom rules,Web Shell,"Rule Potential IIS Web Shell File Creation không phát hiện được đường dẫn file, rule Web Shell Detection: Script Process Child of Common Web Processes chỉ phát hiện khi webshell được thực thi", Rule chưa hoàn thiện 
-T1505.005,1,Not detected,, Không viết được rule,Không viết được rule
-T1505.005,2,Not detected,, No rule,No rule
+T1505.005,1,Not detected,, Không viết được rule do không đủ log tạo file (event id 11),Không viết được rule
+T1505.005,2,Detected with custom rules,Modify Terminal Services DLL Path, No rule,No rule
 T1542.001,1,Detected with custom rules,UEFI Persistence Via Wpbbin, No rule ,No rule
 T1543.003,3,Not detected,, Rule Suspicious Service was Installed in the System không khớp do phạm vi bắt quá hẹp,Rule chưa hoàn thiện 
 T1546,1,Detected with custom rules,Persistence with Custom DLL, No rule,No rule
@@ -119,12 +120,13 @@ T1546.011,3,Detected with custom rules,Registry key creation and/or modification
 T1546.015,1,Detected with custom rules,Component Object Model Hijacking v2,"Có rule Component Object Model Hijacking, sysmon có ghi log, nhưng khi thực thi Windows ánh xạ HKCU\Software\Classes sang HKU\<SID>_Classes nên rule và sysmon không khớp", Rule chưa hoàn thiện 
 T1546.015,2,Detected with custom rules,Powershell Execute COM Object, No rule, No rule
 T1546.015,3,Detected with custom rules,Component Object Model Hijacking v2,"Có rule Component Object Model Hijacking, sysmon có ghi log, nhưng khi thực thi Windows ánh xạ HKCU\Software\Classes sang HKU\<SID>_Classes nên rule và sysmon không khớp", Rule chưa hoàn thiện
-T1546.018,1,Not detected,,có thể viết log tương tự linux -> theo dõi thêm,Không viết được rule
+T1546.018,1,Not detected,,Không viết được rule do không có log ,Không viết được rule
 T1546.018,2,Not detected,,có thể viết log tương tự linux -> theo dõi thêm,Không viết được rule
 T1547,1,Detected with custom rules,Suspicious Driver Install by pnputil.exe, No rule,No rule
 T1547,2,Detected with custom rules,Suspicious Driver Install by pnputil.exe, Đã có rule First Time Seen Driver Loaded nhưng log không ghi do drive test sử dụng đã được kí (built-in windows driver),Rule chưa hoàn thiện 
 T1547,3,Detected with custom rules,Leverage Virtual Channels to execute custom DLL, No rule,No rule
 T1547.001,8,Detected with custom rules,Add_persistance_via_Recycle_bin.toml, No rule,No rule
+T1547.001,16,Detected with custom rules,Potential Suspicious Activity Using SeCEdit, Rule Startup or Run Key Registry Modification không phát hiện do loại trừ user SID S-1-5-18 (SYSTEM) trong khi secedit tạo Run key dưới quyền System, Rule chưa hoàn thiện
 T1547.001,19,Detected with custom rules,Modification of Boot Verification Program registry, Rule Uncommon Registry Persistence Change chỉ phát hiện ControlSet* thay vì CurrentControlSet*,Rule chưa hoàn thiện
 T1547.001,20,Detected with custom rules,Persistence via Windows Context Menu, No rule ,No rule
 T1547.004,1,Detected with custom rules,Uncommon Registry Persistence Change v2, Uncommon Registry Persistence Change và Startup or Run Key Registry Modification chưa ánh xạ đủ ,Không ánh xạ
@@ -137,4 +139,5 @@ T1547.009,1,Detected with custom rules,Shortcut Modification, No rule,No rule
 T1547.010,1,Detected with custom rules,Add Port Monitor persistence in Registry, Có rule Potential Port Monitor or Print Processor Registration Abuse nhưng không bắt được do loại trừ UserId S-1-5-18,Rule chưa hoàn thiện 
 T1547.014,1,Detected with custom rules,Persistence via Active Setup, No rule,No rule
 T1547.014,2,Detected with custom rules,Persistence via Active Setup, No rule,No rule
-T1547.014,3,Not detected,,Không viết được rule, Không viết được rule
+T1547.014,3,Not detected,,Không đủ log để phát hiện hành vi giảm version, Không viết được rule
+T1556.002,1,Not detected,,

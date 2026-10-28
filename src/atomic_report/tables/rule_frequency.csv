@@ -8,13 +8,14 @@ Windows Policy Registry Modification,22
 Bitsadmin Activity,22
 Persistent Scripts in the Startup Directory,20
 Service Control Spawned via Script Interpreter,18
-Persistence via Microsoft Office AddIns,15
+Persistence via Microsoft Office AddIns,16
 Windows Registry Modification to Impair Security Controls or Visibility,14
 Uncommon Registry Persistence Change v2,14
 Suspicious Internet Settings Registry Modification,12
 User Account Creation,12
 Local Scheduled Task Creation V2,11
 RedLine Registry Modification,10
+Winlogon Userinit Key Persistence,10
 Image File Execution Options Injection V2,10
 Uncommon Registry Persistence Change,9
 Registry key creation and/or modification events for SDB,8
@@ -26,11 +27,10 @@ Component Object Model Hijacking v2,8
 Persistence with Custom DLL,7
 Persistence via Active Setup,6
 Service Path Modification via sc.exe,6
-Potential Application Shimming via Sdbinst,6
 New Custom Shim Database Created,6
+Potential Application Shimming via Sdbinst,6
 Microsoft Windows Defender Tampering V2,6
 Abusing MyComputer Disk for Persistence,6
-Winlogon Userinit Key Persistence,6
 Modification of WDigest Security Provider,4
 Enable RDP via Remote Registry,4
 Event Viewer Registry Modification,4
@@ -50,7 +50,6 @@ Suspicious Startup Shell Folder Modification,3
 Suspicious Image Load (taskschd.dll) from MS Office,2
 Persistence via PowerShell profile,2
 Suspicious Driver Install by pnputil.exe,2
-Leverage Virtual Channels to execute custom DLL,2
 Potential Port Monitor or Print Processor Registration Abuse,2
 Deprecated - Microsoft Exchange Transport Agent Install Script,2
 Installation of Custom Shim Databases,2
@@ -64,6 +63,7 @@ Mimic Ransomware-Enable Multiple User Sessions,2
 Potential Remote Desktop Shadowing Activity v2,2
 Potential Remote Desktop Shadowing Activity,2
 ShimCache Flush,2
+Abusing Windows TelemetryController for Persistence,2
 Winlogon Helper DLL or Shell Modification,2
 Windows Accessibility Features Registry Modification,2
 Registry Persistence via AppCert DLL,2
@@ -72,7 +72,6 @@ Change Default File Association Via Assoc,2
 Persistence via Windows Context Menu,2
 Custom debugger for WER,2
 Persistence using STARTUP-PATH in MS-WORD,2
-Potential LSA Authentication Package Abuse v2,2
 Potential LSA Authentication Package Abuse,2
 Powershell Execute COM Object,2
 Outlook Home Page Registry Modification,2
@@ -80,9 +79,11 @@ Registry Persistence via AppInit DLL,2
 Office Test Registry Persistence,2
 Account Discovery Command via SYSTEM Account,2
 UEFI Persistence Via Wpbbin,1
+Leverage Virtual Channels to execute custom DLL,1
 Unusual Persistence via Services Registry,1
 Persistence via Microsoft Outlook VBA,1
 Code Executed Via Office Add-in XLL File,1
+Password Filter DLL,1
 Modify Terminal Services DLL Path,1
 Add Port Monitor persistence in Registry,1
 Change PowerShell Policies to an Insecure Level,1
@@ -93,5 +94,6 @@ Add_persistance_via_Recycle_bin.toml,1
 Potential Suspicious Activity Using SeCEdit,1
 Modification of Boot Verification Program registry,1
 Account Configured with Never-Expiring Password,1
+Python Site or User Customize File Creation Win,1
 Registry_to_load_Arbitrary_DLL_into_LSASS,1
 Netsh Helper DLL,1

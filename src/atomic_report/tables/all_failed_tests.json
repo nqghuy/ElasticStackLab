@@ -154,7 +154,7 @@
       "technique": "T1505.004",
       "test_number": 1,
       "exit_code": 1,
-      "error_message": "operable program or batch file."
+      "error_message": "'C:\\Windows\\system32\\inetsrv\\appcmd.exe' is not recognized as an internal or external command,"
     },
     {
       "technique": "T1505.004",

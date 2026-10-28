@@ -1,2 +1,2 @@
-{"technique": "T1556.002", "test_number": 1, "alerts": [], "has_rule": true, "start_time": "2026-10-27T00:26:00.355Z", "end_time": "2026-10-27T00:26:03.860Z", "status": "undetected"}
-{"technique": "T1556.002", "test_number": 2, "alerts": [], "has_rule": true, "start_time": "2026-10-27T00:26:06.912Z", "end_time": "2026-10-27T00:27:49.470Z", "status": "undetected"}
+{"technique": "T1556.002", "test_number": 1, "alerts": [{"name": "Password Filter DLL", "reason": {"event.type": ["change"], "host.os.type": "windows", "process.executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "process.name": "powershell.exe"}}], "has_rule": true, "start_time": "2026-10-27T17:56:46.212Z", "end_time": "2026-10-27T17:56:49.547Z", "status": "detected"}
+{"technique": "T1556.002", "test_number": 2, "alerts": [], "has_rule": true, "start_time": "2026-10-27T17:56:51.627Z", "end_time": "2026-10-27T17:58:34.047Z", "status": "undetected"}

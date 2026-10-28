@@ -113,7 +113,7 @@ T1112,81,Detected with custom rules,,Modification of BitLocker FVE Policy via Re
 T1112,82,Detected with custom rules,,Modification of BitLocker FVE Policy via Registry
 T1112,83,Detected with custom rules,,Modification of BitLocker FVE Policy via Registry
 T1112,84,Detected with custom rules,,Modification of BitLocker FVE Policy via Registry
-T1112,85,Not detected,,
+T1112,85,Detected with custom rules,,Abusing Windows TelemetryController for Persistence
 T1112,86,Detected by default rules,Uncommon Registry Persistence Change,RDP Registry Modification; Uncommon Registry Persistence Change v2
 T1112,87,Detected with custom rules,,Abusing MyComputer Disk for Persistence
 T1112,88,Detected with custom rules,,Abusing MyComputer Disk for Persistence
@@ -201,7 +201,7 @@ T1546.015,2,Detected with custom rules,,Powershell Execute COM Object
 T1546.015,3,Detected with custom rules,,Component Object Model Hijacking v2
 T1546.015,4,Detected by default rules,Component Object Model Hijacking,Component Object Model Hijacking v2
 T1546.018,1,Not detected,,
-T1546.018,2,Not detected,,
+T1546.018,2,Detected with custom rules,,Python Site or User Customize File Creation Win
 T1547,1,Detected with custom rules,,Suspicious Driver Install by pnputil.exe
 T1547,2,Detected with custom rules,,Suspicious Driver Install by pnputil.exe
 T1547,3,Detected with custom rules,,Leverage Virtual Channels to execute custom DLL
@@ -225,12 +225,12 @@ T1547.001,17,Detected by default rules,Uncommon Registry Persistence Change,Unco
 T1547.001,18,Detected by default rules,Uncommon Registry Persistence Change,Uncommon Registry Persistence Change v2
 T1547.001,19,Detected with custom rules,,Modification of Boot Verification Program registry
 T1547.001,20,Detected with custom rules,,Persistence via Windows Context Menu
-T1547.002,1,Detected by default rules,Potential LSA Authentication Package Abuse,Potential LSA Authentication Package Abuse v2
+T1547.002,1,Detected by default rules,Potential LSA Authentication Package Abuse,
 T1547.003,1,Detected by default rules,Potential Persistence via Time Provider Modification,
 T1547.003,2,Detected by default rules,Potential Persistence via Time Provider Modification,
 T1547.004,1,Detected with custom rules,,Uncommon Registry Persistence Change v2
 T1547.004,2,Detected with custom rules,,Winlogon Userinit Key Persistence
-T1547.004,3,Not detected,,
+T1547.004,3,Detected with custom rules,,Winlogon Userinit Key Persistence
 T1547.004,4,Detected with custom rules,,Uncommon Registry Persistence Change v2; Winlogon Helper DLL or Shell Modification
 T1547.004,5,Detected with custom rules,,Uncommon Registry Persistence Change v2; Winlogon Helper DLL or Shell Modification; Winlogon Userinit Key Persistence
 T1547.005,1,Detected by default rules,Installation of Security Support Provider,
@@ -244,5 +244,5 @@ T1547.014,1,Detected with custom rules,,Persistence via Active Setup
 T1547.014,2,Detected with custom rules,,Persistence via Active Setup
 T1547.014,3,Not detected,,
 T1556.001,1,Failed,,
-T1556.002,1,Not detected,,
+T1556.002,1,Detected with custom rules,,Password Filter DLL
 T1556.002,2,Failed,,

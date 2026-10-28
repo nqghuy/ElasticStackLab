@@ -7,16 +7,16 @@ This companion report removes every failed execution before calculating statisti
 - Total tests recorded: **247**
 - Failed executions removed: **51**
 - Tests remaining: **196**
-- Detected: **187** (95.4%)
-- Undetected (including tests with no rule): **9**
+- Detected: **191** (97.4%)
+- Undetected (including tests with no rule): **5**
 - Techniques with at least one non-failed test: **41**
 
 ## Technique classification
 
-- Fully detected: **34** technique(s)
+- Fully detected: **36** technique(s)
 - Partially detected: **4** technique(s)
-- Not detected: **2** technique(s)
-- No rule: **1** technique(s)
+- Not detected: **1** technique(s)
+- No rule: **0** technique(s)
 
 ## Technique detail
 
@@ -27,7 +27,7 @@ This companion report removes every failed execution before calculating statisti
 | T1078.001   |                2 |             2 |                100   | Fully detected     | Yes        |
 | T1078.003   |                2 |             2 |                100   | Fully detected     | Yes        |
 | T1098       |                1 |             1 |                100   | Fully detected     | Yes        |
-| T1112       |               85 |            87 |                 97.7 | Partially detected | Yes        |
+| T1112       |               86 |            87 |                 98.9 | Partially detected | Yes        |
 | T1133       |                0 |             1 |                  0   | Not detected       | Yes        |
 | T1136.001   |                4 |             4 |                100   | Fully detected     | Yes        |
 | T1137       |                1 |             1 |                100   | Fully detected     | Yes        |
@@ -50,19 +50,19 @@ This companion report removes every failed execution before calculating statisti
 | T1546.012   |                3 |             3 |                100   | Fully detected     | Yes        |
 | T1546.013   |                1 |             1 |                100   | Fully detected     | Yes        |
 | T1546.015   |                3 |             3 |                100   | Fully detected     | Yes        |
-| T1546.018   |                0 |             2 |                  0   | No rule            | No         |
+| T1546.018   |                1 |             2 |                 50   | Partially detected | Yes        |
 | T1547       |                3 |             3 |                100   | Fully detected     | Yes        |
 | T1547.001   |               17 |            17 |                100   | Fully detected     | Yes        |
 | T1547.002   |                1 |             1 |                100   | Fully detected     | Yes        |
 | T1547.003   |                2 |             2 |                100   | Fully detected     | Yes        |
-| T1547.004   |                4 |             5 |                 80   | Partially detected | Yes        |
+| T1547.004   |                5 |             5 |                100   | Fully detected     | Yes        |
 | T1547.005   |                1 |             1 |                100   | Fully detected     | Yes        |
 | T1547.008   |                1 |             1 |                100   | Fully detected     | Yes        |
 | T1547.009   |                2 |             2 |                100   | Fully detected     | Yes        |
 | T1547.010   |                1 |             1 |                100   | Fully detected     | Yes        |
 | T1547.012   |                1 |             1 |                100   | Fully detected     | Yes        |
 | T1547.014   |                2 |             3 |                 66.7 | Partially detected | Yes        |
-| T1556.002   |                0 |             1 |                  0   | Not detected       | Yes        |
+| T1556.002   |                1 |             1 |                100   | Fully detected     | Yes        |
 
 ## Attached files
 
