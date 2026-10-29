@@ -21,7 +21,9 @@ T1053.005 Scheduled Task/Job: Scheduled Task & 4: Powershell Cmdlet Scheduled Ta
 \cline{2-2}
  & 6: WMI Invoke-CimMethod Scheduled Task &  \\*
 \cline{2-2}
- & 8: Import XML Schedule Task with Hidden Attribute &  \\
+ & 8: Import XML Schedule Task with Hidden Attribute &  \\*
+\cline{2-2}
+ & 9: PowerShell Modify A Scheduled Task &  \\
 \hline
 T1112 Modify Registry & 33: Windows Powershell Logging Disabled & Có rule PowerShell Script Block Logging Disabled, nhưng sysmon log chỉ ghi lại registry hive HKLM, không phải HKCU như trong bài test \\*
 \cline{2-3}
@@ -65,7 +67,9 @@ T1546.015 Event Triggered Execution: Component Object Model Hijacking & 1: COM H
 \hline
 T1547 Boot or Logon Autostart Execution & 2: Driver Installation Using pnputil.exe & Đã có rule First Time Seen Driver Loaded nhưng log không ghi do drive test sử dụng đã được kí (built-in windows driver) \\
 \hline
-T1547.001 Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder & 19: Creating Boot Verification Program Key for application execution during successful boot & Rule Uncommon Registry Persistence Change chỉ phát hiện ControlSet* thay vì CurrentControlSet* \\
+T1547.001 Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder & 16: secedit used to create a Run key in the HKLM Hive & Rule Startup or Run Key Registry Modification không phát hiện do loại trừ user SID S-1-5-18 (SYSTEM) trong khi secedit tạo Run key dưới quyền System \\*
+\cline{2-3}
+ & 19: Creating Boot Verification Program Key for application execution during successful boot & Rule Uncommon Registry Persistence Change chỉ phát hiện ControlSet* thay vì CurrentControlSet* \\
 \hline
 T1547.010 Boot or Logon Autostart Execution: Port Monitors & 1: Add Port Monitor persistence in Registry & Có rule Potential Port Monitor or Print Processor Registration Abuse nhưng không bắt được do loại trừ UserId S-1-5-18 \\
 \hline

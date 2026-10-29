@@ -17,15 +17,15 @@
 \endfoot
 \hline
 \endlastfoot
-T1112 Modify Registry & 57: Snake Malware Registry Blob & No event registry for its registry -> hard to detect abnormal data \\
+T1112 Modify Registry & 57: Snake Malware Registry Blob & Không viết được rule do không có log registry nên không phát hiện do log không đủ \\
 \hline
-T1505.005 Server Software Component: Terminal Services DLL & 1: Simulate Patching termsrv.dll &  \\
+T1505.005 Server Software Component: Terminal Services DLL & 1: Simulate Patching termsrv.dll & Không viết được rule do không đủ log tạo file (event id 11) \\
 \hline
-T1546.018 Event Triggered Execution: Python Startup Hooks & 1: Python Startup Hook - atomic\_hook.pth (Windows) & có thể viết log tương tự linux -> theo dõi thêm \\*
-\cline{2-2}
- & 2: Python Startup Hook - usercustomize.py (Windows) &  \\
+T1546.018 Event Triggered Execution: Python Startup Hooks & 1: Python Startup Hook - atomic\_hook.pth (Windows) & Không viết được rule do không có log \\*
+\cline{2-3}
+ & 2: Python Startup Hook - usercustomize.py (Windows) & có thể viết log tương tự linux -> theo dõi thêm \\
 \hline
-T1547.014 Active Setup & 3: HKLM - re-execute 'Internet Explorer Core Fonts' StubPath payload by decreasing version number &  \\
+T1547.014 Active Setup & 3: HKLM - re-execute 'Internet Explorer Core Fonts' StubPath payload by decreasing version number & Không đủ log để phát hiện hành vi giảm version \\
 \hline
 \end{longtable}
 \endgroup

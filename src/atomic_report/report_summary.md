@@ -14,8 +14,9 @@
 ## 2. Technique classification
 
 - Fully detected: **39** technique(s)
-- All tests failed: **6** technique(s)
 - Partially detected: **4** technique(s)
+- All tests failed: **4** technique(s)
+- No rule: **2** technique(s)
 - Not detected: **1** technique(s)
 
 ## 3. Top triggered rules

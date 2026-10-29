@@ -38,10 +38,10 @@ Technique-level classification uses 4 distinct categories:
   Not detected         - technique has a rule, but no test triggered it
   No rule              - technique has no detection rule at all
 
-The technique x test heatmap shows EVERY test, including failed ones, so
-each test always sits at its own real test-number slot (failed tests are
-not silently dropped, which would otherwise shift/hide slots and make it
-harder to tell which specific test failed).
+Charts exclude only failed tests that produced no alert. A test that reported
+an execution error but still triggered a detection rule remains a valid
+detection and is included in chart counts and heatmaps; charts show no
+failure-specific colour or legend.
 
 Output (default ./atomic_report/):
   charts/01_overview_donut.png
@@ -84,7 +84,6 @@ COLOR_GREEN = "#1baf7a"
 COLOR_AMBER = "#eda100"
 COLOR_RED = "#e34948"
 COLOR_MUTEDGRAY = "#898781"
-COLOR_PURPLE = "#8a5fbf"   # failed tests in the heatmap
 COLOR_BLUE = "#378ADD"      # detection gained from a custom rule
 
 
@@ -382,10 +381,10 @@ def compute_stats(results, log_failures):
     # all (different from "Not detected", which means the rule genuinely
     # never fired on a successfully-run test).
     def classify(s):
-        if s["total"] == 0:
-            return "All tests failed"
         if not s["has_rule"]:
             return "No rule"
+        if s["total"] == 0:
+            return "All tests failed"
         if s["detected"] == 0:
             return "Not detected"
         if s["detected"] == s["total"]:
@@ -419,8 +418,8 @@ def chart_overview_donut(stats, outpath):
     if sum(sizes) == 0:
         # matplotlib cannot render a pie whose every wedge is zero.  This is
         # normal after a fresh run that has not recorded results yet.
-        ax.text(0.5, 0.5, "No test results recorded", ha="center", va="center", fontsize=14)
-        ax.set_title("Detection coverage (test-level)\nNo data available", fontsize=12)
+        ax.text(0.5, 0.5, "Chưa có kết quả test", ha="center", va="center", fontsize=14)
+        ax.set_title("Tỷ lệ phát hiện theo test\nKhông có dữ liệu", fontsize=12)
         ax.set_axis_off()
     else:
         wedges, _ = ax.pie(
@@ -429,10 +428,8 @@ def chart_overview_donut(stats, outpath):
         )
         ax.legend(wedges, labels, loc="center", frameon=False, fontsize=11)
         ax.set_title(
-            f"Detection coverage (test-level)\n{stats['detection_rate']:.1f}% detected "
-            f"out of {stats['considered_count']} tests"
-            + (f"\n({len(stats['failed_tests'])} failed tests excluded)"
-               if stats["failed_tests"] else ""),
+            f"Tỷ lệ phát hiện theo test\n{stats['detection_rate']:.1f}% được phát hiện "
+            f"trong {stats['considered_count']} test",
             fontsize=12
         )
     fig.tight_layout()
@@ -440,20 +437,25 @@ def chart_overview_donut(stats, outpath):
     plt.close(fig)
 
 
-def chart_technique_status(stats, outpath, title="Technique classification by detection level"):
-    order = ["Fully detected", "Partially detected", "Not detected", "No rule", "All tests failed"]
+def chart_technique_status(stats, outpath, title="Phân loại kỹ thuật theo mức độ phát hiện"):
+    order = ["Fully detected", "Partially detected", "Not detected", "No rule"]
+    labels = {
+        "Fully detected": "Phát hiện hoàn toàn",
+        "Partially detected": "Phát hiện một phần",
+        "Not detected": "Không phát hiện",
+        "No rule": "Không có rule",
+    }
     colors = {
         "Fully detected": COLOR_GREEN,
         "Partially detected": COLOR_AMBER,
         "Not detected": COLOR_RED,
         "No rule": COLOR_MUTEDGRAY,
-        "All tests failed": COLOR_PURPLE,
     }
     values = [stats["status_count"].get(k, 0) for k in order]
 
     fig, ax = plt.subplots(figsize=(7, 4.5))
     if stats["total_techniques"] == 0:
-        ax.text(0.5, 0.5, "No test results recorded", ha="center", va="center", fontsize=14)
+        ax.text(0.5, 0.5, "Chưa có kết quả test", ha="center", va="center", fontsize=14)
         ax.set_title(title)
         ax.set_axis_off()
         fig.tight_layout()
@@ -461,9 +463,9 @@ def chart_technique_status(stats, outpath, title="Technique classification by de
         plt.close(fig)
         return
 
-    bars = ax.barh(order, values, color=[colors[k] for k in order])
+    bars = ax.barh([labels[k] for k in order], values, color=[colors[k] for k in order])
     ax.invert_yaxis()
-    ax.set_xlabel("Number of techniques")
+    ax.set_xlabel("Số kỹ thuật")
     ax.set_title(title)
     for bar, v in zip(bars, values):
         ax.text(bar.get_width() + 0.2, bar.get_y() + bar.get_height() / 2,
@@ -485,8 +487,8 @@ def chart_top_rules(stats, outpath, top_n=15):
     ax.set_yticks(y_pos)
     ax.set_yticklabels(names, fontsize=9)
     ax.invert_yaxis()
-    ax.set_xlabel("Times triggered")
-    ax.set_title(f"Top {len(names)} most-triggered rules")
+    ax.set_xlabel("Số lần kích hoạt")
+    ax.set_title(f"Top {len(names)} rule được kích hoạt nhiều nhất")
     for i, v in enumerate(counts):
         ax.text(v + 0.1, i, str(v), va="center", fontsize=9)
     fig.tight_layout()
@@ -495,27 +497,24 @@ def chart_top_rules(stats, outpath, top_n=15):
 
 
 # ----------------------------------------------------------------------
-# Heatmap: technique x test. Includes ALL tests (detected / undetected /
-# no_rule / failed) so every test sits at its own real test-number slot -
-# failed tests are shown with their own color instead of being silently
-# dropped (which would otherwise shift later slots and hide which exact
-# test failed).
+# Heatmap: technique x test. Callers provide only successful executions.
 # ----------------------------------------------------------------------
-def _build_heatmap_matrix(results, failed_keys, custom_only_keys=None, default_only=False):
+def _build_heatmap_matrix(results, custom_only_keys=None, default_only=False):
     per_tech_tests = defaultdict(dict)  # {technique: {test_number: value}}
     custom_only_keys = custom_only_keys or set()
 
     for r in results:
         t, n = r["technique"], r["test_number"]
         key = (t, n)
-        if key in failed_keys:
-            value = 3           # failed (execution error)
+        # A technique without a rule in this chart's rule scope must remain
+        # gray for every displayed test. Check this before custom-only
+        # detections, which belong to the supplemental-rule view only.
+        if r["status"] == "no_rule":
+            value = 2           # no rule
         elif key in custom_only_keys:
             # A custom-only detection is absent in the default-only view,
             # but receives its own colour in the combined view.
-            value = 0 if default_only else 4
-        elif r["status"] == "no_rule":
-            value = 2           # no rule
+            value = 0 if default_only else 3
         elif r["status"] == "detected":
             value = 1           # detected
         else:
@@ -559,8 +558,7 @@ def _sparse_ticks(n, step=5):
 
 
 def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False,
-                    title=None, include_failed_legend=True,
-                    include_custom_legend=True):
+                    title=None, include_custom_legend=True):
     if matrix.size == 0:
         return
 
@@ -569,10 +567,10 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False,
         real_test_no = real_test_no.T
 
     cmap = matplotlib.colors.ListedColormap(
-        ["#f1efe8", COLOR_RED, COLOR_GREEN, COLOR_MUTEDGRAY, COLOR_PURPLE, COLOR_BLUE]
+        ["#f1efe8", COLOR_RED, COLOR_GREEN, COLOR_MUTEDGRAY, COLOR_BLUE]
     )
     display_matrix = matrix + 1
-    bounds = [0, 1, 2, 3, 4, 5, 6]
+    bounds = [0, 1, 2, 3, 4, 5]
     norm = matplotlib.colors.BoundaryNorm(bounds, cmap.N)
 
     n_rows, n_cols = matrix.shape
@@ -600,20 +598,20 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False,
         tick_pos = _sparse_ticks(n_cols)
         ax.set_xticks(tick_pos)
         ax.set_xticklabels([str(i + 1) for i in tick_pos], fontsize=12)
-        ax.set_xlabel("Atomic Test Number", fontsize=14)
-        ax.set_ylabel("Technique", fontsize=14)
+        ax.set_xlabel("Số thứ tự Atomic Test", fontsize=14)
+        ax.set_ylabel("Kỹ thuật", fontsize=14)
     else:
         ax.set_xticks(range(n_cols))
         ax.set_xticklabels(techniques, fontsize=13, rotation=90, ha="center")
         tick_pos = _sparse_ticks(n_rows)
         ax.set_yticks(tick_pos)
         ax.set_yticklabels([str(i + 1) for i in tick_pos], fontsize=12)
-        ax.set_ylabel("Atomic Test Number", fontsize=14)
-        ax.set_xlabel("Technique", fontsize=14)
+        ax.set_ylabel("Số thứ tự Atomic Test", fontsize=14)
+        ax.set_xlabel("Kỹ thuật", fontsize=14)
 
     if title is None:
-        title = "Technique x Test detection matrix"
-    ax.set_title(title + (" (rotated)" if rotated else ""), fontsize=16)
+        title = "Ma trận phát hiện theo kỹ thuật và Atomic Test"
+    ax.set_title(title + (" (xoay)" if rotated else ""), fontsize=16)
 
     if n_rows * n_cols <= 800:
         for i in range(n_rows):
@@ -626,14 +624,12 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False,
         spine.set_visible(False)
 
     legend_items = [
-        ("Not detected (rule exists but did not fire)", COLOR_RED),
+        ("Không phát hiện", COLOR_RED),
         ("Detected", COLOR_GREEN),
-        ("No rule", COLOR_MUTEDGRAY),
+        ("Undetected", COLOR_MUTEDGRAY),
     ]
-    if include_failed_legend:
-        legend_items.append(("Failed (execution error)", COLOR_PURPLE))
     if include_custom_legend:
-        legend_items.append(("Detected with custom rules", COLOR_BLUE))
+        legend_items.append(("Phát hiện bởi rule bổ sung", COLOR_BLUE))
     handles = [plt.Rectangle((0, 0), 1, 1, color=c) for _, c in legend_items]
     # fig.legend (figure-fraction coordinates), NOT ax.legend with a
     # negative bbox_to_anchor in axes-fraction coordinates: axes-fraction
@@ -655,16 +651,14 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False,
     plt.close(fig)
 
 
-def chart_technique_heatmap(results, failed_keys, outpath, custom_only_keys=None,
+def chart_technique_heatmap(results, outpath, custom_only_keys=None,
                             default_only=False, title=None,
-                            include_failed_legend=True,
                             include_custom_legend=True):
     techniques, matrix, real_test_no = _build_heatmap_matrix(
-        results, failed_keys, custom_only_keys, default_only
+        results, custom_only_keys, default_only
     )
     _render_heatmap(
         techniques, matrix, real_test_no, outpath, rotated=False, title=title,
-        include_failed_legend=include_failed_legend,
         include_custom_legend=include_custom_legend,
     )
 
@@ -960,6 +954,38 @@ def load_custom_rule_names(rules_dir):
     return names
 
 
+def load_windows_rule_techniques(rules_dir):
+    """Return ATT&CK technique/sub-technique IDs from Windows rule TOMLs.
+
+    Rule availability must be calculated from the selected rule collection,
+    rather than from results.jsonl's ``has_rule`` field. That field describes
+    the rules enabled during the combined run and cannot answer whether a
+    technique had a *default* rule before custom rules were added.
+    """
+    techniques = set()
+    for root, _, files in os.walk(rules_dir):
+        for filename in files:
+            if not filename.endswith(".toml"):
+                continue
+            path = os.path.join(root, filename)
+            try:
+                with open(path, "rb") as f:
+                    rule = tomllib.load(f).get("rule", {})
+            except (OSError, tomllib.TOMLDecodeError) as exc:
+                print(f"[generate_report] Skipping unreadable rule {path}: {exc}")
+                continue
+            if "OS: Windows" not in rule.get("tags", []):
+                continue
+            for threat in rule.get("threat", []):
+                for technique in threat.get("technique", []):
+                    if technique.get("id"):
+                        techniques.add(technique["id"])
+                    for subtechnique in technique.get("subtechnique", []):
+                        if subtechnique.get("id"):
+                            techniques.add(subtechnique["id"])
+    return techniques
+
+
 def build_custom_comparison(baseline_results, custom_results, custom_rule_names,
                             custom_failed_keys):
     """Classify custom-run tests without crediting detections baseline had."""
@@ -1024,7 +1050,7 @@ def write_custom_comparison(rows, outdir):
         f.write("\nSee `tables/test_detection_comparison.csv` for every test.\n")
 
 
-def build_detection_source_rows(results, custom_rule_names, failed_keys):
+def build_detection_source_rows(results, custom_rule_names, default_rule_names, failed_keys):
     """Classify each current-run result by the rule type that detected it.
 
     This uses only output/results.jsonl.  If both a default and custom rule
@@ -1035,8 +1061,13 @@ def build_detection_source_rows(results, custom_rule_names, failed_keys):
     for result in results:
         key = (result["technique"], result["test_number"])
         alert_names = sorted({a.get("name", "") for a in result.get("alerts", [])})
-        custom_alerts = sorted(set(alert_names) & custom_rule_names)
-        default_alerts = sorted(set(alert_names) - custom_rule_names)
+        matching_custom_rules = set(alert_names) & custom_rule_names
+        matching_default_rules = set(alert_names) & default_rule_names
+        # Alert documents expose a rule name rather than a stable rule ID. If
+        # a name occurs in both collections, credit the default rule so it is
+        # never falsely reported as coverage gained from a supplemental rule.
+        custom_alerts = sorted(matching_custom_rules - matching_default_rules)
+        default_alerts = sorted(set(alert_names) - set(custom_alerts))
 
         if default_alerts:
             classification = "Detected by default rules"
@@ -1092,8 +1123,8 @@ def chart_detection_coverage(detected, undetected, title, outpath):
     fig, ax = plt.subplots(figsize=(5, 5))
     sizes = [detected, undetected]
     if sum(sizes) == 0:
-        ax.text(0.5, 0.5, "No test results recorded", ha="center", va="center", fontsize=14)
-        ax.set_title(title + "\nNo data available", fontsize=12)
+        ax.text(0.5, 0.5, "Chưa có kết quả test", ha="center", va="center", fontsize=14)
+        ax.set_title(title + "\nKhông có dữ liệu", fontsize=12)
         ax.set_axis_off()
     else:
         wedges, _ = ax.pie(
@@ -1103,22 +1134,85 @@ def chart_detection_coverage(detected, undetected, title, outpath):
         rate = 100 * detected / sum(sizes)
         ax.legend(wedges, [f"Detected ({detected})", f"Undetected ({undetected})"],
                   loc="center", frameon=False, fontsize=11)
-        ax.set_title(f"{title}\n{rate:.1f}% detected out of {sum(sizes)} tests", fontsize=12)
+        ax.set_title(f"{title}\n{rate:.1f}% được phát hiện trong {sum(sizes)} test", fontsize=12)
     fig.tight_layout()
     fig.savefig(outpath, dpi=150)
     plt.close(fig)
 
 
-def write_detection_source_charts(rows, results, stats, outdir):
-    """Create directly comparable default-only and default+custom charts."""
-    counts = Counter(row["Classification"] for row in rows)
+def results_for_rule_scope(results, available_techniques, custom_only_keys=None,
+                           default_only=False):
+    """Return results reclassified for one rule collection.
+
+    For example, T1546.018 has no Windows default rule but does have a custom
+    Windows rule. Its default-only rows must therefore be ``no_rule`` even
+    though the combined pipeline recorded ``has_rule=true``.
+    """
+    scoped = copy.deepcopy(results)
+    custom_only_keys = custom_only_keys or set()
+    for result in scoped:
+        key = (result["technique"], result["test_number"])
+        has_rule = result["technique"] in available_techniques
+        result["has_rule"] = has_rule
+        if not has_rule:
+            result["status"] = "no_rule"
+            result["alerts"] = []
+        elif default_only and key in custom_only_keys:
+            result["status"] = "undetected"
+            result["alerts"] = []
+    return scoped
+
+
+def write_detection_source_charts(rows, results, stats, outdir,
+                                  default_techniques, custom_techniques):
+    """Create charts excluding only failed executions without alerts."""
+    chart_keys = {
+        (result["technique"], result["test_number"])
+        for result in results
+        if (result["technique"], result["test_number"])
+        not in stats["failed_keys"]
+    }
+    chart_rows = [
+        row for row in rows
+        if (row["Technique"], row["Test"]) in chart_keys
+    ]
+    counts = Counter(row["Classification"] for row in chart_rows)
     default_detected = counts["Detected by default rules"]
     custom_detected = counts["Detected with custom rules"]
-    # `considered_count` excludes only failed/no-alert executions, matching
-    # every other detection-rate chart in this report.
-    default_undetected = max(0, stats["considered_count"] - default_detected)
+    default_detected_techniques = {
+        row["Technique"] for row in rows
+        if row["Classification"] == "Detected by default rules"
+    }
+    custom_detected_techniques = {
+        row["Technique"] for row in rows
+        if row["Classification"] == "Detected with custom rules"
+    }
+    custom_only_keys = {
+        (row["Technique"], row["Test"])
+        for row in rows
+        if row["Classification"] == "Detected with custom rules"
+    }
+    default_results = results_for_rule_scope(
+        results, default_techniques | default_detected_techniques,
+        custom_only_keys, default_only=True,
+    )
+    combined_results = results_for_rule_scope(
+        results, default_techniques | custom_techniques |
+        default_detected_techniques | custom_detected_techniques
+    )
+    default_chart_results = [
+        result for result in default_results
+        if (result["technique"], result["test_number"]) in chart_keys
+    ]
+    combined_chart_results = [
+        result for result in combined_results
+        if (result["technique"], result["test_number"]) in chart_keys
+    ]
+    default_chart_stats = compute_stats(default_chart_results, {})
+    combined_chart_stats = compute_stats(combined_chart_results, {})
+    default_undetected = max(0, default_chart_stats["considered_count"] - default_detected)
     combined_detected = default_detected + custom_detected
-    combined_undetected = max(0, stats["considered_count"] - combined_detected)
+    combined_undetected = max(0, combined_chart_stats["considered_count"] - combined_detected)
     charts_dir = os.path.join(outdir, "charts")
     # Version 1 of the clean heatmap used this ambiguous filename and mixed
     # default/custom detections.  Remove it so a regenerated report cannot
@@ -1129,77 +1223,51 @@ def write_detection_source_charts(rows, results, stats, outdir):
     if os.path.exists(legacy_clean_heatmap):
         os.remove(legacy_clean_heatmap)
     chart_detection_coverage(
-        default_detected, default_undetected, "Detection coverage — default rules only",
+        default_detected, default_undetected, "Tỷ lệ phát hiện với rule mặc định",
         os.path.join(charts_dir, "05_default_rules_coverage.png"),
     )
     chart_detection_coverage(
         combined_detected, combined_undetected,
-        "Detection coverage — default rules + custom rules",
+        "Tỷ lệ phát hiện sau khi bổ sung rule",
         os.path.join(charts_dir, "06_default_plus_custom_coverage.png"),
     )
-    custom_only_keys = {
-        (row["Technique"], row["Test"])
-        for row in rows
-        if row["Classification"] == "Detected with custom rules"
-    }
     chart_technique_heatmap(
-        results, stats["failed_keys"],
+        default_chart_results,
         os.path.join(charts_dir, "07_default_rules_heatmap.png"),
         custom_only_keys=custom_only_keys, default_only=True,
+        title="Ma trận phát hiện với rule mặc định",
     )
     chart_technique_heatmap(
-        results, stats["failed_keys"],
+        combined_chart_results,
         os.path.join(charts_dir, "08_default_plus_custom_heatmap.png"),
         custom_only_keys=custom_only_keys,
+        title="Ma trận phát hiện — rule mặc định và rule tùy chỉnh",
     )
-    # These companion heatmaps use only successfully executed tests.  Unlike
-    # the regular heatmaps above, failed test slots are absent entirely (and
-    # therefore have no failed-test legend item).  Keep the default-only and
-    # default+custom views directly comparable, just as charts 07 and 08 are.
-    clean_results = [
-        result for result in results
-        if (result["technique"], result["test_number"])
-        not in stats["all_failure_keys"]
-    ]
-    clean_custom_only_keys = custom_only_keys - stats["all_failure_keys"]
+    # Keep legacy chart filenames for compatibility; every heatmap uses the
+    # same input policy (failed tests without alerts are omitted).
+    chart_custom_only_keys = custom_only_keys - stats["failed_keys"]
     chart_technique_heatmap(
-        clean_results, set(),
+        default_chart_results,
         os.path.join(charts_dir, "11_default_rules_heatmap_without_failed_tests.png"),
-        custom_only_keys=clean_custom_only_keys,
+        custom_only_keys=chart_custom_only_keys,
         default_only=True,
-        title="Technique x Test detection matrix — default rules only (no failed tests)",
-        include_failed_legend=False,
+        title="Ma trận phát hiện với rule mặc định",
         include_custom_legend=False,
     )
     chart_technique_heatmap(
-        clean_results, set(),
+        combined_chart_results,
         os.path.join(charts_dir, "12_default_plus_custom_heatmap_without_failed_tests.png"),
-        custom_only_keys=clean_custom_only_keys,
-        title="Technique x Test detection matrix — default rules + custom rules (no failed tests)",
-        include_failed_legend=False,
+        custom_only_keys=chart_custom_only_keys,
+        title="Ma trận phát hiện sau khi bổ sung rule",
         include_custom_legend=True,
     )
-    # Reuse the normal technique classifier after removing custom-only
-    # detections from a copy of the current results.  The known failed keys
-    # are restored to status=failed so the default-only chart keeps the same
-    # exclusion policy as the combined chart.
-    default_results = copy.deepcopy(results)
-    for result in default_results:
-        key = (result["technique"], result["test_number"])
-        if key in stats["failed_keys"]:
-            result["status"] = "failed"
-            result["alerts"] = []
-        elif key in custom_only_keys:
-            result["status"] = "undetected"
-            result["alerts"] = []
-    default_stats = compute_stats(default_results, {})
     chart_technique_status(
-        default_stats, os.path.join(charts_dir, "09_default_rules_technique_status.png"),
-        "Technique classification — default rules only",
+        default_chart_stats, os.path.join(charts_dir, "09_default_rules_technique_status.png"),
+        "Phân loại kết quả phát hiện theo kỹ thuật với rule mặc định",
     )
     chart_technique_status(
-        stats, os.path.join(charts_dir, "10_default_plus_custom_technique_status.png"),
-        "Technique classification — default rules + custom rules",
+        combined_chart_stats, os.path.join(charts_dir, "10_default_plus_custom_technique_status.png"),
+        "Phân loại kết quả phát hiện theo kỹ thuật sau khi bổ sung rule",
     )
 
 
@@ -1212,10 +1280,20 @@ def generate_one_report(results_path, atomic_log_path, pipeline_log_path, outdir
         parse_pipeline_log(pipeline_log_path),
     )
     stats = compute_stats(results, log_failures)
-    chart_overview_donut(stats, os.path.join(charts_dir, "01_overview_donut.png"))
-    chart_technique_status(stats, os.path.join(charts_dir, "02_technique_status_bar.png"))
-    chart_top_rules(stats, os.path.join(charts_dir, "03_top_rules_bar.png"), top_rules)
-    chart_technique_heatmap(results, stats["failed_keys"], os.path.join(charts_dir, "04_technique_heatmap.png"))
+    chart_results = [
+        result for result in results
+        if (result["technique"], result["test_number"])
+        not in stats["failed_keys"]
+    ]
+    chart_stats = compute_stats(chart_results, {})
+    chart_overview_donut(chart_stats, os.path.join(charts_dir, "01_overview_donut.png"))
+    chart_technique_status(chart_stats, os.path.join(charts_dir, "02_technique_status_bar.png"))
+    chart_top_rules(chart_stats, os.path.join(charts_dir, "03_top_rules_bar.png"), top_rules)
+    chart_technique_heatmap(
+        chart_results, os.path.join(charts_dir, "04_technique_heatmap.png"),
+        title="Ma trận phát hiện theo kỹ thuật và Atomic Test",
+        include_custom_legend=False,
+    )
     df_tech = export_tables(stats, outdir)
     write_summary_md(stats, df_tech, outdir)
     clean_results, clean_stats, clean_df_tech = export_without_failed_tests_tables(
@@ -1252,6 +1330,9 @@ def main():
     parser.add_argument("--custom-outdir", default="atomic_report_custom")
     parser.add_argument("--custom-rules-dir",
                         default="/home/nqghuy/KLTN/detection-rules/custom-rules/rules")
+    parser.add_argument("--default-rules-dir",
+                        default="/home/nqghuy/KLTN/detection-rules/rules",
+                        help="Directory containing the default Windows rule TOMLs")
     args = parser.parse_args()
 
     if args.compare_custom:
@@ -1276,9 +1357,17 @@ def main():
         args.results, args.atomic_log, args.pipeline_log, args.outdir, args.top_rules
     )
     custom_rule_names = load_custom_rule_names(args.custom_rules_dir)
-    source_rows = build_detection_source_rows(results, custom_rule_names, stats["failed_keys"])
+    default_rule_names = load_custom_rule_names(args.default_rules_dir)
+    default_techniques = load_windows_rule_techniques(args.default_rules_dir)
+    custom_techniques = load_windows_rule_techniques(args.custom_rules_dir)
+    source_rows = build_detection_source_rows(
+        results, custom_rule_names, default_rule_names, stats["failed_keys"]
+    )
     write_detection_source_report(source_rows, args.outdir)
-    write_detection_source_charts(source_rows, results, stats, args.outdir)
+    write_detection_source_charts(
+        source_rows, results, stats, args.outdir,
+        default_techniques, custom_techniques,
+    )
 
     print(f"Report generated at: {os.path.abspath(args.outdir)}")
     print(f"  {stats['considered_count']} tests considered "

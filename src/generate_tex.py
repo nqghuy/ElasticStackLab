@@ -1,12 +1,17 @@
 import csv
 import re
 import unicodedata
+import json
 from collections import defaultdict
 from pathlib import Path
 
 CSV_FILE = Path("not_detect.csv")
 INDEX_FILE = Path("windows-index.md")
 OUTPUT_DIR = Path("tables")
+RESULTS_FILE = Path("output/results.jsonl")
+ATOMIC_LOG = Path("logs/atomic_stdout.log")
+PIPELINE_LOG = Path("logs/pipeline.log")
+TEX_DIR = Path("tex")
 
 REASON_COLUMN = "Reason no alert"
 CATEGORY_COLUMN = "Phan loai"
@@ -245,11 +250,55 @@ def build_table(category, techs, techniques):
     return "\n".join(lines) + "\n", total_tests, label
 
 
+def build_detection_summary_tex(results_path, atomic_log, pipeline_log):
+    """Build LaTeX macros from the same failure policy as generate_report.py."""
+    # Import locally so the existing CSV-to-table workflow remains usable
+    # even when report dependencies are not needed for its other functions.
+    import generate_report as report
+
+    results = report.load_results(str(results_path))
+    failures = report.merge_failures(
+        report.parse_atomic_log(str(atomic_log)),
+        report.parse_pipeline_log(str(pipeline_log)),
+    )
+    stats = report.compute_stats(results, failures)
+    successful = [
+        result for result in results
+        if (result["technique"], result["test_number"]) not in stats["failed_keys"]
+    ]
+    clean_stats = report.compute_stats(successful, {})
+    total_techniques = len(clean_stats["tech_stats"])
+    no_rule = clean_stats["status_count"].get("No rule", 0)
+    fully = clean_stats["status_count"].get("Fully detected", 0)
+    partial = clean_stats["status_count"].get("Partially detected", 0)
+    not_detected = clean_stats["status_count"].get("Not detected", 0)
+
+    macros = {
+        "AtomicTestsTotal": len(results),
+        "AtomicTestsFailed": len(stats["failed_tests"]),
+        "AtomicTestsDetected": clean_stats["detected_count"],
+        "AtomicTestsUndetected": clean_stats["undetected_count"],
+        "AtomicDetectionRate": f"{clean_stats['detection_rate']:.1f}",
+        "TechniquesTotal": total_techniques,
+        "TechniquesFullyDetected": fully,
+        "TechniquesPartiallyDetected": partial,
+        "TechniquesNotDetected": not_detected,
+        "TechniquesNoRule": no_rule,
+    }
+    lines = [
+        "% Tự sinh bởi generate_tex.py; không chỉnh sửa thủ công.",
+        "% Nạp trong luận văn bằng: \\input{.../tex/detection_statistics.tex}",
+    ]
+    lines.extend(rf"\newcommand{{\{name}}}{{{value}}}" for name, value in macros.items())
+    return "\n".join(lines) + "\n", macros
+
+
 def main():
     techniques, atomic_tests = load_atomic_index(INDEX_FILE)
     data, unclassified = load_rows(CSV_FILE, techniques, atomic_tests)
 
     OUTPUT_DIR.mkdir(exist_ok=True)
+    TEX_DIR.mkdir(exist_ok=True)
 
     ordered = [c for c in CATEGORY_ORDER if c in data]
     ordered += [c for c in data if c not in CATEGORY_ORDER]
@@ -264,6 +313,14 @@ def main():
         print(f"{category:<28}{total:>8}  {path}  ({label})")
 
     print(f"{'Tổng':<28}{grand_total:>8}")
+
+    summary_tex, summary_macros = build_detection_summary_tex(
+        RESULTS_FILE, ATOMIC_LOG, PIPELINE_LOG
+    )
+    summary_path = TEX_DIR / "detection_statistics.tex"
+    summary_path.write_text(summary_tex, encoding="utf-8")
+    print(f"Đã tạo số liệu LaTeX: {summary_path}")
+    print(json.dumps(summary_macros, ensure_ascii=False, indent=2))
 
     if unclassified:
         print("\nCảnh báo: dòng chưa có giá trị ở cột "
