@@ -594,39 +594,39 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False,
 
     if not rotated:
         ax.set_yticks(range(n_rows))
-        ax.set_yticklabels(techniques, fontsize=13)
+        ax.set_yticklabels(techniques, fontsize=15)
         tick_pos = _sparse_ticks(n_cols)
         ax.set_xticks(tick_pos)
-        ax.set_xticklabels([str(i + 1) for i in tick_pos], fontsize=12)
-        ax.set_xlabel("Số thứ tự Atomic Test", fontsize=14)
-        ax.set_ylabel("Kỹ thuật", fontsize=14)
+        ax.set_xticklabels([str(i + 1) for i in tick_pos], fontsize=14)
+        ax.set_xlabel("Số thứ tự Atomic Test", fontsize=16)
+        ax.set_ylabel("Kỹ thuật", fontsize=16)
     else:
         ax.set_xticks(range(n_cols))
-        ax.set_xticklabels(techniques, fontsize=13, rotation=90, ha="center")
+        ax.set_xticklabels(techniques, fontsize=15, rotation=90, ha="center")
         tick_pos = _sparse_ticks(n_rows)
         ax.set_yticks(tick_pos)
-        ax.set_yticklabels([str(i + 1) for i in tick_pos], fontsize=12)
-        ax.set_ylabel("Số thứ tự Atomic Test", fontsize=14)
-        ax.set_xlabel("Kỹ thuật", fontsize=14)
+        ax.set_yticklabels([str(i + 1) for i in tick_pos], fontsize=14)
+        ax.set_ylabel("Số thứ tự Atomic Test", fontsize=16)
+        ax.set_xlabel("Kỹ thuật", fontsize=16)
 
     if title is None:
-        title = "Ma trận phát hiện theo kỹ thuật và Atomic Test"
-    ax.set_title(title + (" (xoay)" if rotated else ""), fontsize=16)
+        title = "Kết quả của từng Atomic Test với rule mặc định"
+    ax.set_title(title + (" (xoay)" if rotated else ""), fontsize=19, pad=14)
 
     if n_rows * n_cols <= 800:
         for i in range(n_rows):
             for j in range(n_cols):
                 if real_test_no[i, j] >= 0:
                     ax.text(j, i, str(real_test_no[i, j]), ha="center", va="center",
-                            fontsize=8, color="white" if matrix[i, j] != -1 else "black")
+                            fontsize=9, color="white" if matrix[i, j] != -1 else "black")
 
     for spine in ax.spines.values():
         spine.set_visible(False)
 
     legend_items = [
         ("Không phát hiện", COLOR_RED),
-        ("Detected", COLOR_GREEN),
-        ("Undetected", COLOR_MUTEDGRAY),
+        ("Đã phát hiện", COLOR_GREEN),
+        ("Không có rule", COLOR_MUTEDGRAY),
     ]
     if include_custom_legend:
         legend_items.append(("Phát hiện bởi rule bổ sung", COLOR_BLUE))
@@ -644,7 +644,7 @@ def _render_heatmap(techniques, matrix, real_test_no, outpath, rotated=False,
     # this fix). rect=[left, bottom, right, top] in figure fraction.
     fig.tight_layout(rect=[0, 0.08, 1, 1])
     fig.legend(handles, [l for l, _ in legend_items],
-               loc="lower center", ncol=len(legend_items), frameon=False, fontsize=12,
+               loc="lower center", ncol=len(legend_items), frameon=False, fontsize=18,
                bbox_to_anchor=(0.5, 0.0))
 
     fig.savefig(outpath, dpi=150, bbox_inches="tight")
@@ -1235,13 +1235,14 @@ def write_detection_source_charts(rows, results, stats, outdir,
         default_chart_results,
         os.path.join(charts_dir, "07_default_rules_heatmap.png"),
         custom_only_keys=custom_only_keys, default_only=True,
-        title="Ma trận phát hiện với rule mặc định",
+        title="Kết quả phát hiện với từng Atomic Test với rule mặc định",
+        include_custom_legend=False,
     )
     chart_technique_heatmap(
         combined_chart_results,
         os.path.join(charts_dir, "08_default_plus_custom_heatmap.png"),
         custom_only_keys=custom_only_keys,
-        title="Ma trận phát hiện — rule mặc định và rule tùy chỉnh",
+        title="Kết quả phát hiện với từng Atomic Test sau khi bổ sung rule",
     )
     # Keep legacy chart filenames for compatibility; every heatmap uses the
     # same input policy (failed tests without alerts are omitted).
@@ -1251,14 +1252,14 @@ def write_detection_source_charts(rows, results, stats, outdir,
         os.path.join(charts_dir, "11_default_rules_heatmap_without_failed_tests.png"),
         custom_only_keys=chart_custom_only_keys,
         default_only=True,
-        title="Ma trận phát hiện với rule mặc định",
+        title="Kết quả phát hiện với từng Atomic Test với rule mặc định",
         include_custom_legend=False,
     )
     chart_technique_heatmap(
         combined_chart_results,
         os.path.join(charts_dir, "12_default_plus_custom_heatmap_without_failed_tests.png"),
         custom_only_keys=chart_custom_only_keys,
-        title="Ma trận phát hiện sau khi bổ sung rule",
+        title="Kết quả phát hiện với từng Atomic Test sau khi bổ sung rule",
         include_custom_legend=True,
     )
     chart_technique_status(

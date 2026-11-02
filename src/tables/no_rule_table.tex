@@ -3,8 +3,8 @@
 \renewcommand{\arraystretch}{1.12}
 \setlength{\LTpre}{0pt}
 \setlength{\LTpost}{0pt}
-\begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{5.5cm}|>{\raggedright\arraybackslash}p{5.8cm}|}
-\caption{Các Atomic Test chưa có Detection Rule phù hợp}\label{tab:no-rule}\\
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{6.2cm}|>{\raggedright\arraybackslash}p{5.1cm}|}
+\caption{Các Atomic Test chưa có Detection Rule}\label{tab:no-rule}\\
 \hline
 \textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
 \hline
@@ -113,6 +113,8 @@ T1112 Modify Registry & 1: Modify Registry of Current User Profile - cmd &  \\*
 \cline{2-2}
  & 55: Do Not Connect To Win Update &  \\*
 \cline{2-2}
+ & 57: Snake Malware Registry Blob &  \\*
+\cline{2-2}
  & 58: Allow Simultaneous Download Registry &  \\*
 \cline{2-2}
  & 59: Modify Internet Zone Protocol Defaults in Current User Registry - cmd &  \\*
@@ -163,6 +165,8 @@ T1112 Modify Registry & 1: Modify Registry of Current User Profile - cmd &  \\*
 \cline{2-2}
  & 84: Modify UsePIN Registry entry &  \\*
 \cline{2-2}
+ & 85: Abusing Windows TelemetryController Registry Key for Persistence &  \\*
+\cline{2-2}
  & 87: Abusing MyComputer Disk Cleanup Path for Persistence &  \\*
 \cline{2-2}
  & 88: Abusing MyComputer Disk Fragmentation Path for Persistence &  \\*
@@ -171,7 +175,11 @@ T1112 Modify Registry & 1: Modify Registry of Current User Profile - cmd &  \\*
 \cline{2-2}
  & 90: Adding custom paths for application execution &  \\
 \hline
-T1505.005 Server Software Component: Terminal Services DLL & 2: Modify Terminal Services DLL Path &  \\
+T1133 External Remote Services & 1: Running Chrome VPN Extensions via the Registry 2 vpn extension &  \\
+\hline
+T1505.005 Server Software Component: Terminal Services DLL & 1: Simulate Patching termsrv.dll &  \\*
+\cline{2-2}
+ & 2: Modify Terminal Services DLL Path &  \\
 \hline
 T1542.001 Pre-OS Boot: System Firmware & 1: UEFI Persistence via Wpbbin.exe File Creation &  \\
 \hline
@@ -193,6 +201,10 @@ T1546.008 Event Triggered Execution: Accessibility Features & 4: Atbroker.exe (A
 \hline
 T1546.015 Event Triggered Execution: Component Object Model Hijacking & 2: Powershell Execute COM Object &  \\
 \hline
+T1546.018 Event Triggered Execution: Python Startup Hooks & 1: Python Startup Hook - atomic\_hook.pth (Windows) & Chỉ có rule tương tự cho linux \\*
+\cline{2-2}
+ & 2: Python Startup Hook - usercustomize.py (Windows) &  \\
+\hline
 T1547 Boot or Logon Autostart Execution & 1: Add a driver &  \\*
 \cline{2-2}
  & 3: Leverage Virtual Channels to execute custom DLL during successful RDP session &  \\
@@ -201,13 +213,19 @@ T1547.001 Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder 
 \cline{2-2}
  & 20: Add persistence via Windows Context Menu &  \\
 \hline
+T1547.004 Boot or Logon Autostart Execution: Winlogon Helper DLL & 3: Winlogon Notify Key Logon Persistence - PowerShell &  \\
+\hline
 T1547.008 Boot or Logon Autostart Execution: LSASS Driver & 1: Modify Registry to load Arbitrary DLL into LSASS - LsaDbExtPt &  \\
 \hline
 T1547.009 Boot or Logon Autostart Execution: Shortcut Modification & 1: Shortcut Modification &  \\
 \hline
 T1547.014 Active Setup & 1: HKLM - Add atomic\_test key to launch executable as part of user setup &  \\*
 \cline{2-2}
- & 2: HKLM - Add malicious StubPath value to existing Active Setup Entry &  \\
+ & 2: HKLM - Add malicious StubPath value to existing Active Setup Entry &  \\*
+\cline{2-2}
+ & 3: HKLM - re-execute 'Internet Explorer Core Fonts' StubPath payload by decreasing version number &  \\
+\hline
+T1556.002 Modify Authentication Process: Password Filter DLL & 1: Install and Register Password Filter DLL &  \\
 \hline
 \end{longtable}
 \endgroup

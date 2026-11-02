@@ -162,8 +162,8 @@
 
 Classified from alerts in this run. When both default and custom rules alert, the test is counted as default-detected.
 
-- Detected by default rules: **73**
-- Detected with custom rules: **136**
+- Detected by default rules: **75**
+- Detected with custom rules: **134**
 - Not detected: **5**
 - Failed: **33**
 

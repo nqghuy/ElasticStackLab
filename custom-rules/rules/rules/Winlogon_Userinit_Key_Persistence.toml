@@ -67,7 +67,7 @@ any where host.os.type == "windows" and
   process.command_line: ("*New-ItemProperty*", "*New-Item*", "*Set-ItemProperty*")
 ) and 
 process.command_line: "*Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon*" and 
-process.command_line: "*Userinit*"
+process.command_line: ("*Userinit*","*Notify*")
 '''
 
 filters = []

@@ -54,3 +54,16 @@ T1546.011,3 sửa và thêm lại Custom và InstalledSDB
 T1546.015 sửa 
 "query": "host.os.type: \"windows\" and powershell.file.script_block_text : \"*::GetTypeFromCLSID(*\" and powershell.file.script_block_text : \"*.ShellExecute(*\"",
 -> done, rule đa giống splunk
+
+xoá rule Potential LSA Authentication Package Abuse v2 thừa 
+
+T1546.018,1,Not detected,,No rule (Chỉ có rule tương tự cho linux), No rule
+T1133,1,Not detected,, "Không viết được rule do không đủ log và cần kết hợp với nguồn Threat Intelligence",khác
+T1112,57,Not detected,, Không viết được rule do không có log registry nên không phát hiện do log không đủ, Không viết được rule
+T1547.014,3,Not detected,,Không đủ log để phát hiện hành vi giảm version, Không viết được rule
+T1505.005,1,Not detected,, Không viết được rule do không đủ log tạo file (event id 11),Không viết được rule
+
+lí thuyêt elk, query language 
+mitre 
+Viết thêm các rule được viết như thế nào
+

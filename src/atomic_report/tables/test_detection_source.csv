@@ -231,11 +231,11 @@ T1547.003,2,Detected by default rules,Potential Persistence via Time Provider Mo
 T1547.004,1,Detected with custom rules,,Uncommon Registry Persistence Change v2
 T1547.004,2,Detected with custom rules,,Winlogon Userinit Key Persistence
 T1547.004,3,Detected with custom rules,,Winlogon Userinit Key Persistence
-T1547.004,4,Detected with custom rules,,Uncommon Registry Persistence Change v2; Winlogon Helper DLL or Shell Modification
-T1547.004,5,Detected with custom rules,,Uncommon Registry Persistence Change v2; Winlogon Helper DLL or Shell Modification; Winlogon Userinit Key Persistence
+T1547.004,4,Detected by default rules,Winlogon Helper DLL or Shell Modification,Uncommon Registry Persistence Change v2
+T1547.004,5,Detected by default rules,Winlogon Helper DLL or Shell Modification,Uncommon Registry Persistence Change v2; Winlogon Userinit Key Persistence
 T1547.005,1,Detected by default rules,Installation of Security Support Provider,
 T1547.005,2,Failed,,
-T1547.008,1,Detected with custom rules,,Registry_to_load_Arbitrary_DLL_into_LSASS
+T1547.008,1,Detected with custom rules,,Registry to load Arbitrary DLL into LSASS
 T1547.009,1,Detected with custom rules,,Shortcut Modification
 T1547.009,2,Detected by default rules,Shortcut File Written or Modified on Startup Folder,Shortcut Modification
 T1547.010,1,Detected with custom rules,,Add Port Monitor persistence in Registry

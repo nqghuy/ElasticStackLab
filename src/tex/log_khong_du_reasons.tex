@@ -1,0 +1,21 @@
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\centering\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{9.1cm}|}
+\caption{Nguyên nhân: Các Atomic Test không phát hiện được do thiếu dữ liệu log}\label{tab:log-khong-du-reasons}\\
+\hline
+\textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+T1112 & 43 & Có rule Microsoft Windows Defender Tampering nhưng sysmon không ghi lại log registry của bài test \\ \hline
+T1546.002 & 1 & Có rule Uncommon Registry Persistence Change nhưng sysmon log không ghi lại path Control Panel\textbackslash{}Desktop \\ \hline
+\end{longtable}
+\endgroup

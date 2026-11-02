@@ -1,0 +1,77 @@
+[metadata]
+creation_date = "2026/10/28"
+integration = ["endpoint", "windows"]
+maturity = "production"
+updated_date = "2026/10/28"
+
+[rule]
+name = "Python Site or User Customize File Creation Win"
+description = "Python Site or User Customize File Creation Win"
+risk_score = 21
+severity = "low"
+license = ""
+interval = "5m"
+from = "now-360s"
+to = "now"
+max_signals = 100
+
+rule_id = "795b7e56-0694-4938-a2cc-ebba8e123223"
+
+author = ["Huy"]
+tags = ["OS: Windows"]
+
+false_positives = []
+exceptions_list = []
+
+required_fields = [
+    { name = "event.type", type = "keyword", ecs = true },
+    { name = "host.os.type", type = "keyword", ecs = true },
+    { name = "process.executable", type = "keyword", ecs = true },
+    { name = "process.name", type = "keyword", ecs = true },
+    { name = "process.args", type = "keyword", ecs = true },
+    { name = "process.parent.name", type = "keyword", ecs = true },
+]
+
+related_integrations = []
+type = "eql"
+language = "eql"
+
+index = [
+    "logs-windows.sysmon_operational*",
+    "logs-endpoint.events.process-*",
+    "logs-endpoint.events.registry-*",
+    "winlogbeat-*",
+    "logs-windows.powershell_operational*"
+]
+
+query = '''
+file where host.os.type: "windows" and event.code: "11" and 
+file.name: ("sitecustomize.py", "usercustomize.py") and
+file.path: (
+    "C:\\Program Files\\Python*\\Lib\\site-packages\\*",
+    "C:\\Users\\*\\AppData\\Local\\Programs\\Python\\Python*\\Lib\\site-packages\\*",
+    "C:\\Users\\*\\AppData\\Roaming\\Python\\Python*\\site-packages\\*"
+)
+'''
+
+filters = []
+actions = []
+setup = ""
+
+[[rule.threat]]
+framework = "MITRE ATT&CK"
+
+[[rule.threat.technique]]
+id = "T1546"
+name = "Event Triggered Execution"
+reference = "https://attack.mitre.org/techniques/T1546/"
+
+[[rule.threat.technique.subtechnique]]
+id = "T1546.018"
+name = "Python Startup Hooks"
+reference = "https://attack.mitre.org/techniques/T1546/018/"
+
+[rule.threat.tactic]
+id = "TA0003"
+name = "Persistence"
+reference = "https://attack.mitre.org/tactics/TA0003/"
