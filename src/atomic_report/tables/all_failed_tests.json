@@ -16,7 +16,7 @@
       "technique": "T1556.002",
       "test_number": 2,
       "exit_code": -1,
-      "error_message": "Process Timed out after 100 seconds, use '-TimeoutSeconds' to specify a different timeout"
+      "error_message": "MinorRevision : 6456"
     },
     {
       "technique": "T1176",
@@ -40,7 +40,7 @@
       "technique": "T1176",
       "test_number": 4,
       "exit_code": -1,
-      "error_message": "Process Timed out after 100 seconds, use '-TimeoutSeconds' to specify a different timeout"
+      "error_message": "MinorRevision : 6456"
     },
     {
       "technique": "T1137.005",
@@ -95,6 +95,12 @@
       "test_number": 1,
       "exit_code": null,
       "error_message": "+ CategoryInfo          : InvalidOperation: (:) [], RuntimeException"
+    },
+    {
+      "technique": "T1546.003",
+      "test_number": 1,
+      "exit_code": -1,
+      "error_message": "MinorRevision : 6456"
     },
     {
       "technique": "T1098",
@@ -154,7 +160,7 @@
       "technique": "T1505.004",
       "test_number": 1,
       "exit_code": 1,
-      "error_message": "'C:\\Windows\\system32\\inetsrv\\appcmd.exe' is not recognized as an internal or external command,"
+      "error_message": "operable program or batch file."
     },
     {
       "technique": "T1505.004",

@@ -2,7 +2,7 @@
 \small
 \renewcommand{\arraystretch}{1.12}
 \begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\centering\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{9.1cm}|}
-\caption{Nguyên nhân: Các Atomic Test có rule nhưng chưa bao phủ đầy đủ hành vi}\label{tab:rule-chua-hoan-thien-reasons}\\
+\caption{Nguyên nhân: Các Atomic Test có Prebuilt Rule nhưng chưa bao phủ đầy đủ hành vi}\label{tab:rule-chua-hoan-thien-reasons}\\
 \hline
 \textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
 \hline
@@ -19,26 +19,25 @@ T1053.005 & 4 & Local Scheduled Task Creation không phát hiện được do ch
 T1053.005 & 6 & Local Scheduled Task Creation không phát hiện được do chỉ phát hiện được hành vi từ tiến trình schtasks.exe \\ \hline
 T1053.005 & 8 & Local Scheduled Task Creation không phát hiện được do chỉ phát hiện được hành vi từ tiến trình schtasks.exe \\ \hline
 T1053.005 & 9 & Local Scheduled Task Creation không phát hiện được do chỉ phát hiện được hành vi từ tiến trình schtasks.exe \\ \hline
-T1112 & 33 & Có rule PowerShell Script Block Logging Disabled, nhưng sysmon log chỉ ghi lại registry hive HKLM, không phải HKCU như trong bài test \\ \hline
-T1112 & 38 & Có rule Microsoft Windows Defender Tampering nhưng phát hiện registry value Notification\_Suppress \\ \hline
-T1112 & 51 & Có rule Microsoft Windows Defender Tampering nhưng phát hiện key Notifications và value DisableNotifications \\ \hline
+T1112 & 38 & Có rule Microsoft Windows Defender Tampering nhưng chưa phát hiện registry value Notification\_Suppress \\ \hline
+T1112 & 51 & Có rule Microsoft Windows Defender Tampering nhưng chưa phát hiện key Notifications và value DisableNotifications \\ \hline
 T1112 & 56 & Có rule Microsoft Windows Defender Tampering nhưng không phát hiện registry \textbackslash{}Features (Sysmon cũng không ghi lại log registry này) \\ \hline
 T1136.001 & 5 & Rule User Account Creation chỉ phát hiện được hành vi sử dụng net /add \\ \hline
-T1136.001 & 9 & có rule User Account Creation nhưng bắt chưa đầy đủ (mới bắt net /add) \\ \hline
+T1136.001 & 9 & Rule User Account Creation chỉ phát hiện được hành vi sử dụng net /add \\ \hline
 T1137.006 & 1 & Rule Suspicious Execution via Microsoft Office Add-Ins chỉ phát hiện được file dll với một số đường dẫn cố định \\ \hline
 T1505.003 & 1 & Rule Potential IIS Web Shell File Creation không phát hiện được đường dẫn file, rule Web Shell Detection: Script Process Child of Common Web Processes chỉ phát hiện khi webshell được thực thi \\ \hline
 T1543.003 & 3 & Rule Suspicious Service was Installed in the System không khớp do phạm vi bắt quá hẹp \\ \hline
-T1546 & 5 & Rule Werfault ReflectDebugger Persistence chỉ bắt value Debugger trong khi test là Debugger \\ \hline
+T1546 & 5 & Rule Werfault ReflectDebugger Persistence chỉ bắt registr value ReflectDebugger trong khi test là Debugger \\ \hline
 T1546.008 & 2 & Đã có rule Potential Modification of Accessibility Binaries nhưng chỉ phát hiện khi sethc.exe được thực thi \\ \hline
 T1546.008 & 6 & Đã có rule Potential Modification of Accessibility Binaries nhưng chỉ phát hiện khi utilman.exe được thực thi \\ \hline
 T1546.008 & 7 & Đã có rule Potential Modification of Accessibility Binaries nhưng chỉ phát hiện khi Magnify.exe được thực thi \\ \hline
 T1546.008 & 8 & Đã có rule Potential Modification of Accessibility Binaries nhưng chỉ phát hiện khi Narrator.exe được thực thi \\ \hline
 T1546.008 & 9 & Đã có rule Potential Modification of Accessibility Binaries nhưng chỉ phát hiện khi DisplaySwitch.exe được thực thi \\ \hline
 T1546.008 & 10 & Đã có rule Potential Modification of Accessibility Binaries nhưng chỉ phát hiện khi AtBroker.exe được thực thi \\ \hline
-T1546.011 & 2 & Đã có rule Potential Application Shimming via Sdbinst chỉ phát hiện được hành vi tạo database bằng sdbinst.exe... \\ \hline
-T1546.011 & 3 & Rule Installation of Custom Shim Databases chỉ phát hiện registry path có đuối SDB \\ \hline
-T1546.015 & 1 & Có rule Component Object Model Hijacking, sysmon có ghi log, nhưng khi thực thi Windows ánh xạ HKCU\textbackslash{}Software\textbackslash{}Classes sang HKU\textbackslash{}<SID>\_Classes nên rule và sysmon không khớp \\ \hline
-T1546.015 & 3 & Có rule Component Object Model Hijacking, sysmon có ghi log, nhưng khi thực thi Windows ánh xạ HKCU\textbackslash{}Software\textbackslash{}Classes sang HKU\textbackslash{}<SID>\_Classes nên rule và sysmon không khớp \\ \hline
+T1546.011 & 2 & Đã có rule Potential Application Shimming via Sdbinst chỉ phát hiện được hành vi tạo database bằng sdbinst.exe. \\ \hline
+T1546.011 & 3 & Rule Installation of Custom Shim Databases chỉ phát hiện registry path có đuôi SDB \\ \hline
+T1546.015 & 1 & Có rule Component Object Model Hijacking, Sysmon có ghi log, nhưng khi thực thi Windows ánh xạ HKCU\textbackslash{}Software\textbackslash{}Classes sang HKU\textbackslash{}<SID>\_Classes nên rule và Sysmon không khớp \\ \hline
+T1546.015 & 3 & Có rule Component Object Model Hijacking, Sysmon có ghi log, nhưng khi thực thi Windows ánh xạ HKCU\textbackslash{}Software\textbackslash{}Classes sang HKU\textbackslash{}<SID>\_Classes nên rule và Sysmon không khớp \\ \hline
 T1547 & 2 & Đã có rule First Time Seen Driver Loaded nhưng log không ghi do drive test sử dụng đã được kí (built-in windows driver) \\ \hline
 T1547.001 & 16 & Rule Startup or Run Key Registry Modification không phát hiện do loại trừ user SID S-1-5-18 (SYSTEM) trong khi secedit tạo Run key dưới quyền System \\ \hline
 T1547.001 & 19 & Rule Uncommon Registry Persistence Change chỉ phát hiện ControlSet* thay vì CurrentControlSet* \\ \hline

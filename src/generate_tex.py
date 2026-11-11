@@ -7,6 +7,7 @@ from collections import defaultdict
 from pathlib import Path
 
 CSV_FILE = Path("not_detect.csv")
+RULE_CSV_FILE = Path("rule.csv")
 INDEX_FILE = Path("windows-index.md")
 OUTPUT_DIR = Path("tables")
 RESULTS_FILE = Path("output/results.jsonl")
@@ -37,8 +38,8 @@ CATEGORY_ORDER = [
 # Caption riêng cho từng nhóm (không khai báo thì dùng caption mặc định).
 CAPTIONS = {
     "No rule": "Các Atomic Test chưa có Detection Rule",
-    "Không ánh xạ": "Các Atomic Test có rule nhưng chưa ánh xạ hết technique",
-    "Rule chưa hoàn thiện": "Các Atomic Test có rule nhưng chưa bao phủ đầy đủ hành vi",
+    "Không ánh xạ": "Các Atomic Test có Prebuilt Rule nhưng chưa ánh xạ đầy đủ technique",
+    "Rule chưa hoàn thiện": "Các Atomic Test có Prebuilt Rule nhưng chưa bao phủ đầy đủ hành vi",
     "Log không đủ": "Các Atomic Test không phát hiện được do thiếu dữ liệu log",
     "Không viết được rule": "Các Atomic Test chưa thể viết Detection Rule",
 }
@@ -347,7 +348,7 @@ def build_custom_rules_per_technique_table(detections_csv, techniques):
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{3.5cm}|"
         r">{\raggedright\arraybackslash}p{8.5cm}|"
         r">{\centering\arraybackslash}p{2.0cm}|}",
-        r"\caption{Số lượng custom rule bổ sung theo technique}\label{tab:custom-rules-per-technique}\\",
+        r"\caption{Số lượng Custom Rules bổ sung theo technique}\label{tab:custom-rules-per-technique}\\",
         r"\hline", header, r"\hline", r"\endfirsthead",
         r"\hline", header, r"\hline", r"\endhead", r"\hline", r"\endfoot",
         r"\hline", r"\endlastfoot",
@@ -359,6 +360,43 @@ def build_custom_rules_per_technique_table(detections_csv, techniques):
         )
     lines.extend([r"\end{longtable}", r"\endgroup"])
     return "\n".join(lines) + "\n", len(rows)
+
+
+def build_custom_rule_descriptions_tex(csv_path):
+    """Render rule.csv as prose, preserving commas in loosely quoted rows."""
+    entries = []
+    with Path(csv_path).open(encoding="utf-8-sig") as f:
+        next(f, None)  # header
+        for line_no, line in enumerate(f, start=2):
+            line = line.rstrip("\r\n")
+            if not line.strip():
+                continue
+            name, separator, description = line.partition(",")
+            if not separator:
+                print(f"[generate_tex] Bỏ qua dòng {line_no}: thiếu dấu phẩy phân cột")
+                continue
+            name = clean(name)
+            # rule.csv has commas inside descriptions and inconsistent CSV
+            # quoting. Split only at the first comma, then remove at most one
+            # pair of wrapper quotes so punctuation inside the description is
+            # preserved.
+            description = clean(description).strip()
+            if description.startswith('"'):
+                description = description[1:].lstrip()
+            if description.endswith('"'):
+                description = description[:-1].rstrip()
+            if name:
+                entries.append((name, description))
+
+    lines = [
+        "% Tự sinh từ rule.csv bởi generate_tex.py; không chỉnh sửa thủ công.",
+        r"Sau quá trình phân tích, khóa luận đã bổ sung \CustomRulesWritten Custom Rules bao gồm:",
+        r"\begin{enumerate}",
+    ]
+    for name, description in entries:
+        lines.append(rf"\item \textbf{{{latex_escape(name)}}}. {latex_escape(description)}")
+    lines.extend([r"\end{enumerate}"])
+    return "\n".join(lines) + "\n", len(entries)
 
 
 def build_custom_detection_table(results_path, detections_csv, rules_dir):
@@ -399,7 +437,7 @@ def build_custom_detection_table(results_path, detections_csv, rules_dir):
         r"\begingroup", r"\small", r"\renewcommand{\arraystretch}{1.12}",
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{5.2cm}|"
         r">{\raggedright\arraybackslash}p{9.0cm}|}",
-        r"\caption{Detection Rules bổ sung cho các Atomic Test chưa được phát hiện}\label{tab:custom-rule-detections}\\",
+        r"\caption{Custom Rules bổ sung cho các Atomic Test chưa được phát hiện}\label{tab:custom-rule-detections}\\",
         r"\hline", header, r"\hline", r"\endfirsthead",
         r"\hline", header, r"\hline", r"\endhead", r"\hline", r"\endfoot",
         r"\hline", r"\endlastfoot",
@@ -439,7 +477,7 @@ def build_tests_without_custom_detection_table(source_csv, atomic_tests):
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{3.5cm}|"
         r">{\centering\arraybackslash}p{1.5cm}|"
         r">{\raggedright\arraybackslash}p{10.5cm}|}",
-        r"\caption{Các Atomic Test chưa viết được rule bổ sung}\label{tab:tests-without-custom-detection}\\",
+        r"\caption{Các Atomic Test chưa viết được Custom Rule bổ sung}\label{tab:tests-without-custom-detection}\\",
         r"\hline", header, r"\hline", r"\endfirsthead",
         r"\hline", header, r"\hline", r"\endhead", r"\hline", r"\endfoot",
         r"\hline", r"\endlastfoot",
@@ -568,6 +606,11 @@ def main():
     summary_path.write_text(summary_tex, encoding="utf-8")
     print(f"Đã tạo số liệu LaTeX: {summary_path}")
     print(json.dumps(summary_macros, ensure_ascii=False, indent=2))
+
+    descriptions_tex, described_count = build_custom_rule_descriptions_tex(RULE_CSV_FILE)
+    descriptions_path = TEX_DIR / "custom_rule_descriptions.tex"
+    descriptions_path.write_text(descriptions_tex, encoding="utf-8")
+    print(f"Đã tạo phần mô tả custom rule: {descriptions_path} ({described_count} rule)")
 
     custom_table, custom_rows = build_custom_detection_table(
         RESULTS_FILE, CUSTOM_DETECTIONS_CSV, CUSTOM_RULES_DIR

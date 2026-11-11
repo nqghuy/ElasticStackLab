@@ -100,7 +100,7 @@ T1112,68,Detected with custom rules,,Modification of IE Registry Settings
 T1112,69,Detected with custom rules,,Darkgate Registry Modification
 T1112,70,Detected by default rules,RDP Enabled via Registry,RDP Registry Modification
 T1112,71,Detected with custom rules,,Windows Registry Modification to Impair Security Controls or Visibility
-T1112,72,Detected by default rules,Potential Remote Desktop Shadowing Activity,Potential Remote Desktop Shadowing Activity v2
+T1112,72,Detected with custom rules,,Potential Remote Desktop Shadowing Activity v2
 T1112,73,Detected with custom rules,,ShimCache Flush
 T1112,74,Detected with custom rules,,RDP Registry Modification
 T1112,75,Detected with custom rules,,Windows Policy Registry Modification
@@ -173,7 +173,7 @@ T1546,8,Detected with custom rules,,Suspicious Copy From or To System Directory
 T1546,9,Detected with custom rules,,Persistence using STARTUP-PATH in MS-WORD
 T1546.001,1,Detected with custom rules,,Change Default File Association Via Assoc
 T1546.002,1,Detected with custom rules,,Suspicious Copy From or To System Directory
-T1546.003,1,Detected by default rules,Suspicious WMI Event Subscription Created,
+T1546.003,1,Failed,,
 T1546.003,2,Detected by default rules,Suspicious WMI Event Subscription Created,
 T1546.003,3,Detected by default rules,Mofcomp Activity; Suspicious WMI Event Subscription Created,
 T1546.007,1,Detected by default rules,Netsh Helper DLL,
@@ -212,7 +212,7 @@ T1547.001,4,Detected by default rules,Persistent Scripts in the Startup Director
 T1547.001,5,Detected by default rules,Persistent Scripts in the Startup Directory; Startup Persistence by a Suspicious Process,
 T1547.001,6,Detected by default rules,Persistent Scripts in the Startup Directory; Startup Persistence by a Suspicious Process,
 T1547.001,7,Detected by default rules,Shortcut File Written or Modified on Startup Folder; Startup Persistence by a Suspicious Process,
-T1547.001,8,Detected with custom rules,,Add_persistance_via_Recycle_bin.toml
+T1547.001,8,Detected with custom rules,,Add persistance via Recycle bin
 T1547.001,9,Detected by default rules,Startup or Run Key Registry Modification,
 T1547.001,10,Detected by default rules,Suspicious Startup Shell Folder Modification,
 T1547.001,11,Detected by default rules,Suspicious Startup Shell Folder Modification,
@@ -231,8 +231,8 @@ T1547.003,2,Detected by default rules,Potential Persistence via Time Provider Mo
 T1547.004,1,Detected with custom rules,,Uncommon Registry Persistence Change v2
 T1547.004,2,Detected with custom rules,,Winlogon Userinit Key Persistence
 T1547.004,3,Detected with custom rules,,Winlogon Userinit Key Persistence
-T1547.004,4,Detected by default rules,Winlogon Helper DLL or Shell Modification,Uncommon Registry Persistence Change v2
-T1547.004,5,Detected by default rules,Winlogon Helper DLL or Shell Modification,Uncommon Registry Persistence Change v2; Winlogon Userinit Key Persistence
+T1547.004,4,Detected with custom rules,,Uncommon Registry Persistence Change v2
+T1547.004,5,Detected with custom rules,,Uncommon Registry Persistence Change v2; Winlogon Userinit Key Persistence
 T1547.005,1,Detected by default rules,Installation of Security Support Provider,
 T1547.005,2,Failed,,
 T1547.008,1,Detected with custom rules,,Registry to load Arbitrary DLL into LSASS

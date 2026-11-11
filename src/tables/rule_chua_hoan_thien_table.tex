@@ -4,7 +4,7 @@
 \setlength{\LTpre}{0pt}
 \setlength{\LTpost}{0pt}
 \begin{longtable}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{5.5cm}|>{\raggedright\arraybackslash}p{5.8cm}|}
-\caption{Các Atomic Test có rule nhưng chưa bao phủ đầy đủ hành vi}\label{tab:rule-chua-hoan-thien}\\
+\caption{Các Atomic Test có Prebuilt Rule nhưng chưa bao phủ đầy đủ hành vi}\label{tab:rule-chua-hoan-thien}\\
 \hline
 \textbf{Technique/Sub-technique} & \textbf{Atomic Test} & \textbf{Chú thích} \\
 \hline
@@ -25,17 +25,15 @@ T1053.005 Scheduled Task/Job: Scheduled Task & 4: Powershell Cmdlet Scheduled Ta
 \cline{2-2}
  & 9: PowerShell Modify A Scheduled Task &  \\
 \hline
-T1112 Modify Registry & 33: Windows Powershell Logging Disabled & Có rule PowerShell Script Block Logging Disabled, nhưng sysmon log chỉ ghi lại registry hive HKLM, không phải HKCU như trong bài test \\*
+T1112 Modify Registry & 38: Suppress Win Defender Notifications & Có rule Microsoft Windows Defender Tampering nhưng chưa phát hiện registry value Notification\_Suppress \\*
 \cline{2-3}
- & 38: Suppress Win Defender Notifications & Có rule Microsoft Windows Defender Tampering nhưng phát hiện registry value Notification\_Suppress \\*
-\cline{2-3}
- & 51: Disable Win Defender Notification & Có rule Microsoft Windows Defender Tampering nhưng phát hiện key Notifications và value DisableNotifications \\*
+ & 51: Disable Win Defender Notification & Có rule Microsoft Windows Defender Tampering nhưng chưa phát hiện key Notifications và value DisableNotifications \\*
 \cline{2-3}
  & 56: Tamper Win Defender Protection & Có rule Microsoft Windows Defender Tampering nhưng không phát hiện registry \textbackslash{}Features (Sysmon cũng không ghi lại log registry này) \\
 \hline
 T1136.001 Create Account: Local Account & 5: Create a new user in PowerShell & Rule User Account Creation chỉ phát hiện được hành vi sử dụng net /add \\*
-\cline{2-3}
- & 9: Create a new Windows admin user via .NET & có rule User Account Creation nhưng bắt chưa đầy đủ (mới bắt net /add) \\
+\cline{2-2}
+ & 9: Create a new Windows admin user via .NET &  \\
 \hline
 T1137.006 Office Application Startup: Add-ins & 1: Code Executed Via Excel Add-in File (XLL) & Rule Suspicious Execution via Microsoft Office Add-Ins chỉ phát hiện được file dll với một số đường dẫn cố định \\
 \hline
@@ -43,7 +41,7 @@ T1505.003 Server Software Component: Web Shell & 1: Web Shell Written to Disk & 
 \hline
 T1543.003 Create or Modify System Process: Windows Service & 3: Service Installation PowerShell & Rule Suspicious Service was Installed in the System không khớp do phạm vi bắt quá hẹp \\
 \hline
-T1546 Event Triggered Execution & 5: Adding custom debugger for Windows Error Reporting & Rule Werfault ReflectDebugger Persistence chỉ bắt value Debugger trong khi test là Debugger \\
+T1546 Event Triggered Execution & 5: Adding custom debugger for Windows Error Reporting & Rule Werfault ReflectDebugger Persistence chỉ bắt registr value ReflectDebugger trong khi test là Debugger \\
 \hline
 T1546.008 Event Triggered Execution: Accessibility Features & 2: Replace binary of sticky keys & Đã có rule Potential Modification of Accessibility Binaries nhưng chỉ phát hiện khi sethc.exe được thực thi \\*
 \cline{2-3}
@@ -57,11 +55,11 @@ T1546.008 Event Triggered Execution: Accessibility Features & 2: Replace binary 
 \cline{2-3}
  & 10: Replace AtBroker.exe (App Switcher binary) with cmd.exe & Đã có rule Potential Modification of Accessibility Binaries nhưng chỉ phát hiện khi AtBroker.exe được thực thi \\
 \hline
-T1546.011 Event Triggered Execution: Application Shimming & 2: New shim database files created in the default shim database directory & Đã có rule Potential Application Shimming via Sdbinst chỉ phát hiện được hành vi tạo database bằng sdbinst.exe... \\*
+T1546.011 Event Triggered Execution: Application Shimming & 2: New shim database files created in the default shim database directory & Đã có rule Potential Application Shimming via Sdbinst chỉ phát hiện được hành vi tạo database bằng sdbinst.exe. \\*
 \cline{2-3}
- & 3: Registry key creation and/or modification events for SDB & Rule Installation of Custom Shim Databases chỉ phát hiện registry path có đuối SDB \\
+ & 3: Registry key creation and/or modification events for SDB & Rule Installation of Custom Shim Databases chỉ phát hiện registry path có đuôi SDB \\
 \hline
-T1546.015 Event Triggered Execution: Component Object Model Hijacking & 1: COM Hijacking - InprocServer32 & Có rule Component Object Model Hijacking, sysmon có ghi log, nhưng khi thực thi Windows ánh xạ HKCU\textbackslash{}Software\textbackslash{}Classes sang HKU\textbackslash{}<SID>\_Classes nên rule và sysmon không khớp \\*
+T1546.015 Event Triggered Execution: Component Object Model Hijacking & 1: COM Hijacking - InprocServer32 & Có rule Component Object Model Hijacking, Sysmon có ghi log, nhưng khi thực thi Windows ánh xạ HKCU\textbackslash{}Software\textbackslash{}Classes sang HKU\textbackslash{}<SID>\_Classes nên rule và Sysmon không khớp \\*
 \cline{2-2}
  & 3: COM Hijacking with RunDLL32 (Local Server Switch) &  \\
 \hline

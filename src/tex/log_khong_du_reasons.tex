@@ -15,7 +15,8 @@
 \endfoot
 \hline
 \endlastfoot
-T1112 & 43 & Có rule Microsoft Windows Defender Tampering nhưng sysmon không ghi lại log registry của bài test \\ \hline
-T1546.002 & 1 & Có rule Uncommon Registry Persistence Change nhưng sysmon log không ghi lại path Control Panel\textbackslash{}Desktop \\ \hline
+T1112 & 33 & Có rule PowerShell Script Block Logging Disabled, nhưng Sysmon log chỉ ghi lại registry hive HKLM, không phải HKCU như trong bài test \\ \hline
+T1112 & 43 & Có rule Microsoft Windows Defender Tampering nhưng Sysmon không ghi lại log registry của bài test \\ \hline
+T1546.002 & 1 & Có rule Uncommon Registry Persistence Change nhưng Sysmon log không ghi lại path Control Panel\textbackslash{}Desktop \\ \hline
 \end{longtable}
 \endgroup

@@ -34,7 +34,7 @@ T1112,29,Detected with custom rules,Windows Explorer Functionality Restriction, 
 T1112,30,Detected with custom rules,Windows Explorer Functionality Restriction, No rule,No rule
 T1112,31,Detected with custom rules,Windows Explorer Functionality Restriction, No rule,No rule
 T1112,32,Detected with custom rules,Modify Registry related to hermeticwiper, No rule,No rule
-T1112,33,Detected with custom rules,Windows Registry Modification to Impair Security Controls or Visibility,"Có rule PowerShell Script Block Logging Disabled, nhưng sysmon log chỉ ghi lại registry hive HKLM, không phải HKCU như trong bài test ", Rule chưa hoàn thiện
+T1112,33,Detected with custom rules,Windows Registry Modification to Impair Security Controls or Visibility,"Có rule PowerShell Script Block Logging Disabled, nhưng Sysmon log chỉ ghi lại registry hive HKLM, không phải HKCU như trong bài test ", Log không đủ
 T1112,34,Detected with custom rules,Add SafeBoot Keys Via Reg Utility, No rule ,No rule
 T1112,35,Detected with custom rules,Add SafeBoot Keys Via Reg Utility, No rule ,No rule
 T1112,36,Detected with custom rules,Windows Registry Modification to Impair Security Controls or Visibility, No rule (Chỉ có rule tương tự là Windows Defender Disabled via Registry Modification),No rule
@@ -43,7 +43,7 @@ T1112,38,Detected with custom rules,Microsoft Windows Defender Tampering V2, Có
 T1112,39,Detected with custom rules,Enable RDP via Remote Registry, No rule ,No rule
 T1112,41,Detected with custom rules,Ursnif Malware Registry Key Creation, No rule,No rule
 T1112,42,Detected with custom rules,Terminal Server Client Connection History Cleared, No rule,No rule
-T1112,43,Detected with custom rules,Windows Registry Modification to Impair Security Controls or Visibility, Có rule Microsoft Windows Defender Tampering nhưng sysmon không ghi lại log registry của bài test,Log không đủ
+T1112,43,Detected with custom rules,Windows Registry Modification to Impair Security Controls or Visibility, Có rule Microsoft Windows Defender Tampering nhưng Sysmon không ghi lại log registry của bài test,Log không đủ
 T1112,44,Detected with custom rules,Windows Explorer Functionality Restriction, No rule ,No rule
 T1112,45,Detected with custom rules,RestrictedAdminMode Registry Value Tampering, No rule,No rule
 T1112,46,Detected with custom rules,Mimic Ransomware-Enable Multiple User Sessions, No rule ,No rule
@@ -74,7 +74,7 @@ T1112,71,Detected with custom rules,Windows Registry Modification to Impair Secu
 T1112,72,Detected with custom rules,Potential Remote Desktop Shadowing Activity v2, Rule Potential Remote Desktop Shadowing Activity không ánh xạ đủ,Không ánh xạ
 T1112,73,Detected with custom rules,ShimCache Flush, No rule ,No rule
 T1112,74,Detected with custom rules,RDP Registry Modification," ""No rule (Chỉ có rule RDP Enabled via Registry, không phát hiện hành vi disable)",No rule
-T1112,75,Detected with custom rules,Windows Policy Registry Modification," "No rule'",No rule
+T1112,75,Detected with custom rules,Windows Policy Registry Modification,"No rule",No rule
 T1112,76,Detected with custom rules,Modification of BitLocker FVE Policy via Registry, No rule, No rule
 T1112,77,Detected with custom rules,Modification of BitLocker FVE Policy via Registry, No rule, No rule
 T1112,78,Detected with custom rules,Modification of BitLocker FVE Policy via Registry, No rule, No rule
@@ -91,7 +91,7 @@ T1112,89,Detected with custom rules,Abusing MyComputer Disk for Persistence, No 
 T1112,90,Detected with custom rules,App Paths hijacking,No rule, No rule
 T1133,1,Not detected,, No rule, No rule
 T1136.001,5,Detected with custom rules,Modify user account, "Rule User Account Creation chỉ phát hiện được hành vi sử dụng net /add", Rule chưa hoàn thiện 
-T1136.001,9,Detected with custom rules,Modify user account, có rule User Account Creation nhưng bắt chưa đầy đủ (mới bắt net /add), Rule chưa hoàn thiện 
+T1136.001,9,Detected with custom rules,Modify user account, Rule User Account Creation chỉ phát hiện được hành vi sử dụng net /add, Rule chưa hoàn thiện 
 T1137.006,1,Detected with custom rules,Code Executed Via Office Add-in XLL File, Rule Suspicious Execution via Microsoft Office Add-Ins chỉ phát hiện được file dll với một số đường dẫn cố định, Rule chưa hoàn thiện 
 T1505.003,1,Detected with custom rules,Web Shell,"Rule Potential IIS Web Shell File Creation không phát hiện được đường dẫn file, rule Web Shell Detection: Script Process Child of Common Web Processes chỉ phát hiện khi webshell được thực thi", Rule chưa hoàn thiện 
 T1505.005,1,Not detected,,No rule, No rule
@@ -99,13 +99,13 @@ T1505.005,2,Detected with custom rules,Modify Terminal Services DLL Path, No rul
 T1542.001,1,Detected with custom rules,UEFI Persistence Via Wpbbin, No rule ,No rule
 T1543.003,3,Not detected,Suspicious Service was Installed in the System v2, Rule Suspicious Service was Installed in the System không khớp do phạm vi bắt quá hẹp,Rule chưa hoàn thiện 
 T1546,1,Detected with custom rules,Persistence with Custom DLL, No rule,No rule
-T1546,5,Detected with custom rules,Custom debugger for WER, Rule Werfault ReflectDebugger Persistence chỉ bắt value Debugger trong khi test là Debugger,Rule chưa hoàn thiện 
+T1546,5,Detected with custom rules,Custom debugger for WER, Rule Werfault ReflectDebugger Persistence chỉ bắt registr value ReflectDebugger trong khi test là Debugger,Rule chưa hoàn thiện 
 T1546,6,Detected with custom rules,Persistence with Custom DLL, No rule,No rule
 T1546,7,Detected with custom rules,Persistence with Custom DLL, No rule,No rule
 T1546,8,Detected with custom rules,Suspicious Copy From or To System Directory, No rule ,No rule
 T1546,9,Detected with custom rules,Persistence using STARTUP-PATH in MS-WORD, No rule,No rule
 T1546.001,1,Detected with custom rules,Change Default File Association Via Assoc, No rule ,No rule
-T1546.002,1,Detected with custom rules,Suspicious Copy From or To System Directory, Có rule Uncommon Registry Persistence Change nhưng sysmon log không ghi lại path Control Panel\Desktop,Log không đủ
+T1546.002,1,Detected with custom rules,Suspicious Copy From or To System Directory, Có rule Uncommon Registry Persistence Change nhưng Sysmon log không ghi lại path Control Panel\Desktop,Log không đủ
 T1546.008,1,Detected with custom rules,Image File Execution Options Injection V2, Đã có rule Image File Execution Options Injection nhưng chưa ánh xạ T1546.008 ,Không ánh xạ
 T1546.008,2,Detected with custom rules,Suspicious Copy From or To System Directory, Đã có rule Potential Modification of Accessibility Binaries nhưng chỉ phát hiện khi sethc.exe được thực thi,Rule chưa hoàn thiện 
 T1546.008,4,Detected with custom rules,Windows Accessibility Features Registry Modification, No rule,No rule
@@ -115,11 +115,11 @@ T1546.008,7,Detected with custom rules,Suspicious Copy From or To System Directo
 T1546.008,8,Detected with custom rules,Suspicious Copy From or To System Directory, Đã có rule Potential Modification of Accessibility Binaries nhưng chỉ phát hiện khi Narrator.exe được thực thi,Rule chưa hoàn thiện 
 T1546.008,9,Detected with custom rules,Suspicious Copy From or To System Directory, Đã có rule Potential Modification of Accessibility Binaries nhưng chỉ phát hiện khi DisplaySwitch.exe được thực thi,Rule chưa hoàn thiện 
 T1546.008,10,Detected with custom rules,Suspicious Copy From or To System Directory, Đã có rule Potential Modification of Accessibility Binaries nhưng chỉ phát hiện khi AtBroker.exe được thực thi,Rule chưa hoàn thiện 
-T1546.011,2,Detected with custom rules,New Custom Shim Database Created, Đã có rule Potential Application Shimming via Sdbinst chỉ phát hiện được hành vi tạo database bằng sdbinst.exe...,Rule chưa hoàn thiện
-T1546.011,3,Detected with custom rules,Registry key creation and/or modification events for SDB, Rule Installation of Custom Shim Databases chỉ phát hiện registry path có đuối SDB, Rule chưa hoàn thiện 
-T1546.015,1,Detected with custom rules,Component Object Model Hijacking v2,"Có rule Component Object Model Hijacking, sysmon có ghi log, nhưng khi thực thi Windows ánh xạ HKCU\Software\Classes sang HKU\<SID>_Classes nên rule và sysmon không khớp", Rule chưa hoàn thiện 
+T1546.011,2,Detected with custom rules,New Custom Shim Database Created, Đã có rule Potential Application Shimming via Sdbinst chỉ phát hiện được hành vi tạo database bằng sdbinst.exe.,Rule chưa hoàn thiện
+T1546.011,3,Detected with custom rules,Registry key creation and/or modification events for SDB, Rule Installation of Custom Shim Databases chỉ phát hiện registry path có đuôi SDB, Rule chưa hoàn thiện 
+T1546.015,1,Detected with custom rules,Component Object Model Hijacking v2,"Có rule Component Object Model Hijacking, Sysmon có ghi log, nhưng khi thực thi Windows ánh xạ HKCU\Software\Classes sang HKU\<SID>_Classes nên rule và Sysmon không khớp", Rule chưa hoàn thiện 
 T1546.015,2,Detected with custom rules,Powershell Execute COM Object, No rule, No rule
-T1546.015,3,Detected with custom rules,Component Object Model Hijacking v2,"Có rule Component Object Model Hijacking, sysmon có ghi log, nhưng khi thực thi Windows ánh xạ HKCU\Software\Classes sang HKU\<SID>_Classes nên rule và sysmon không khớp", Rule chưa hoàn thiện
+T1546.015,3,Detected with custom rules,Component Object Model Hijacking v2,"Có rule Component Object Model Hijacking, Sysmon có ghi log, nhưng khi thực thi Windows ánh xạ HKCU\Software\Classes sang HKU\<SID>_Classes nên rule và Sysmon không khớp", Rule chưa hoàn thiện
 T1546.018,1,Not detected,,No rule (Chỉ có rule tương tự cho linux), No rule
 T1546.018,2,Detected with custom rules,Python Site or User Customize File Creation Win, No rule (Chỉ có rule tương tự cho linux), No rule
 T1547,1,Detected with custom rules,Suspicious Driver Install by pnputil.exe, No rule,No rule

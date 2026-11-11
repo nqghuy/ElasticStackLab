@@ -3,7 +3,7 @@ T1037.001,1,detected,Yes,1,Uncommon Registry Persistence Change v2
 T1053.005,1,detected,Yes,8,Local Scheduled Task Creation; Local Scheduled Task Creation V2
 T1053.005,2,detected,Yes,7,Local Scheduled Task Creation; Local Scheduled Task Creation V2
 T1053.005,4,detected,Yes,1,Local Scheduled Task Creation V2
-T1053.005,5,detected,Yes,3,Local Scheduled Task Creation V2; Suspicious Image Load (taskschd.dll) from MS Office
+T1053.005,5,detected,Yes,2,Local Scheduled Task Creation V2; Suspicious Image Load (taskschd.dll) from MS Office
 T1053.005,6,detected,Yes,1,Local Scheduled Task Creation V2
 T1053.005,7,detected,Yes,7,Local Scheduled Task Creation; Local Scheduled Task Creation V2
 T1053.005,8,detected,Yes,1,Local Scheduled Task Creation V2
@@ -26,76 +26,76 @@ T1112,8,detected,Yes,6,Local Account TokenFilter Policy Disabled; Windows Policy
 T1112,9,detected,Yes,5,Local Account TokenFilter Policy Disabled; Windows Policy Registry Modification
 T1112,10,detected,Yes,2,Windows Policy Registry Modification
 T1112,12,detected,Yes,2,Windows Policy Registry Modification
-T1112,13,detected,Yes,2,Windows Registry Modification to Impair Security Controls or Visibility
+T1112,13,detected,Yes,1,Windows Registry Modification to Impair Security Controls or Visibility
 T1112,14,detected,Yes,2,Windows Policy Registry Modification
-T1112,15,detected,Yes,2,Windows Explorer Functionality Restriction
+T1112,15,detected,Yes,1,Windows Explorer Functionality Restriction
 T1112,16,detected,Yes,2,Windows Policy Registry Modification
 T1112,17,detected,Yes,2,Windows Policy Registry Modification
-T1112,18,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,19,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,20,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,21,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,22,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,23,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,24,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,25,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,26,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,27,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,28,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,29,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,30,detected,Yes,2,Windows Explorer Functionality Restriction
-T1112,31,detected,Yes,2,Windows Explorer Functionality Restriction
+T1112,18,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,19,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,20,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,21,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,22,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,23,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,24,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,25,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,26,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,27,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,28,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,29,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,30,detected,Yes,1,Windows Explorer Functionality Restriction
+T1112,31,detected,Yes,1,Windows Explorer Functionality Restriction
 T1112,32,detected,Yes,1,Modify Registry related to hermeticwiper
-T1112,33,detected,Yes,2,Windows Registry Modification to Impair Security Controls or Visibility
+T1112,33,detected,Yes,1,Windows Registry Modification to Impair Security Controls or Visibility
 T1112,34,detected,Yes,1,Add SafeBoot Keys Via Reg Utility
 T1112,35,detected,Yes,1,Add SafeBoot Keys Via Reg Utility
-T1112,36,detected,Yes,2,Windows Registry Modification to Impair Security Controls or Visibility
-T1112,37,detected,Yes,2,Windows Registry Modification to Impair Security Controls or Visibility
+T1112,36,detected,Yes,1,Windows Registry Modification to Impair Security Controls or Visibility
+T1112,37,detected,Yes,1,Windows Registry Modification to Impair Security Controls or Visibility
 T1112,38,detected,Yes,4,Microsoft Windows Defender Tampering V2
-T1112,39,detected,Yes,2,Enable RDP via Remote Registry
+T1112,39,detected,Yes,1,Enable RDP via Remote Registry
 T1112,40,detected,Yes,1,Startup or Run Key Registry Modification
-T1112,41,detected,Yes,2,Ursnif Malware Registry Key Creation
-T1112,42,detected,Yes,2,Terminal Server Client Connection History Cleared
-T1112,44,detected,Yes,2,Windows Explorer Functionality Restriction
+T1112,41,detected,Yes,1,Ursnif Malware Registry Key Creation
+T1112,42,detected,Yes,1,Terminal Server Client Connection History Cleared
+T1112,44,detected,Yes,1,Windows Explorer Functionality Restriction
 T1112,45,detected,Yes,2,RestrictedAdminMode Registry Value Tampering
-T1112,46,detected,Yes,2,Mimic Ransomware-Enable Multiple User Sessions
+T1112,46,detected,Yes,1,Mimic Ransomware-Enable Multiple User Sessions
 T1112,47,detected,Yes,2,RDP Registry Modification
-T1112,48,detected,Yes,2,Event Viewer Registry Modification
-T1112,49,detected,Yes,2,Event Viewer Registry Modification
-T1112,50,detected,Yes,2,Enable RDP via Remote Registry
+T1112,48,detected,Yes,1,Event Viewer Registry Modification
+T1112,49,detected,Yes,1,Event Viewer Registry Modification
+T1112,50,detected,Yes,1,Enable RDP via Remote Registry
 T1112,51,detected,Yes,2,Microsoft Windows Defender Tampering V2
-T1112,52,detected,Yes,2,RedLine Registry Modification
-T1112,53,detected,Yes,2,RedLine Registry Modification
-T1112,54,detected,Yes,2,RedLine Registry Modification
-T1112,55,detected,Yes,2,RedLine Registry Modification
+T1112,52,detected,Yes,1,RedLine Registry Modification
+T1112,53,detected,Yes,1,RedLine Registry Modification
+T1112,54,detected,Yes,1,RedLine Registry Modification
+T1112,55,detected,Yes,1,RedLine Registry Modification
 T1112,57,undetected,Yes,0,
-T1112,58,detected,Yes,2,Suspicious Internet Settings Registry Modification
-T1112,59,detected,Yes,2,Suspicious Internet Settings Registry Modification
-T1112,60,detected,Yes,2,Suspicious Internet Settings Registry Modification
-T1112,61,detected,Yes,2,Disable Secondary Authentication
-T1112,62,detected,Yes,2,Disable Secondary Authentication
+T1112,58,detected,Yes,1,Suspicious Internet Settings Registry Modification
+T1112,59,detected,Yes,1,Suspicious Internet Settings Registry Modification
+T1112,60,detected,Yes,1,Suspicious Internet Settings Registry Modification
+T1112,61,detected,Yes,1,Disable Secondary Authentication
+T1112,62,detected,Yes,1,Disable Secondary Authentication
 T1112,63,detected,Yes,2,Windows Policy Registry Modification
-T1112,64,detected,Yes,2,Darkgate Registry Modification
-T1112,65,detected,Yes,2,Darkgate Registry Modification
-T1112,66,detected,Yes,2,Darkgate Registry Modification
-T1112,67,detected,Yes,2,Suspicious Internet Settings Registry Modification
+T1112,64,detected,Yes,1,Darkgate Registry Modification
+T1112,65,detected,Yes,1,Darkgate Registry Modification
+T1112,66,detected,Yes,1,Darkgate Registry Modification
+T1112,67,detected,Yes,1,Suspicious Internet Settings Registry Modification
 T1112,68,detected,Yes,1,Modification of IE Registry Settings
-T1112,69,detected,Yes,2,Darkgate Registry Modification
+T1112,69,detected,Yes,1,Darkgate Registry Modification
 T1112,70,detected,Yes,6,RDP Enabled via Registry; RDP Registry Modification
-T1112,71,detected,Yes,2,Windows Registry Modification to Impair Security Controls or Visibility
-T1112,72,detected,Yes,4,Potential Remote Desktop Shadowing Activity; Potential Remote Desktop Shadowing Activity v2
+T1112,71,detected,Yes,1,Windows Registry Modification to Impair Security Controls or Visibility
+T1112,72,detected,Yes,2,Potential Remote Desktop Shadowing Activity v2
 T1112,73,detected,Yes,2,ShimCache Flush
 T1112,74,detected,Yes,2,RDP Registry Modification
 T1112,75,detected,Yes,2,Windows Policy Registry Modification
-T1112,76,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
-T1112,77,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
-T1112,78,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
-T1112,79,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
-T1112,80,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
-T1112,81,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
-T1112,82,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
-T1112,83,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
-T1112,84,detected,Yes,3,Modification of BitLocker FVE Policy via Registry
+T1112,76,detected,Yes,2,Modification of BitLocker FVE Policy via Registry
+T1112,77,detected,Yes,2,Modification of BitLocker FVE Policy via Registry
+T1112,78,detected,Yes,2,Modification of BitLocker FVE Policy via Registry
+T1112,79,detected,Yes,2,Modification of BitLocker FVE Policy via Registry
+T1112,80,detected,Yes,2,Modification of BitLocker FVE Policy via Registry
+T1112,81,detected,Yes,2,Modification of BitLocker FVE Policy via Registry
+T1112,82,detected,Yes,2,Modification of BitLocker FVE Policy via Registry
+T1112,83,detected,Yes,2,Modification of BitLocker FVE Policy via Registry
+T1112,84,detected,Yes,2,Modification of BitLocker FVE Policy via Registry
 T1112,85,detected,Yes,2,Abusing Windows TelemetryController for Persistence
 T1112,86,detected,Yes,5,RDP Registry Modification; Uncommon Registry Persistence Change; Uncommon Registry Persistence Change v2
 T1112,87,detected,Yes,2,Abusing MyComputer Disk for Persistence
@@ -159,14 +159,14 @@ T1546.018,1,undetected,Yes,0,
 T1546.018,2,detected,Yes,1,Python Site or User Customize File Creation Win
 T1547,1,detected,Yes,1,Suspicious Driver Install by pnputil.exe
 T1547,2,detected,Yes,1,Suspicious Driver Install by pnputil.exe
-T1547,3,detected,Yes,1,Leverage Virtual Channels to execute custom DLL
+T1547,3,detected,Yes,2,Leverage Virtual Channels to execute custom DLL
 T1547.001,1,detected,Yes,1,Startup or Run Key Registry Modification
 T1547.001,2,detected,Yes,1,Startup or Run Key Registry Modification
 T1547.001,3,detected,Yes,1,Startup or Run Key Registry Modification
 T1547.001,4,detected,Yes,16,Persistent Scripts in the Startup Directory; Startup Persistence by a Suspicious Process
 T1547.001,5,detected,Yes,16,Persistent Scripts in the Startup Directory; Startup Persistence by a Suspicious Process
 T1547.001,7,detected,Yes,2,Shortcut File Written or Modified on Startup Folder; Startup Persistence by a Suspicious Process
-T1547.001,8,detected,Yes,1,Add_persistance_via_Recycle_bin.toml
+T1547.001,8,detected,Yes,1,Add persistance via Recycle bin
 T1547.001,9,detected,Yes,1,Startup or Run Key Registry Modification
 T1547.001,10,detected,Yes,1,Suspicious Startup Shell Folder Modification
 T1547.001,11,detected,Yes,2,Suspicious Startup Shell Folder Modification
@@ -181,12 +181,12 @@ T1547.002,1,detected,Yes,2,Potential LSA Authentication Package Abuse
 T1547.003,1,detected,Yes,2,Potential Persistence via Time Provider Modification
 T1547.003,2,detected,Yes,2,Potential Persistence via Time Provider Modification
 T1547.004,1,detected,Yes,1,Uncommon Registry Persistence Change v2
-T1547.004,2,detected,Yes,3,Winlogon Userinit Key Persistence
-T1547.004,3,detected,Yes,4,Winlogon Userinit Key Persistence
-T1547.004,4,detected,Yes,2,Uncommon Registry Persistence Change v2; Winlogon Helper DLL or Shell Modification
-T1547.004,5,detected,Yes,5,Uncommon Registry Persistence Change v2; Winlogon Helper DLL or Shell Modification; Winlogon Userinit Key Persistence
+T1547.004,2,detected,Yes,1,Winlogon Userinit Key Persistence
+T1547.004,3,detected,Yes,1,Winlogon Userinit Key Persistence
+T1547.004,4,detected,Yes,1,Uncommon Registry Persistence Change v2
+T1547.004,5,detected,Yes,2,Uncommon Registry Persistence Change v2; Winlogon Userinit Key Persistence
 T1547.005,1,detected,Yes,2,Installation of Security Support Provider
-T1547.008,1,detected,Yes,1,Registry_to_load_Arbitrary_DLL_into_LSASS
+T1547.008,1,detected,Yes,1,Registry to load Arbitrary DLL into LSASS
 T1547.009,1,detected,Yes,1,Shortcut Modification
 T1547.009,2,detected,Yes,4,Shortcut File Written or Modified on Startup Folder; Shortcut Modification
 T1547.010,1,detected,Yes,1,Add Port Monitor persistence in Registry

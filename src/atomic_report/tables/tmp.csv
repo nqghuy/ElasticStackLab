@@ -3,6 +3,7 @@ T1037.001,1,Detected with custom rules,,Uncommon Registry Persistence Change v2
 T1053.005,4,Detected with custom rules,,Local Scheduled Task Creation V2
 T1053.005,6,Detected with custom rules,,Local Scheduled Task Creation V2
 T1053.005,8,Detected with custom rules,,Local Scheduled Task Creation V2
+T1053.005,9,Detected with custom rules,,Local Scheduled Task Creation V2
 T1078.001,1,Detected with custom rules,,Modify user account
 T1078.001,2,Detected with custom rules,,Modify user account
 T1078.003,1,Detected with custom rules,,Modify user account
@@ -83,7 +84,7 @@ T1112,81,Detected with custom rules,,Modification of BitLocker FVE Policy via Re
 T1112,82,Detected with custom rules,,Modification of BitLocker FVE Policy via Registry
 T1112,83,Detected with custom rules,,Modification of BitLocker FVE Policy via Registry
 T1112,84,Detected with custom rules,,Modification of BitLocker FVE Policy via Registry
-T1112,85,Not detected,,
+T1112,85,Detected with custom rules,,Abusing Windows TelemetryController for Persistence
 T1112,87,Detected with custom rules,,Abusing MyComputer Disk for Persistence
 T1112,88,Detected with custom rules,,Abusing MyComputer Disk for Persistence
 T1112,89,Detected with custom rules,,Abusing MyComputer Disk for Persistence
@@ -116,31 +117,27 @@ T1546.008,9,Detected with custom rules,,Suspicious Copy From or To System Direct
 T1546.008,10,Detected with custom rules,,Suspicious Copy From or To System Directory
 T1546.011,2,Detected with custom rules,,New Custom Shim Database Created
 T1546.011,3,Detected with custom rules,,Registry key creation and/or modification events for SDB
-T1546.012,1,Detected with custom rules,,Image File Execution Options Injection V2
-T1546.012,2,Detected with custom rules,,Image File Execution Options Injection V2
-T1546.012,3,Detected with custom rules,,Image File Execution Options Injection V2
 T1546.015,1,Detected with custom rules,,Component Object Model Hijacking v2
 T1546.015,2,Detected with custom rules,,Powershell Execute COM Object
 T1546.015,3,Detected with custom rules,,Component Object Model Hijacking v2
 T1546.018,1,Not detected,,
-T1546.018,2,Not detected,,
+T1546.018,2,Detected with custom rules,,Python Site or User Customize File Creation Win
 T1547,1,Detected with custom rules,,Suspicious Driver Install by pnputil.exe
 T1547,2,Detected with custom rules,,Suspicious Driver Install by pnputil.exe
 T1547,3,Detected with custom rules,,Leverage Virtual Channels to execute custom DLL
-T1547.001,8,Detected with custom rules,,Add_persistance_via_Recycle_bin.toml
+T1547.001,8,Detected with custom rules,,Add persistance via Recycle bin
 T1547.001,16,Detected with custom rules,,Potential Suspicious Activity Using SeCEdit
 T1547.001,19,Detected with custom rules,,Modification of Boot Verification Program registry
 T1547.001,20,Detected with custom rules,,Persistence via Windows Context Menu
-T1547.002,1,Detected with custom rules,,Potential LSA Authentication Package Abuse v2
 T1547.004,1,Detected with custom rules,,Uncommon Registry Persistence Change v2
 T1547.004,2,Detected with custom rules,,Winlogon Userinit Key Persistence
-T1547.004,3,Not detected,,
-T1547.004,4,Detected with custom rules,,Uncommon Registry Persistence Change v2; Winlogon Helper DLL or Shell Modification
-T1547.004,5,Detected with custom rules,,Uncommon Registry Persistence Change v2; Winlogon Helper DLL or Shell Modification; Winlogon Userinit Key Persistence
-T1547.008,1,Detected with custom rules,,Registry_to_load_Arbitrary_DLL_into_LSASS
+T1547.004,3,Detected with custom rules,,Winlogon Userinit Key Persistence
+T1547.004,4,Detected with custom rules,,Uncommon Registry Persistence Change v2
+T1547.004,5,Detected with custom rules,,Uncommon Registry Persistence Change v2; Winlogon Userinit Key Persistence
+T1547.008,1,Detected with custom rules,,Registry to load Arbitrary DLL into LSASS
 T1547.009,1,Detected with custom rules,,Shortcut Modification
 T1547.010,1,Detected with custom rules,,Add Port Monitor persistence in Registry
 T1547.014,1,Detected with custom rules,,Persistence via Active Setup
 T1547.014,2,Detected with custom rules,,Persistence via Active Setup
 T1547.014,3,Not detected,,
-T1556.002,1,Not detected,,
+T1556.002,1,Detected with custom rules,,Password Filter DLL

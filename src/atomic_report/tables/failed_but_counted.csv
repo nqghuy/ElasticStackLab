@@ -8,8 +8,7 @@ T1112,56,1,ERROR: Access is denied.
 T1546.008,4,1,The operation completed successfully.
 T1136.002,1,2,The specified domain either does not exist or could not be contacted.
 T1136.002,2,2,The specified domain either does not exist or could not be contacted.
-T1546.003,1,-1,"Process Timed out after 100 seconds, use '-TimeoutSeconds' to specify a different timeout"
-T1547.001,6,-1,"Process Timed out after 100 seconds, use '-TimeoutSeconds' to specify a different timeout"
+T1547.001,6,-1,MinorRevision : 6456
 T1547.001,14,,"+ CategoryInfo          : InvalidArgument: (:) [Get-ItemPropertyValue], PSArgumentException"
 T1547.001,15,,"+ CategoryInfo          : InvalidArgument: (:) [Get-ItemPropertyValue], PSArgumentException"
 T1546,8,,"+ CategoryInfo          : NotSpecified: (:) [Copy-Item], DirectoryNotFoundException"
