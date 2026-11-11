@@ -432,7 +432,7 @@ def build_custom_detection_table(results_path, detections_csv, rules_dir):
         for (technique_id, rule_name), numbers in ordered_groups
     ]
 
-    header = r"\textbf{Technique/Sub-technique -- Test \#} & \textbf{Detection Rule} \\"
+    header = r"\textbf{Technique/Sub-technique -- Test \#} & \textbf{Custom Rule} \\"
     lines = [
         r"\begingroup", r"\small", r"\renewcommand{\arraystretch}{1.12}",
         r"\begin{longtable}{|>{\raggedright\arraybackslash}p{5.2cm}|"

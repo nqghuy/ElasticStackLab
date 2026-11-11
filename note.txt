@@ -65,5 +65,34 @@ T1505.005,1,Not detected,, Không viết được rule do không đủ log tạo
 
 lí thuyêt elk, query language 
 mitre 
-Viết thêm các rule được viết như thế nào
+Viết thêm các rule được viết như thế nào -> done
+chỉ ra tại sao chọn sysmon olaf hartong
+viết lại mở đầu, kết luận
+thêm vài trích dẫn 
 
+chương 3: Đề xuất và triển khai SIEM rule 
+đưa ra tên riêng, rà soát lại, đưa tên riêng
+
+nêu ý chính ra câu đầu tiên 
+kiếm hình log SIEM tập trung
+vision, kiến trúc an ninh high level cho doanh nghiệp 
+chương 1 + 2 trang, thêm cấu trúc khóa luận 
+nộp quyển, soạn presentation 
+
+tóm tắt mỗi chương 
+viết tóm tắt
+
+lên seminar kế hoạch an toàn thông tin
+lên topic seminar
+presentation 
+
+	\noindent\huge\textbf{\@chapterprefix\ \thechapter. #1}\par
+	\vspace{1cm}\normalsize%	
+
+ https://www.cyber.gov.au/publication/windows-event-logging-and-forwarding log  
+
+https://learn.microsoft.com/en-us/windows/security/operating-system-security/sysmon/how-to-enable-sysmon olaf hartong 
+https://www.researchgate.net/publication/391562361_Comparative_Analysis_of_Wazuh_Graylog_and_Elk_Stack_for_Cyber_Threat_Detection_and_Response
+
+sửa lại phần kiến trúc
+rà soát lại, nêu ý chính đầu tiên 

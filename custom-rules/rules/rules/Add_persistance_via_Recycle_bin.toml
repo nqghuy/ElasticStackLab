@@ -5,7 +5,7 @@ maturity = "production"
 updated_date = "2026/08/26"
 
 [rule]
-name = "Add persistance via_Recycle bin"
+name = "Add persistance via Recycle bin"
 description = "Add a persistance via Recycle bin"
 risk_score = 21
 severity = "low"
